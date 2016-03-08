@@ -13,7 +13,7 @@ class PhotoCropViewController: UIViewController {
   var imageIndex: Int?
   
   var originImage: UIImage!
-
+  
   var cropImageScrollView: CropImageScrollView!
   
   var bottomBarContainerView: UIView!
@@ -58,9 +58,9 @@ class PhotoCropViewController: UIViewController {
       
       self.originImage = _image
       self.initView()
-
+      
     }
-
+    
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -84,13 +84,13 @@ class PhotoCropViewController: UIViewController {
    *  Target-Action
    ******************************************************************************/
    //MARK: - Target-Action
-
+  
   func onComplete() {
     
     let (xScale, yScale, sizeScalse) = cropImageScrollView.getSelectedRectScale()
     
     PhotosManager.sharedInstance.clearData()
-
+    
     PhotosManager.sharedInstance.rectScale = ImageRectScale(xScale: xScale, yScale: yScale, widthScale: sizeScalse, heighScale: sizeScalse)
     
     if imageIndex != nil {
@@ -101,13 +101,17 @@ class PhotoCropViewController: UIViewController {
     }
     
     PhotosManager.sharedInstance.didFinish(imageIndex == nil ? originImage : nil)
-
+    
   }
   
   func onCancel() {
     
-    navigationController?.popViewControllerAnimated(true)
-
+    if navigationController == nil {
+      self.dismissViewControllerAnimated(true, completion: nil)
+    } else {
+      navigationController!.popViewControllerAnimated(true)
+    }
+    
   }
   
   /******************************************************************************
@@ -115,7 +119,7 @@ class PhotoCropViewController: UIViewController {
    ******************************************************************************/
    //MARK: - Private Method Implementation
    
-  /**
+   /**
    收起navigationbar 暂不用
    */
   private func hideNavigationBar() {
@@ -129,17 +133,17 @@ class PhotoCropViewController: UIViewController {
     navigationController!.setNavigationBarHidden(!isHidden, animated: true)
     
   }
-
+  
   private func initView() {
     
     automaticallyAdjustsScrollViewInsets = false
-
+    
     cropImageScrollView = CropImageScrollView(frame: view.bounds, image: originImage)
     view.addSubview(cropImageScrollView)
     
     let maskView = PhotoMaskView(frame: view.bounds)
     view.addSubview(maskView)
-
+    
     initBottomBar()
     
   }
