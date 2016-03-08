@@ -12,13 +12,9 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
   
   private var imageView: UIImageView!
   private var simpleTap: UITapGestureRecognizer!
+  private var imageSize: CGSize!
   var reuseIdentifier: String
-  private var placeHolderImageSize: CGSize?
-  private var netImageSize: CGSize!
-  private var isLoaded = false // 是否加载完大图
-  private var isAnimation = false //标识此刻是否为放大动画，如果是则手动调整大小执行moveFrameToCenter，不执行layoutsubviews的moveFrameToCenter
-  private var progressView: LoadImageProgressView?
-  
+
   var padding: CGFloat = 0
   
   init(reuseIdentifier: String){
@@ -54,22 +50,6 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
     
   }
   
-  func initProgressView() {
-    
-    for view in subviews {
-      if view.isKindOfClass(LoadImageProgressView) {
-        return
-      }
-    }
-    let progressWidth: CGFloat = 100
-    let progressheight: CGFloat = 100
-    let x: CGFloat = (CGRectGetWidth(frame) - progressWidth) / 2
-    let y: CGFloat = (CGRectGetHeight(frame) - progressheight) / 2
-    progressView = LoadImageProgressView(frame: CGRect(x: x, y: y, width: progressWidth, height: progressWidth))
-    addSubview(progressView!)
-    
-  }
-  
   func setImage(image: UIImage?) {
     
     if image == nil {
@@ -82,53 +62,6 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
     contentSize = imageView.frame.size
     
     calculateZoomScale()
-  }
-  
-  /**
-   设置图片
-   
-   - parameter imageUrl:         图片url
-   - parameter placeholderImage: 占位图
-   - parameter loadNow:          是否立即加载，用户动画push时在完全显示出来后再去加载图片
-   */
-  func setImageUrl(imageUrl: String, placeholderImage: UIImage? = nil, loadNow: Bool = true) {
-    
-    minimumZoomScale = 1
-    maximumZoomScale = 1
-    zoomScale = 1
-    isLoaded = false
-    placeHolderImageSize = nil
-    
-    //如果图片没有被缓存过则显示默认图片站位
-    if !SDImageCache.sharedImageCache().diskImageExistsWithKey(imageUrl) {
-      placeHolderImageSize = placeholderImage?.size
-      self.setImage(placeholderImage)
-      initProgressView()
-      
-      guard loadNow else {
-        return
-      }
-      
-      imageView.sd_setImageWithURL(NSURL(string: imageUrl), placeholderImage: placeholderImage, options: .AvoidAutoSetImage, progress: { (current, total) -> Void in
-        
-        self.progressView!.progress = CGFloat(current) / CGFloat(total)
-        
-        }) { (image, error, SDImageCacheType, url) -> Void in
-          if error == nil{
-            
-            self.progressView?.dismiss()
-            self.didFetchImageWith(image)
-            
-          }
-      }
-      
-    } else {
-      
-      let image = SDImageCache.sharedImageCache().imageFromDiskCacheForKey(imageUrl)
-      didFetchImageWith(image)
-      
-    }
-    
   }
   
   func setImageWithLocalPhotoWith(index: Int) {
@@ -146,8 +79,7 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
 
         return
       }
-      self.netImageSize = image!.size
-      self.isLoaded = true
+      self.imageSize = image!.size
       self.setImage(image)
     }
   }
@@ -162,19 +94,9 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
     simpleTap.addTarget(target, action: action)
   }
   
-  
-  private func didFetchImageWith(image: UIImage) {
-    
-    self.netImageSize = image.size
-    self.isLoaded = true
-    self.setImage(image)
-    self.isAnimation = false
-  }
-  
   private func calculateZoomScale() {
     
     let boundsSize = bounds.size
-    let imageSize = isLoaded == true ? netImageSize : placeHolderImageSize!
     
     let scaleX = (boundsSize.width - padding * CGFloat(2)) / imageSize.width
     let scaleY = boundsSize.height / imageSize.height
@@ -184,47 +106,13 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
     //如果图片长宽都小于屏幕则不缩放
     if scaleX > 1.0 && scaleY > 1.0 {
       minScale = 1.0
-      
-      if !isLoaded {
-        
-        minScale = reducePlaceHolderIfNeed(minScale)
-        
-      }
     }
     
     let maxScale = CGFloat(3)
     
     maximumZoomScale = maxScale
-    
-    if placeHolderImageSize != nil && self.isLoaded == true {
-      
-      //此时已经换了一张大图，但是需要先缩小到之前的比例，以便进行动画
-      var scaleForPlaceHolder = self.placeHolderImageSize!.width / imageSize.width
-      
-      scaleForPlaceHolder = reducePlaceHolderIfNeed(scaleForPlaceHolder)
-      
-      minimumZoomScale = scaleForPlaceHolder
-      zoomScale = scaleForPlaceHolder
-      
-      setNeedsLayout()
-      layoutIfNeeded()
-      
-      isAnimation = true
-      UIView.animateWithDuration(0.2, animations: { () -> Void in
-        
-        self.minimumZoomScale = minScale
-        self.zoomScale = self.minimumZoomScale
-        
-        self.moveFrameToCenter()
-      })
-      
-    } else {
-      
-      isAnimation = false
-      minimumZoomScale = minScale
-      zoomScale = minimumZoomScale
-      
-    }
+    minimumZoomScale = minScale
+    zoomScale = minimumZoomScale
     
     setNeedsLayout()
   }
@@ -252,44 +140,12 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
     
   }
   
-  //当占位图比较大时看着不爽
-  private func reducePlaceHolderIfNeed(scale: CGFloat) -> CGFloat {
-    
-    //    return scale
-    
-    guard placeHolderImageSize != nil else {
-      return scale
-    }
-    
-    let limite: CGFloat = 2 / 3
-    let reduceLimite: CGFloat = 1 / 2
-    
-    if placeHolderImageSize!.width > bounds.width * limite || placeHolderImageSize!.height > bounds.height * limite {
-      
-      return scale * reduceLimite
-    }
-    
-    return scale
-  }
-  
   override func layoutSubviews() {
     super.layoutSubviews()
     
-    if !isAnimation {
-      moveFrameToCenter()
-    }
+    moveFrameToCenter()
   }
   
-  //for transitionAnimation push
-  func getImageSize() -> CGSize {
-    
-    return imageView.frame.size
-  }
-  
-  //for transitionAnimation pop
-  func getImage() -> UIImage? {
-    return imageView.image
-  }
 }
 
 extension ZoomImageScrollView: UIScrollViewDelegate {

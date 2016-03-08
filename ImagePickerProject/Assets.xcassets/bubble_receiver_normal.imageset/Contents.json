@@ -1,0 +1,35 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 2,
+          "height" : 9
+        },
+        "cap-insets" : {
+          "bottom" : 19,
+          "top" : 83,
+          "right" : 15,
+          "left" : 34
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "qq_talk_box_in.png",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

@@ -30,16 +30,17 @@ protocol HTableViewForPhotoDataSource: NSObjectProtocol{
 
 extension UIScrollView{
   
-  //scrollView的contentView的可见Rect
-//  func visibleRect() -> CGRect{
-//    
-//    var rect = CGRectZero
-//    rect.origin = self.contentOffset
-//    rect.size = self.bounds.size
-//    
-//    return rect
-//  }
+//  scrollView的contentView的可见Rect
+  func visibleRect() -> CGRect{
+    
+    var rect = CGRectZero
+    rect.origin = self.contentOffset
+    rect.size = self.bounds.size
+    
+    return rect
+  }
 }
+
 class HTableViewForPhoto: UIScrollView {
   
   enum RollDirection{
