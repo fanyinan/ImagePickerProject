@@ -12,9 +12,6 @@
 		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
 		CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F81C89613700B72821 /* Assets.xcassets */; };
 		CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */; };
-		CF2C7C951C8961B500B72821 /* HTableViewForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C780B1C8961B400B72821 /* HTableViewForPhoto.swift */; };
-		CF2C7C9B1C8961B500B72821 /* WZPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C78111C8961B400B72821 /* WZPhotoBrowserLite.swift */; };
-		CF2C7C9C1C8961B500B72821 /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C78121C8961B400B72821 /* ZoomImageScrollViewLite.swift */; };
 		CF2C802B1C8961B500B72821 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C581C8961B500B72821 /* NSData+ImageContentType.m */; };
 		CF2C802C1C8961B500B72821 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C5A1C8961B500B72821 /* SDImageCache.m */; };
 		CF2C802D1C8961B500B72821 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C5C1C8961B500B72821 /* SDWebImageCompat.m */; };
@@ -64,7 +61,10 @@
 		CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */; };
 		CF9E699A1C8EAA940082E9DB /* PhotoThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */; };
 		CF9E699B1C8EAA940082E9DB /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */; };
-		CF9E699C1C8EAA940082E9DB /* PreviewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698E1C8EAA940082E9DB /* PreviewPhotoViewController.swift */; };
+		CF9E69B91C8F17490082E9DB /* HTableViewForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B51C8F17490082E9DB /* HTableViewForPhoto.swift */; };
+		CF9E69BA1C8F17490082E9DB /* PreviewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */; };
+		CF9E69BB1C8F17490082E9DB /* WZPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */; };
+		CF9E69BC1C8F17490082E9DB /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,9 +75,6 @@
 		CF2C77F81C89613700B72821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF2C77FB1C89613700B72821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF2C77FD1C89613700B72821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF2C780B1C8961B400B72821 /* HTableViewForPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableViewForPhoto.swift; sourceTree = "<group>"; };
-		CF2C78111C8961B400B72821 /* WZPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WZPhotoBrowserLite.swift; sourceTree = "<group>"; };
-		CF2C78121C8961B400B72821 /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
 		CF2C7C571C8961B500B72821 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		CF2C7C581C8961B500B72821 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
 		CF2C7C591C8961B500B72821 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
@@ -143,7 +140,10 @@
 		CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
 		CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbCell.swift; sourceTree = "<group>"; };
 		CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
-		CF9E698E1C8EAA940082E9DB /* PreviewPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhotoViewController.swift; sourceTree = "<group>"; };
+		CF9E69B51C8F17490082E9DB /* HTableViewForPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableViewForPhoto.swift; sourceTree = "<group>"; };
+		CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhotoViewController.swift; sourceTree = "<group>"; };
+		CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WZPhotoBrowserLite.swift; sourceTree = "<group>"; };
+		CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				CF9E69801C8EAA940082E9DB /* ImagePicker */,
-				CF2C78091C8961B400B72821 /* PhotoBrowser */,
 				CF2C7C561C8961B500B72821 /* SDWebImage */,
 				CF2C7C741C8961B500B72821 /* SnapKit */,
 				CF2C7C841C8961B500B72821 /* SupportFile */,
@@ -189,16 +188,6 @@
 				CF2C77FD1C89613700B72821 /* Info.plist */,
 			);
 			path = ImagePickerProject;
-			sourceTree = "<group>";
-		};
-		CF2C78091C8961B400B72821 /* PhotoBrowser */ = {
-			isa = PBXGroup;
-			children = (
-				CF2C780B1C8961B400B72821 /* HTableViewForPhoto.swift */,
-				CF2C78111C8961B400B72821 /* WZPhotoBrowserLite.swift */,
-				CF2C78121C8961B400B72821 /* ZoomImageScrollViewLite.swift */,
-			);
-			path = PhotoBrowser;
 			sourceTree = "<group>";
 		};
 		CF2C7C561C8961B500B72821 /* SDWebImage */ = {
@@ -285,6 +274,7 @@
 		CF9E69801C8EAA940082E9DB /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				CF9E69B41C8F17490082E9DB /* PhotoBrowser */,
 				CF9E69811C8EAA940082E9DB /* CameraHelper.swift */,
 				CF9E69821C8EAA940082E9DB /* CropImageScrollView.swift */,
 				CF9E69831C8EAA940082E9DB /* ImagePickerHelper.swift */,
@@ -298,9 +288,19 @@
 				CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */,
 				CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */,
 				CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */,
-				CF9E698E1C8EAA940082E9DB /* PreviewPhotoViewController.swift */,
 			);
 			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		CF9E69B41C8F17490082E9DB /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E69B51C8F17490082E9DB /* HTableViewForPhoto.swift */,
+				CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */,
+				CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */,
+				CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */,
+			);
+			path = PhotoBrowser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,14 +380,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2C80311C8961B500B72821 /* SDWebImageManager.m in Sources */,
-				CF2C7C9B1C8961B500B72821 /* WZPhotoBrowserLite.swift in Sources */,
 				CF2C80381C8961B500B72821 /* UIView+WebCacheOperation.m in Sources */,
 				CF2C802B1C8961B500B72821 /* NSData+ImageContentType.m in Sources */,
-				CF9E699C1C8EAA940082E9DB /* PreviewPhotoViewController.swift in Sources */,
 				CF2C80441C8961B500B72821 /* SnapKit.swift in Sources */,
 				CF9E699A1C8EAA940082E9DB /* PhotoThumbCell.swift in Sources */,
 				CF2C80301C8961B500B72821 /* SDWebImageDownloaderOperation.m in Sources */,
-				CF2C7C951C8961B500B72821 /* HTableViewForPhoto.swift in Sources */,
 				CF2C77F41C89613700B72821 /* ViewController.swift in Sources */,
 				CF9E698F1C8EAA940082E9DB /* CameraHelper.swift in Sources */,
 				CF9E69971C8EAA940082E9DB /* PhotoCropViewController.swift in Sources */,
@@ -397,8 +394,10 @@
 				CF2C804B1C8961B500B72821 /* MuView.swift in Sources */,
 				CF2C80421C8961B500B72821 /* EdgeInsets.swift in Sources */,
 				CF2C802C1C8961B500B72821 /* SDImageCache.m in Sources */,
+				CF9E69B91C8F17490082E9DB /* HTableViewForPhoto.swift in Sources */,
 				CF2C803E1C8961B500B72821 /* ConstraintItem.swift in Sources */,
 				CF2C80461C8961B500B72821 /* ViewController+SnapKit.swift in Sources */,
+				CF9E69BA1C8F17490082E9DB /* PreviewPhotoViewController.swift in Sources */,
 				CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */,
 				CF9E69981C8EAA940082E9DB /* PhotoMaskView.swift in Sources */,
 				CF2C803F1C8961B500B72821 /* ConstraintMaker.swift in Sources */,
@@ -406,6 +405,7 @@
 				CF2C80361C8961B500B72821 /* UIImageView+HighlightedWebCache.m in Sources */,
 				CF9E69911C8EAA940082E9DB /* ImagePickerHelper.swift in Sources */,
 				CF2C80371C8961B500B72821 /* UIImageView+WebCache.m in Sources */,
+				CF9E69BC1C8F17490082E9DB /* ZoomImageScrollViewLite.swift in Sources */,
 				CF2C803A1C8961B500B72821 /* README.md in Sources */,
 				CF2C802D1C8961B500B72821 /* SDWebImageCompat.m in Sources */,
 				CF9E69941C8EAA940082E9DB /* PhotoAlbumViewController.swift in Sources */,
@@ -415,7 +415,6 @@
 				CF2C80491C8961B500B72821 /* MuTableViewCell.swift in Sources */,
 				CF2C804A1C8961B500B72821 /* MuTools.swift in Sources */,
 				CF2C804E1C8961B500B72821 /* UIImageView.swift in Sources */,
-				CF2C7C9C1C8961B500B72821 /* ZoomImageScrollViewLite.swift in Sources */,
 				CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */,
 				CF2C804C1C8961B500B72821 /* MuViewController.swift in Sources */,
 				CF2C804D1C8961B500B72821 /* String+ProcessString.swift in Sources */,
@@ -429,6 +428,7 @@
 				CF2C80341C8961B500B72821 /* UIImage+GIF.m in Sources */,
 				CF2C80471C8961B500B72821 /* MuColor.swift in Sources */,
 				CF2C803C1C8961B500B72821 /* ConstraintAttributes.swift in Sources */,
+				CF9E69BB1C8F17490082E9DB /* WZPhotoBrowserLite.swift in Sources */,
 				CF9E69921C8EAA940082E9DB /* PhotoAlbumCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
