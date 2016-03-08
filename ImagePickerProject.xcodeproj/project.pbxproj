@@ -1,0 +1,617 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F11C89613700B72821 /* AppDelegate.swift */; };
+		CF2C77F41C89613700B72821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F31C89613700B72821 /* ViewController.swift */; };
+		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
+		CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F81C89613700B72821 /* Assets.xcassets */; };
+		CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */; };
+		CF2C7C941C8961B500B72821 /* HTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C780A1C8961B400B72821 /* HTableView.swift */; };
+		CF2C7C951C8961B500B72821 /* HTableViewForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C780B1C8961B400B72821 /* HTableViewForPhoto.swift */; };
+		CF2C7C961C8961B500B72821 /* LoadImageProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C780C1C8961B400B72821 /* LoadImageProgressView.swift */; };
+		CF2C7C971C8961B500B72821 /* PhotoTransitionDismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C780D1C8961B400B72821 /* PhotoTransitionDismissAnimation.swift */; };
+		CF2C7C981C8961B500B72821 /* PhotoTransitionPresentAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C780E1C8961B400B72821 /* PhotoTransitionPresentAnimation.swift */; };
+		CF2C7C991C8961B500B72821 /* ThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C780F1C8961B400B72821 /* ThumbCell.swift */; };
+		CF2C7C9A1C8961B500B72821 /* ThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF2C78101C8961B400B72821 /* ThumbCell.xib */; };
+		CF2C7C9B1C8961B500B72821 /* WZPhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C78111C8961B400B72821 /* WZPhotoBrowser.swift */; };
+		CF2C7C9C1C8961B500B72821 /* ZoomImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C78121C8961B400B72821 /* ZoomImageScrollView.swift */; };
+		CF2C802B1C8961B500B72821 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C581C8961B500B72821 /* NSData+ImageContentType.m */; };
+		CF2C802C1C8961B500B72821 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C5A1C8961B500B72821 /* SDImageCache.m */; };
+		CF2C802D1C8961B500B72821 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C5C1C8961B500B72821 /* SDWebImageCompat.m */; };
+		CF2C802E1C8961B500B72821 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C5E1C8961B500B72821 /* SDWebImageDecoder.m */; };
+		CF2C802F1C8961B500B72821 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C601C8961B500B72821 /* SDWebImageDownloader.m */; };
+		CF2C80301C8961B500B72821 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C621C8961B500B72821 /* SDWebImageDownloaderOperation.m */; };
+		CF2C80311C8961B500B72821 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C641C8961B500B72821 /* SDWebImageManager.m */; };
+		CF2C80321C8961B500B72821 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C671C8961B500B72821 /* SDWebImagePrefetcher.m */; };
+		CF2C80331C8961B500B72821 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C691C8961B500B72821 /* UIButton+WebCache.m */; };
+		CF2C80341C8961B500B72821 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C6B1C8961B500B72821 /* UIImage+GIF.m */; };
+		CF2C80351C8961B500B72821 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C6D1C8961B500B72821 /* UIImage+MultiFormat.m */; };
+		CF2C80361C8961B500B72821 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C6F1C8961B500B72821 /* UIImageView+HighlightedWebCache.m */; };
+		CF2C80371C8961B500B72821 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C711C8961B500B72821 /* UIImageView+WebCache.m */; };
+		CF2C80381C8961B500B72821 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C731C8961B500B72821 /* UIView+WebCacheOperation.m */; };
+		CF2C80391C8961B500B72821 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CF2C7C751C8961B500B72821 /* LICENSE */; };
+		CF2C803A1C8961B500B72821 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C761C8961B500B72821 /* README.md */; };
+		CF2C803B1C8961B500B72821 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C781C8961B500B72821 /* Constraint.swift */; };
+		CF2C803C1C8961B500B72821 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C791C8961B500B72821 /* ConstraintAttributes.swift */; };
+		CF2C803D1C8961B500B72821 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7A1C8961B500B72821 /* ConstraintDescription.swift */; };
+		CF2C803E1C8961B500B72821 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7B1C8961B500B72821 /* ConstraintItem.swift */; };
+		CF2C803F1C8961B500B72821 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7C1C8961B500B72821 /* ConstraintMaker.swift */; };
+		CF2C80401C8961B500B72821 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7D1C8961B500B72821 /* ConstraintRelation.swift */; };
+		CF2C80411C8961B500B72821 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7E1C8961B500B72821 /* Debugging.swift */; };
+		CF2C80421C8961B500B72821 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7F1C8961B500B72821 /* EdgeInsets.swift */; };
+		CF2C80431C8961B500B72821 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C801C8961B500B72821 /* LayoutConstraint.swift */; };
+		CF2C80441C8961B500B72821 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C811C8961B500B72821 /* SnapKit.swift */; };
+		CF2C80451C8961B500B72821 /* View+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C821C8961B500B72821 /* View+SnapKit.swift */; };
+		CF2C80461C8961B500B72821 /* ViewController+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C831C8961B500B72821 /* ViewController+SnapKit.swift */; };
+		CF2C80471C8961B500B72821 /* MuColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C851C8961B500B72821 /* MuColor.swift */; };
+		CF2C80481C8961B500B72821 /* MuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C861C8961B500B72821 /* MuTableView.swift */; };
+		CF2C80491C8961B500B72821 /* MuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C871C8961B500B72821 /* MuTableViewCell.swift */; };
+		CF2C804A1C8961B500B72821 /* MuTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C881C8961B500B72821 /* MuTools.swift */; };
+		CF2C804B1C8961B500B72821 /* MuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C891C8961B500B72821 /* MuView.swift */; };
+		CF2C804C1C8961B500B72821 /* MuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C8A1C8961B500B72821 /* MuViewController.swift */; };
+		CF2C804D1C8961B500B72821 /* String+ProcessString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C8C1C8961B500B72821 /* String+ProcessString.swift */; };
+		CF2C804E1C8961B500B72821 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C8D1C8961B500B72821 /* UIImageView.swift */; };
+		CF9E698F1C8EAA940082E9DB /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69811C8EAA940082E9DB /* CameraHelper.swift */; };
+		CF9E69901C8EAA940082E9DB /* CropImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69821C8EAA940082E9DB /* CropImageScrollView.swift */; };
+		CF9E69911C8EAA940082E9DB /* ImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69831C8EAA940082E9DB /* ImagePickerHelper.swift */; };
+		CF9E69921C8EAA940082E9DB /* PhotoAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69841C8EAA940082E9DB /* PhotoAlbumCell.swift */; };
+		CF9E69931C8EAA940082E9DB /* PhotoAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF9E69851C8EAA940082E9DB /* PhotoAlbumCell.xib */; };
+		CF9E69941C8EAA940082E9DB /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69861C8EAA940082E9DB /* PhotoAlbumViewController.swift */; };
+		CF9E69951C8EAA940082E9DB /* PhotoColletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69871C8EAA940082E9DB /* PhotoColletionViewController.swift */; };
+		CF9E69961C8EAA940082E9DB /* PhotoColletionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF9E69881C8EAA940082E9DB /* PhotoColletionViewController.xib */; };
+		CF9E69971C8EAA940082E9DB /* PhotoCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69891C8EAA940082E9DB /* PhotoCropViewController.swift */; };
+		CF9E69981C8EAA940082E9DB /* PhotoMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698A1C8EAA940082E9DB /* PhotoMaskView.swift */; };
+		CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */; };
+		CF9E699A1C8EAA940082E9DB /* PhotoThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */; };
+		CF9E699B1C8EAA940082E9DB /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */; };
+		CF9E699C1C8EAA940082E9DB /* PreviewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698E1C8EAA940082E9DB /* PreviewPhotoViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CF2C77EE1C89613700B72821 /* ImagePickerProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePickerProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF2C77F11C89613700B72821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CF2C77F31C89613700B72821 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CF2C77F61C89613700B72821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CF2C77F81C89613700B72821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CF2C77FB1C89613700B72821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CF2C77FD1C89613700B72821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF2C780A1C8961B400B72821 /* HTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableView.swift; sourceTree = "<group>"; };
+		CF2C780B1C8961B400B72821 /* HTableViewForPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableViewForPhoto.swift; sourceTree = "<group>"; };
+		CF2C780C1C8961B400B72821 /* LoadImageProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadImageProgressView.swift; sourceTree = "<group>"; };
+		CF2C780D1C8961B400B72821 /* PhotoTransitionDismissAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTransitionDismissAnimation.swift; sourceTree = "<group>"; };
+		CF2C780E1C8961B400B72821 /* PhotoTransitionPresentAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTransitionPresentAnimation.swift; sourceTree = "<group>"; };
+		CF2C780F1C8961B400B72821 /* ThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThumbCell.swift; sourceTree = "<group>"; };
+		CF2C78101C8961B400B72821 /* ThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThumbCell.xib; sourceTree = "<group>"; };
+		CF2C78111C8961B400B72821 /* WZPhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WZPhotoBrowser.swift; sourceTree = "<group>"; };
+		CF2C78121C8961B400B72821 /* ZoomImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollView.swift; sourceTree = "<group>"; };
+		CF2C7C571C8961B500B72821 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
+		CF2C7C581C8961B500B72821 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
+		CF2C7C591C8961B500B72821 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
+		CF2C7C5A1C8961B500B72821 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
+		CF2C7C5B1C8961B500B72821 /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
+		CF2C7C5C1C8961B500B72821 /* SDWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCompat.m; sourceTree = "<group>"; };
+		CF2C7C5D1C8961B500B72821 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
+		CF2C7C5E1C8961B500B72821 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
+		CF2C7C5F1C8961B500B72821 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloader.h; sourceTree = "<group>"; };
+		CF2C7C601C8961B500B72821 /* SDWebImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloader.m; sourceTree = "<group>"; };
+		CF2C7C611C8961B500B72821 /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
+		CF2C7C621C8961B500B72821 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
+		CF2C7C631C8961B500B72821 /* SDWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageManager.h; sourceTree = "<group>"; };
+		CF2C7C641C8961B500B72821 /* SDWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageManager.m; sourceTree = "<group>"; };
+		CF2C7C651C8961B500B72821 /* SDWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageOperation.h; sourceTree = "<group>"; };
+		CF2C7C661C8961B500B72821 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImagePrefetcher.h; sourceTree = "<group>"; };
+		CF2C7C671C8961B500B72821 /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImagePrefetcher.m; sourceTree = "<group>"; };
+		CF2C7C681C8961B500B72821 /* UIButton+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+WebCache.h"; sourceTree = "<group>"; };
+		CF2C7C691C8961B500B72821 /* UIButton+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
+		CF2C7C6A1C8961B500B72821 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
+		CF2C7C6B1C8961B500B72821 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
+		CF2C7C6C1C8961B500B72821 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MultiFormat.h"; sourceTree = "<group>"; };
+		CF2C7C6D1C8961B500B72821 /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MultiFormat.m"; sourceTree = "<group>"; };
+		CF2C7C6E1C8961B500B72821 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
+		CF2C7C6F1C8961B500B72821 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
+		CF2C7C701C8961B500B72821 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
+		CF2C7C711C8961B500B72821 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
+		CF2C7C721C8961B500B72821 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
+		CF2C7C731C8961B500B72821 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		CF2C7C751C8961B500B72821 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CF2C7C761C8961B500B72821 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CF2C7C781C8961B500B72821 /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		CF2C7C791C8961B500B72821 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
+		CF2C7C7A1C8961B500B72821 /* ConstraintDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDescription.swift; sourceTree = "<group>"; };
+		CF2C7C7B1C8961B500B72821 /* ConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintItem.swift; sourceTree = "<group>"; };
+		CF2C7C7C1C8961B500B72821 /* ConstraintMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMaker.swift; sourceTree = "<group>"; };
+		CF2C7C7D1C8961B500B72821 /* ConstraintRelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelation.swift; sourceTree = "<group>"; };
+		CF2C7C7E1C8961B500B72821 /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
+		CF2C7C7F1C8961B500B72821 /* EdgeInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeInsets.swift; sourceTree = "<group>"; };
+		CF2C7C801C8961B500B72821 /* LayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
+		CF2C7C811C8961B500B72821 /* SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
+		CF2C7C821C8961B500B72821 /* View+SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+SnapKit.swift"; sourceTree = "<group>"; };
+		CF2C7C831C8961B500B72821 /* ViewController+SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+SnapKit.swift"; sourceTree = "<group>"; };
+		CF2C7C851C8961B500B72821 /* MuColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuColor.swift; sourceTree = "<group>"; };
+		CF2C7C861C8961B500B72821 /* MuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuTableView.swift; sourceTree = "<group>"; };
+		CF2C7C871C8961B500B72821 /* MuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuTableViewCell.swift; sourceTree = "<group>"; };
+		CF2C7C881C8961B500B72821 /* MuTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuTools.swift; sourceTree = "<group>"; };
+		CF2C7C891C8961B500B72821 /* MuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuView.swift; sourceTree = "<group>"; };
+		CF2C7C8A1C8961B500B72821 /* MuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuViewController.swift; sourceTree = "<group>"; };
+		CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagePickerProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		CF2C7C8C1C8961B500B72821 /* String+ProcessString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ProcessString.swift"; sourceTree = "<group>"; };
+		CF2C7C8D1C8961B500B72821 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		CF9E69811C8EAA940082E9DB /* CameraHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraHelper.swift; sourceTree = "<group>"; };
+		CF9E69821C8EAA940082E9DB /* CropImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropImageScrollView.swift; sourceTree = "<group>"; };
+		CF9E69831C8EAA940082E9DB /* ImagePickerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerHelper.swift; sourceTree = "<group>"; };
+		CF9E69841C8EAA940082E9DB /* PhotoAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCell.swift; sourceTree = "<group>"; };
+		CF9E69851C8EAA940082E9DB /* PhotoAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumCell.xib; sourceTree = "<group>"; };
+		CF9E69861C8EAA940082E9DB /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		CF9E69871C8EAA940082E9DB /* PhotoColletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColletionViewController.swift; sourceTree = "<group>"; };
+		CF9E69881C8EAA940082E9DB /* PhotoColletionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoColletionViewController.xib; sourceTree = "<group>"; };
+		CF9E69891C8EAA940082E9DB /* PhotoCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCropViewController.swift; sourceTree = "<group>"; };
+		CF9E698A1C8EAA940082E9DB /* PhotoMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMaskView.swift; sourceTree = "<group>"; };
+		CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
+		CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbCell.swift; sourceTree = "<group>"; };
+		CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
+		CF9E698E1C8EAA940082E9DB /* PreviewPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhotoViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF2C77EB1C89613700B72821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF2C77E51C89613700B72821 = {
+			isa = PBXGroup;
+			children = (
+				CF2C77F01C89613700B72821 /* ImagePickerProject */,
+				CF2C77EF1C89613700B72821 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CF2C77EF1C89613700B72821 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C77EE1C89613700B72821 /* ImagePickerProject.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF2C77F01C89613700B72821 /* ImagePickerProject */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E69801C8EAA940082E9DB /* ImagePicker */,
+				CF2C78091C8961B400B72821 /* PhotoBrowser */,
+				CF2C7C561C8961B500B72821 /* SDWebImage */,
+				CF2C7C741C8961B500B72821 /* SnapKit */,
+				CF2C7C841C8961B500B72821 /* SupportFile */,
+				CF2C77F11C89613700B72821 /* AppDelegate.swift */,
+				CF2C77F31C89613700B72821 /* ViewController.swift */,
+				CF2C77F51C89613700B72821 /* Main.storyboard */,
+				CF2C77F81C89613700B72821 /* Assets.xcassets */,
+				CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */,
+				CF2C77FD1C89613700B72821 /* Info.plist */,
+			);
+			path = ImagePickerProject;
+			sourceTree = "<group>";
+		};
+		CF2C78091C8961B400B72821 /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C780A1C8961B400B72821 /* HTableView.swift */,
+				CF2C780B1C8961B400B72821 /* HTableViewForPhoto.swift */,
+				CF2C780C1C8961B400B72821 /* LoadImageProgressView.swift */,
+				CF2C780D1C8961B400B72821 /* PhotoTransitionDismissAnimation.swift */,
+				CF2C780E1C8961B400B72821 /* PhotoTransitionPresentAnimation.swift */,
+				CF2C780F1C8961B400B72821 /* ThumbCell.swift */,
+				CF2C78101C8961B400B72821 /* ThumbCell.xib */,
+				CF2C78111C8961B400B72821 /* WZPhotoBrowser.swift */,
+				CF2C78121C8961B400B72821 /* ZoomImageScrollView.swift */,
+			);
+			path = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		CF2C7C561C8961B500B72821 /* SDWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C7C571C8961B500B72821 /* NSData+ImageContentType.h */,
+				CF2C7C581C8961B500B72821 /* NSData+ImageContentType.m */,
+				CF2C7C591C8961B500B72821 /* SDImageCache.h */,
+				CF2C7C5A1C8961B500B72821 /* SDImageCache.m */,
+				CF2C7C5B1C8961B500B72821 /* SDWebImageCompat.h */,
+				CF2C7C5C1C8961B500B72821 /* SDWebImageCompat.m */,
+				CF2C7C5D1C8961B500B72821 /* SDWebImageDecoder.h */,
+				CF2C7C5E1C8961B500B72821 /* SDWebImageDecoder.m */,
+				CF2C7C5F1C8961B500B72821 /* SDWebImageDownloader.h */,
+				CF2C7C601C8961B500B72821 /* SDWebImageDownloader.m */,
+				CF2C7C611C8961B500B72821 /* SDWebImageDownloaderOperation.h */,
+				CF2C7C621C8961B500B72821 /* SDWebImageDownloaderOperation.m */,
+				CF2C7C631C8961B500B72821 /* SDWebImageManager.h */,
+				CF2C7C641C8961B500B72821 /* SDWebImageManager.m */,
+				CF2C7C651C8961B500B72821 /* SDWebImageOperation.h */,
+				CF2C7C661C8961B500B72821 /* SDWebImagePrefetcher.h */,
+				CF2C7C671C8961B500B72821 /* SDWebImagePrefetcher.m */,
+				CF2C7C681C8961B500B72821 /* UIButton+WebCache.h */,
+				CF2C7C691C8961B500B72821 /* UIButton+WebCache.m */,
+				CF2C7C6A1C8961B500B72821 /* UIImage+GIF.h */,
+				CF2C7C6B1C8961B500B72821 /* UIImage+GIF.m */,
+				CF2C7C6C1C8961B500B72821 /* UIImage+MultiFormat.h */,
+				CF2C7C6D1C8961B500B72821 /* UIImage+MultiFormat.m */,
+				CF2C7C6E1C8961B500B72821 /* UIImageView+HighlightedWebCache.h */,
+				CF2C7C6F1C8961B500B72821 /* UIImageView+HighlightedWebCache.m */,
+				CF2C7C701C8961B500B72821 /* UIImageView+WebCache.h */,
+				CF2C7C711C8961B500B72821 /* UIImageView+WebCache.m */,
+				CF2C7C721C8961B500B72821 /* UIView+WebCacheOperation.h */,
+				CF2C7C731C8961B500B72821 /* UIView+WebCacheOperation.m */,
+			);
+			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		CF2C7C741C8961B500B72821 /* SnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C7C751C8961B500B72821 /* LICENSE */,
+				CF2C7C761C8961B500B72821 /* README.md */,
+				CF2C7C771C8961B500B72821 /* Source */,
+			);
+			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		CF2C7C771C8961B500B72821 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C7C781C8961B500B72821 /* Constraint.swift */,
+				CF2C7C791C8961B500B72821 /* ConstraintAttributes.swift */,
+				CF2C7C7A1C8961B500B72821 /* ConstraintDescription.swift */,
+				CF2C7C7B1C8961B500B72821 /* ConstraintItem.swift */,
+				CF2C7C7C1C8961B500B72821 /* ConstraintMaker.swift */,
+				CF2C7C7D1C8961B500B72821 /* ConstraintRelation.swift */,
+				CF2C7C7E1C8961B500B72821 /* Debugging.swift */,
+				CF2C7C7F1C8961B500B72821 /* EdgeInsets.swift */,
+				CF2C7C801C8961B500B72821 /* LayoutConstraint.swift */,
+				CF2C7C811C8961B500B72821 /* SnapKit.swift */,
+				CF2C7C821C8961B500B72821 /* View+SnapKit.swift */,
+				CF2C7C831C8961B500B72821 /* ViewController+SnapKit.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		CF2C7C841C8961B500B72821 /* SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C7C851C8961B500B72821 /* MuColor.swift */,
+				CF2C7C861C8961B500B72821 /* MuTableView.swift */,
+				CF2C7C871C8961B500B72821 /* MuTableViewCell.swift */,
+				CF2C7C881C8961B500B72821 /* MuTools.swift */,
+				CF2C7C891C8961B500B72821 /* MuView.swift */,
+				CF2C7C8A1C8961B500B72821 /* MuViewController.swift */,
+				CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */,
+				CF2C7C8C1C8961B500B72821 /* String+ProcessString.swift */,
+				CF2C7C8D1C8961B500B72821 /* UIImageView.swift */,
+			);
+			path = SupportFile;
+			sourceTree = "<group>";
+		};
+		CF9E69801C8EAA940082E9DB /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				CF9E69811C8EAA940082E9DB /* CameraHelper.swift */,
+				CF9E69821C8EAA940082E9DB /* CropImageScrollView.swift */,
+				CF9E69831C8EAA940082E9DB /* ImagePickerHelper.swift */,
+				CF9E69841C8EAA940082E9DB /* PhotoAlbumCell.swift */,
+				CF9E69851C8EAA940082E9DB /* PhotoAlbumCell.xib */,
+				CF9E69861C8EAA940082E9DB /* PhotoAlbumViewController.swift */,
+				CF9E69871C8EAA940082E9DB /* PhotoColletionViewController.swift */,
+				CF9E69881C8EAA940082E9DB /* PhotoColletionViewController.xib */,
+				CF9E69891C8EAA940082E9DB /* PhotoCropViewController.swift */,
+				CF9E698A1C8EAA940082E9DB /* PhotoMaskView.swift */,
+				CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */,
+				CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */,
+				CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */,
+				CF9E698E1C8EAA940082E9DB /* PreviewPhotoViewController.swift */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CF2C77ED1C89613700B72821 /* ImagePickerProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF2C78001C89613700B72821 /* Build configuration list for PBXNativeTarget "ImagePickerProject" */;
+			buildPhases = (
+				CF2C77EA1C89613700B72821 /* Sources */,
+				CF2C77EB1C89613700B72821 /* Frameworks */,
+				CF2C77EC1C89613700B72821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImagePickerProject;
+			productName = ImagePickerProject;
+			productReference = CF2C77EE1C89613700B72821 /* ImagePickerProject.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF2C77E61C89613700B72821 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "范祎楠";
+				TargetAttributes = {
+					CF2C77ED1C89613700B72821 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4RQRV7P524;
+					};
+				};
+			};
+			buildConfigurationList = CF2C77E91C89613700B72821 /* Build configuration list for PBXProject "ImagePickerProject" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF2C77E51C89613700B72821;
+			productRefGroup = CF2C77EF1C89613700B72821 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF2C77ED1C89613700B72821 /* ImagePickerProject */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF2C77EC1C89613700B72821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2C7C9A1C8961B500B72821 /* ThumbCell.xib in Resources */,
+				CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */,
+				CF9E69931C8EAA940082E9DB /* PhotoAlbumCell.xib in Resources */,
+				CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */,
+				CF2C80391C8961B500B72821 /* LICENSE in Resources */,
+				CF9E699B1C8EAA940082E9DB /* PhotoThumbCell.xib in Resources */,
+				CF2C77F71C89613700B72821 /* Main.storyboard in Resources */,
+				CF9E69961C8EAA940082E9DB /* PhotoColletionViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF2C77EA1C89613700B72821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF2C80311C8961B500B72821 /* SDWebImageManager.m in Sources */,
+				CF2C7C9B1C8961B500B72821 /* WZPhotoBrowser.swift in Sources */,
+				CF2C80381C8961B500B72821 /* UIView+WebCacheOperation.m in Sources */,
+				CF2C802B1C8961B500B72821 /* NSData+ImageContentType.m in Sources */,
+				CF9E699C1C8EAA940082E9DB /* PreviewPhotoViewController.swift in Sources */,
+				CF2C80441C8961B500B72821 /* SnapKit.swift in Sources */,
+				CF9E699A1C8EAA940082E9DB /* PhotoThumbCell.swift in Sources */,
+				CF2C80301C8961B500B72821 /* SDWebImageDownloaderOperation.m in Sources */,
+				CF2C7C951C8961B500B72821 /* HTableViewForPhoto.swift in Sources */,
+				CF2C77F41C89613700B72821 /* ViewController.swift in Sources */,
+				CF9E698F1C8EAA940082E9DB /* CameraHelper.swift in Sources */,
+				CF9E69971C8EAA940082E9DB /* PhotoCropViewController.swift in Sources */,
+				CF2C802E1C8961B500B72821 /* SDWebImageDecoder.m in Sources */,
+				CF2C80331C8961B500B72821 /* UIButton+WebCache.m in Sources */,
+				CF2C803B1C8961B500B72821 /* Constraint.swift in Sources */,
+				CF2C804B1C8961B500B72821 /* MuView.swift in Sources */,
+				CF2C80421C8961B500B72821 /* EdgeInsets.swift in Sources */,
+				CF2C802C1C8961B500B72821 /* SDImageCache.m in Sources */,
+				CF2C803E1C8961B500B72821 /* ConstraintItem.swift in Sources */,
+				CF2C80461C8961B500B72821 /* ViewController+SnapKit.swift in Sources */,
+				CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */,
+				CF9E69981C8EAA940082E9DB /* PhotoMaskView.swift in Sources */,
+				CF2C803F1C8961B500B72821 /* ConstraintMaker.swift in Sources */,
+				CF9E69951C8EAA940082E9DB /* PhotoColletionViewController.swift in Sources */,
+				CF2C80361C8961B500B72821 /* UIImageView+HighlightedWebCache.m in Sources */,
+				CF9E69911C8EAA940082E9DB /* ImagePickerHelper.swift in Sources */,
+				CF2C80371C8961B500B72821 /* UIImageView+WebCache.m in Sources */,
+				CF2C803A1C8961B500B72821 /* README.md in Sources */,
+				CF2C802D1C8961B500B72821 /* SDWebImageCompat.m in Sources */,
+				CF9E69941C8EAA940082E9DB /* PhotoAlbumViewController.swift in Sources */,
+				CF2C80321C8961B500B72821 /* SDWebImagePrefetcher.m in Sources */,
+				CF2C7C991C8961B500B72821 /* ThumbCell.swift in Sources */,
+				CF2C80411C8961B500B72821 /* Debugging.swift in Sources */,
+				CF2C802F1C8961B500B72821 /* SDWebImageDownloader.m in Sources */,
+				CF2C80491C8961B500B72821 /* MuTableViewCell.swift in Sources */,
+				CF2C804A1C8961B500B72821 /* MuTools.swift in Sources */,
+				CF2C804E1C8961B500B72821 /* UIImageView.swift in Sources */,
+				CF2C7C9C1C8961B500B72821 /* ZoomImageScrollView.swift in Sources */,
+				CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */,
+				CF2C804C1C8961B500B72821 /* MuViewController.swift in Sources */,
+				CF2C804D1C8961B500B72821 /* String+ProcessString.swift in Sources */,
+				CF2C803D1C8961B500B72821 /* ConstraintDescription.swift in Sources */,
+				CF2C80401C8961B500B72821 /* ConstraintRelation.swift in Sources */,
+				CF9E69901C8EAA940082E9DB /* CropImageScrollView.swift in Sources */,
+				CF2C80351C8961B500B72821 /* UIImage+MultiFormat.m in Sources */,
+				CF2C80451C8961B500B72821 /* View+SnapKit.swift in Sources */,
+				CF2C80431C8961B500B72821 /* LayoutConstraint.swift in Sources */,
+				CF2C7C981C8961B500B72821 /* PhotoTransitionPresentAnimation.swift in Sources */,
+				CF2C80481C8961B500B72821 /* MuTableView.swift in Sources */,
+				CF2C7C971C8961B500B72821 /* PhotoTransitionDismissAnimation.swift in Sources */,
+				CF2C80341C8961B500B72821 /* UIImage+GIF.m in Sources */,
+				CF2C80471C8961B500B72821 /* MuColor.swift in Sources */,
+				CF2C803C1C8961B500B72821 /* ConstraintAttributes.swift in Sources */,
+				CF2C7C941C8961B500B72821 /* HTableView.swift in Sources */,
+				CF2C7C961C8961B500B72821 /* LoadImageProgressView.swift in Sources */,
+				CF9E69921C8EAA940082E9DB /* PhotoAlbumCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CF2C77F51C89613700B72821 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2C77F61C89613700B72821 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2C77FB1C89613700B72821 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CF2C77FE1C89613700B72821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CF2C77FF1C89613700B72821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CF2C78011C89613700B72821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ImagePickerProject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fyn.ImagePickerProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ImagePickerProject/SupportFile/ImagePickerProject-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		CF2C78021C89613700B72821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ImagePickerProject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fyn.ImagePickerProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ImagePickerProject/SupportFile/ImagePickerProject-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF2C77E91C89613700B72821 /* Build configuration list for PBXProject "ImagePickerProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2C77FE1C89613700B72821 /* Debug */,
+				CF2C77FF1C89613700B72821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF2C78001C89613700B72821 /* Build configuration list for PBXNativeTarget "ImagePickerProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2C78011C89613700B72821 /* Debug */,
+				CF2C78021C89613700B72821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CF2C77E61C89613700B72821 /* Project object */;
+}
