@@ -242,15 +242,15 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
   }
 }
 
-extension PhotoColletionViewController: WZPhotoBrowserDelegate {
+extension PhotoColletionViewController: WZPhotoBrowserLiteDelegate {
   
-  func numberOfImage(photoBrowser: WZPhotoBrowser) -> Int {
+  func numberOfImage(photoBrowser: WZPhotoBrowserLite) -> Int {
     
     return PhotosManager.sharedInstance.getImageCountInCurrentAlbum()
     
   }
   
-  func firstDisplayIndex(photoBrowser: WZPhotoBrowser) -> Int {
+  func firstDisplayIndex(photoBrowser: WZPhotoBrowserLite) -> Int {
     
     return selectItemNum
   }

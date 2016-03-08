@@ -14,7 +14,7 @@ protocol HTableViewForPhotoCellDelegate: NSObjectProtocol {
 
 protocol HTableViewForPhotoDataSource: NSObjectProtocol{
   func numberOfColumnsForPhoto(hTableViewForPhoto: HTableViewForPhoto) -> Int
-  func hTableViewForPhoto(hTableViewForPhoto: HTableViewForPhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollView
+  func hTableViewForPhoto(hTableViewForPhoto: HTableViewForPhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollViewLite
 }
 
 @objc protocol HTableViewForPhotoDelegate: NSObjectProtocol{
@@ -65,9 +65,9 @@ class HTableViewForPhoto: UIScrollView {
   //所有cell的rect
   private var allRectList: [String] = []
   //可见的所有cell
-  private var visibleCellList: [ZoomImageScrollView] = []
+  private var visibleCellList: [ZoomImageScrollViewLite] = []
   //可供复用的cell
-  private var reusableCellListDic = Dictionary<String, [ZoomImageScrollView]>()
+  private var reusableCellListDic = Dictionary<String, [ZoomImageScrollViewLite]>()
   //储存上次一发生滑动的可见区域
   private var perviousVisibleRect: CGRect = CGRectZero
   //选中cell
@@ -203,7 +203,7 @@ class HTableViewForPhoto: UIScrollView {
   }
   
   //复用cell
-  func dequeueReusableCellWithIdentifier(identifier: String) -> ZoomImageScrollView?{
+  func dequeueReusableCellWithIdentifier(identifier: String) -> ZoomImageScrollViewLite?{
     var reusableCellList = reusableCellListDic[identifier]
     if let _reusableCellList = reusableCellList {
       if _reusableCellList.count > 0 {
@@ -349,7 +349,7 @@ class HTableViewForPhoto: UIScrollView {
     }
   }
   
-  func didSelectedCell(cell: ZoomImageScrollView){
+  func didSelectedCell(cell: ZoomImageScrollViewLite){
     let currentSelectedIndex = cell.tag
     delegateForHTableView?.hTableViewForPhoto?(self, didSelectRowAtIndex: currentSelectedIndex)
     selectedIndex = currentSelectedIndex
@@ -359,7 +359,7 @@ class HTableViewForPhoto: UIScrollView {
     return allRectList.map({CGRectFromString($0)})
   }
   
-  func itemForRowAtIndex(index: Int) -> ZoomImageScrollView {
+  func itemForRowAtIndex(index: Int) -> ZoomImageScrollViewLite {
     
     let item = dataSource.hTableViewForPhoto(self, cellForColumnAtIndex: index)
     item.frame = CGRectFromString(allRectList[index])
@@ -380,7 +380,7 @@ class HTableViewForPhoto: UIScrollView {
     return nil
   }
   
-  func cellForRowAtIndex(index: Int) -> ZoomImageScrollView {
+  func cellForRowAtIndex(index: Int) -> ZoomImageScrollViewLite {
     
     if visibleRange.contains(index) && !visibleRange.isEmpty{
       

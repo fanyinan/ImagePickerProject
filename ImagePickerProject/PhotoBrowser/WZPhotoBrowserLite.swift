@@ -1,6 +1,6 @@
 //
-//  WZPhotoBrowser.swift
-//  WZPhotoBrowser
+//  WZPhotoBrowserLite.swift
+//  WZPhotoBrowserLite
 //
 //  Created by 范祎楠 on 15/9/2.
 //  Copyright © 2015年 范祎楠. All rights reserved.
@@ -8,28 +8,19 @@
 
 import UIKit
 
-protocol WZPhotoBrowserAnimatedTransition: NSObjectProtocol {
+protocol WZPhotoBrowserLiteDelegate: NSObjectProtocol {
   
-  //如果index为nil则返回当前点击的即将跳转图片浏器的图片的frame
-  func getImageViewFrameInParentViewWith(index: Int?) -> CGRect
+  func numberOfImage(photoBrowser: WZPhotoBrowserLite) -> Int
   
-  func getImageForAnimation() -> UIImage?
-  
-}
-
-protocol WZPhotoBrowserDelegate: NSObjectProtocol {
-  
-  func numberOfImage(photoBrowser: WZPhotoBrowser) -> Int
-  
-  func firstDisplayIndex(photoBrowser: WZPhotoBrowser) -> Int
+  func firstDisplayIndex(photoBrowser: WZPhotoBrowserLite) -> Int
   
 }
 
-class WZPhotoBrowser: UIViewController {
+class WZPhotoBrowserLite: UIViewController {
   
   private var mainTableView: HTableViewForPhoto!
   
-  var delegate: WZPhotoBrowserDelegate
+  var delegate: WZPhotoBrowserLiteDelegate
   var quitBlock: (() -> Void)?
   var selectCellIndex: Int = 0 {
     didSet{
@@ -42,7 +33,7 @@ class WZPhotoBrowser: UIViewController {
   let IDENTIFIER_IMAGE_CELL = "ZoomImageCell"
   let padding: CGFloat = 6
   
-  init(delegate: WZPhotoBrowserDelegate, quitBlock: (() -> Void)? = nil) {
+  init(delegate: WZPhotoBrowserLiteDelegate, quitBlock: (() -> Void)? = nil) {
     
     self.delegate = delegate
     self.quitBlock = quitBlock
@@ -134,16 +125,16 @@ class WZPhotoBrowser: UIViewController {
   }
 }
 
-extension WZPhotoBrowser: HTableViewForPhotoDataSource {
+extension WZPhotoBrowserLite: HTableViewForPhotoDataSource {
   
   func numberOfColumnsForPhoto(hTableView: HTableViewForPhoto) -> Int{
     return delegate.numberOfImage(self)
   }
   
-  func hTableViewForPhoto(hTableView: HTableViewForPhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollView{
+  func hTableViewForPhoto(hTableView: HTableViewForPhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollViewLite{
     var cell = hTableView.dequeueReusableCellWithIdentifier(IDENTIFIER_IMAGE_CELL)
     if cell == nil {
-      cell = ZoomImageScrollView(reuseIdentifier: IDENTIFIER_IMAGE_CELL)
+      cell = ZoomImageScrollViewLite(reuseIdentifier: IDENTIFIER_IMAGE_CELL)
       cell!.addImageTarget(self, action: Selector("onClickPhoto"))
     }
     
@@ -156,7 +147,7 @@ extension WZPhotoBrowser: HTableViewForPhotoDataSource {
   }
 }
 
-extension WZPhotoBrowser: HTableViewForPhotoDelegate {
+extension WZPhotoBrowserLite: HTableViewForPhotoDelegate {
   
   func hTableViewForPhoto(hTableView: HTableViewForPhoto, widthForColumnAtIndex index: Int) -> CGFloat{
     return mainTableView.frame.width

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PreviewPhotoViewController: WZPhotoBrowser {
+class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   var topBarContainerView: UIView!
   var topBarTransparentView: UIView!

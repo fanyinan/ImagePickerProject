@@ -1,5 +1,5 @@
 //
-//  ZoomImageScrollView.swift
+//  ZoomImageScrollViewLite.swift
 //  WZPhotoBrowser
 //
 //  Created by 范祎楠 on 15/9/1.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
+class ZoomImageScrollViewLite: UIScrollView, HTableViewForPhotoCellDelegate {
   
   private var imageView: UIImageView!
   private var simpleTap: UITapGestureRecognizer!
@@ -148,7 +148,7 @@ class ZoomImageScrollView: UIScrollView, HTableViewForPhotoCellDelegate {
   
 }
 
-extension ZoomImageScrollView: UIScrollViewDelegate {
+extension ZoomImageScrollViewLite: UIScrollViewDelegate {
   func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
     return imageView
   }
