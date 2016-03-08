@@ -61,7 +61,7 @@
 		CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */; };
 		CF9E699A1C8EAA940082E9DB /* PhotoThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */; };
 		CF9E699B1C8EAA940082E9DB /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */; };
-		CF9E69B91C8F17490082E9DB /* HTableViewForPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B51C8F17490082E9DB /* HTableViewForPhoto.swift */; };
+		CF9E69B91C8F17490082E9DB /* HTableViewForLitePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B51C8F17490082E9DB /* HTableViewForLitePhoto.swift */; };
 		CF9E69BA1C8F17490082E9DB /* PreviewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */; };
 		CF9E69BB1C8F17490082E9DB /* WZPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */; };
 		CF9E69BC1C8F17490082E9DB /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */; };
@@ -140,7 +140,7 @@
 		CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
 		CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbCell.swift; sourceTree = "<group>"; };
 		CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
-		CF9E69B51C8F17490082E9DB /* HTableViewForPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableViewForPhoto.swift; sourceTree = "<group>"; };
+		CF9E69B51C8F17490082E9DB /* HTableViewForLitePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableViewForLitePhoto.swift; sourceTree = "<group>"; };
 		CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhotoViewController.swift; sourceTree = "<group>"; };
 		CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WZPhotoBrowserLite.swift; sourceTree = "<group>"; };
 		CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
@@ -295,7 +295,7 @@
 		CF9E69B41C8F17490082E9DB /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				CF9E69B51C8F17490082E9DB /* HTableViewForPhoto.swift */,
+				CF9E69B51C8F17490082E9DB /* HTableViewForLitePhoto.swift */,
 				CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */,
 				CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */,
 				CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */,
@@ -394,7 +394,7 @@
 				CF2C804B1C8961B500B72821 /* MuView.swift in Sources */,
 				CF2C80421C8961B500B72821 /* EdgeInsets.swift in Sources */,
 				CF2C802C1C8961B500B72821 /* SDImageCache.m in Sources */,
-				CF9E69B91C8F17490082E9DB /* HTableViewForPhoto.swift in Sources */,
+				CF9E69B91C8F17490082E9DB /* HTableViewForLitePhoto.swift in Sources */,
 				CF2C803E1C8961B500B72821 /* ConstraintItem.swift in Sources */,
 				CF2C80461C8961B500B72821 /* ViewController+SnapKit.swift in Sources */,
 				CF9E69BA1C8F17490082E9DB /* PreviewPhotoViewController.swift in Sources */,

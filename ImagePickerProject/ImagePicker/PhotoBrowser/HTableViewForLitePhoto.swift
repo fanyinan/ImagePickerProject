@@ -8,23 +8,23 @@
 
 import UIKit
 
-protocol HTableViewForPhotoCellDelegate: NSObjectProtocol {
+protocol HTableViewForLitePhotoCellDelegate: NSObjectProtocol {
   var reuseIdentifier: String {get set}
 }
 
-protocol HTableViewForPhotoDataSource: NSObjectProtocol{
-  func numberOfColumnsForPhoto(hTableViewForPhoto: HTableViewForPhoto) -> Int
-  func hTableViewForPhoto(hTableViewForPhoto: HTableViewForPhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollViewLite
+protocol HTableViewForLitePhotoDataSource: NSObjectProtocol{
+  func numberOfColumnsForPhoto(hTableViewForPhoto: HTableViewForLitePhoto) -> Int
+  func hTableViewForPhoto(hTableViewForPhoto: HTableViewForLitePhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollViewLite
 }
 
-@objc protocol HTableViewForPhotoDelegate: NSObjectProtocol{
-  optional func hTableViewForPhoto(hTableViewForPhoto: HTableViewForPhoto, widthForColumnAtIndex index: Int) -> CGFloat
-  optional func hTableViewForPhoto(hTableViewForPhoto: HTableViewForPhoto, didSelectRowAtIndex: Int)
-  optional func hTableViewForPhotoDidScroll(hTableViewForPhoto: HTableViewForPhoto)
-  optional func hTableViewForPhotoWillBeginDragging(hTableViewForPhoto: HTableViewForPhoto)
-  optional func hTableViewForPhotoDidEndDecelerating(hTableViewForPhoto: HTableViewForPhoto)
-  optional func hTableViewForPhotoWillEndDragging(hTableViewForPhoto: HTableViewForPhoto)
-  optional func hTableViewForPhotoDidEndDragging(hTableViewForPhoto: HTableViewForPhoto, willDecelerate decelerate: Bool)
+@objc protocol HTableViewForLitePhotoDelegate: NSObjectProtocol{
+  optional func hTableViewForPhoto(hTableViewForPhoto: HTableViewForLitePhoto, widthForColumnAtIndex index: Int) -> CGFloat
+  optional func hTableViewForPhoto(hTableViewForPhoto: HTableViewForLitePhoto, didSelectRowAtIndex: Int)
+  optional func hTableViewForPhotoDidScroll(hTableViewForPhoto: HTableViewForLitePhoto)
+  optional func hTableViewForPhotoWillBeginDragging(hTableViewForPhoto: HTableViewForLitePhoto)
+  optional func hTableViewForPhotoDidEndDecelerating(hTableViewForPhoto: HTableViewForLitePhoto)
+  optional func hTableViewForPhotoWillEndDragging(hTableViewForPhoto: HTableViewForLitePhoto)
+  optional func hTableViewForPhotoDidEndDragging(hTableViewForPhoto: HTableViewForLitePhoto, willDecelerate decelerate: Bool)
 
 }
 
@@ -41,7 +41,7 @@ extension UIScrollView{
   }
 }
 
-class HTableViewForPhoto: UIScrollView {
+class HTableViewForLitePhoto: UIScrollView {
   
   enum RollDirection{
     case Left
@@ -49,12 +49,12 @@ class HTableViewForPhoto: UIScrollView {
   }
   
 //  private var scrollView: UIScrollView!
-  var dataSource: HTableViewForPhotoDataSource!{
+  var dataSource: HTableViewForLitePhotoDataSource!{
     didSet{
       loadData()
     }
   }
-  var delegateForHTableView: HTableViewForPhotoDelegate?
+  var delegateForHTableView: HTableViewForLitePhotoDelegate?
   
   //cell的个数
   private var numberOfColumns: Int!
@@ -421,7 +421,7 @@ class HTableViewForPhoto: UIScrollView {
   
 }
 
-extension HTableViewForPhoto: UIScrollViewDelegate {
+extension HTableViewForLitePhoto: UIScrollViewDelegate {
   
   //scrollView的回调
   func scrollViewDidScroll(scrollView: UIScrollView) {

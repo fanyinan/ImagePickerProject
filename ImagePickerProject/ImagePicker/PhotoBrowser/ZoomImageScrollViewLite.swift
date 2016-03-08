@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZoomImageScrollViewLite: UIScrollView, HTableViewForPhotoCellDelegate {
+class ZoomImageScrollViewLite: UIScrollView, HTableViewForLitePhotoCellDelegate {
   
   private var imageView: UIImageView!
   private var simpleTap: UITapGestureRecognizer!

@@ -18,7 +18,7 @@ protocol WZPhotoBrowserLiteDelegate: NSObjectProtocol {
 
 class WZPhotoBrowserLite: UIViewController {
   
-  private var mainTableView: HTableViewForPhoto!
+  private var mainTableView: HTableViewForLitePhoto!
   
   var delegate: WZPhotoBrowserLiteDelegate
   var quitBlock: (() -> Void)?
@@ -90,7 +90,7 @@ class WZPhotoBrowserLite: UIViewController {
   
   private func initMainTableView() {
     
-    mainTableView = HTableViewForPhoto(frame: CGRect(x: -padding, y: view.bounds.minY, width: view.bounds.width + padding * 2, height: view.bounds.height))
+    mainTableView = HTableViewForLitePhoto(frame: CGRect(x: -padding, y: view.bounds.minY, width: view.bounds.width + padding * 2, height: view.bounds.height))
     mainTableView.delegateForHTableView = self
     mainTableView.dataSource = self
     mainTableView.pagingEnabled = true
@@ -125,13 +125,13 @@ class WZPhotoBrowserLite: UIViewController {
   }
 }
 
-extension WZPhotoBrowserLite: HTableViewForPhotoDataSource {
+extension WZPhotoBrowserLite: HTableViewForLitePhotoDataSource {
   
-  func numberOfColumnsForPhoto(hTableView: HTableViewForPhoto) -> Int{
+  func numberOfColumnsForPhoto(hTableView: HTableViewForLitePhoto) -> Int{
     return delegate.numberOfImage(self)
   }
   
-  func hTableViewForPhoto(hTableView: HTableViewForPhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollViewLite{
+  func hTableViewForPhoto(hTableView: HTableViewForLitePhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollViewLite{
     var cell = hTableView.dequeueReusableCellWithIdentifier(IDENTIFIER_IMAGE_CELL)
     if cell == nil {
       cell = ZoomImageScrollViewLite(reuseIdentifier: IDENTIFIER_IMAGE_CELL)
@@ -147,19 +147,19 @@ extension WZPhotoBrowserLite: HTableViewForPhotoDataSource {
   }
 }
 
-extension WZPhotoBrowserLite: HTableViewForPhotoDelegate {
+extension WZPhotoBrowserLite: HTableViewForLitePhotoDelegate {
   
-  func hTableViewForPhoto(hTableView: HTableViewForPhoto, widthForColumnAtIndex index: Int) -> CGFloat{
+  func hTableViewForPhoto(hTableView: HTableViewForLitePhoto, widthForColumnAtIndex index: Int) -> CGFloat{
     return mainTableView.frame.width
   }
   
-  func hTableViewForPhoto(hTableView: HTableViewForPhoto, didSelectRowAtIndex: Int) {
+  func hTableViewForPhoto(hTableView: HTableViewForLitePhoto, didSelectRowAtIndex: Int) {
     
     onClickPhoto()
     
   }
   
-  func hTableViewForPhotoDidScroll(hTableViewForPhoto: HTableViewForPhoto) {
+  func hTableViewForPhotoDidScroll(hTableViewForPhoto: HTableViewForLitePhoto) {
     
     //更新selectCellIndex
     let cellPoint = view.convertPoint(hTableViewForPhoto.center, toView: mainTableView)
