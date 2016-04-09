@@ -12,19 +12,13 @@ let separatorColor = UIColor.hexStringToColor("e5e5e5")
 
 class ViewController: UIViewController {
 
-  var imagePickerHelper: ImagePickerHelper!
-  @IBOutlet weak var imageView1: UIImageView!
-  @IBOutlet weak var imageView2: UIImageView!
-  @IBOutlet weak var imageView3: UIImageView!
-
-  @IBOutlet weak var imageView4: UIImageView!
-  @IBOutlet weak var imageView5: UIImageView!
-
-  var imageViewList: [UIImageView] = []
+  @IBOutlet var isCropSwitch: UISwitch!
+  @IBOutlet var maxCountTextField: UITextField!
   
-  var value1: CGFloat = 1
-  var value2: CGFloat = 1
-  var image: UIImage!
+  var imagePickerHelper: ImagePickerHelper!
+  var isCrop: Bool = true
+  var type: ImagePickerType = .AlbumAndCamera
+  var maxCount = 3
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -33,13 +27,7 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-//    imageViewList += [imageView1]
-//    imageViewList += [imageView2]
-//    imageViewList += [imageView3]
-
-    
     imagePickerHelper = ImagePickerHelper(delegate: self)
-//    imagePickerHelper.maxSelectedCount = 4
     
   }
 
@@ -50,131 +38,45 @@ class ViewController: UIViewController {
   
   @IBAction func onStart() {
     
-//    imagePickerHelper.isCrop = true
-    imagePickerHelper.maxSelectedCount = 3
+    imagePickerHelper.isCrop = isCrop
+    imagePickerHelper.maxSelectedCount = maxCount
+    imagePickerHelper.type = type
     imagePickerHelper.startPhoto()
   }
-
-  func getOrientation(image: UIImage) -> String {
+  
+  @IBAction func onIsCrop(sender: UISwitch) {
     
-    var imageOrientation = ""
+    isCrop = sender.on
     
-    switch image.imageOrientation {
-    case .Down:
-      imageOrientation = "Down"
-    case .Up:
-      imageOrientation = "Up"
-    case .Left:
-      imageOrientation = "Left"
-    case .Right:
-      imageOrientation = "Right"
-    case .DownMirrored:
-      imageOrientation = "DownMirrored"
-    case .UpMirrored:
-      imageOrientation = "UpMirrored"
-    case .RightMirrored:
-      imageOrientation = "RightMirrored"
-    case .LeftMirrored:
-      imageOrientation = "LeftMirrored"
+    if isCrop {
+      maxCountTextField.text = "1"
+      maxCount = 1
     }
     
-    return imageOrientation
   }
   
-  @IBAction func changeValue1(sender: UISlider) {
-    value1 = CGFloat(sender.value)
-    
-    reDraw()
-  }
-  
-  @IBAction func changeValue2(sender: UISlider) {
-    value2 = CGFloat(sender.value)
-    reDraw()
-  }
-  
-  /**
-   旋转图片
-   
-   - parameter image: 原图
-   
-   - returns: 旋转后的图片
-   */
-  func fixOrientation(image: UIImage) -> UIImage {
-    
-    //    if image.imageOrientation == UIImageOrientation.Up {
-    //      return image
-    //    }
-    var transform = CGAffineTransformIdentity
-    typealias o = UIImageOrientation
-    let width = image.size.width
-    let height = image.size.height
-    
-    switch (image.imageOrientation) {
-    case o.Down, o.DownMirrored:
-      transform = CGAffineTransformTranslate(transform, width, height)
-      transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
-    case o.Left, o.LeftMirrored:
-      transform = CGAffineTransformTranslate(transform, width, 0)
-      transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2))
-    case o.Right, o.RightMirrored:
-      transform = CGAffineTransformTranslate(transform, 0, height)
-      transform = CGAffineTransformRotate(transform, CGFloat(-M_PI_2))
-    default: // o.Up, o.UpMirrored:
+  @IBAction func onStyle(sender: UISegmentedControl) {
+    switch sender.selectedSegmentIndex {
+    case 0:
+      type = .AlbumAndCamera
+    case 1:
+      type = .Album
+    case 2:
+      type = .Camera
+    default:
       break
     }
-    
-//    switch (image.imageOrientation) {
-//    case o.UpMirrored, o.DownMirrored:
-//      transform = CGAffineTransformTranslate(transform, width, 0)
-//      transform = CGAffineTransformScale(transform, -1, 1)
-//    case o.LeftMirrored, o.RightMirrored:
-//      transform = CGAffineTransformTranslate(transform, height, 0)
-//      transform = CGAffineTransformScale(transform, -1, 1)
-//    default: // o.Up, o.Down, o.Left, o.Right
-//      break
-//    }
-    let cgimage = image.CGImage
-    
-    let ctx = CGBitmapContextCreate(nil, Int(width), Int(height),
-      CGImageGetBitsPerComponent(cgimage), 0,
-      CGImageGetColorSpace(cgimage),
-      CGImageGetBitmapInfo(cgimage).rawValue)
-    
-//    CGContextConcatCTM(ctx, transform)
-    
-//    switch (image.imageOrientation) {
-//    case o.Left, o.LeftMirrored, o.Right, o.RightMirrored:
-//      CGContextDrawImage(ctx, CGRectMake(0, 0, height, width), cgimage)
-//    default:
-      CGContextDrawImage(ctx, CGRectMake(0, 0, width, height), cgimage)
-//    }
-    let cgimg = CGBitmapContextCreateImage(ctx)
-    let img = UIImage(CGImage: cgimg!)
-    return img
-    
   }
   
-  func dealImage(image: UIImage) {
+  @IBAction func onCountChange(sender: UITextField) {
     
-    print("size : \(image.size), orientation: \(getOrientation(image))")
+    guard let maxCount = Int(sender.text!) else { return }
     
-//    imageView4.layer.contentsRect = CGRect(x: 0, y: 0, width: 0.5, height: 0.5)
-    imageView4.image = image
+    self.maxCount = maxCount
     
-    print("----------------------------")
-    
-    let image2 = fixOrientation(image)
-//    let image2 = UIImage(CGImage: image.CGImage!, scale: image.scale, orientation: .Up)
-
-    print("size : \(image2.size), orientation: \(getOrientation(image2))")
-
-    imageView5.layer.contentsRect = CGRect(x: 0, y: 0, width: 0.5, height: 0.5)
-    imageView5.image = image2
-
-  }
-  
-  func reDraw() {
-    dealImage(image)
+    if maxCount != 1 {
+      isCropSwitch.setOn(false, animated: true)
+    }
   }
   
 
