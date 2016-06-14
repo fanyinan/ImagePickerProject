@@ -118,7 +118,7 @@ class PhotoColletionViewController: UIViewController {
     
     selectedCountLabel.setViewCornerRadius()
     
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: "onCancel")
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
     
   }
   
@@ -127,8 +127,12 @@ class PhotoColletionViewController: UIViewController {
     let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
     if (AVAuthorizationStatus.Denied == authStatus || AVAuthorizationStatus.Restricted == authStatus){
       
-      let _ = UIAlertView(title: "相机被禁用", message: "请在设置－隐私－相机中开启", delegate: nil, cancelButtonTitle: "确定").show()
+//      let _ = UIAlertView(title: "相机被禁用", message: "请在设置－隐私－相机中开启", delegate: nil, cancelButtonTitle: "确定").show()
       
+      let alertController = UIAlertController(title: "相机被禁用", message: "请在设置－隐私－相机中开启", preferredStyle: .Alert)
+      let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+      alertController.addAction(okAction)
+      presentViewController(alertController, animated: true, completion: nil)
     }
   }
   

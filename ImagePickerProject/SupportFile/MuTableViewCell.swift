@@ -16,7 +16,7 @@ extension UITableViewCell {
     
     self.separatorInset = UIEdgeInsetsZero
     
-    if self.respondsToSelector("setLayoutMargins:"){
+    if self.respondsToSelector(Selector("setLayoutMargins:")){
       self.layoutMargins = UIEdgeInsetsZero
     }
     

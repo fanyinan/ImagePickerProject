@@ -61,7 +61,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   }
   
   func onSelect() {
-    setPhotoSelectedStatusWith(selectCellIndex)
+    setPhotoSelectedStatusWith(currentIndex)
     updateCount()
   }
   
@@ -71,14 +71,14 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     
     //如果当前没有被选择的照片，则选择当前照片
     if selectedCount == 0 {
-      PhotosManager.sharedInstance.selectPhotoWith(selectCellIndex)
+      PhotosManager.sharedInstance.selectPhotoWith(currentIndex)
     }
     
     PhotosManager.sharedInstance.didFinish()
   }
   
   override func onClickPhoto() {
-    print(__FUNCTION__)
+    print(#function)
   }
   
   func initTopbar() {
@@ -114,7 +114,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     }
     
     backButton.setImage(UIImage(named: "back_white_arrow"), forState: .Normal)
-    backButton.addTarget(self, action: "onBack", forControlEvents: .TouchUpInside)
+    backButton.addTarget(self, action: #selector(PreviewPhotoViewController.onBack), forControlEvents: .TouchUpInside)
     
     //selectButton
     selectButton = UIControl()
@@ -125,7 +125,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.width.equalTo(50)
     }
     
-    selectButton.addTarget(self, action: "onSelect", forControlEvents: .TouchUpInside)
+    selectButton.addTarget(self, action: #selector(PreviewPhotoViewController.onSelect), forControlEvents: .TouchUpInside)
     
     //unselectedButton
     unselectedImageView = UIImageView()
@@ -183,7 +183,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     completeButton.setTitle("完成", forState: .Normal)
     completeButton.titleLabel?.font = UIFont.systemFontOfSize(16)
     completeButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
-    completeButton.addTarget(self, action: "onComplete", forControlEvents: .TouchUpInside)
+    completeButton.addTarget(self, action: #selector(PreviewPhotoViewController.onComplete), forControlEvents: .TouchUpInside)
     
     //selectedCountLabel
     selectedCountLabel = UILabel()
@@ -203,7 +203,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   override func photoDidChange() {
     
-    let isSelected = PhotosManager.sharedInstance.selectedIndexList.contains(selectCellIndex)
+    let isSelected = PhotosManager.sharedInstance.selectedIndexList.contains(currentIndex)
     setPhotoSelected(isSelected)
     updateCount()
     

@@ -8,24 +8,31 @@
 
 import UIKit
 
-class ZoomImageScrollViewLite: UIScrollView, HTableViewForLitePhotoCellDelegate {
+class ZoomImageScrollViewLite: UIScrollView {
   
-  private var imageView: UIImageView!
-  private var simpleTap: UITapGestureRecognizer!
   private var imageSize: CGSize!
-  var reuseIdentifier: String
-
-  var padding: CGFloat = 0
+  private var imageView: UIImageView!
+  private var singleTap: UITapGestureRecognizer!
+  private var doubleTap: UITapGestureRecognizer!
+  private var initialZoomScale: CGFloat! //保存初始比例，供双击放大后还原使用
   
-  init(reuseIdentifier: String){
-    self.reuseIdentifier = reuseIdentifier
+  let maxScale: CGFloat = 3
+  
+  init(){
     super.init(frame: CGRectZero)
     configUI()
   }
   
   required init?(coder aDecoder: NSCoder) {
-    self.reuseIdentifier = ""
     super.init(coder: aDecoder)
+  }
+  
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    
+    moveFrameToCenter()
+    
   }
   
   private func configUI() {
@@ -40,11 +47,17 @@ class ZoomImageScrollViewLite: UIScrollView, HTableViewForLitePhotoCellDelegate 
     
     //imageview
     imageView = UIImageView(frame: CGRectZero)
-    imageView.backgroundColor = UIColor.blackColor()
+    imageView.backgroundColor = UIColor.yellowColor()
     imageView.contentMode = .ScaleAspectFill
     imageView.userInteractionEnabled = true
-    simpleTap = UITapGestureRecognizer()
-    imageView.addGestureRecognizer(simpleTap)
+    
+    singleTap = UITapGestureRecognizer()
+    addGestureRecognizer(singleTap)
+    
+    doubleTap = UITapGestureRecognizer(target: self, action: #selector(ZoomImageScrollViewLite.imageViewDoubleTap(_:)))
+    doubleTap.numberOfTapsRequired = 2
+    imageView.addGestureRecognizer(doubleTap)
+    singleTap.requireGestureRecognizerToFail(doubleTap)
     
     addSubview(imageView)
     
@@ -59,7 +72,6 @@ class ZoomImageScrollViewLite: UIScrollView, HTableViewForLitePhotoCellDelegate 
     imageView.image = image
     //这里设置imageview的size为imagesize在当前缩放比例下的size
     imageView.frame = CGRect(x: 0, y: 0, width: image!.size.width * zoomScale, height: image!.size.height * zoomScale)
-    contentSize = imageView.frame.size
     
     calculateZoomScale()
   }
@@ -91,14 +103,44 @@ class ZoomImageScrollViewLite: UIScrollView, HTableViewForLitePhotoCellDelegate 
    :param: action action
    */
   func addImageTarget(target: AnyObject, action: Selector) {
-    simpleTap.addTarget(target, action: action)
+    singleTap.addTarget(target, action: action)
+  }
+  
+  func imageViewDoubleTap(tap: UITapGestureRecognizer) {
+    
+    guard zoomScale == initialZoomScale else {
+      
+      setZoomScale(initialZoomScale, animated: true)
+      return
+    }
+    
+    let position = tap.locationInView(imageView)
+    
+    let zoomRectScale: CGFloat = 2
+    
+    // "/ zoomScale"将尺寸还原为zoomscale为1时的尺寸
+    let zoomWidth = frame.width / zoomScale / zoomRectScale
+    let zoomHeight = frame.height / zoomScale / zoomRectScale
+    //position为zoomscale为1时的位置; "* zoomScale":转为当前zoomscale下的position
+    //"/ imageView.frame.width * frame.width" 将点击的位置按比例转为scrollview上的位置
+    //"/ zoomScale":再将位置还原为zoomscale为1时的位置
+    //当zoomScale为1时还是有瑕疵，待改进
+    let zoomX = position.x * zoomScale / imageView.frame.width * frame.width / zoomScale - zoomWidth / 2
+    let zoomY = position.y * zoomScale / imageView.frame.height * frame.height / zoomScale - zoomHeight / 2
+    
+    //此值为在zoomscale为1时图片上的尺寸
+    //用于表示要把这个以点击位置为center的rect区域缩放zoomRectScale倍
+    //此处需要解决：当以zoomRectScale放大后，图片的高超过屏幕的高度，此时不应该再动画的时候执行moveFrameToCenter，而应根据点击位置调整
+    let zoomRect = CGRect(x: zoomX, y: zoomY, width: zoomWidth, height: zoomHeight)
+    zoomToRect(zoomRect, animated: true)
+    
   }
   
   private func calculateZoomScale() {
     
     let boundsSize = bounds.size
     
-    let scaleX = (boundsSize.width - padding * CGFloat(2)) / imageSize.width
+    let scaleX = boundsSize.width / imageSize.width
     let scaleY = boundsSize.height / imageSize.height
     
     var minScale = min(scaleX, scaleY)
@@ -113,7 +155,8 @@ class ZoomImageScrollViewLite: UIScrollView, HTableViewForLitePhotoCellDelegate 
     maximumZoomScale = maxScale
     minimumZoomScale = minScale
     zoomScale = minimumZoomScale
-    
+    initialZoomScale = zoomScale
+
     setNeedsLayout()
   }
   
@@ -138,12 +181,6 @@ class ZoomImageScrollViewLite: UIScrollView, HTableViewForLitePhotoCellDelegate 
       imageView.frame = frameToCenter
     }
     
-  }
-  
-  override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    moveFrameToCenter()
   }
   
 }

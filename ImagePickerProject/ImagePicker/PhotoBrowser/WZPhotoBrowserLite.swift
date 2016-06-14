@@ -18,11 +18,11 @@ protocol WZPhotoBrowserLiteDelegate: NSObjectProtocol {
 
 class WZPhotoBrowserLite: UIViewController {
   
-  private var mainTableView: HTableViewForLitePhoto!
+  private var mainCollectionView: UICollectionView!
   
-  var delegate: WZPhotoBrowserLiteDelegate
+  weak var delegate: WZPhotoBrowserLiteDelegate?
   var quitBlock: (() -> Void)?
-  var selectCellIndex: Int = 0 {
+  var currentIndex: Int = 0 {
     didSet{
       photoDidChange()
     }
@@ -55,13 +55,14 @@ class WZPhotoBrowserLite: UIViewController {
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
-    mainTableView.moveToPage(delegate.firstDisplayIndex(self) ?? 0)
+    let photoIndex = delegate?.firstDisplayIndex(self) ?? 0
+    mainCollectionView.setContentOffset(CGPoint(x: CGFloat(photoIndex) * CGRectGetWidth(mainCollectionView.frame), y: 0), animated: false)
     
-    //当默认显示第0张时，selectCellIndex不会被赋值，需要手动赋值，以便调用photoDidChange
-    if (delegate.firstDisplayIndex(self)) == 0 {
-      selectCellIndex = 0
+    //当默认显示第0张时，currentIndex不会被赋值，需要手动赋值，以便调用photoDidChange
+    if delegate?.firstDisplayIndex(self) != nil && (delegate?.firstDisplayIndex(self))! == 0 {
+      currentIndex = 0
     }
-
+    
     hideNavigationBar()
   }
   
@@ -80,6 +81,7 @@ class WZPhotoBrowserLite: UIViewController {
   }
   
   private func initView() {
+    
     automaticallyAdjustsScrollViewInsets = false
     view.backgroundColor = UIColor.blackColor()
     view.clipsToBounds = true
@@ -90,12 +92,21 @@ class WZPhotoBrowserLite: UIViewController {
   
   private func initMainTableView() {
     
-    mainTableView = HTableViewForLitePhoto(frame: CGRect(x: -padding, y: view.bounds.minY, width: view.bounds.width + padding * 2, height: view.bounds.height))
-    mainTableView.delegateForHTableView = self
-    mainTableView.dataSource = self
-    mainTableView.pagingEnabled = true
-    mainTableView.backgroundColor = UIColor.blackColor()
-    view.addSubview(mainTableView)
+    let mainCollectionViewFrame = CGRect(x: -padding, y: view.bounds.minY, width: view.bounds.width + padding * 2, height: view.bounds.height)
+    
+    let mainCollectionViewLayout = UICollectionViewFlowLayout()
+    mainCollectionViewLayout.itemSize = mainCollectionViewFrame.size
+    mainCollectionViewLayout.minimumInteritemSpacing = 0
+    mainCollectionViewLayout.minimumLineSpacing = 0
+    mainCollectionViewLayout.scrollDirection = .Horizontal
+    
+    mainCollectionView = UICollectionView(frame: mainCollectionViewFrame, collectionViewLayout: mainCollectionViewLayout)
+    mainCollectionView.delegate = self
+    mainCollectionView.dataSource = self
+    mainCollectionView.pagingEnabled = true
+    mainCollectionView.backgroundColor = UIColor.blackColor()
+    mainCollectionView.registerClass(PhotoCollectionLiteCell.self, forCellWithReuseIdentifier: "PhotoCollectionLiteCell")
+    view.addSubview(mainCollectionView)
     
   }
   
@@ -120,59 +131,43 @@ class WZPhotoBrowserLite: UIViewController {
   }
   
   func photoDidChange() {
-      print("pb \(selectCellIndex)")
 
   }
 }
 
-extension WZPhotoBrowserLite: HTableViewForLitePhotoDataSource {
+extension WZPhotoBrowserLite: UICollectionViewDataSource {
   
-  func numberOfColumnsForPhoto(hTableView: HTableViewForLitePhoto) -> Int{
-    return delegate.numberOfImage(self)
+  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return delegate?.numberOfImage(self) ?? 0
   }
   
-  func hTableViewForPhoto(hTableView: HTableViewForLitePhoto, cellForColumnAtIndex index: Int) -> ZoomImageScrollViewLite{
-    var cell = hTableView.dequeueReusableCellWithIdentifier(IDENTIFIER_IMAGE_CELL)
-    if cell == nil {
-      cell = ZoomImageScrollViewLite(reuseIdentifier: IDENTIFIER_IMAGE_CELL)
-      cell!.addImageTarget(self, action: Selector("onClickPhoto"))
-    }
+  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     
-    cell!.frame = mainTableView.frame
-    cell!.padding = padding
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier("PhotoCollectionLiteCell", forIndexPath: indexPath) as! PhotoCollectionLiteCell
     
-    cell!.setImageWithLocalPhotoWith(index)
-
-    return cell!
+    cell.zoomImageScrollView.addImageTarget(self, action: #selector(WZPhotoBrowserLite.onClickPhoto))
+    
+    cell.padding = padding
+    
+    cell.zoomImageScrollView.setImageWithLocalPhotoWith(indexPath.row)
+    
+    return cell
+    
   }
 }
 
-extension WZPhotoBrowserLite: HTableViewForLitePhotoDelegate {
+extension WZPhotoBrowserLite: UICollectionViewDelegateFlowLayout {
   
-  func hTableViewForPhoto(hTableView: HTableViewForLitePhoto, widthForColumnAtIndex index: Int) -> CGFloat{
-    return mainTableView.frame.width
-  }
-  
-  func hTableViewForPhoto(hTableView: HTableViewForLitePhoto, didSelectRowAtIndex: Int) {
+  func scrollViewDidScroll(scrollView: UIScrollView) {
     
-    onClickPhoto()
+    //更新currentIndex
+    let cellPoint = view.convertPoint(mainCollectionView.center, toView: mainCollectionView)
+    let showPhotoIndex = mainCollectionView.indexPathForItemAtPoint(cellPoint)
     
-  }
-  
-  func hTableViewForPhotoDidScroll(hTableViewForPhoto: HTableViewForLitePhoto) {
-    
-    //更新selectCellIndex
-    let cellPoint = view.convertPoint(hTableViewForPhoto.center, toView: mainTableView)
-    let showPhotoIndex = mainTableView.indexForRowAtPoint(cellPoint)
-    
-    guard showPhotoIndex != nil else {
-      return
+    if let _showPhotoIndex = showPhotoIndex where currentIndex != _showPhotoIndex {
+      currentIndex = showPhotoIndex!.row
     }
     
-    if selectCellIndex != showPhotoIndex! {
-      selectCellIndex = showPhotoIndex!
-    }
-
   }
-
+  
 }

@@ -53,8 +53,8 @@ class PhotoAlbumViewController: UIViewController {
     title = "照片"
     
     view.backgroundColor = UIColor.greenColor()
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: "onCancel")
-    setNaviBackButton()
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(PhotoAlbumViewController.onCancel))
+    setNaviBackButton("相册")
     
     tableView = UITableView(frame: view.bounds, style: .Plain)
     tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]

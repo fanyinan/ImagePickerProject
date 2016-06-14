@@ -28,11 +28,16 @@ extension UIView {
   
   - parameter radius: 圆角半径，为空时，按计算height/2计算，宽高相等时为圆形
   */
-  func setViewCornerRadius(var radius : CGFloat? = nil){
-    if radius == nil{
-      radius = self.frame.size.height / 2
+  func setViewCornerRadius(radius : CGFloat? = nil){
+    
+    var tmpRadius: CGFloat!
+    
+    if let _radius = radius {
+      tmpRadius = _radius
+    } else {
+      tmpRadius = self.frame.size.height / 2
     }
-    self.layer.cornerRadius = radius!
+    self.layer.cornerRadius = tmpRadius
     self.layer.masksToBounds = true
   }
 

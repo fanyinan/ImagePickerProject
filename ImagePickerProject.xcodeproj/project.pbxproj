@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF04DDB31D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04DDB01D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift */; };
 		CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F11C89613700B72821 /* AppDelegate.swift */; };
 		CF2C77F41C89613700B72821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F31C89613700B72821 /* ViewController.swift */; };
 		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
@@ -61,13 +62,13 @@
 		CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */; };
 		CF9E699A1C8EAA940082E9DB /* PhotoThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */; };
 		CF9E699B1C8EAA940082E9DB /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */; };
-		CF9E69B91C8F17490082E9DB /* HTableViewForLitePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B51C8F17490082E9DB /* HTableViewForLitePhoto.swift */; };
 		CF9E69BA1C8F17490082E9DB /* PreviewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */; };
 		CF9E69BB1C8F17490082E9DB /* WZPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */; };
 		CF9E69BC1C8F17490082E9DB /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CF04DDB01D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionLiteCell.swift; sourceTree = "<group>"; };
 		CF2C77EE1C89613700B72821 /* ImagePickerProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePickerProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2C77F11C89613700B72821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF2C77F31C89613700B72821 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +141,6 @@
 		CF9E698B1C8EAA940082E9DB /* PhotosManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
 		CF9E698C1C8EAA940082E9DB /* PhotoThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbCell.swift; sourceTree = "<group>"; };
 		CF9E698D1C8EAA940082E9DB /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
-		CF9E69B51C8F17490082E9DB /* HTableViewForLitePhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTableViewForLitePhoto.swift; sourceTree = "<group>"; };
 		CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhotoViewController.swift; sourceTree = "<group>"; };
 		CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WZPhotoBrowserLite.swift; sourceTree = "<group>"; };
 		CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
@@ -295,7 +295,7 @@
 		CF9E69B41C8F17490082E9DB /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				CF9E69B51C8F17490082E9DB /* HTableViewForLitePhoto.swift */,
+				CF04DDB01D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift */,
 				CF9E69B61C8F17490082E9DB /* PreviewPhotoViewController.swift */,
 				CF9E69B71C8F17490082E9DB /* WZPhotoBrowserLite.swift */,
 				CF9E69B81C8F17490082E9DB /* ZoomImageScrollViewLite.swift */,
@@ -394,9 +394,9 @@
 				CF2C804B1C8961B500B72821 /* MuView.swift in Sources */,
 				CF2C80421C8961B500B72821 /* EdgeInsets.swift in Sources */,
 				CF2C802C1C8961B500B72821 /* SDImageCache.m in Sources */,
-				CF9E69B91C8F17490082E9DB /* HTableViewForLitePhoto.swift in Sources */,
 				CF2C803E1C8961B500B72821 /* ConstraintItem.swift in Sources */,
 				CF2C80461C8961B500B72821 /* ViewController+SnapKit.swift in Sources */,
+				CF04DDB31D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift in Sources */,
 				CF9E69BA1C8F17490082E9DB /* PreviewPhotoViewController.swift in Sources */,
 				CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */,
 				CF9E69981C8EAA940082E9DB /* PhotoMaskView.swift in Sources */,
@@ -543,6 +543,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ImagePickerProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fyn.ImagePickerProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -558,6 +559,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ImagePickerProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fyn.ImagePickerProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";

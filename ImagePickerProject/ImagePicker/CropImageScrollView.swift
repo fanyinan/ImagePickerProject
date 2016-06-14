@@ -12,14 +12,11 @@ class CropImageScrollView: UIScrollView {
 
   private var imageView: UIImageView!
   private var simpleTap: UITapGestureRecognizer!
-  private var netImageSize: CGSize!
   private var originImage: UIImage
   
   private var maskHeight: CGFloat!
-  
   var imageContainerView: UIView!
-  var padding: CGFloat = 0
-    
+  
   init(frame: CGRect, image: UIImage){
     
     self.originImage = image
@@ -113,7 +110,7 @@ class CropImageScrollView: UIScrollView {
     let boundsSize = bounds.size
     let imageSize = imageView.image!.size
     
-    let scaleX = (boundsSize.width - padding * CGFloat(2)) / imageSize.width
+    let scaleX = boundsSize.width / imageSize.width
     let scaleY = boundsSize.height / imageSize.height
     
     var minScale = min(scaleX, scaleY)

@@ -182,7 +182,7 @@ class PhotoCropViewController: UIViewController {
     completeButton.setTitle("选取", forState: .Normal)
     completeButton.titleLabel?.font = UIFont.systemFontOfSize(18)
     completeButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    completeButton.addTarget(self, action: "onComplete", forControlEvents: .TouchUpInside)
+    completeButton.addTarget(self, action: #selector(PhotoCropViewController.onComplete), forControlEvents: .TouchUpInside)
     
     //selectedCountLabel
     cancelButton = UIButton()
@@ -195,7 +195,7 @@ class PhotoCropViewController: UIViewController {
     cancelButton.setTitle("取消", forState: .Normal)
     cancelButton.titleLabel?.font = UIFont.systemFontOfSize(18)
     cancelButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    cancelButton.addTarget(self, action: "onCancel", forControlEvents: .TouchUpInside)
+    cancelButton.addTarget(self, action: #selector(PhotoCropViewController.onCancel), forControlEvents: .TouchUpInside)
     
     imageView = UIImageView()
     view.addSubview(imageView)
