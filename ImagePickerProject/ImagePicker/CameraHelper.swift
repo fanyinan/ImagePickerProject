@@ -99,7 +99,4 @@ extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerD
     }
   }
   
-//  func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-//    
-//  }
 }

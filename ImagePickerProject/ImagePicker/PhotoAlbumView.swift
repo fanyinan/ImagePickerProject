@@ -1,58 +1,52 @@
 //
-//  PhotoAlbumViewController.swift
-//  PhotoBrowserProject
+//  PhotoAlbumView.swift
+//  ImagePickerProject
 //
-//  Created by 范祎楠 on 15/11/25.
-//  Copyright © 2015年 范祎楠. All rights reserved.
+//  Created by 范祎楠 on 16/7/6.
+//  Copyright © 2016年 范祎楠. All rights reserved.
 //
 
 import UIKit
 
-class PhotoAlbumViewController: UIViewController {
+protocol PhotoAlbumViewDelegate: NSObjectProtocol {
   
+  func photoAlbumView(photoAlbumView: PhotoAlbumView, didSelectAtIndex index: Int)
+  
+}
+
+class PhotoAlbumView: UIView {
+
   private var tableView: UITableView!
-  var canOpenCamera = true
+  private var delegate: PhotoAlbumViewDelegate
   
   let identifier = "PhotoAlbumCell"
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  init(frame: CGRect, delegate: PhotoAlbumViewDelegate) {
+    
+    self.delegate = delegate
+    
+    super.init(frame: frame)
     
     initView()
 
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    PhotosManager.sharedInstance.clearData()
-  }
-  
-  func onCancel() {
-    
-    PhotosManager.sharedInstance.cancel()
-    dismissViewControllerAnimated(true, completion: nil)
-  }
+//    PhotosManager.sharedInstance.clearData()
   
   /******************************************************************************
    *  private  Implements
    ******************************************************************************/
-   //MARK: - private Implements
+  //MARK: - private Implements
   
   func initView(){
     
-    title = "照片"
+    backgroundColor = UIColor.greenColor()
     
-    view.backgroundColor = UIColor.greenColor()
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(PhotoAlbumViewController.onCancel))
-    setNaviBackButton("相册")
-    
-    tableView = UITableView(frame: view.bounds, style: .Plain)
+    tableView = UITableView(frame: bounds, style: .Plain)
     tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
     tableView.backgroundColor = UIColor.whiteColor()
     tableView.tableFooterView = UIView()
@@ -62,7 +56,7 @@ class PhotoAlbumViewController: UIViewController {
     tableView.setSeparatorByEdge()
     tableView.separatorColor = separatorColor
     tableView.rowHeight = 60.0
-    view.addSubview(tableView)
+    addSubview(tableView)
     
     tableView.reloadData()
     
@@ -70,7 +64,7 @@ class PhotoAlbumViewController: UIViewController {
   
 }
 
-extension PhotoAlbumViewController: UITableViewDataSource {
+extension PhotoAlbumView: UITableViewDataSource {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return PhotosManager.sharedInstance.getAlbumCount()
@@ -97,10 +91,9 @@ extension PhotoAlbumViewController: UITableViewDataSource {
     
     return cell
   }
-  
 }
 
-extension PhotoAlbumViewController: UITableViewDelegate {
+extension PhotoAlbumView: UITableViewDelegate {
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
@@ -108,6 +101,8 @@ extension PhotoAlbumViewController: UITableViewDelegate {
     
     PhotosManager.sharedInstance.currentAlbumIndex = indexPath.row
     
+    delegate.photoAlbumView(self, didSelectAtIndex: indexPath.row)
   }
   
 }
+

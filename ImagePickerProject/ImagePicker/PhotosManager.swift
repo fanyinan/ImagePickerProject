@@ -26,7 +26,7 @@ struct ImageRectScale {
 class PhotosManager: NSObject {
   
   static let sharedInstance = PhotosManager()
-  static var assetGridThumbnailSize = CGSize(width: 100, height: 100)
+  static var assetGridThumbnailSize = CGSize(width: 80, height: 80)
   static var assetPreviewImageSize = UIScreen.mainScreen().bounds.size
   
   private var assetCollectionList: [PHAssetCollection] = []

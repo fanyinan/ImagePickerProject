@@ -14,7 +14,7 @@ class PhotoThumbCell: UICollectionViewCell {
   @IBOutlet weak var selectedImageView: UIImageView!
   @IBOutlet weak var unselectedImageView: UIImageView!
   @IBOutlet weak var selectedButton: UIControl!
-  
+
   var onRadio: ((PhotoThumbCell) -> Void)?
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -94,11 +94,4 @@ class PhotoThumbCell: UICollectionViewCell {
     
   }
   
-  func setAsCamera() {
-    
-    selectedImageView.hidden = true
-    unselectedImageView.hidden = true
-    imageView.image = UIImage(named: "imagepick_camera")
-    
-  }
 }

@@ -86,19 +86,23 @@ class ImagePickerHelper: NSObject {
   func onComplete(image: UIImage?) {
     
     if let image = image {
-      self.delegate?.pickedPhoto(self, images: [image])
       
-      self.handlerViewController?.dismissViewControllerAnimated(true, completion: nil)
+      self.handlerViewController?.dismissViewControllerAnimated(true, completion: {
+        
+        self.delegate?.pickedPhoto(self, images: [image])
+        
+      })
       
       return
     }
     
     PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
       
-      self.handlerViewController?.dismissViewControllerAnimated(true, completion: nil)
-      
-      self.delegate?.pickedPhoto(self, images: images)
-      
+      self.handlerViewController?.dismissViewControllerAnimated(true, completion: {
+        
+        self.delegate?.pickedPhoto(self, images: images)
+        
+      })
     }
     
     
@@ -122,8 +126,10 @@ class ImagePickerHelper: NSObject {
       return
     }
     
-    let viewController = PhotoAlbumViewController()
+    let viewController = PhotoColletionViewController()
     viewController.canOpenCamera = type != .Album
+//    let viewController = PhotoAlbumViewController()
+//    viewController.canOpenCamera = type != .Album
     
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.translucent = false
