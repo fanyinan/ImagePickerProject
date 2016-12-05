@@ -9,9 +9,9 @@
 import Photos
 
 enum PhotoSizeType {
-  case Thumbnail
-  case Preview
-  case Origin
+  case thumbnail
+  case preview
+  case origin
 }
 
 struct ImageRectScale {
@@ -27,12 +27,12 @@ class PhotosManager: NSObject {
   
   static let sharedInstance = PhotosManager()
   static var assetGridThumbnailSize = CGSize(width: 80, height: 80)
-  static var assetPreviewImageSize = UIScreen.mainScreen().bounds.size
+  static var assetPreviewImageSize = UIScreen.main.bounds.size
   
-  private var assetCollectionList: [PHAssetCollection] = []
-  private var imageManager: PHImageManager!
-  private var currentImageFetchResult: PHFetchResult!
-  private(set) var selectedIndexList: [Int] = []
+  fileprivate var assetCollectionList: [PHAssetCollection] = []
+  fileprivate var imageManager: PHImageManager!
+  fileprivate var currentImageFetchResult: PHFetchResult<AnyObject>!
+  fileprivate(set) var selectedIndexList: [Int] = []
   
   var maxSelectedCount: Int = 1 {
     didSet {
@@ -80,18 +80,18 @@ class PhotosManager: NSObject {
     
     imageManager = PHImageManager()
     
-    PHPhotoLibrary.sharedPhotoLibrary().registerChangeObserver(self)
+    PHPhotoLibrary.shared().register(self)
   }
   
   //startphoto是调用，保存当前imagePicker
-  func prepareWith(imagePicker: ImagePickerHelper) {
+  func prepareWith(_ imagePicker: ImagePickerHelper) {
     
     self.imagePicker = imagePicker
     
   }
   
   //onCompletion是调用，重置数据
-  func didFinish(image: UIImage? = nil) {
+  func didFinish(_ image: UIImage? = nil) {
     
     imagePicker?.onComplete(image)
     
@@ -114,26 +114,26 @@ class PhotosManager: NSObject {
     
   }
   
-  private func getPhotoAlbum() -> [PHAssetCollection] {
+  fileprivate func getPhotoAlbum() -> [PHAssetCollection] {
     
     if assetCollectionList.isEmpty {
       
-      var albumType: [PHAssetCollectionSubtype] = [.SmartAlbumRecentlyAdded, .SmartAlbumUserLibrary]
+      var albumType: [PHAssetCollectionSubtype] = [.smartAlbumRecentlyAdded, .smartAlbumUserLibrary]
       
       if #available(iOS 9.0, *) {
-        albumType += [.SmartAlbumSelfPortraits, .SmartAlbumScreenshots]
+        albumType += [.smartAlbumSelfPortraits, .smartAlbumScreenshots]
       } else {
         // Fallback on earlier versions
       }
       
       //      ["相机胶卷", "自拍" , "最近添加", "屏幕快照"]
-      let defaultAlbum = PHAssetCollectionSubtype.SmartAlbumUserLibrary
+      let defaultAlbum = PHAssetCollectionSubtype.smartAlbumUserLibrary
       
-      let albumFetchResult = PHAssetCollection.fetchAssetCollectionsWithType(.SmartAlbum, subtype: .AlbumRegular, options: nil)
+      let albumFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
       
-      albumFetchResult.enumerateObjectsUsingBlock({ (object, index, point) -> Void in
+      albumFetchResult.enumerateObjects({ (object, index, point) -> Void in
         
-        let assetCollection = object as! PHAssetCollection
+        let assetCollection = object 
         
         let title = assetCollection.localizedTitle
         
@@ -152,7 +152,7 @@ class PhotosManager: NSObject {
     return assetCollectionList
   }
   
-  func getAlbumWith(index: Int) -> PHAssetCollection? {
+  func getAlbumWith(_ index: Int) -> PHAssetCollection? {
     
     guard getAlbumCount() > index else {
       
@@ -167,14 +167,14 @@ class PhotosManager: NSObject {
   }
   
   //通过相册获取照片集合
-  func getImageFetchResultWith(album: PHAssetCollection) -> PHFetchResult {
+  func getImageFetchResultWith(_ album: PHAssetCollection) -> PHFetchResult<AnyObject> {
     
     let fetchOptions = PHFetchOptions()
     fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-    fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.Image.rawValue)
-    let imageFetchResult = PHAsset.fetchAssetsInAssetCollection(album, options: fetchOptions)
+    fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+    let imageFetchResult = PHAsset.fetchAssets(in: album, options: fetchOptions)
     
-    return imageFetchResult
+    return imageFetchResult as! PHFetchResult<AnyObject>
   }
   
   func getImageCountInCurrentAlbum() -> Int {
@@ -187,11 +187,11 @@ class PhotosManager: NSObject {
     return currentImageFetchResult.count
   }
   
-  func getImageInCurrentAlbumWith(index: Int, withSizeType sizeType: PhotoSizeType, handleCompletion: (image: UIImage?) -> Void) {
+  func getImageInCurrentAlbumWith(_ index: Int, withSizeType sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?) -> Void) {
     
     guard let _currentAlbumIndex = currentAlbumIndex else {
       print("currentAlbumIndex is nil")
-      handleCompletion(image: nil)
+      handleCompletion(nil)
       return
     }
     
@@ -199,53 +199,56 @@ class PhotosManager: NSObject {
       
       let imageCroped = self.cropImage(image)
       
-      handleCompletion(image: imageCroped)
+      handleCompletion(imageCroped)
       
     }
   }
   
-  func getImageWith(albumIndex: Int, withIndex index: Int, withSizeType sizeType: PhotoSizeType, handleCompletion: (image: UIImage?) -> Void) {
+  func getImageWith(_ albumIndex: Int, withIndex index: Int, withSizeType sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?) -> Void) {
     
     if currentAlbumIndex != albumIndex {
       currentAlbumIndex = albumIndex
     }
     
     if getAlbumCount() <= albumIndex {
-      handleCompletion(image: nil)
+      handleCompletion(nil)
       return
     }
     
     if currentImageFetchResult.count <= index {
-      handleCompletion(image: nil)
+      handleCompletion(nil)
       return
     }
     
     let asset = currentImageFetchResult[index] as! PHAsset
     
-    var imageSize = CGSizeZero
+    var imageSize = CGSize.zero
     let imageRequestOptions = PHImageRequestOptions()
-    imageRequestOptions.networkAccessAllowed = false
     
     switch sizeType {
-    case .Thumbnail:
+    case .thumbnail:
       imageSize = PhotosManager.assetGridThumbnailSize
-      imageRequestOptions.synchronous = false
-      imageRequestOptions.resizeMode = .Fast
-      
-    case .Preview:
+      imageRequestOptions.isSynchronous = false
+      imageRequestOptions.resizeMode = .fast
+      imageRequestOptions.isNetworkAccessAllowed = false
+
+    case .preview:
       imageSize = PhotosManager.assetPreviewImageSize
-      imageRequestOptions.synchronous = true
-      imageRequestOptions.resizeMode = .Fast
-      
-    case .Origin:
+      imageRequestOptions.isSynchronous = false
+      imageRequestOptions.resizeMode = .fast
+      imageRequestOptions.isNetworkAccessAllowed = true
+
+    case .origin:
       imageSize = PHImageManagerMaximumSize
-      imageRequestOptions.synchronous = true
-      imageRequestOptions.resizeMode = .None
-      
+      imageRequestOptions.isSynchronous = false
+      imageRequestOptions.resizeMode = .none
+      imageRequestOptions.deliveryMode = .highQualityFormat
+      imageRequestOptions.isNetworkAccessAllowed = true
+
     }
     
-    imageManager.requestImageForAsset(asset, targetSize: imageSize, contentMode: .AspectFill, options: imageRequestOptions) { (image: UIImage?, _) -> Void in
-      handleCompletion(image: image)
+    imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: imageRequestOptions) { (image: UIImage?, _) -> Void in
+      handleCompletion(image)
     }
   }
   
@@ -257,7 +260,7 @@ class PhotosManager: NSObject {
    
    - returns: 是否成功，如果不成功，则以达到最大数量
    */
-  func selectPhotoWith(index: Int) -> Bool {
+  func selectPhotoWith(_ index: Int) -> Bool {
     
     let isExist = getPhotoSelectedStatus(index)
     
@@ -287,7 +290,7 @@ class PhotosManager: NSObject {
    
    - returns: true为已被选中，false为未选中
    */
-  func getPhotoSelectedStatus(index: Int) -> Bool {
+  func getPhotoSelectedStatus(_ index: Int) -> Bool {
     return !selectedIndexList.filter({$0 == index}).isEmpty
   }
   
@@ -298,25 +301,25 @@ class PhotosManager: NSObject {
     
   }
   
-  func fetchSelectedImages(handleCompletion: (images: [UIImage]) -> Void) {
+  func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
-    selectedIndexList = selectedIndexList.sort({$0 < $1})
+    selectedIndexList = selectedIndexList.sorted(by: {$0 < $1})
     getAllSelectedImageInCurrentAlbumWith(selectedIndexList, imageList: [], handleCompletion: handleCompletion)
     
   }
   
-  func getAllSelectedImageInCurrentAlbumWith(imageIndexList: [Int], imageList: [UIImage],  handleCompletion: (images: [UIImage]) -> Void) {
+  func getAllSelectedImageInCurrentAlbumWith(_ imageIndexList: [Int], imageList: [UIImage],  handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
     if imageIndexList.count == 0 {
-      handleCompletion(images: imageList)
+      handleCompletion(imageList)
       return
     }
     
-    getImageInCurrentAlbumWith(imageIndexList[0], withSizeType: .Origin) { (image: UIImage?) -> Void in
+    getImageInCurrentAlbumWith(imageIndexList[0], withSizeType: .origin) { (image: UIImage?) -> Void in
       
       if image == nil {
         
-        handleCompletion(images: [])
+        handleCompletion([])
         return
       }
       
@@ -324,7 +327,7 @@ class PhotosManager: NSObject {
     }
   }
   
-  func cropImage(originImage: UIImage?) -> UIImage? {
+  func cropImage(_ originImage: UIImage?) -> UIImage? {
     
     guard isCrop else { return originImage }
     
@@ -340,33 +343,33 @@ class PhotosManager: NSObject {
     
     let orientationRect = transformOrientationRect(_originImage, rect: cropRect)
     
-    let cropImageRef = CGImageCreateWithImageInRect(_originImage.CGImage, orientationRect)
+    let cropImageRef = _originImage.cgImage?.cropping(to: orientationRect)
     
     guard let _cropImageRef = cropImageRef else { return nil }
     
-    let cropImage = UIImage(CGImage: _cropImageRef, scale: 1, orientation: _originImage.imageOrientation)
+    let cropImage = UIImage(cgImage: _cropImageRef, scale: 1, orientation: _originImage.imageOrientation)
     
     return cropImage
     
   }
   
   //旋转rect
-  private func transformOrientationRect(originImage: UIImage, rect: CGRect) -> CGRect {
+  fileprivate func transformOrientationRect(_ originImage: UIImage, rect: CGRect) -> CGRect {
     
-    var rectTransform: CGAffineTransform = CGAffineTransformIdentity
+    var rectTransform: CGAffineTransform = CGAffineTransform.identity
     
     switch originImage.imageOrientation {
-    case .Left:
-      rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(CGFloat(M_PI_2)), 0, -originImage.size.height)
-    case .Right:
-      rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(CGFloat(-M_PI_2)), -originImage.size.width, 0)
-    case .Down:
-      rectTransform = CGAffineTransformTranslate(CGAffineTransformMakeRotation(CGFloat(-M_PI)), -originImage.size.width, -originImage.size.height)
+    case .left:
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2)).translatedBy(x: 0, y: -originImage.size.height)
+    case .right:
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2)).translatedBy(x: -originImage.size.width, y: 0)
+    case .down:
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-M_PI)).translatedBy(x: -originImage.size.width, y: -originImage.size.height)
     default:
       break
     }
     
-    let orientationRect = CGRectApplyAffineTransform(rect, CGAffineTransformScale(rectTransform, originImage.scale, originImage.scale))
+    let orientationRect = rect.applying(rectTransform.scaledBy(x: originImage.scale, y: originImage.scale))
     
     return orientationRect
     
@@ -375,7 +378,7 @@ class PhotosManager: NSObject {
 
 extension PhotosManager: PHPhotoLibraryChangeObserver {
   
-  func photoLibraryDidChange(changeInstance: PHChange) {
+  func photoLibraryDidChange(_ changeInstance: PHChange) {
     
     getPhotoAlbum()
     

@@ -1,7 +1,7 @@
 //
 //  SnapKit
 //
-//  Copyright (c) 2011-2015 SnapKit Team - https://github.com/SnapKit
+//  Copyright (c) 2011-Present SnapKit Team - https://github.com/SnapKit
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -22,24 +22,36 @@
 //  THE SOFTWARE.
 
 #if os(iOS) || os(tvOS)
-import UIKit
+    import UIKit
+#else
+    import AppKit
+#endif
 
-/**
-    Used to expose public API on view controllers
-*/
-public extension UIViewController {
+
+public class LayoutConstraint: NSLayoutConstraint {
     
-    /// top layout guide top
-    public var snp_topLayoutGuideTop: ConstraintItem { return ConstraintItem(object: self.topLayoutGuide, attributes: ConstraintAttributes.Top) }
+    public var label: String? {
+        get {
+            return self.identifier
+        }
+        set {
+            self.identifier = newValue
+        }
+    }
     
-    /// top layout guide bottom
-    public var snp_topLayoutGuideBottom: ConstraintItem { return ConstraintItem(object: self.topLayoutGuide, attributes: ConstraintAttributes.Bottom) }
-    
-    /// bottom layout guide top
-    public var snp_bottomLayoutGuideTop: ConstraintItem { return ConstraintItem(object: self.bottomLayoutGuide, attributes: ConstraintAttributes.Top) }
-    
-    /// bottom layout guide bottom
-    public var snp_bottomLayoutGuideBottom: ConstraintItem { return ConstraintItem(object: self.bottomLayoutGuide, attributes: ConstraintAttributes.Bottom) }
+    internal weak var constraint: Constraint? = nil
     
 }
-#endif
+
+internal func ==(lhs: LayoutConstraint, rhs: LayoutConstraint) -> Bool {
+    guard lhs.firstItem === rhs.firstItem &&
+          lhs.secondItem === rhs.secondItem &&
+          lhs.firstAttribute == rhs.firstAttribute &&
+          lhs.secondAttribute == rhs.secondAttribute &&
+          lhs.relation == rhs.relation &&
+          lhs.priority == rhs.priority &&
+          lhs.multiplier == rhs.multiplier else {
+        return false
+    }
+    return true
+}

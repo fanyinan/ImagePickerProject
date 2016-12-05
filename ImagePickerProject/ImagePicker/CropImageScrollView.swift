@@ -10,11 +10,11 @@ import UIKit
 
 class CropImageScrollView: UIScrollView {
 
-  private var imageView: UIImageView!
-  private var simpleTap: UITapGestureRecognizer!
-  private var originImage: UIImage
+  fileprivate var imageView: UIImageView!
+  fileprivate var simpleTap: UITapGestureRecognizer!
+  fileprivate var originImage: UIImage
   
-  private var maskHeight: CGFloat!
+  fileprivate var maskHeight: CGFloat!
   var imageContainerView: UIView!
   
   init(frame: CGRect, image: UIImage){
@@ -40,7 +40,7 @@ class CropImageScrollView: UIScrollView {
     moveFrameToCenter()
   }
   
-  func setImage(image: UIImage?) {
+  func setImage(_ image: UIImage?) {
     
     if image == nil {
       return
@@ -53,7 +53,7 @@ class CropImageScrollView: UIScrollView {
     
     imageContainerView.frame = CGRect(x: 0, y: 0,width: imageView.frame.size.width , height: imageView.frame.size.height + maskHeight * 2)
     
-    imageView.center = CGPoint(x: CGRectGetWidth(imageContainerView.frame) / 2, y: CGRectGetHeight(imageContainerView.frame) / 2)
+    imageView.center = CGPoint(x: imageContainerView.frame.width / 2, y: imageContainerView.frame.height / 2)
     
     contentSize = imageContainerView.frame.size
     
@@ -66,7 +66,7 @@ class CropImageScrollView: UIScrollView {
    :param: target target
    :param: action action
    */
-  func addImageTarget(target: AnyObject, action: Selector) {
+  func addImageTarget(_ target: AnyObject, action: Selector) {
     simpleTap.addTarget(target, action: action)
   }
   
@@ -80,10 +80,10 @@ class CropImageScrollView: UIScrollView {
     
   }
   
-  private func configUI() {
+  fileprivate func configUI() {
     
     delegate = self
-    backgroundColor = UIColor.blackColor()
+    backgroundColor = UIColor.black
     showsHorizontalScrollIndicator = false
     showsVerticalScrollIndicator = false
     decelerationRate = UIScrollViewDecelerationRateFast
@@ -92,20 +92,20 @@ class CropImageScrollView: UIScrollView {
     bounces = true
     
     //imageview
-    imageView = UIImageView(frame: CGRectZero)
-    imageView.backgroundColor = UIColor.blackColor()
-    imageView.contentMode = .ScaleAspectFill
-    imageView.userInteractionEnabled = true
+    imageView = UIImageView(frame: CGRect.zero)
+    imageView.backgroundColor = UIColor.black
+    imageView.contentMode = .scaleAspectFill
+    imageView.isUserInteractionEnabled = true
     simpleTap = UITapGestureRecognizer()
     imageView.addGestureRecognizer(simpleTap)
     
-    imageContainerView = UIView(frame: CGRectZero)
+    imageContainerView = UIView(frame: CGRect.zero)
     imageContainerView.addSubview(imageView)
     
     addSubview(imageContainerView)
   }
   
-  private func calculateZoomScale() {
+  fileprivate func calculateZoomScale() {
     
     let boundsSize = bounds.size
     let imageSize = imageView.image!.size
@@ -113,18 +113,10 @@ class CropImageScrollView: UIScrollView {
     let scaleX = boundsSize.width / imageSize.width
     let scaleY = boundsSize.height / imageSize.height
     
-    var minScale = min(scaleX, scaleY)
-    
-    //如果图片长宽都小于屏幕则不缩放
-    if scaleX > 1.0 && scaleY > 1.0 {
-      minScale = 1.0
-    }
-    
+    let minScale = min(scaleX, scaleY)
     let maxScale = CGFloat(3)
     
-    maximumZoomScale = maxScale
-    
-    
+    maximumZoomScale = minScale > 1 ? minScale : maxScale
     minimumZoomScale = minScale
     zoomScale = minimumZoomScale
     
@@ -132,7 +124,7 @@ class CropImageScrollView: UIScrollView {
     
     //这句话需要放在初次缩放后面
     
-    var adjustPositionY = (CGRectGetHeight(imageContainerView.frame) - CGRectGetHeight(frame)) / 2
+    var adjustPositionY = (imageContainerView.frame.height - frame.height) / 2
     
     adjustPositionY = adjustPositionY > 0 ? adjustPositionY : 0
     
@@ -140,7 +132,7 @@ class CropImageScrollView: UIScrollView {
     
   }
   
-  private func moveFrameToCenter() {
+  fileprivate func moveFrameToCenter() {
     
     let boundsSize = bounds.size
     var frameToCenter = imageContainerView.frame
@@ -157,13 +149,13 @@ class CropImageScrollView: UIScrollView {
       frameToCenter.origin.y = 0
     }
   
-    if !CGRectEqualToRect(imageContainerView.frame, frameToCenter) {
+    if !imageContainerView.frame.equalTo(frameToCenter) {
       imageContainerView.frame = frameToCenter
     }
     
   }
   
-  private func updateUI() {
+  fileprivate func updateUI() {
     
     imageContainerView.frame = CGRect(x: imageContainerView.frame.origin.x, y: imageContainerView.frame.origin.y,width: imageContainerView.frame.size.width , height: (imageView.frame.size.height * zoomScale + maskHeight * 2))
     
@@ -177,16 +169,16 @@ class CropImageScrollView: UIScrollView {
 
 extension CropImageScrollView: UIScrollViewDelegate {
   
-  func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
     return imageContainerView
   }
   
-  func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
-    scrollEnabled = true
+  func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+    isScrollEnabled = true
   }
   
   //主要是解决先缩小后再松手弹回来时不会执行moveFrameToCenter()的问题
-  func scrollViewDidZoom(scrollView: UIScrollView) {
+  func scrollViewDidZoom(_ scrollView: UIScrollView) {
 
     updateUI()
 

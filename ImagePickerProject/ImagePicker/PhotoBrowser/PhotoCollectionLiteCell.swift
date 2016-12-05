@@ -21,7 +21,7 @@ class PhotoCollectionLiteCell: UICollectionViewCell {
     super.init(frame: frame)
     
     zoomImageScrollView = ZoomImageScrollViewLite()
-    zoomImageScrollView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+    zoomImageScrollView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     contentView.addSubview(zoomImageScrollView)
     
   }

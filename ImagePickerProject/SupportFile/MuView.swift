@@ -8,18 +8,6 @@
 
 import UIKit
 
-enum ShadowStyle{
-  case Down
-}
-
-enum ViewStatus {
-  case NetError //网络异常
-  case DataEmpty //数据为空
-  case Custom //自定义文字
-  case Blank //空白
-  case None //移除该view ，返回nil，其他枚举返回UIControl
-}
-
 extension UIView {
  
   
@@ -28,7 +16,7 @@ extension UIView {
   
   - parameter radius: 圆角半径，为空时，按计算height/2计算，宽高相等时为圆形
   */
-  func setViewCornerRadius(radius : CGFloat? = nil){
+  func setViewCornerRadius(_ radius : CGFloat? = nil){
     
     var tmpRadius: CGFloat!
     

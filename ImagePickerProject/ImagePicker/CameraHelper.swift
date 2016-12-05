@@ -14,7 +14,7 @@ class CameraHelper: NSObject {
   static let cropViewControllerTranlateType_Push = 0
   static let cropViewControllerTranlateType_Present = 1
 
-  private weak var handlerViewController: UIViewController?
+  fileprivate weak var handlerViewController: UIViewController?
   
   var isCrop = false
   
@@ -31,14 +31,14 @@ class CameraHelper: NSObject {
   
   func openCamera() {
 
-    if UIImagePickerController.isSourceTypeAvailable(.Camera){
+    if UIImagePickerController.isSourceTypeAvailable(.camera){
       imagePicker = UIImagePickerController()
-      imagePicker.sourceType = .Camera
-      imagePicker.cameraDevice = .Front
-      imagePicker.editing = false
+      imagePicker.sourceType = .camera
+      imagePicker.cameraDevice = .front
+      imagePicker.isEditing = false
       imagePicker.delegate = self
-      handlerViewController?.modalPresentationStyle = .OverCurrentContext
-      handlerViewController?.presentViewController(imagePicker, animated: true, completion: {
+      handlerViewController?.modalPresentationStyle = .overCurrentContext
+      handlerViewController?.present(imagePicker, animated: true, completion: {
         
         self.checkCamera() })
     } else {
@@ -47,10 +47,10 @@ class CameraHelper: NSObject {
     
   }
   
-  private func checkCamera(){
+  fileprivate func checkCamera(){
     
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
-    if (AVAuthorizationStatus.Denied == authStatus || AVAuthorizationStatus.Restricted == authStatus){
+    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    if (AVAuthorizationStatus.denied == authStatus || AVAuthorizationStatus.restricted == authStatus){
       
       let _ = UIAlertView(title: "相机被禁用", message: "请在设置－隐私－相机中开启", delegate: nil, cancelButtonTitle: "确定").show()
       
@@ -60,7 +60,7 @@ class CameraHelper: NSObject {
 
 extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     
     let type : String = info[UIImagePickerControllerMediaType] as! String
     
@@ -73,7 +73,7 @@ extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerD
         let viewController = PhotoCropViewController(image: image)
         viewController.hidesBottomBarWhenPushed = true
         
-        picker.dismissViewControllerAnimated(false, completion: nil)
+        picker.dismiss(animated: false, completion: nil)
 
         //这种情况dismiss，是因为外部会dismiss掉PhotoCropViewController的rootViewController
         if cropViewControllerTranlateType == CameraHelper.cropViewControllerTranlateType_Push {
@@ -83,7 +83,7 @@ extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerD
           //这种情况dismiss是因为会present出新的viewcontroller，外部会dismiss新的viewcontroller
         } else if cropViewControllerTranlateType == CameraHelper.cropViewControllerTranlateType_Present{
           
-          handlerViewController?.presentViewController(viewController, animated: true, completion: nil)
+          handlerViewController?.present(viewController, animated: true, completion: nil)
 
         }
         

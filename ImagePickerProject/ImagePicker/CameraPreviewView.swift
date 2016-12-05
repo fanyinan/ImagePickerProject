@@ -10,9 +10,9 @@ import AVFoundation
 
 class CameraPreviewView: UIView {
 
-  private var inputVideo: AVCaptureDeviceInput!
-  private var preLayer: AVCaptureVideoPreviewLayer!
-  private var session: AVCaptureSession!
+  fileprivate var inputVideo: AVCaptureDeviceInput!
+  fileprivate var preLayer: AVCaptureVideoPreviewLayer!
+  fileprivate var session: AVCaptureSession!
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -30,14 +30,14 @@ class CameraPreviewView: UIView {
   
   override func layoutSubviews() {
     
-    let sreenSize = UIScreen.mainScreen().bounds.size
+    let sreenSize = UIScreen.main.bounds.size
     preLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
 
   }
   
   func startPreview() {
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) { 
+    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low).async { 
       
       self.session.startRunning()
       
@@ -47,7 +47,7 @@ class CameraPreviewView: UIView {
   
   func stopPreview() {
   
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {
+    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low).async {
       
       self.session.stopRunning()
       
@@ -55,9 +55,9 @@ class CameraPreviewView: UIView {
     
   }
   
-  private func initRecording() {
+  fileprivate func initRecording() {
     
-    let device = getCamera(with: .Back)
+    let device = getCamera(with: .back)
     
     do {
       
@@ -81,9 +81,9 @@ class CameraPreviewView: UIView {
     
   }
 
-  private func getCamera(with position: AVCaptureDevicePosition) -> AVCaptureDevice? {
+  fileprivate func getCamera(with position: AVCaptureDevicePosition) -> AVCaptureDevice? {
     
-    for device in AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo) {
+    for device in AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) {
       
       let device = device as! AVCaptureDevice
       

@@ -11,19 +11,19 @@ import Photos
 
 protocol ImagePickerDelegate: NSObjectProtocol {
   
-  func pickedPhoto(imagePickerHelper: ImagePickerHelper, images: [UIImage])
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage])
   
 }
 
 enum ImagePickerType {
-  case Album
-  case Camera
-  case AlbumAndCamera
+  case album
+  case camera
+  case albumAndCamera
 }
 
 class ImagePickerHelper: NSObject {
   
-  private var cameraHelper: CameraHelper!
+  fileprivate var cameraHelper: CameraHelper!
   
   weak var delegate: ImagePickerDelegate?
   weak var handlerViewController: UIViewController?
@@ -40,7 +40,7 @@ class ImagePickerHelper: NSObject {
       PhotosManager.sharedInstance.isCrop = isCrop
     }
   }
-  var type: ImagePickerType = .AlbumAndCamera
+  var type: ImagePickerType = .albumAndCamera
   
   init(delegate: ImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
@@ -57,7 +57,7 @@ class ImagePickerHelper: NSObject {
   /******************************************************************************
    *  public Method Implementation
    ******************************************************************************/
-   //MARK: - public Method Implementation
+  //MARK: - public Method Implementation
   
   func startPhoto(){
     
@@ -65,10 +65,9 @@ class ImagePickerHelper: NSObject {
     
     guard let _handlerViewController = handlerViewController else { return }
     
-    
     PhotosManager.sharedInstance.prepareWith(self)
     
-    if type == .Camera {
+    if type == .camera {
       
       cameraHelper = CameraHelper(handlerViewController: _handlerViewController)
       cameraHelper.isCrop = PhotosManager.sharedInstance.isCrop
@@ -83,11 +82,11 @@ class ImagePickerHelper: NSObject {
   }
   
   
-  func onComplete(image: UIImage?) {
+  func onComplete(_ image: UIImage?) {
     
     if let image = image {
       
-      self.handlerViewController?.dismissViewControllerAnimated(true, completion: {
+      self.handlerViewController?.dismiss(animated: true, completion: {
         
         self.delegate?.pickedPhoto(self, images: [image])
         
@@ -98,42 +97,56 @@ class ImagePickerHelper: NSObject {
     
     PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
       
-      self.handlerViewController?.dismissViewControllerAnimated(true, completion: {
+      self.handlerViewController?.dismiss(animated: true, completion: {
         
         self.delegate?.pickedPhoto(self, images: images)
         
       })
     }
-    
-    
   }
   
-  private func openAblum() {
+  fileprivate func openAblum() {
     
-    let status = PHPhotoLibrary.authorizationStatus()
-    
-    guard status != .Restricted && status != .Denied else {
-      
-      let _ = UIAlertView(title: "相册被禁用", message: "请在设置－隐私－照片中开启", delegate: nil, cancelButtonTitle: "确定").show()
-      
-      return
-    }
-    
-    guard UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) else {
+    guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
       
       let _ = UIAlertView(title: "相册不可用", message: nil, delegate: nil, cancelButtonTitle: "确定").show()
       
       return
     }
     
+    let status = PHPhotoLibrary.authorizationStatus()
+    
+    switch status {
+    case .notDetermined:
+      
+      PHPhotoLibrary.requestAuthorization { (status) in
+        
+        guard status == .authorized else { return }
+        
+        exChangeMainQueue {
+          self.showAblum()
+        }
+      }
+      
+    case .authorized:
+      showAblum()
+      
+    case .restricted, .denied:
+      
+      let _ = UIAlertView(title: "相册被禁用", message: "请在设置－隐私－照片中开启", delegate: nil, cancelButtonTitle: "确定").show()
+      
+    }
+  }
+  
+  fileprivate func showAblum() {
+    
     let viewController = PhotoColletionViewController()
-    viewController.canOpenCamera = type != .Album
-//    let viewController = PhotoAlbumViewController()
-//    viewController.canOpenCamera = type != .Album
+    viewController.canOpenCamera = self.type != .album
     
     let navigationController = UINavigationController(rootViewController: viewController)
-    navigationController.navigationBar.translucent = false
-    handlerViewController?.presentViewController(navigationController, animated: true, completion: nil)
+    navigationController.navigationBar.isTranslucent = false
+    navigationController.navigationBar.tintColor = mainTextColor
+    self.handlerViewController?.present(navigationController, animated: true, completion: nil)
     
   }
 }

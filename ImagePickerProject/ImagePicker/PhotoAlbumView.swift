@@ -10,14 +10,14 @@ import UIKit
 
 protocol PhotoAlbumViewDelegate: NSObjectProtocol {
   
-  func photoAlbumView(photoAlbumView: PhotoAlbumView, didSelectAtIndex index: Int)
+  func photoAlbumView(_ photoAlbumView: PhotoAlbumView, didSelectAtIndex index: Int)
   
 }
 
 class PhotoAlbumView: UIView {
 
-  private var tableView: UITableView!
-  private var delegate: PhotoAlbumViewDelegate
+  fileprivate var tableView: UITableView!
+  fileprivate var delegate: PhotoAlbumViewDelegate
   
   let identifier = "PhotoAlbumCell"
   
@@ -44,16 +44,16 @@ class PhotoAlbumView: UIView {
   
   func initView(){
     
-    backgroundColor = UIColor.greenColor()
+    backgroundColor = UIColor.green
     
-    tableView = UITableView(frame: bounds, style: .Plain)
-    tableView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-    tableView.backgroundColor = UIColor.whiteColor()
+    tableView = UITableView(frame: bounds, style: .plain)
+    tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    tableView.backgroundColor = UIColor.white
     tableView.tableFooterView = UIView()
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.setNibCell(identifier)
-    tableView.setSeparatorByEdge()
+    let nibCell = UINib(nibName: identifier, bundle: nil)
+    tableView.register(nibCell, forCellReuseIdentifier: identifier)
     tableView.separatorColor = separatorColor
     tableView.rowHeight = 60.0
     addSubview(tableView)
@@ -66,19 +66,19 @@ class PhotoAlbumView: UIView {
 
 extension PhotoAlbumView: UITableViewDataSource {
   
-  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return PhotosManager.sharedInstance.getAlbumCount()
   }
   
-  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! PhotoAlbumCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! PhotoAlbumCell
     
-    guard let collection = PhotosManager.sharedInstance.getAlbumWith(indexPath.row) else  { return cell }
+    guard let collection = PhotosManager.sharedInstance.getAlbumWith((indexPath as NSIndexPath).row) else  { return cell }
     
     cell.titleLabel.text = "\(collection.localizedTitle!) (\(PhotosManager.sharedInstance.getImageFetchResultWith(collection).count))"
     
-    PhotosManager.sharedInstance.getImageWith(indexPath.row, withIndex: 0, withSizeType: .Thumbnail) { (image) -> Void in
+    PhotosManager.sharedInstance.getImageWith((indexPath as NSIndexPath).row, withIndex: 0, withSizeType: .thumbnail) { (image) -> Void in
       
       if image == nil {
         return
@@ -87,21 +87,23 @@ extension PhotoAlbumView: UITableViewDataSource {
       cell.thumbImageView.image = image
     }
     
-    cell.setSeparatorByEdge()
-    
+    cell.separatorInset = UIEdgeInsets.zero
+
     return cell
   }
 }
 
 extension PhotoAlbumView: UITableViewDelegate {
   
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    tableView.deselectRow()
+    if let indexPath = tableView.indexPathForSelectedRow {
+      tableView.deselectRow(at: indexPath, animated: true)
+    }
     
-    PhotosManager.sharedInstance.currentAlbumIndex = indexPath.row
+    PhotosManager.sharedInstance.currentAlbumIndex = (indexPath as NSIndexPath).row
     
-    delegate.photoAlbumView(self, didSelectAtIndex: indexPath.row)
+    delegate.photoAlbumView(self, didSelectAtIndex: (indexPath as NSIndexPath).row)
   }
   
 }

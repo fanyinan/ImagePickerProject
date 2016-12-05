@@ -30,14 +30,14 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
 
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     if PhotosManager.sharedInstance.maxSelectedCount == 1 {
       
-      selectButton.hidden = true
-      unselectedImageView.hidden = true
-      selectedImageView.hidden = true
+      selectButton.isHidden = true
+      unselectedImageView.isHidden = true
+      selectedImageView.isHidden = true
       
     }
     
@@ -57,7 +57,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   }
   
   func onBack() {
-    navigationController?.popViewControllerAnimated(true)
+    navigationController?.popViewController(animated: true)
   }
   
   func onSelect() {
@@ -103,7 +103,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.height.equalTo(64)
     }
     
-    topBarContainerView.backgroundColor = UIColor.clearColor()
+    topBarContainerView.backgroundColor = UIColor.clear
     
     //backButton
     backButton = UIButton()
@@ -113,8 +113,8 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.width.equalTo(50)
     }
     
-    backButton.setImage(UIImage(named: "back_white_arrow"), forState: .Normal)
-    backButton.addTarget(self, action: #selector(PreviewPhotoViewController.onBack), forControlEvents: .TouchUpInside)
+    backButton.setImage(UIImage(named: "back_white_arrow"), for: UIControlState())
+    backButton.addTarget(self, action: #selector(PreviewPhotoViewController.onBack), for: .touchUpInside)
     
     //selectButton
     selectButton = UIControl()
@@ -125,7 +125,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.width.equalTo(50)
     }
     
-    selectButton.addTarget(self, action: #selector(PreviewPhotoViewController.onSelect), forControlEvents: .TouchUpInside)
+    selectButton.addTarget(self, action: #selector(PreviewPhotoViewController.onSelect), for: .touchUpInside)
     
     //unselectedButton
     unselectedImageView = UIImageView()
@@ -170,7 +170,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.height.equalTo(44)
     }
     
-    bottomBarContainerView.backgroundColor = UIColor.clearColor()
+    bottomBarContainerView.backgroundColor = UIColor.clear
     
     //completeButton
     completeButton = UIButton()
@@ -180,10 +180,10 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.width.equalTo(50)
     }
     
-    completeButton.setTitle("完成", forState: .Normal)
-    completeButton.titleLabel?.font = UIFont.systemFontOfSize(16)
-    completeButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
-    completeButton.addTarget(self, action: #selector(PreviewPhotoViewController.onComplete), forControlEvents: .TouchUpInside)
+    completeButton.setTitle("完成", for: UIControlState())
+    completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    completeButton.setTitleColor(UIColor.green, for: UIControlState())
+    completeButton.addTarget(self, action: #selector(PreviewPhotoViewController.onComplete), for: .touchUpInside)
     
     //selectedCountLabel
     selectedCountLabel = UILabel()
@@ -194,14 +194,15 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.width.height.equalTo(20)
     }
     
-    selectedCountLabel.textColor = UIColor.whiteColor()
+    selectedCountLabel.textColor = UIColor.white
     selectedCountLabel.backgroundColor = UIColor.hexStringToColor("03AC00")
-    selectedCountLabel.textAlignment = .Center
-    selectedCountLabel.font = UIFont.systemFontOfSize(14)
+    selectedCountLabel.textAlignment = .center
+    selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
     
   }
   
   override func photoDidChange() {
+    super.photoDidChange()
     
     let isSelected = PhotosManager.sharedInstance.selectedIndexList.contains(currentIndex)
     setPhotoSelected(isSelected)
@@ -209,7 +210,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     
   }
   
-  func setPhotoSelectedStatusWith(index: Int) {
+  func setPhotoSelectedStatusWith(_ index: Int) {
     
     let isSuccess = PhotosManager.sharedInstance.selectPhotoWith(index)
     
@@ -225,11 +226,11 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     setPhotoStatusWithAnimation(isSelected)
   }
   
-  func setPhotoStatusWithAnimation(isSelected: Bool) {
+  func setPhotoStatusWithAnimation(_ isSelected: Bool) {
     
     self.setPhotoSelected(!isSelected)
     
-    UIView.animateWithDuration(0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .CurveEaseInOut, animations: { () -> Void in
+    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: UIViewAnimationOptions(), animations: { () -> Void in
       
       self.setPhotoSelected(isSelected)
       
@@ -239,19 +240,19 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     
   }
   
-  func setPhotoSelected(isSelected: Bool) {
+  func setPhotoSelected(_ isSelected: Bool) {
     
-    selectedImageView.transform = isSelected == false ? CGAffineTransformMakeScale(0.5, 0.5) : CGAffineTransformIdentity
-    self.selectedImageView.alpha = CGFloat(isSelected)
+    selectedImageView.transform = isSelected == false ? CGAffineTransform(scaleX: 0.5, y: 0.5) : CGAffineTransform.identity
+    self.selectedImageView.alpha = isSelected ? 1 : 0
     
   }
   
-  private func updateCount() {
+  fileprivate func updateCount() {
     
     let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
-    selectedCountLabel.hidden = selectedCount == 0
+    selectedCountLabel.isHidden = selectedCount == 0
     selectedCountLabel.text = countString
     
   }

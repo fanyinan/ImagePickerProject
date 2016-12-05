@@ -45,12 +45,14 @@ class PhotoCropViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    view.backgroundColor = UIColor.black
+
     guard originImage == nil else {
       self.initView()
       return
     }
     
-    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(imageIndex!, withSizeType: .Preview) { (image) -> Void in
+    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(imageIndex!, withSizeType: .preview) { (image) -> Void in
       
       guard let _image = image else {
         return
@@ -63,14 +65,14 @@ class PhotoCropViewController: UIViewController {
     
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     hideNavigationBar()
     
   }
   
-  override func viewWillDisappear(animated: Bool) {
+  override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     hideNavigationBar()
   }
@@ -107,9 +109,9 @@ class PhotoCropViewController: UIViewController {
   func onCancel() {
     
     if navigationController == nil {
-      self.dismissViewControllerAnimated(true, completion: nil)
+      self.dismiss(animated: true, completion: nil)
     } else {
-      navigationController!.popViewControllerAnimated(true)
+      navigationController!.popViewController(animated: true)
     }
     
   }
@@ -122,19 +124,19 @@ class PhotoCropViewController: UIViewController {
    /**
    收起navigationbar 暂不用
    */
-  private func hideNavigationBar() {
+  fileprivate func hideNavigationBar() {
     
     if navigationController == nil {
       return
     }
     
-    let isHidden = navigationController!.navigationBarHidden
-    UIApplication.sharedApplication().setStatusBarHidden(!isHidden, withAnimation: .None)
+    let isHidden = navigationController!.isNavigationBarHidden
+    UIApplication.shared.setStatusBarHidden(!isHidden, with: .none)
     navigationController!.setNavigationBarHidden(!isHidden, animated: true)
     
   }
   
-  private func initView() {
+  fileprivate func initView() {
     
     automaticallyAdjustsScrollViewInsets = false
     
@@ -148,7 +150,7 @@ class PhotoCropViewController: UIViewController {
     
   }
   
-  private func initBottomBar() {
+  fileprivate func initBottomBar() {
     
     //bottomBarTransparentView
     bottomBarTransparentView = UIView()
@@ -169,7 +171,7 @@ class PhotoCropViewController: UIViewController {
       make.height.equalTo(60)
     }
     
-    bottomBarContainerView.backgroundColor = UIColor.clearColor()
+    bottomBarContainerView.backgroundColor = UIColor.clear
     
     //completeButton
     completeButton = UIButton()
@@ -179,10 +181,10 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(60)
     }
     
-    completeButton.setTitle("选取", forState: .Normal)
-    completeButton.titleLabel?.font = UIFont.systemFontOfSize(18)
-    completeButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    completeButton.addTarget(self, action: #selector(PhotoCropViewController.onComplete), forControlEvents: .TouchUpInside)
+    completeButton.setTitle("选取", for: UIControlState())
+    completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+    completeButton.setTitleColor(UIColor.white, for: UIControlState())
+    completeButton.addTarget(self, action: #selector(PhotoCropViewController.onComplete), for: .touchUpInside)
     
     //selectedCountLabel
     cancelButton = UIButton()
@@ -192,10 +194,10 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(60)
     }
     
-    cancelButton.setTitle("取消", forState: .Normal)
-    cancelButton.titleLabel?.font = UIFont.systemFontOfSize(18)
-    cancelButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-    cancelButton.addTarget(self, action: #selector(PhotoCropViewController.onCancel), forControlEvents: .TouchUpInside)
+    cancelButton.setTitle("取消", for: UIControlState())
+    cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+    cancelButton.setTitleColor(UIColor.white, for: UIControlState())
+    cancelButton.addTarget(self, action: #selector(PhotoCropViewController.onCancel), for: .touchUpInside)
     
     imageView = UIImageView()
     view.addSubview(imageView)

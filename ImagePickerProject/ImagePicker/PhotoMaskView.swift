@@ -13,8 +13,8 @@ class PhotoMaskView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    backgroundColor = UIColor.clearColor()
-    userInteractionEnabled = false
+    backgroundColor = UIColor.clear
+    isUserInteractionEnabled = false
     
   }
 
@@ -22,20 +22,20 @@ class PhotoMaskView: UIView {
       fatalError("init(coder:) has not been implemented")
   }
   
-  override func drawRect(rect: CGRect) {
+  override func draw(_ rect: CGRect) {
     
-    let ctx = UIGraphicsGetCurrentContext()
+    guard let ctx = UIGraphicsGetCurrentContext() else { return }
     
-    CGContextSetFillColorWithColor(ctx, UIColor.hexStringToColor("000000", alpha: 0.5).CGColor)
-    CGContextFillRect(ctx, rect);
-    CGContextStrokePath(ctx);
+    ctx.setFillColor(UIColor.hexStringToColor("000000", alpha: 0.5).cgColor)
+    ctx.fill(rect);
+    ctx.strokePath();
     
-    CGContextClearRect(ctx, CGRect(x: 0, y: (rect.height - rect.width) / 2, width: rect.width, height: rect.width))
+    ctx.clear(CGRect(x: 0, y: (rect.height - rect.width) / 2, width: rect.width, height: rect.width))
     
-    CGContextSetRGBStrokeColor(ctx, 1, 1.0, 1.0, 1.0)
-    CGContextSetLineWidth(ctx, 1.0)
-    CGContextAddRect(ctx, CGRect(x: 1, y: (rect.height - rect.width) / 2, width: rect.width - 2, height: rect.width));
-    CGContextStrokePath(ctx)
+    ctx.setStrokeColor(red: 1, green: 1.0, blue: 1.0, alpha: 1.0)
+    ctx.setLineWidth(1.0)
+    ctx.addRect(CGRect(x: 1, y: (rect.height - rect.width) / 2, width: rect.width - 2, height: rect.width));
+    ctx.strokePath()
   }
   
   

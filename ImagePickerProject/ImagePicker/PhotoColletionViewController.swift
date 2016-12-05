@@ -11,28 +11,28 @@ import Photos
 
 class PhotoColletionViewController: UIViewController {
   
-  private var collectionView: UICollectionView!
-  private var selectedCountLabel: UILabel!
-  private var completionLabel: UILabel!
-  private var completionButton: UIControl!
-  private var ablumButton: UIControl!
-  private var titleLabel: UILabel!
-  private var indicatorImageView: UIImageView!
+  fileprivate var collectionView: UICollectionView!
+  fileprivate var selectedCountLabel: UILabel!
+  fileprivate var completionLabel: UILabel!
+  fileprivate var completionButton: UIControl!
+  fileprivate var ablumButton: UIControl!
+  fileprivate var titleLabel: UILabel!
+  fileprivate var indicatorImageView: UIImageView!
   
-  private var imageWidth: CGFloat!
-  private var selectItemNum = 0
-  private var popViewHelp: PopViewHelper!
-  private var ablumView: UIView!
-  private var cellFadeAnimation = false
+  fileprivate var imageWidth: CGFloat!
+  fileprivate var selectItemNum = 0
+  fileprivate var popViewHelp: PopViewHelper!
+  fileprivate var ablumView: UIView!
+  fileprivate var cellFadeAnimation = false
   
-  private let thumbIdentifier = "PhotoThumbCell"
-  private let previewIdentifier = "CameraPreviewCell"
+  fileprivate let thumbIdentifier = "PhotoThumbCell"
+  fileprivate let previewIdentifier = "CameraPreviewCell"
 
-  private let midSpace: CGFloat = 2
-  private let rowCount = 3
-  private let ablumButtonWidth: CGFloat = 120
-  private let selectedCountLabelWidth: CGFloat = 20
-  private let indicatorWidth: CGFloat = 15
+  fileprivate let midSpace: CGFloat = 2
+  fileprivate let rowCount = 3
+  fileprivate let ablumButtonWidth: CGFloat = 120
+  fileprivate let selectedCountLabelWidth: CGFloat = 20
+  fileprivate let indicatorWidth: CGFloat = 15
   
   var canOpenCamera = true
   var cameraHelper: CameraHelper!
@@ -44,7 +44,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  override func viewWillAppear(animated: Bool) {
+  override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     collectionView.reloadData()
     
@@ -54,9 +54,9 @@ class PhotoColletionViewController: UIViewController {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-    imageWidth = (CGRectGetWidth(view.frame) - midSpace * CGFloat(rowCount - 1)) / CGFloat(rowCount)
+    imageWidth = (view.frame.width - midSpace * CGFloat(rowCount - 1)) / CGFloat(rowCount)
     
-    let scale = UIScreen.mainScreen().scale
+    let scale = UIScreen.main.scale
     PhotosManager.assetGridThumbnailSize = CGSize(width: imageWidth * scale, height: imageWidth * scale)
     
   }
@@ -66,18 +66,17 @@ class PhotoColletionViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
-  func onRadio(cell: PhotoThumbCell) {
+  func onRadio(_ cell: PhotoThumbCell) {
     
-    let indexPath = collectionView.indexPathForCell(cell)!
-    cell.setPhotoSelectedStatusWith(indexPath.row - 1)
+    let indexPath = collectionView.indexPath(for: cell)!
+    cell.setPhotoSelectedStatusWith((indexPath as NSIndexPath).row - 1)
     
     updateUI()
   }
   
   func completeButtonClick() {
     
-//    PhotosManager.sharedInstance.didFinish()
-    collectionView.deleteItemsAtIndexPaths(collectionView.indexPathsForVisibleItems())
+    PhotosManager.sharedInstance.didFinish()
     
   }
   
@@ -94,13 +93,13 @@ class PhotoColletionViewController: UIViewController {
   func onCancel() {
     
     PhotosManager.sharedInstance.cancel()
-    dismissViewControllerAnimated(true, completion: nil)
+    dismiss(animated: true, completion: nil)
   }
   
   func goToPhotoBrowser() {
     
     let photoBrowser = PreviewPhotoViewController(delegate: self, quitBlock: { () -> Void in
-      self.navigationController?.popViewControllerAnimated(true)
+      self.navigationController?.popViewController(animated: true)
     })
     photoBrowser.delegate = self
     navigationController?.pushViewController(photoBrowser, animated: true)
@@ -112,17 +111,17 @@ class PhotoColletionViewController: UIViewController {
    ******************************************************************************/
    //MARK: - private Implements
   
-  private func initView() {
+  fileprivate func initView() {
     
     initAblum()
     initNavigationBarButton()
     
     let collectionViewFlowLayout = UICollectionViewFlowLayout()
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionViewFlowLayout)
-    collectionView.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-    collectionView.backgroundColor = UIColor.whiteColor()
-    collectionView.registerNib(UINib(nibName: thumbIdentifier, bundle: nil), forCellWithReuseIdentifier: thumbIdentifier)
-    collectionView.registerNib(UINib(nibName: previewIdentifier, bundle: nil), forCellWithReuseIdentifier: previewIdentifier)
+    collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+    collectionView.backgroundColor = UIColor.white
+    collectionView.register(UINib(nibName: thumbIdentifier, bundle: nil), forCellWithReuseIdentifier: thumbIdentifier)
+    collectionView.register(UINib(nibName: previewIdentifier, bundle: nil), forCellWithReuseIdentifier: previewIdentifier)
 
     collectionView.dataSource = self
     collectionView.delegate = self
@@ -130,16 +129,16 @@ class PhotoColletionViewController: UIViewController {
     
     initCompletionButton()
 
-    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .Plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(PhotoColletionViewController.onCancel))
     
   }
   
-  private func initNavigationBarButton() {
+  fileprivate func initNavigationBarButton() {
     
     ablumButton = UIControl(frame: CGRect(x: 0 , y: 0, width: ablumButtonWidth, height: 44))
     navigationItem.titleView = ablumButton
     
-    ablumButton.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), forControlEvents: .TouchUpInside)
+    ablumButton.addTarget(self, action: #selector(PhotoColletionViewController.albumButtonClick), for: .touchUpInside)
     
     titleLabel = UILabel()
     ablumButton.addSubview(titleLabel)
@@ -148,8 +147,8 @@ class PhotoColletionViewController: UIViewController {
     }
     
     titleLabel.textColor = UIColor.hexStringToColor("368EFF")
-    titleLabel.font = UIFont.systemFontOfSize(18)
-    titleLabel.textAlignment = .Center
+    titleLabel.font = UIFont.systemFont(ofSize: 18)
+    titleLabel.textAlignment = .center
     
     updateTitle()
 
@@ -161,15 +160,15 @@ class PhotoColletionViewController: UIViewController {
       make.width.height.equalTo(indicatorWidth)
     }
     
-    indicatorImageView.contentMode = .ScaleAspectFit
+    indicatorImageView.contentMode = .scaleAspectFit
     indicatorImageView.image = UIImage(named: "ic_down_arrow")
     
   }
   
-  private func initAblum() {
+  fileprivate func initAblum() {
   
     ablumView = PhotoAlbumView(frame: view.bounds, delegate: self)
-    popViewHelp = PopViewHelper(superView: view, targetView: ablumView, viewPopDirection: .Above, maskStatus: .Normal)
+    popViewHelp = PopViewHelper(superView: view, targetView: ablumView, viewPopDirection: .above, maskStatus: .normal)
     popViewHelp.showAnimateDuration = 0.35
     popViewHelp.hideAnimateDuration = 0.35
     popViewHelp.alpha = [0, 1, 1]
@@ -177,42 +176,42 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  private func initCompletionButton() {
+  fileprivate func initCompletionButton() {
   
     completionButton = UIControl(frame: CGRect(x: view.frame.width - 60, y: 0, width: 60, height: 44))
-    completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), forControlEvents: .TouchUpInside)
+    completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
     navigationController?.navigationBar.addSubview(completionButton)
     
     selectedCountLabel = UILabel(frame: CGRect(x: 0, y: (completionButton.frame.height - selectedCountLabelWidth) / 2, width: selectedCountLabelWidth, height: selectedCountLabelWidth))
     selectedCountLabel.backgroundColor = UIColor.hexStringToColor("03AC00")
-    selectedCountLabel.font = UIFont.systemFontOfSize(14)
-    selectedCountLabel.textColor = UIColor.whiteColor()
-    selectedCountLabel.textAlignment = .Center
+    selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
+    selectedCountLabel.textColor = UIColor.white
+    selectedCountLabel.textAlignment = .center
     selectedCountLabel.setViewCornerRadius()
     completionButton.addSubview(selectedCountLabel)
     
     completionLabel = UILabel(frame: CGRect(x: selectedCountLabelWidth, y: 0, width: completionButton.frame.width - selectedCountLabelWidth, height: 44))
     completionLabel.textColor = UIColor.hexStringToColor("03AC00")
     completionLabel.text = "完成"
-    completionLabel.font = UIFont.systemFontOfSize(14)
-    completionLabel.textAlignment = .Center
+    completionLabel.font = UIFont.systemFont(ofSize: 14)
+    completionLabel.textAlignment = .center
     completionButton.addSubview(completionLabel)
     
   }
   
-  private func checkCamera(){
+  fileprivate func checkCamera(){
     
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
-    if (AVAuthorizationStatus.Denied == authStatus || AVAuthorizationStatus.Restricted == authStatus){
+    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    if (AVAuthorizationStatus.denied == authStatus || AVAuthorizationStatus.restricted == authStatus){
       
-      let alertController = UIAlertController(title: "相机被禁用", message: "请在设置－隐私－相机中开启", preferredStyle: .Alert)
-      let okAction = UIAlertAction(title: "确定", style: .Default, handler: nil)
+      let alertController = UIAlertController(title: "相机被禁用", message: "请在设置－隐私－相机中开启", preferredStyle: .alert)
+      let okAction = UIAlertAction(title: "确定", style: .default, handler: nil)
       alertController.addAction(okAction)
-      presentViewController(alertController, animated: true, completion: nil)
+      present(alertController, animated: true, completion: nil)
     }
   }
   
-  private func getPhotoFromCamera(){
+  fileprivate func getPhotoFromCamera(){
     
     if cameraHelper == nil {
       cameraHelper = CameraHelper(handlerViewController: self)
@@ -223,20 +222,20 @@ class PhotoColletionViewController: UIViewController {
     cameraHelper.openCamera()
   }
   
-  private func updateUI() {
+  fileprivate func updateUI() {
     
     let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
-    selectedCountLabel.hidden = selectedCount == 0
+    selectedCountLabel.isHidden = selectedCount == 0
     selectedCountLabel.text = countString
     
-    completionLabel.enabled = selectedCount != 0
-    completionButton.enabled = selectedCount != 0
+    completionLabel.isEnabled = selectedCount != 0
+    completionButton.isEnabled = selectedCount != 0
     
   }
 
-  private func updateTitle() {
+  fileprivate func updateTitle() {
     
     if let currentAlbumIndex = PhotosManager.sharedInstance.currentAlbumIndex {
       let title = PhotosManager.sharedInstance.getAlbumWith(currentAlbumIndex)?.localizedTitle ?? "相册"
@@ -245,21 +244,20 @@ class PhotoColletionViewController: UIViewController {
     }
   }
   
-  private func animateIndicator(isIndicatShowing: Bool) {
+  fileprivate func animateIndicator(_ isIndicatShowing: Bool) {
     
-    UIView.animateWithDuration(0.3) { 
+    UIView.animate(withDuration: 0.3, animations: { 
       
-      let transform = CGAffineTransformMakeRotation(isIndicatShowing ? CGFloat(M_PI) : 0)
+      let transform = CGAffineTransform(rotationAngle: isIndicatShowing ? CGFloat(M_PI) : 0)
       self.indicatorImageView.transform = transform
       
-    }
-    
+    }) 
   }
 }
 
 extension PhotoColletionViewController: UICollectionViewDataSource {
   
-  func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
     var photoNum = PhotosManager.sharedInstance.getImageCountInCurrentAlbum()
     
@@ -269,20 +267,20 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
     return photoNum
   }
   
-  func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    let row = indexPath.row
+    let row = (indexPath as NSIndexPath).row
     let showPreview = canOpenCamera && row == 0
     
     let identifier = showPreview ? previewIdentifier : thumbIdentifier
     
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
     
     if !showPreview {
       
       let thumbCell = cell as! PhotoThumbCell
       thumbCell.onRadio = onRadio
-      thumbCell.setImageWith(canOpenCamera == true ? indexPath.row - 1 : indexPath.row)
+      thumbCell.setImageWith(canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row)
       
     }
     
@@ -292,24 +290,24 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
 
 extension PhotoColletionViewController: UICollectionViewDelegateFlowLayout {
   
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: imageWidth, height: imageWidth)
   }
   
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return midSpace
   }
   
-  func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return midSpace
   }
 }
 
 extension PhotoColletionViewController: UICollectionViewDelegate {
   
-  func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    let row = indexPath.row
+    let row = (indexPath as NSIndexPath).row
     
     if canOpenCamera && row == 0 {
       
@@ -319,11 +317,11 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       if PhotosManager.sharedInstance.isCrop {
         
-        self.navigationController?.pushViewController(PhotoCropViewController(imageIndex: canOpenCamera == true ? indexPath.row - 1 : indexPath.row), animated: true)
+        self.navigationController?.pushViewController(PhotoCropViewController(imageIndex: canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row), animated: true)
         
       } else {
         
-        selectItemNum = canOpenCamera == true ? indexPath.row - 1 : indexPath.row
+        selectItemNum = canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row
         goToPhotoBrowser()
         
       }
@@ -334,7 +332,7 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
 
 extension PhotoColletionViewController: PhotoAlbumViewDelegate {
   
-  func photoAlbumView(photoAlbumView: PhotoAlbumView, didSelectAtIndex index: Int) {
+  func photoAlbumView(_ photoAlbumView: PhotoAlbumView, didSelectAtIndex index: Int) {
     updateTitle()
     popViewHelp.hidePopView()
     collectionView.reloadData()
@@ -343,35 +341,33 @@ extension PhotoColletionViewController: PhotoAlbumViewDelegate {
 
   }
   
-  func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+  @objc(collectionView:willDisplayCell:forItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 
     guard cellFadeAnimation else { return }
     
     cell.alpha = 0
     
-    UIView.animateWithDuration(0.3, animations: { 
+    UIView.animate(withDuration: 0.3, animations: { 
       
       cell.alpha = 1
 
-      }) { finish in
+      }, completion: { finish in
         
       self.cellFadeAnimation = false
 
-    }
-
+    }) 
   }
-  
 }
 
 extension PhotoColletionViewController: WZPhotoBrowserLiteDelegate {
   
-  func numberOfImage(photoBrowser: WZPhotoBrowserLite) -> Int {
+  func numberOfImage(_ photoBrowser: WZPhotoBrowserLite) -> Int {
     
     return PhotosManager.sharedInstance.getImageCountInCurrentAlbum()
     
   }
   
-  func firstDisplayIndex(photoBrowser: WZPhotoBrowserLite) -> Int {
+  func firstDisplayIndex(_ photoBrowser: WZPhotoBrowserLite) -> Int {
     
     return selectItemNum
   }
@@ -379,7 +375,7 @@ extension PhotoColletionViewController: WZPhotoBrowserLiteDelegate {
 
 extension PhotoColletionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     
     let type : String = info[UIImagePickerControllerMediaType] as! String
     
@@ -389,13 +385,13 @@ extension PhotoColletionViewController: UIImagePickerControllerDelegate, UINavig
       
       if PhotosManager.sharedInstance.isCrop {
         
-        picker.dismissViewControllerAnimated(false, completion: nil)
+        picker.dismiss(animated: false, completion: nil)
         
         navigationController?.pushViewController(PhotoCropViewController(image: image), animated: true)
         
       } else {
         
-        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
         
         PhotosManager.sharedInstance.didFinish(image)
         
@@ -406,14 +402,13 @@ extension PhotoColletionViewController: UIImagePickerControllerDelegate, UINavig
 
 extension PhotoColletionViewController: PopViewHelperDelegate {
   
-  func popViewHelper(popViewHelper: PopViewHelper, shouldShowPopView targetView: UIView) {
+  func popViewHelper(_ popViewHelper: PopViewHelper, shouldShowPopView targetView: UIView) {
     
     animateIndicator(true)
   }
   
-  func popViewHelper(popViewHelper: PopViewHelper, shouldHidePopView targetView: UIView) {
+  func popViewHelper(_ popViewHelper: PopViewHelper, shouldHidePopView targetView: UIView) {
     
     animateIndicator(false)
   }
-  
 }

@@ -10,16 +10,16 @@ import UIKit
 
 class ZoomImageScrollViewLite: UIScrollView {
   
-  private var imageSize: CGSize!
-  private var imageView: UIImageView!
-  private var singleTap: UITapGestureRecognizer!
-  private var doubleTap: UITapGestureRecognizer!
-  private var initialZoomScale: CGFloat! //保存初始比例，供双击放大后还原使用
+  fileprivate var imageSize: CGSize!
+  fileprivate var imageView: UIImageView!
+  fileprivate var singleTap: UITapGestureRecognizer!
+  fileprivate var doubleTap: UITapGestureRecognizer!
+  fileprivate var initialZoomScale: CGFloat! //保存初始比例，供双击放大后还原使用
   
   let maxScale: CGFloat = 3
   
   init(){
-    super.init(frame: CGRectZero)
+    super.init(frame: CGRect.zero)
     configUI()
   }
   
@@ -35,21 +35,21 @@ class ZoomImageScrollViewLite: UIScrollView {
     
   }
   
-  private func configUI() {
-    backgroundColor = UIColor.blackColor()
+  fileprivate func configUI() {
+    backgroundColor = UIColor.black
     showsHorizontalScrollIndicator = false
     showsVerticalScrollIndicator = false
     decelerationRate = UIScrollViewDecelerationRateFast
     //    autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
     alwaysBounceHorizontal = false
     delegate = self
-    scrollEnabled = false //使图片开始是不能滑动的，因为当图片宽为600左右，scale为0.533左右时，htable无法滑动，具体原因不明
+    isScrollEnabled = false //使图片开始是不能滑动的，因为当图片宽为600左右，scale为0.533左右时，htable无法滑动，具体原因不明
     
     //imageview
-    imageView = UIImageView(frame: CGRectZero)
-    imageView.backgroundColor = UIColor.yellowColor()
-    imageView.contentMode = .ScaleAspectFill
-    imageView.userInteractionEnabled = true
+    imageView = UIImageView(frame: CGRect.zero)
+    imageView.backgroundColor = UIColor.yellow
+    imageView.contentMode = .scaleAspectFill
+    imageView.isUserInteractionEnabled = true
     
     singleTap = UITapGestureRecognizer()
     addGestureRecognizer(singleTap)
@@ -57,13 +57,13 @@ class ZoomImageScrollViewLite: UIScrollView {
     doubleTap = UITapGestureRecognizer(target: self, action: #selector(ZoomImageScrollViewLite.imageViewDoubleTap(_:)))
     doubleTap.numberOfTapsRequired = 2
     imageView.addGestureRecognizer(doubleTap)
-    singleTap.requireGestureRecognizerToFail(doubleTap)
+    singleTap.require(toFail: doubleTap)
     
     addSubview(imageView)
     
   }
   
-  func setImage(image: UIImage?) {
+  func setImage(_ image: UIImage?) {
     
     if image == nil {
       return
@@ -76,12 +76,12 @@ class ZoomImageScrollViewLite: UIScrollView {
     calculateZoomScale()
   }
   
-  func setImageWithLocalPhotoWith(index: Int) {
+  func setImageWithLocalPhotoWith(_ index: Int) {
         
     let currentTag = tag + 1
     tag = currentTag
     
-    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(index, withSizeType: .Preview) { (image) -> Void in
+    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(index, withSizeType: .preview) { (image) -> Void in
       
       guard image != nil else {
         return
@@ -102,11 +102,11 @@ class ZoomImageScrollViewLite: UIScrollView {
    :param: target target
    :param: action action
    */
-  func addImageTarget(target: AnyObject, action: Selector) {
+  func addImageTarget(_ target: AnyObject, action: Selector) {
     singleTap.addTarget(target, action: action)
   }
   
-  func imageViewDoubleTap(tap: UITapGestureRecognizer) {
+  func imageViewDoubleTap(_ tap: UITapGestureRecognizer) {
     
     guard zoomScale == initialZoomScale else {
       
@@ -114,7 +114,7 @@ class ZoomImageScrollViewLite: UIScrollView {
       return
     }
     
-    let position = tap.locationInView(imageView)
+    let position = tap.location(in: imageView)
     
     let zoomRectScale: CGFloat = 2
     
@@ -132,27 +132,21 @@ class ZoomImageScrollViewLite: UIScrollView {
     //用于表示要把这个以点击位置为center的rect区域缩放zoomRectScale倍
     //此处需要解决：当以zoomRectScale放大后，图片的高超过屏幕的高度，此时不应该再动画的时候执行moveFrameToCenter，而应根据点击位置调整
     let zoomRect = CGRect(x: zoomX, y: zoomY, width: zoomWidth, height: zoomHeight)
-    zoomToRect(zoomRect, animated: true)
+    zoom(to: zoomRect, animated: true)
     
   }
   
-  private func calculateZoomScale() {
+  fileprivate func calculateZoomScale() {
     
     let boundsSize = bounds.size
     
     let scaleX = boundsSize.width / imageSize.width
     let scaleY = boundsSize.height / imageSize.height
     
-    var minScale = min(scaleX, scaleY)
-    
-    //如果图片长宽都小于屏幕则不缩放
-    if scaleX > 1.0 && scaleY > 1.0 {
-      minScale = 1.0
-    }
-    
+    let minScale = min(scaleX, scaleY)
     let maxScale = CGFloat(3)
     
-    maximumZoomScale = maxScale
+    maximumZoomScale = minScale > 1 ? minScale : maxScale
     minimumZoomScale = minScale
     zoomScale = minimumZoomScale
     initialZoomScale = zoomScale
@@ -160,7 +154,7 @@ class ZoomImageScrollViewLite: UIScrollView {
     setNeedsLayout()
   }
   
-  private func moveFrameToCenter() {
+  fileprivate func moveFrameToCenter() {
     
     let boundsSize = bounds.size
     var frameToCenter = imageView.frame
@@ -177,7 +171,7 @@ class ZoomImageScrollViewLite: UIScrollView {
       frameToCenter.origin.y = 0
     }
     
-    if !CGRectEqualToRect(imageView.frame, frameToCenter) {
+    if !imageView.frame.equalTo(frameToCenter) {
       imageView.frame = frameToCenter
     }
     
@@ -186,16 +180,16 @@ class ZoomImageScrollViewLite: UIScrollView {
 }
 
 extension ZoomImageScrollViewLite: UIScrollViewDelegate {
-  func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
     return imageView
   }
   
-  func scrollViewWillBeginZooming(scrollView: UIScrollView, withView view: UIView?) {
-    scrollEnabled = true
+  func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+    isScrollEnabled = true
   }
   
   //主要是解决先缩小后再松手弹回来时不会执行moveFrameToCenter()的问题
-  func scrollViewDidZoom(scrollView: UIScrollView) {
+  func scrollViewDidZoom(_ scrollView: UIScrollView) {
     setNeedsLayout()
     layoutIfNeeded()
   }

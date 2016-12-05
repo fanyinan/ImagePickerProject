@@ -8,6 +8,39 @@
 
 /* Begin PBXBuildFile section */
 		CF04DDB31D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04DDB01D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift */; };
+		CF25CE9E1DC88DE400CD57BC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CF25CE7C1DC88DE400CD57BC /* LICENSE */; };
+		CF25CE9F1DC88DE400CD57BC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE7D1DC88DE400CD57BC /* README.md */; };
+		CF25CEA01DC88DE400CD57BC /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE7F1DC88DE400CD57BC /* Constraint.swift */; };
+		CF25CEA11DC88DE400CD57BC /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE801DC88DE400CD57BC /* ConstraintAttributes.swift */; };
+		CF25CEA21DC88DE400CD57BC /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE811DC88DE400CD57BC /* ConstraintConfig.swift */; };
+		CF25CEA31DC88DE400CD57BC /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE821DC88DE400CD57BC /* ConstraintConstantTarget.swift */; };
+		CF25CEA41DC88DE400CD57BC /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE831DC88DE400CD57BC /* ConstraintDescription.swift */; };
+		CF25CEA51DC88DE400CD57BC /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE841DC88DE400CD57BC /* ConstraintDSL.swift */; };
+		CF25CEA61DC88DE400CD57BC /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE851DC88DE400CD57BC /* ConstraintInsets.swift */; };
+		CF25CEA71DC88DE400CD57BC /* ConstraintInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE861DC88DE400CD57BC /* ConstraintInsetTarget.swift */; };
+		CF25CEA81DC88DE400CD57BC /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE871DC88DE400CD57BC /* ConstraintItem.swift */; };
+		CF25CEA91DC88DE400CD57BC /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE881DC88DE400CD57BC /* ConstraintLayoutGuide.swift */; };
+		CF25CEAA1DC88DE400CD57BC /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE891DC88DE400CD57BC /* ConstraintLayoutGuideDSL.swift */; };
+		CF25CEAB1DC88DE400CD57BC /* ConstraintLayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE8A1DC88DE400CD57BC /* ConstraintLayoutSupport.swift */; };
+		CF25CEAC1DC88DE400CD57BC /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE8B1DC88DE400CD57BC /* ConstraintLayoutSupportDSL.swift */; };
+		CF25CEAD1DC88DE400CD57BC /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE8C1DC88DE400CD57BC /* ConstraintMaker.swift */; };
+		CF25CEAE1DC88DE400CD57BC /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE8D1DC88DE400CD57BC /* ConstraintMakerEditable.swift */; };
+		CF25CEAF1DC88DE400CD57BC /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE8E1DC88DE400CD57BC /* ConstraintMakerExtendable.swift */; };
+		CF25CEB01DC88DE400CD57BC /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE8F1DC88DE400CD57BC /* ConstraintMakerFinalizable.swift */; };
+		CF25CEB11DC88DE400CD57BC /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE901DC88DE400CD57BC /* ConstraintMakerPriortizable.swift */; };
+		CF25CEB21DC88DE400CD57BC /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE911DC88DE400CD57BC /* ConstraintMakerRelatable.swift */; };
+		CF25CEB31DC88DE400CD57BC /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE921DC88DE400CD57BC /* ConstraintMultiplierTarget.swift */; };
+		CF25CEB41DC88DE400CD57BC /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE931DC88DE400CD57BC /* ConstraintOffsetTarget.swift */; };
+		CF25CEB51DC88DE400CD57BC /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE941DC88DE400CD57BC /* ConstraintPriorityTarget.swift */; };
+		CF25CEB61DC88DE400CD57BC /* ConstraintRelatableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE951DC88DE400CD57BC /* ConstraintRelatableTarget.swift */; };
+		CF25CEB71DC88DE400CD57BC /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE961DC88DE400CD57BC /* ConstraintRelation.swift */; };
+		CF25CEB81DC88DE400CD57BC /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE971DC88DE400CD57BC /* ConstraintView+Extensions.swift */; };
+		CF25CEB91DC88DE400CD57BC /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE981DC88DE400CD57BC /* ConstraintView.swift */; };
+		CF25CEBA1DC88DE400CD57BC /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE991DC88DE400CD57BC /* ConstraintViewDSL.swift */; };
+		CF25CEBB1DC88DE400CD57BC /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE9A1DC88DE400CD57BC /* Debugging.swift */; };
+		CF25CEBC1DC88DE400CD57BC /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE9B1DC88DE400CD57BC /* LayoutConstraint.swift */; };
+		CF25CEBD1DC88DE400CD57BC /* UILayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE9C1DC88DE400CD57BC /* UILayoutGuide+Extensions.swift */; };
+		CF25CEBE1DC88DE400CD57BC /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE9D1DC88DE400CD57BC /* UILayoutSupport+Extensions.swift */; };
 		CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F11C89613700B72821 /* AppDelegate.swift */; };
 		CF2C77F41C89613700B72821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F31C89613700B72821 /* ViewController.swift */; };
 		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
@@ -27,34 +60,14 @@
 		CF2C80361C8961B500B72821 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C6F1C8961B500B72821 /* UIImageView+HighlightedWebCache.m */; };
 		CF2C80371C8961B500B72821 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C711C8961B500B72821 /* UIImageView+WebCache.m */; };
 		CF2C80381C8961B500B72821 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C731C8961B500B72821 /* UIView+WebCacheOperation.m */; };
-		CF2C80391C8961B500B72821 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CF2C7C751C8961B500B72821 /* LICENSE */; };
-		CF2C803A1C8961B500B72821 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C761C8961B500B72821 /* README.md */; };
-		CF2C803B1C8961B500B72821 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C781C8961B500B72821 /* Constraint.swift */; };
-		CF2C803C1C8961B500B72821 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C791C8961B500B72821 /* ConstraintAttributes.swift */; };
-		CF2C803D1C8961B500B72821 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7A1C8961B500B72821 /* ConstraintDescription.swift */; };
-		CF2C803E1C8961B500B72821 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7B1C8961B500B72821 /* ConstraintItem.swift */; };
-		CF2C803F1C8961B500B72821 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7C1C8961B500B72821 /* ConstraintMaker.swift */; };
-		CF2C80401C8961B500B72821 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7D1C8961B500B72821 /* ConstraintRelation.swift */; };
-		CF2C80411C8961B500B72821 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7E1C8961B500B72821 /* Debugging.swift */; };
-		CF2C80421C8961B500B72821 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C7F1C8961B500B72821 /* EdgeInsets.swift */; };
-		CF2C80431C8961B500B72821 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C801C8961B500B72821 /* LayoutConstraint.swift */; };
-		CF2C80441C8961B500B72821 /* SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C811C8961B500B72821 /* SnapKit.swift */; };
-		CF2C80451C8961B500B72821 /* View+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C821C8961B500B72821 /* View+SnapKit.swift */; };
-		CF2C80461C8961B500B72821 /* ViewController+SnapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C831C8961B500B72821 /* ViewController+SnapKit.swift */; };
 		CF2C80471C8961B500B72821 /* MuColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C851C8961B500B72821 /* MuColor.swift */; };
-		CF2C80481C8961B500B72821 /* MuTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C861C8961B500B72821 /* MuTableView.swift */; };
-		CF2C80491C8961B500B72821 /* MuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C871C8961B500B72821 /* MuTableViewCell.swift */; };
-		CF2C804A1C8961B500B72821 /* MuTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C881C8961B500B72821 /* MuTools.swift */; };
 		CF2C804B1C8961B500B72821 /* MuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C891C8961B500B72821 /* MuView.swift */; };
-		CF2C804C1C8961B500B72821 /* MuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C8A1C8961B500B72821 /* MuViewController.swift */; };
-		CF2C804D1C8961B500B72821 /* String+ProcessString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C8C1C8961B500B72821 /* String+ProcessString.swift */; };
-		CF2C804E1C8961B500B72821 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C7C8D1C8961B500B72821 /* UIImageView.swift */; };
+		CF5F189A1DC86DFD005D1D04 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5F18991DC86DFD005D1D04 /* Utility.swift */; };
 		CF9E698F1C8EAA940082E9DB /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69811C8EAA940082E9DB /* CameraHelper.swift */; };
 		CF9E69901C8EAA940082E9DB /* CropImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69821C8EAA940082E9DB /* CropImageScrollView.swift */; };
 		CF9E69911C8EAA940082E9DB /* ImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69831C8EAA940082E9DB /* ImagePickerHelper.swift */; };
 		CF9E69921C8EAA940082E9DB /* PhotoAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69841C8EAA940082E9DB /* PhotoAlbumCell.swift */; };
 		CF9E69931C8EAA940082E9DB /* PhotoAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF9E69851C8EAA940082E9DB /* PhotoAlbumCell.xib */; };
-		CF9E69941C8EAA940082E9DB /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69861C8EAA940082E9DB /* PhotoAlbumViewController.swift */; };
 		CF9E69951C8EAA940082E9DB /* PhotoColletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69871C8EAA940082E9DB /* PhotoColletionViewController.swift */; };
 		CF9E69971C8EAA940082E9DB /* PhotoCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E69891C8EAA940082E9DB /* PhotoCropViewController.swift */; };
 		CF9E69981C8EAA940082E9DB /* PhotoMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9E698A1C8EAA940082E9DB /* PhotoMaskView.swift */; };
@@ -73,6 +86,39 @@
 
 /* Begin PBXFileReference section */
 		CF04DDB01D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionLiteCell.swift; sourceTree = "<group>"; };
+		CF25CE7C1DC88DE400CD57BC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CF25CE7D1DC88DE400CD57BC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CF25CE7F1DC88DE400CD57BC /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		CF25CE801DC88DE400CD57BC /* ConstraintAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
+		CF25CE811DC88DE400CD57BC /* ConstraintConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConfig.swift; sourceTree = "<group>"; };
+		CF25CE821DC88DE400CD57BC /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConstantTarget.swift; sourceTree = "<group>"; };
+		CF25CE831DC88DE400CD57BC /* ConstraintDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDescription.swift; sourceTree = "<group>"; };
+		CF25CE841DC88DE400CD57BC /* ConstraintDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDSL.swift; sourceTree = "<group>"; };
+		CF25CE851DC88DE400CD57BC /* ConstraintInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintInsets.swift; sourceTree = "<group>"; };
+		CF25CE861DC88DE400CD57BC /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintInsetTarget.swift; sourceTree = "<group>"; };
+		CF25CE871DC88DE400CD57BC /* ConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintItem.swift; sourceTree = "<group>"; };
+		CF25CE881DC88DE400CD57BC /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
+		CF25CE891DC88DE400CD57BC /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
+		CF25CE8A1DC88DE400CD57BC /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
+		CF25CE8B1DC88DE400CD57BC /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
+		CF25CE8C1DC88DE400CD57BC /* ConstraintMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMaker.swift; sourceTree = "<group>"; };
+		CF25CE8D1DC88DE400CD57BC /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerEditable.swift; sourceTree = "<group>"; };
+		CF25CE8E1DC88DE400CD57BC /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
+		CF25CE8F1DC88DE400CD57BC /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
+		CF25CE901DC88DE400CD57BC /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
+		CF25CE911DC88DE400CD57BC /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
+		CF25CE921DC88DE400CD57BC /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
+		CF25CE931DC88DE400CD57BC /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
+		CF25CE941DC88DE400CD57BC /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
+		CF25CE951DC88DE400CD57BC /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
+		CF25CE961DC88DE400CD57BC /* ConstraintRelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelation.swift; sourceTree = "<group>"; };
+		CF25CE971DC88DE400CD57BC /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
+		CF25CE981DC88DE400CD57BC /* ConstraintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintView.swift; sourceTree = "<group>"; };
+		CF25CE991DC88DE400CD57BC /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintViewDSL.swift; sourceTree = "<group>"; };
+		CF25CE9A1DC88DE400CD57BC /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
+		CF25CE9B1DC88DE400CD57BC /* LayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
+		CF25CE9C1DC88DE400CD57BC /* UILayoutGuide+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
+		CF25CE9D1DC88DE400CD57BC /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		CF2C77EE1C89613700B72821 /* ImagePickerProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePickerProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2C77F11C89613700B72821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF2C77F31C89613700B72821 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,35 +155,15 @@
 		CF2C7C711C8961B500B72821 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		CF2C7C721C8961B500B72821 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		CF2C7C731C8961B500B72821 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		CF2C7C751C8961B500B72821 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CF2C7C761C8961B500B72821 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		CF2C7C781C8961B500B72821 /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
-		CF2C7C791C8961B500B72821 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
-		CF2C7C7A1C8961B500B72821 /* ConstraintDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDescription.swift; sourceTree = "<group>"; };
-		CF2C7C7B1C8961B500B72821 /* ConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintItem.swift; sourceTree = "<group>"; };
-		CF2C7C7C1C8961B500B72821 /* ConstraintMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMaker.swift; sourceTree = "<group>"; };
-		CF2C7C7D1C8961B500B72821 /* ConstraintRelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelation.swift; sourceTree = "<group>"; };
-		CF2C7C7E1C8961B500B72821 /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
-		CF2C7C7F1C8961B500B72821 /* EdgeInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeInsets.swift; sourceTree = "<group>"; };
-		CF2C7C801C8961B500B72821 /* LayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
-		CF2C7C811C8961B500B72821 /* SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapKit.swift; sourceTree = "<group>"; };
-		CF2C7C821C8961B500B72821 /* View+SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+SnapKit.swift"; sourceTree = "<group>"; };
-		CF2C7C831C8961B500B72821 /* ViewController+SnapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+SnapKit.swift"; sourceTree = "<group>"; };
 		CF2C7C851C8961B500B72821 /* MuColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuColor.swift; sourceTree = "<group>"; };
-		CF2C7C861C8961B500B72821 /* MuTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuTableView.swift; sourceTree = "<group>"; };
-		CF2C7C871C8961B500B72821 /* MuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuTableViewCell.swift; sourceTree = "<group>"; };
-		CF2C7C881C8961B500B72821 /* MuTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuTools.swift; sourceTree = "<group>"; };
 		CF2C7C891C8961B500B72821 /* MuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuView.swift; sourceTree = "<group>"; };
-		CF2C7C8A1C8961B500B72821 /* MuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuViewController.swift; sourceTree = "<group>"; };
 		CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagePickerProject-Bridging-Header.h"; sourceTree = "<group>"; };
-		CF2C7C8C1C8961B500B72821 /* String+ProcessString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ProcessString.swift"; sourceTree = "<group>"; };
-		CF2C7C8D1C8961B500B72821 /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		CF5F18991DC86DFD005D1D04 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		CF9E69811C8EAA940082E9DB /* CameraHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraHelper.swift; sourceTree = "<group>"; };
 		CF9E69821C8EAA940082E9DB /* CropImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropImageScrollView.swift; sourceTree = "<group>"; };
 		CF9E69831C8EAA940082E9DB /* ImagePickerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerHelper.swift; sourceTree = "<group>"; };
 		CF9E69841C8EAA940082E9DB /* PhotoAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCell.swift; sourceTree = "<group>"; };
 		CF9E69851C8EAA940082E9DB /* PhotoAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumCell.xib; sourceTree = "<group>"; };
-		CF9E69861C8EAA940082E9DB /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 		CF9E69871C8EAA940082E9DB /* PhotoColletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColletionViewController.swift; sourceTree = "<group>"; };
 		CF9E69891C8EAA940082E9DB /* PhotoCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCropViewController.swift; sourceTree = "<group>"; };
 		CF9E698A1C8EAA940082E9DB /* PhotoMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMaskView.swift; sourceTree = "<group>"; };
@@ -165,6 +191,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF25CE7B1DC88DE400CD57BC /* SnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				CF25CE7C1DC88DE400CD57BC /* LICENSE */,
+				CF25CE7D1DC88DE400CD57BC /* README.md */,
+				CF25CE7E1DC88DE400CD57BC /* Source */,
+			);
+			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		CF25CE7E1DC88DE400CD57BC /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				CF25CE7F1DC88DE400CD57BC /* Constraint.swift */,
+				CF25CE801DC88DE400CD57BC /* ConstraintAttributes.swift */,
+				CF25CE811DC88DE400CD57BC /* ConstraintConfig.swift */,
+				CF25CE821DC88DE400CD57BC /* ConstraintConstantTarget.swift */,
+				CF25CE831DC88DE400CD57BC /* ConstraintDescription.swift */,
+				CF25CE841DC88DE400CD57BC /* ConstraintDSL.swift */,
+				CF25CE851DC88DE400CD57BC /* ConstraintInsets.swift */,
+				CF25CE861DC88DE400CD57BC /* ConstraintInsetTarget.swift */,
+				CF25CE871DC88DE400CD57BC /* ConstraintItem.swift */,
+				CF25CE881DC88DE400CD57BC /* ConstraintLayoutGuide.swift */,
+				CF25CE891DC88DE400CD57BC /* ConstraintLayoutGuideDSL.swift */,
+				CF25CE8A1DC88DE400CD57BC /* ConstraintLayoutSupport.swift */,
+				CF25CE8B1DC88DE400CD57BC /* ConstraintLayoutSupportDSL.swift */,
+				CF25CE8C1DC88DE400CD57BC /* ConstraintMaker.swift */,
+				CF25CE8D1DC88DE400CD57BC /* ConstraintMakerEditable.swift */,
+				CF25CE8E1DC88DE400CD57BC /* ConstraintMakerExtendable.swift */,
+				CF25CE8F1DC88DE400CD57BC /* ConstraintMakerFinalizable.swift */,
+				CF25CE901DC88DE400CD57BC /* ConstraintMakerPriortizable.swift */,
+				CF25CE911DC88DE400CD57BC /* ConstraintMakerRelatable.swift */,
+				CF25CE921DC88DE400CD57BC /* ConstraintMultiplierTarget.swift */,
+				CF25CE931DC88DE400CD57BC /* ConstraintOffsetTarget.swift */,
+				CF25CE941DC88DE400CD57BC /* ConstraintPriorityTarget.swift */,
+				CF25CE951DC88DE400CD57BC /* ConstraintRelatableTarget.swift */,
+				CF25CE961DC88DE400CD57BC /* ConstraintRelation.swift */,
+				CF25CE971DC88DE400CD57BC /* ConstraintView+Extensions.swift */,
+				CF25CE981DC88DE400CD57BC /* ConstraintView.swift */,
+				CF25CE991DC88DE400CD57BC /* ConstraintViewDSL.swift */,
+				CF25CE9A1DC88DE400CD57BC /* Debugging.swift */,
+				CF25CE9B1DC88DE400CD57BC /* LayoutConstraint.swift */,
+				CF25CE9C1DC88DE400CD57BC /* UILayoutGuide+Extensions.swift */,
+				CF25CE9D1DC88DE400CD57BC /* UILayoutSupport+Extensions.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		CF2C77E51C89613700B72821 = {
 			isa = PBXGroup;
 			children = (
@@ -186,7 +260,6 @@
 			children = (
 				CF9E69801C8EAA940082E9DB /* ImagePicker */,
 				CF2C7C561C8961B500B72821 /* SDWebImage */,
-				CF2C7C741C8961B500B72821 /* SnapKit */,
 				CF2C7C841C8961B500B72821 /* SupportFile */,
 				CF2C77F11C89613700B72821 /* AppDelegate.swift */,
 				CF2C77F31C89613700B72821 /* ViewController.swift */,
@@ -234,47 +307,13 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
-		CF2C7C741C8961B500B72821 /* SnapKit */ = {
-			isa = PBXGroup;
-			children = (
-				CF2C7C751C8961B500B72821 /* LICENSE */,
-				CF2C7C761C8961B500B72821 /* README.md */,
-				CF2C7C771C8961B500B72821 /* Source */,
-			);
-			path = SnapKit;
-			sourceTree = "<group>";
-		};
-		CF2C7C771C8961B500B72821 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				CF2C7C781C8961B500B72821 /* Constraint.swift */,
-				CF2C7C791C8961B500B72821 /* ConstraintAttributes.swift */,
-				CF2C7C7A1C8961B500B72821 /* ConstraintDescription.swift */,
-				CF2C7C7B1C8961B500B72821 /* ConstraintItem.swift */,
-				CF2C7C7C1C8961B500B72821 /* ConstraintMaker.swift */,
-				CF2C7C7D1C8961B500B72821 /* ConstraintRelation.swift */,
-				CF2C7C7E1C8961B500B72821 /* Debugging.swift */,
-				CF2C7C7F1C8961B500B72821 /* EdgeInsets.swift */,
-				CF2C7C801C8961B500B72821 /* LayoutConstraint.swift */,
-				CF2C7C811C8961B500B72821 /* SnapKit.swift */,
-				CF2C7C821C8961B500B72821 /* View+SnapKit.swift */,
-				CF2C7C831C8961B500B72821 /* ViewController+SnapKit.swift */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
 		CF2C7C841C8961B500B72821 /* SupportFile */ = {
 			isa = PBXGroup;
 			children = (
+				CF5F18991DC86DFD005D1D04 /* Utility.swift */,
 				CF2C7C851C8961B500B72821 /* MuColor.swift */,
-				CF2C7C861C8961B500B72821 /* MuTableView.swift */,
-				CF2C7C871C8961B500B72821 /* MuTableViewCell.swift */,
-				CF2C7C881C8961B500B72821 /* MuTools.swift */,
 				CF2C7C891C8961B500B72821 /* MuView.swift */,
-				CF2C7C8A1C8961B500B72821 /* MuViewController.swift */,
 				CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */,
-				CF2C7C8C1C8961B500B72821 /* String+ProcessString.swift */,
-				CF2C7C8D1C8961B500B72821 /* UIImageView.swift */,
 			);
 			path = SupportFile;
 			sourceTree = "<group>";
@@ -282,13 +321,13 @@
 		CF9E69801C8EAA940082E9DB /* ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				CF25CE7B1DC88DE400CD57BC /* SnapKit */,
 				CF9E69B41C8F17490082E9DB /* PhotoBrowser */,
 				CF9E69811C8EAA940082E9DB /* CameraHelper.swift */,
 				CF9E69821C8EAA940082E9DB /* CropImageScrollView.swift */,
 				CF9E69831C8EAA940082E9DB /* ImagePickerHelper.swift */,
 				CF9E69841C8EAA940082E9DB /* PhotoAlbumCell.swift */,
 				CF9E69851C8EAA940082E9DB /* PhotoAlbumCell.xib */,
-				CF9E69861C8EAA940082E9DB /* PhotoAlbumViewController.swift */,
 				CF9E69871C8EAA940082E9DB /* PhotoColletionViewController.swift */,
 				CF9E69891C8EAA940082E9DB /* PhotoCropViewController.swift */,
 				CF9E698A1C8EAA940082E9DB /* PhotoMaskView.swift */,
@@ -348,6 +387,7 @@
 					CF2C77ED1C89613700B72821 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 4RQRV7P524;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -377,7 +417,7 @@
 				CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */,
 				CF9E69931C8EAA940082E9DB /* PhotoAlbumCell.xib in Resources */,
 				CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */,
-				CF2C80391C8961B500B72821 /* LICENSE in Resources */,
+				CF25CE9E1DC88DE400CD57BC /* LICENSE in Resources */,
 				CFED6E241D2CF77000B2BF68 /* CameraPreviewCell.xib in Resources */,
 				CF9E699B1C8EAA940082E9DB /* PhotoThumbCell.xib in Resources */,
 				CF2C77F71C89613700B72821 /* Main.storyboard in Resources */,
@@ -392,58 +432,71 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2C80311C8961B500B72821 /* SDWebImageManager.m in Sources */,
+				CF25CEB41DC88DE400CD57BC /* ConstraintOffsetTarget.swift in Sources */,
+				CF25CEBE1DC88DE400CD57BC /* UILayoutSupport+Extensions.swift in Sources */,
 				CF2C80381C8961B500B72821 /* UIView+WebCacheOperation.m in Sources */,
+				CF25CEB91DC88DE400CD57BC /* ConstraintView.swift in Sources */,
 				CF2C802B1C8961B500B72821 /* NSData+ImageContentType.m in Sources */,
-				CF2C80441C8961B500B72821 /* SnapKit.swift in Sources */,
+				CF25CEAA1DC88DE400CD57BC /* ConstraintLayoutGuideDSL.swift in Sources */,
 				CF9E699A1C8EAA940082E9DB /* PhotoThumbCell.swift in Sources */,
 				CF2C80301C8961B500B72821 /* SDWebImageDownloaderOperation.m in Sources */,
 				CF2C77F41C89613700B72821 /* ViewController.swift in Sources */,
 				CF9E698F1C8EAA940082E9DB /* CameraHelper.swift in Sources */,
+				CF25CEB21DC88DE400CD57BC /* ConstraintMakerRelatable.swift in Sources */,
+				CF25CEA91DC88DE400CD57BC /* ConstraintLayoutGuide.swift in Sources */,
 				CF9E69971C8EAA940082E9DB /* PhotoCropViewController.swift in Sources */,
 				CF2C802E1C8961B500B72821 /* SDWebImageDecoder.m in Sources */,
+				CF25CEAF1DC88DE400CD57BC /* ConstraintMakerExtendable.swift in Sources */,
 				CF2C80331C8961B500B72821 /* UIButton+WebCache.m in Sources */,
-				CF2C803B1C8961B500B72821 /* Constraint.swift in Sources */,
 				CF2C804B1C8961B500B72821 /* MuView.swift in Sources */,
 				CFED6E181D2CDD3A00B2BF68 /* PhotoAlbumView.swift in Sources */,
-				CF2C80421C8961B500B72821 /* EdgeInsets.swift in Sources */,
+				CF25CEA61DC88DE400CD57BC /* ConstraintInsets.swift in Sources */,
 				CF2C802C1C8961B500B72821 /* SDImageCache.m in Sources */,
-				CF2C803E1C8961B500B72821 /* ConstraintItem.swift in Sources */,
-				CF2C80461C8961B500B72821 /* ViewController+SnapKit.swift in Sources */,
 				CF04DDB31D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift in Sources */,
 				CF9E69BA1C8F17490082E9DB /* PreviewPhotoViewController.swift in Sources */,
+				CF25CEBB1DC88DE400CD57BC /* Debugging.swift in Sources */,
+				CF25CEB01DC88DE400CD57BC /* ConstraintMakerFinalizable.swift in Sources */,
 				CF9E69991C8EAA940082E9DB /* PhotosManager.swift in Sources */,
 				CF9E69981C8EAA940082E9DB /* PhotoMaskView.swift in Sources */,
-				CF2C803F1C8961B500B72821 /* ConstraintMaker.swift in Sources */,
 				CF9E69951C8EAA940082E9DB /* PhotoColletionViewController.swift in Sources */,
+				CF25CEA71DC88DE400CD57BC /* ConstraintInsetTarget.swift in Sources */,
+				CF25CEA81DC88DE400CD57BC /* ConstraintItem.swift in Sources */,
 				CF2C80361C8961B500B72821 /* UIImageView+HighlightedWebCache.m in Sources */,
+				CF25CEB81DC88DE400CD57BC /* ConstraintView+Extensions.swift in Sources */,
 				CF9E69911C8EAA940082E9DB /* ImagePickerHelper.swift in Sources */,
 				CF2C80371C8961B500B72821 /* UIImageView+WebCache.m in Sources */,
 				CFED6E231D2CF77000B2BF68 /* CameraPreviewCell.swift in Sources */,
 				CF9E69BC1C8F17490082E9DB /* ZoomImageScrollViewLite.swift in Sources */,
-				CF2C803A1C8961B500B72821 /* README.md in Sources */,
 				CF2C802D1C8961B500B72821 /* SDWebImageCompat.m in Sources */,
-				CF9E69941C8EAA940082E9DB /* PhotoAlbumViewController.swift in Sources */,
+				CF25CE9F1DC88DE400CD57BC /* README.md in Sources */,
 				CF2C80321C8961B500B72821 /* SDWebImagePrefetcher.m in Sources */,
-				CF2C80411C8961B500B72821 /* Debugging.swift in Sources */,
+				CF25CEBD1DC88DE400CD57BC /* UILayoutGuide+Extensions.swift in Sources */,
+				CF25CEBC1DC88DE400CD57BC /* LayoutConstraint.swift in Sources */,
 				CF2C802F1C8961B500B72821 /* SDWebImageDownloader.m in Sources */,
-				CF2C80491C8961B500B72821 /* MuTableViewCell.swift in Sources */,
-				CF2C804A1C8961B500B72821 /* MuTools.swift in Sources */,
-				CF2C804E1C8961B500B72821 /* UIImageView.swift in Sources */,
+				CF25CEA41DC88DE400CD57BC /* ConstraintDescription.swift in Sources */,
+				CF25CEAC1DC88DE400CD57BC /* ConstraintLayoutSupportDSL.swift in Sources */,
+				CF25CEB51DC88DE400CD57BC /* ConstraintPriorityTarget.swift in Sources */,
 				CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */,
+				CF25CEAD1DC88DE400CD57BC /* ConstraintMaker.swift in Sources */,
+				CF25CEB61DC88DE400CD57BC /* ConstraintRelatableTarget.swift in Sources */,
 				CFED6E1C1D2CF13400B2BF68 /* CameraPreviewView.swift in Sources */,
-				CF2C804C1C8961B500B72821 /* MuViewController.swift in Sources */,
-				CF2C804D1C8961B500B72821 /* String+ProcessString.swift in Sources */,
-				CF2C803D1C8961B500B72821 /* ConstraintDescription.swift in Sources */,
-				CF2C80401C8961B500B72821 /* ConstraintRelation.swift in Sources */,
+				CF25CEA21DC88DE400CD57BC /* ConstraintConfig.swift in Sources */,
+				CF25CEB71DC88DE400CD57BC /* ConstraintRelation.swift in Sources */,
+				CF25CEA01DC88DE400CD57BC /* Constraint.swift in Sources */,
+				CF25CEB11DC88DE400CD57BC /* ConstraintMakerPriortizable.swift in Sources */,
+				CF25CEBA1DC88DE400CD57BC /* ConstraintViewDSL.swift in Sources */,
+				CF5F189A1DC86DFD005D1D04 /* Utility.swift in Sources */,
+				CF25CEB31DC88DE400CD57BC /* ConstraintMultiplierTarget.swift in Sources */,
 				CF9E69901C8EAA940082E9DB /* CropImageScrollView.swift in Sources */,
+				CF25CEA51DC88DE400CD57BC /* ConstraintDSL.swift in Sources */,
 				CF2C80351C8961B500B72821 /* UIImage+MultiFormat.m in Sources */,
-				CF2C80451C8961B500B72821 /* View+SnapKit.swift in Sources */,
-				CF2C80431C8961B500B72821 /* LayoutConstraint.swift in Sources */,
-				CF2C80481C8961B500B72821 /* MuTableView.swift in Sources */,
+				CF25CEA11DC88DE400CD57BC /* ConstraintAttributes.swift in Sources */,
+				CF25CEAB1DC88DE400CD57BC /* ConstraintLayoutSupport.swift in Sources */,
+				CF25CEA31DC88DE400CD57BC /* ConstraintConstantTarget.swift in Sources */,
 				CF2C80341C8961B500B72821 /* UIImage+GIF.m in Sources */,
 				CFED6E1A1D2CE2F900B2BF68 /* PopViewHelper.swift in Sources */,
 				CF2C80471C8961B500B72821 /* MuColor.swift in Sources */,
-				CF2C803C1C8961B500B72821 /* ConstraintAttributes.swift in Sources */,
+				CF25CEAE1DC88DE400CD57BC /* ConstraintMakerEditable.swift in Sources */,
 				CF9E69BB1C8F17490082E9DB /* WZPhotoBrowserLite.swift in Sources */,
 				CF9E69921C8EAA940082E9DB /* PhotoAlbumCell.swift in Sources */,
 			);
@@ -565,6 +618,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ImagePickerProject/SupportFile/ImagePickerProject-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -581,6 +635,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ImagePickerProject/SupportFile/ImagePickerProject-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

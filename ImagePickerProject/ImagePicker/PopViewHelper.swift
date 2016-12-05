@@ -10,44 +10,44 @@ import UIKit
 
 @objc protocol PopViewHelperDelegate: NSObjectProtocol {
   
-  optional func popViewHelper(popViewHelper: PopViewHelper, shouldShowPopView targetView: UIView)
-  optional func popViewHelper(popViewHelper: PopViewHelper, shouldHidePopView targetView: UIView)
-  optional func popViewHelper(popViewHelper: PopViewHelper, didShowPopView targetView: UIView)
-  optional func popViewHelper(popViewHelper: PopViewHelper, didHidePopView targetView: UIView)
-  optional func popViewHelper(popViewHelper: PopViewHelper, didClickMask mask: UIControl)
+  @objc optional func popViewHelper(_ popViewHelper: PopViewHelper, shouldShowPopView targetView: UIView)
+  @objc optional func popViewHelper(_ popViewHelper: PopViewHelper, shouldHidePopView targetView: UIView)
+  @objc optional func popViewHelper(_ popViewHelper: PopViewHelper, didShowPopView targetView: UIView)
+  @objc optional func popViewHelper(_ popViewHelper: PopViewHelper, didHidePopView targetView: UIView)
+  @objc optional func popViewHelper(_ popViewHelper: PopViewHelper, didClickMask mask: UIControl)
   
 }
 
 //弹出方向
 enum ViewPopDirection{
-  case None
-  case Above
-  case Below
-  case BelowToCenter
-  case Center
-  case OnlyShowFullScreen
-  case Fade
+  case none
+  case above
+  case below
+  case belowToCenter
+  case center
+  case onlyShowFullScreen
+  case fade
 }
 
 //动画表现
 enum AnimationStyle{
-  case Normal
-  case Spring
+  case normal
+  case spring
 }
 
 enum MaskStatus {
-  case Hidden
-  case Transparent
-  case Normal
-  case ClickDisable
+  case hidden
+  case transparent
+  case normal
+  case clickDisable
 }
 
 class PopViewManager {
   
   static let sharedInstance = PopViewManager()
-  private init() {}
+  fileprivate init() {}
   
-  private var popViewHelperDic = [Int: PopViewHelper]()
+  fileprivate var popViewHelperDic = [Int: PopViewHelper]()
   
   subscript(hash: Int) -> PopViewHelper? {
     
@@ -63,13 +63,13 @@ class PopViewManager {
 
 class PopViewHelper: NSObject {
   
-  private(set) var isPoping = false //是否正在动画中
-  private(set) var mask : UIControl?
-  private var spring: CGFloat = 1 //动画弹性
-  private var initVelocity: CGFloat = 0 //动画初始速度
-  private var currentFrame: CGRect!
-  private(set) var isShow = false //是否正在显示
-  private var targetViewShadowOpacity: Float = 0
+  fileprivate(set) var isPoping = false //是否正在动画中
+  fileprivate(set) var mask : UIControl?
+  fileprivate var spring: CGFloat = 1 //动画弹性
+  fileprivate var initVelocity: CGFloat = 0 //动画初始速度
+  fileprivate var currentFrame: CGRect!
+  fileprivate(set) var isShow = false //是否正在显示
+  fileprivate var targetViewShadowOpacity: Float = 0
   
   weak var delegate: PopViewHelperDelegate?
   
@@ -78,12 +78,12 @@ class PopViewHelper: NSObject {
   var strongTargetView: UIView!
   var superView: UIView
   var viewPopDirection: ViewPopDirection
-  var showAnimateDuration: NSTimeInterval = 0.25 //动画持续时间
-  var hideAnimateDuration: NSTimeInterval = 0.25 //动画持续时间
+  var showAnimateDuration: TimeInterval = 0.25 //动画持续时间
+  var hideAnimateDuration: TimeInterval = 0.25 //动画持续时间
   var alpha:[CGFloat] = [1,1,1]
-  var beginOrgin: CGPoint = CGPointZero //开始位置
-  var showOrgin: CGPoint = CGPointZero //弹出后位置
-  var endOrgin: CGPoint = CGPointZero //收回
+  var beginOrgin: CGPoint = CGPoint.zero //开始位置
+  var showOrgin: CGPoint = CGPoint.zero //弹出后位置
+  var endOrgin: CGPoint = CGPoint.zero //收回
   var maskStatus: MaskStatus //是否显示遮罩
   var hideDelay: Double = 0
   var isLockTargetView = false {
@@ -103,15 +103,15 @@ class PopViewHelper: NSObject {
     }
   }
   
-  var animationStyle: AnimationStyle = .Normal{
+  var animationStyle: AnimationStyle = .normal{
     didSet{
       switch self.animationStyle {
-      case .Normal:
+      case .normal:
         spring = 1
         initVelocity = 0
         showAnimateDuration = 0.5
         hideAnimateDuration = 0.5
-      case .Spring:
+      case .spring:
         spring = 0.7
         initVelocity = 0
         showAnimateDuration = 0.5
@@ -120,75 +120,75 @@ class PopViewHelper: NSObject {
     }
   }
   
-  init(superView: UIView?, targetView : UIView, viewPopDirection: ViewPopDirection = .None, maskStatus : MaskStatus = .Normal){
+  init(superView: UIView?, targetView : UIView, viewPopDirection: ViewPopDirection = .none, maskStatus : MaskStatus = .normal){
     self.targetView = targetView
     self.maskStatus = maskStatus
-    self.superView = superView ?? UIApplication.sharedApplication().keyWindow!
+    self.superView = superView ?? UIApplication.shared.keyWindow!
     self.viewPopDirection = viewPopDirection
     
     super.init()
     
     initMask(maskStatus)
     
-    self.targetView.hidden = true
+    self.targetView.isHidden = true
     
   }
 
-  private func setPopViewDirection() {
+  fileprivate func setPopViewDirection() {
     
     switch viewPopDirection{
       
-    case .Above:
+    case .above:
       
       beginOrgin.x = 0
       //隐藏在上面
-      beginOrgin.y = -CGRectGetHeight(targetView.frame)
+      beginOrgin.y = -targetView.frame.height
       
       showOrgin.x = 0
       showOrgin.y = 0
       
       endOrgin = beginOrgin
       
-    case .Below:
+    case .below:
       
       beginOrgin.x = 0
       //隐藏在下面
-      beginOrgin.y = CGRectGetMaxY(superView.frame)
+      beginOrgin.y = superView.frame.maxY
       
       showOrgin.x = 0
-      showOrgin.y = CGRectGetHeight(superView.frame) - CGRectGetHeight(targetView.frame)
+      showOrgin.y = superView.frame.height - targetView.frame.height
       
       endOrgin = beginOrgin
       
-    case .BelowToCenter:
+    case .belowToCenter:
       
       beginOrgin.x = superView.frame.width/2 - targetView.frame.width/2
       //隐藏在下面
-      beginOrgin.y = CGRectGetMaxY(superView.frame)
+      beginOrgin.y = superView.frame.maxY
       
       showOrgin.x = superView.frame.width/2 - targetView.frame.width/2
       showOrgin.y = superView.frame.height/2 - targetView.frame.height/2
       
       endOrgin = beginOrgin
       
-    case .Center:
+    case .center:
       
-      beginOrgin.x = CGRectGetMaxX(superView.frame)
+      beginOrgin.x = superView.frame.maxX
       beginOrgin.y = superView.frame.height/2 - targetView.frame.height/2
       
       showOrgin.x = superView.frame.width/2 - targetView.frame.width/2
       showOrgin.y = superView.frame.height/2 - targetView.frame.height/2
       
-      endOrgin.x = -CGRectGetWidth(superView.frame)
+      endOrgin.x = -superView.frame.width
       endOrgin.y = superView.frame.height/2 - targetView.frame.height/2
       
-    case .OnlyShowFullScreen:
+    case .onlyShowFullScreen:
       
       beginOrgin = CGPoint(x: 0, y: 0)
       showOrgin = beginOrgin
       endOrgin = beginOrgin
       
-    case .Fade:
+    case .fade:
       
       alpha = [0,1,0]
       beginOrgin.x = superView.frame.width/2 - targetView.frame.width/2
@@ -196,28 +196,28 @@ class PopViewHelper: NSObject {
       showOrgin = beginOrgin
       endOrgin = beginOrgin
       
-    case .None:
+    case .none:
       break
     }
   }
   
-  private func setupUI(){
+  fileprivate func setupUI(){
     
     targetView.frame.origin = beginOrgin
     targetView.alpha = alpha[0]
   }
   
   //初始化遮罩
-  private func initMask(maskStatus: MaskStatus){
+  fileprivate func initMask(_ maskStatus: MaskStatus){
     
-    if maskStatus == .Hidden {
+    if maskStatus == .hidden {
       return
     }
     
     mask = UIControl(frame: superView.bounds)
     mask!.alpha = 0
-    mask!.backgroundColor = maskStatus == .Transparent ? UIColor.clearColor() : UIColor.blackColor()
-    mask!.addTarget(self, action: #selector(PopViewHelper.onClickMask), forControlEvents: .TouchUpInside)
+    mask!.backgroundColor = maskStatus == .transparent ? UIColor.clear : UIColor.black
+    mask!.addTarget(self, action: #selector(PopViewHelper.onClickMask), for: .touchUpInside)
     
     superView.addSubview(mask!)
     
@@ -229,7 +229,7 @@ class PopViewHelper: NSObject {
       delegate?.popViewHelper?(self, didClickMask: _mask)
     }
     
-    guard maskStatus != .ClickDisable else { return }
+    guard maskStatus != .clickDisable else { return }
     
     hidePopView()
     
@@ -246,12 +246,12 @@ class PopViewHelper: NSObject {
       setupUI()
       
       if let _mask = mask{
-        superView.bringSubviewToFront(_mask)
+        superView.bringSubview(toFront: _mask)
       }
       
       superView.addSubview(targetView)
-      superView.bringSubviewToFront(targetView)
-      targetView.hidden = false
+      superView.bringSubview(toFront: targetView)
+      targetView.isHidden = false
       isShow = true
       isPoping = true
       
@@ -261,9 +261,9 @@ class PopViewHelper: NSObject {
       
       delegate?.popViewHelper?(self, shouldShowPopView: targetView)
       
-      UIView.animateWithDuration(
-        showAnimateDuration,
-        delay: NSTimeInterval(0),
+      UIView.animate(
+        withDuration: showAnimateDuration,
+        delay: TimeInterval(0),
         usingSpringWithDamping: spring,
         initialSpringVelocity: initVelocity,
         options: UIViewAnimationOptions(),
@@ -296,9 +296,9 @@ class PopViewHelper: NSObject {
         self.targetView.layer.shadowOpacity = 0
       }
       
-      UIView.animateWithDuration(
-        hideAnimateDuration,
-        delay: NSTimeInterval(hideDelay),
+      UIView.animate(
+        withDuration: hideAnimateDuration,
+        delay: TimeInterval(hideDelay),
         usingSpringWithDamping: spring,
         initialSpringVelocity: initVelocity,
         options: UIViewAnimationOptions(),
@@ -313,7 +313,7 @@ class PopViewHelper: NSObject {
           self.isPoping = false
           self.isShow = false
           self.delegate?.popViewHelper?(self, didHidePopView: self.targetView)
-          self.targetView.hidden = true
+          self.targetView.isHidden = true
           self.targetView.removeFromSuperview()
       })
       
