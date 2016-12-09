@@ -44,6 +44,10 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
+  deinit{
+    print("PhotoColletionViewController deinit")
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     collectionView.reloadData()
@@ -64,14 +68,6 @@ class PhotoColletionViewController: UIViewController {
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
-  }
-  
-  func onRadio(_ cell: PhotoThumbCell) {
-    
-    let indexPath = collectionView.indexPath(for: cell)!
-    cell.setPhotoSelectedStatusWith((indexPath as NSIndexPath).row - 1)
-    
-    updateUI()
   }
   
   func completeButtonClick() {
@@ -279,7 +275,15 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
     if !showPreview {
       
       let thumbCell = cell as! PhotoThumbCell
-      thumbCell.onRadio = onRadio
+      
+      thumbCell.onRadio = { [weak self] cell in
+        
+        let indexPath = collectionView.indexPath(for: cell)!
+        cell.setPhotoSelectedStatusWith((indexPath as NSIndexPath).row - 1)
+        
+        self?.updateUI()
+      }
+      
       thumbCell.setImageWith(canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row)
       
     }

@@ -17,7 +17,7 @@ protocol PhotoAlbumViewDelegate: NSObjectProtocol {
 class PhotoAlbumView: UIView {
 
   fileprivate var tableView: UITableView!
-  fileprivate var delegate: PhotoAlbumViewDelegate
+  fileprivate weak var delegate: PhotoAlbumViewDelegate?
   
   let identifier = "PhotoAlbumCell"
   
@@ -103,7 +103,7 @@ extension PhotoAlbumView: UITableViewDelegate {
     
     PhotosManager.sharedInstance.currentAlbumIndex = (indexPath as NSIndexPath).row
     
-    delegate.photoAlbumView(self, didSelectAtIndex: (indexPath as NSIndexPath).row)
+    delegate?.photoAlbumView(self, didSelectAtIndex: (indexPath as NSIndexPath).row)
   }
   
 }
