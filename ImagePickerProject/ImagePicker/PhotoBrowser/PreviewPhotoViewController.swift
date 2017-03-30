@@ -61,20 +61,31 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   }
   
   func onSelect() {
-    setPhotoSelectedStatusWith(currentIndex)
-    updateCount()
+    
+    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentIndex) { isInICloud in
+      
+      guard !isInICloud else { return }
+      
+      self.setPhotoSelectedStatusWith(self.currentIndex)
+      self.updateCount()
+    }
   }
   
   func onComplete() {
     
-    let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
-    
-    //如果当前没有被选择的照片，则选择当前照片
-    if selectedCount == 0 {
-      PhotosManager.sharedInstance.selectPhotoWith(currentIndex)
+    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentIndex) { isInICloud in
+      
+      guard !isInICloud else { return }
+      
+      let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
+      
+      //如果当前没有被选择的照片，则选择当前照片
+      if selectedCount == 0 {
+        PhotosManager.sharedInstance.selectPhotoWith(self.currentIndex)
+      }
+      
+      PhotosManager.sharedInstance.didFinish()
     }
-    
-    PhotosManager.sharedInstance.didFinish()
   }
   
   override func onClickPhoto() {

@@ -12,13 +12,29 @@ import Photos
 protocol ImagePickerDelegate: NSObjectProtocol {
   
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage])
-  
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceOption)
+}
+
+extension ImagePickerDelegate {
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage]) {}
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceOption) {}
 }
 
 enum ImagePickerType {
   case album
   case camera
   case albumAndCamera
+}
+
+struct ResourceOption: OptionSet {
+  var rawValue: Int = 0
+  static var image = ResourceOption(rawValue: 1 << 0)
+  static var video = ResourceOption(rawValue: 1 << 1)
+}
+
+enum ResourceType {
+  case image(images: [UIImage])
+  case video(video: AVAsset)
 }
 
 class ImagePickerHelper: NSObject {
@@ -41,6 +57,7 @@ class ImagePickerHelper: NSObject {
     }
   }
   var type: ImagePickerType = .albumAndCamera
+  var resourceOption: ResourceOption = .image
   
   init(delegate: ImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
@@ -48,6 +65,7 @@ class ImagePickerHelper: NSObject {
     self.maxSelectedCount = 1
     super.init()
     
+    PhotosManager.sharedInstance.clearData()
   }
   
   deinit{
@@ -60,8 +78,6 @@ class ImagePickerHelper: NSObject {
   //MARK: - public Method Implementation
   
   func startPhoto(){
-    
-    PhotosManager.sharedInstance.clearData()
     
     guard let _handlerViewController = handlerViewController else { return }
     
@@ -88,6 +104,8 @@ class ImagePickerHelper: NSObject {
       
       self.handlerViewController?.dismiss(animated: true, completion: {
         
+        PhotosManager.sharedInstance.clearData()
+
         self.delegate?.pickedPhoto(self, images: [image])
         
       })
@@ -99,7 +117,9 @@ class ImagePickerHelper: NSObject {
       
       self.handlerViewController?.dismiss(animated: true, completion: {
         
-        self.delegate?.pickedPhoto(self, images: images)
+        PhotosManager.sharedInstance.clearData()
+
+        self.delegate?.pickedPhoto(self, images: images)        
         
       })
     }

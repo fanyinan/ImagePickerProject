@@ -14,6 +14,7 @@ class ViewController: UIViewController {
 
   @IBOutlet var isCropSwitch: UISwitch!
   @IBOutlet var maxCountTextField: UITextField!
+  @IBOutlet var imageViews: [UIImageView]!
   
   var imagePickerHelper: ImagePickerHelper!
   var isCrop: Bool = true
@@ -110,8 +111,6 @@ class ViewController: UIViewController {
     
     print("\(prefix),size: \(image.size), dataSize \(UIImageJPEGRepresentation(image, 1)!.count)")
   }
-  
-
 }
 
 extension ViewController: ImagePickerDelegate {
@@ -119,67 +118,15 @@ extension ViewController: ImagePickerDelegate {
     
     print("count \(images.count)")
 
-    for image in images {
-      testCompression(image: image)
+    for (index, image) in images.enumerated() {
+      
+      if index >= imageViews.count {
+        return
+      }
+      
+      imageViews[index].image = image
     }
+    
   }
 }
 
-import UIKit
-extension UIImage {
-  
-  func imageScaledToSize(_ newSize:CGSize) -> UIImage? {
-    UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
-    self.draw(in: CGRect(origin: CGPoint.zero, size: newSize))
-    let newImage = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    return newImage
-  }
-  
-  func imageScaledWithoutCliped(to maxSize: CGSize) -> UIImage? {
-    
-    guard maxSize != CGSize.zero else { return nil }
-    
-    let widthScale = maxSize.width / self.size.width
-    let heightScale = maxSize.height / self.size.height
-    
-    let targetScale = min(widthScale, heightScale)
-    
-    if widthScale > 1 && heightScale > 1 { return self }
-    
-    let displaySize = CGSize(width: ceil(self.size.width * targetScale), height: ceil(self.size.height * targetScale))
-    
-    return imageScaledToSize(displaySize)
-  }
-  
-  func compressForUpload(_ completion: @escaping ((_ compressedImageData: Data, _ compressedImage: UIImage) -> Void)){
-    
-    exChangeGloableeQueue {
-      
-      let maxSize: Int = 1024 * 250
-      var currentCompression: CGFloat = 1
-      let compressionByStep: CGFloat = 0.5
-      let maxCompressionNum = 20
-      var currentCompressionNum = 0
-      
-      var imageData = UIImageJPEGRepresentation(self, 1)!
-      
-      while imageData.count > maxSize && maxCompressionNum > currentCompressionNum {
-        
-        currentCompressionNum += 1
-        currentCompression *= compressionByStep
-        imageData = UIImageJPEGRepresentation(self, currentCompression)!
-        
-      }
-      
-      let compressedImage = UIImage(data: imageData)!
-      
-      exChangeMainQueue({
-        
-        completion(imageData, compressedImage)
-        
-      })
-    }
-    
-  }
-}

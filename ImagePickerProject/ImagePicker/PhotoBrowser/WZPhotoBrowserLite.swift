@@ -150,7 +150,7 @@ extension WZPhotoBrowserLite: UICollectionViewDataSource {
     
     cell.padding = padding
     
-    cell.zoomImageScrollView.setImageWithLocalPhotoWith((indexPath as NSIndexPath).row)
+    cell.setImageWithLocalPhoto(with: indexPath.row)
     
     return cell
     

@@ -11,20 +11,20 @@ import Photos
 
 class PhotoColletionViewController: UIViewController {
   
-  fileprivate var collectionView: UICollectionView!
-  fileprivate var selectedCountLabel: UILabel!
-  fileprivate var completionLabel: UILabel!
-  fileprivate var completionButton: UIControl!
-  fileprivate var ablumButton: UIControl!
-  fileprivate var titleLabel: UILabel!
-  fileprivate var indicatorImageView: UIImageView!
+  private(set) var collectionView: UICollectionView!
+  private var selectedCountLabel: UILabel!
+  private var completionLabel: UILabel!
+  private var completionButton: UIControl!
+  private var ablumButton: UIControl!
+  private var titleLabel: UILabel!
+  private var indicatorImageView: UIImageView!
+  private var ablumView: UIView!
   
-  fileprivate var imageWidth: CGFloat!
   fileprivate var selectItemNum = 0
-  fileprivate var popViewHelp: PopViewHelper!
-  fileprivate var ablumView: UIView!
   fileprivate var cellFadeAnimation = false
-  
+  fileprivate var imageWidth: CGFloat!
+  fileprivate var popViewHelp: PopViewHelper!
+
   fileprivate let thumbIdentifier = "PhotoThumbCell"
   fileprivate let previewIdentifier = "CameraPreviewCell"
 
@@ -44,15 +44,11 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  deinit{
-    print("PhotoColletionViewController deinit")
-  }
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    collectionView.reloadData()
     
     updateUI()
+    collectionView.reloadData()
   }
   
   override func viewWillLayoutSubviews() {
@@ -79,9 +75,9 @@ class PhotoColletionViewController: UIViewController {
   func albumButtonClick() {
     
     if popViewHelp.isShow {
-      popViewHelp.hidePopView()
+      popViewHelp.hidePoppingView()
     } else {
-      popViewHelp.showPopView()
+      popViewHelp.showPoppingView()
     }
     
   }
@@ -95,10 +91,23 @@ class PhotoColletionViewController: UIViewController {
   func goToPhotoBrowser() {
     
     let photoBrowser = PreviewPhotoViewController(delegate: self, quitBlock: { () -> Void in
-      self.navigationController?.popViewController(animated: true)
+      _ = self.navigationController?.popViewController(animated: true)
     })
     photoBrowser.delegate = self
     navigationController?.pushViewController(photoBrowser, animated: true)
+    
+  }
+  
+  func updateUI() {
+    
+    let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
+    let countString = selectedCount == 0 ? "" : "\(selectedCount)"
+    
+    selectedCountLabel.isHidden = selectedCount == 0
+    selectedCountLabel.text = countString
+    
+    completionLabel.isEnabled = selectedCount != 0
+    completionButton.isEnabled = selectedCount != 0
     
   }
   
@@ -107,7 +116,7 @@ class PhotoColletionViewController: UIViewController {
    ******************************************************************************/
    //MARK: - private Implements
   
-  fileprivate func initView() {
+  private func initView() {
     
     initAblum()
     initNavigationBarButton()
@@ -129,7 +138,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  fileprivate func initNavigationBarButton() {
+  private func initNavigationBarButton() {
     
     ablumButton = UIControl(frame: CGRect(x: 0 , y: 0, width: ablumButtonWidth, height: 44))
     navigationItem.titleView = ablumButton
@@ -138,11 +147,11 @@ class PhotoColletionViewController: UIViewController {
     
     titleLabel = UILabel()
     ablumButton.addSubview(titleLabel)
-    titleLabel.snp_makeConstraints { (make) in
+    titleLabel.snp.makeConstraints { (make) in
       make.center.equalTo(ablumButton)
     }
     
-    titleLabel.textColor = UIColor.hexStringToColor("368EFF")
+    titleLabel.textColor = mainTextColor
     titleLabel.font = UIFont.systemFont(ofSize: 18)
     titleLabel.textAlignment = .center
     
@@ -150,8 +159,8 @@ class PhotoColletionViewController: UIViewController {
 
     indicatorImageView = UIImageView()
     ablumButton.addSubview(indicatorImageView)
-    indicatorImageView.snp_makeConstraints { (make) in
-      make.left.equalTo(titleLabel.snp_right).offset(5)
+    indicatorImageView.snp.makeConstraints { (make) in
+      make.left.equalTo(titleLabel.snp.right).offset(5)
       make.centerY.equalTo(ablumButton)
       make.width.height.equalTo(indicatorWidth)
     }
@@ -161,7 +170,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  fileprivate func initAblum() {
+  private func initAblum() {
   
     ablumView = PhotoAlbumView(frame: view.bounds, delegate: self)
     popViewHelp = PopViewHelper(superView: view, targetView: ablumView, viewPopDirection: .above, maskStatus: .normal)
@@ -172,7 +181,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  fileprivate func initCompletionButton() {
+  private func initCompletionButton() {
   
     completionButton = UIControl(frame: CGRect(x: view.frame.width - 60, y: 0, width: 60, height: 44))
     completionButton.addTarget(self, action: #selector(PhotoColletionViewController.completeButtonClick), for: .touchUpInside)
@@ -195,7 +204,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  fileprivate func checkCamera(){
+  private func checkCamera(){
     
     let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
     if (AVAuthorizationStatus.denied == authStatus || AVAuthorizationStatus.restricted == authStatus){
@@ -216,19 +225,6 @@ class PhotoColletionViewController: UIViewController {
     cameraHelper.cropViewControllerTranlateType = CameraHelper.cropViewControllerTranlateType_Push
     cameraHelper.isCrop = PhotosManager.sharedInstance.isCrop
     cameraHelper.openCamera()
-  }
-  
-  fileprivate func updateUI() {
-    
-    let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
-    let countString = selectedCount == 0 ? "" : "\(selectedCount)"
-    
-    selectedCountLabel.isHidden = selectedCount == 0
-    selectedCountLabel.text = countString
-    
-    completionLabel.isEnabled = selectedCount != 0
-    completionButton.isEnabled = selectedCount != 0
-    
   }
 
   fileprivate func updateTitle() {
@@ -265,8 +261,7 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-    let row = (indexPath as NSIndexPath).row
-    let showPreview = canOpenCamera && row == 0
+    let showPreview = canOpenCamera && indexPath.row == 0
     
     let identifier = showPreview ? previewIdentifier : thumbIdentifier
     
@@ -276,14 +271,7 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
       
       let thumbCell = cell as! PhotoThumbCell
       
-      thumbCell.onRadio = { [weak self] cell in
-        
-        let indexPath = collectionView.indexPath(for: cell)!
-        cell.setPhotoSelectedStatusWith((indexPath as NSIndexPath).row - 1)
-        
-        self?.updateUI()
-      }
-      
+      thumbCell.photoColletionViewController = self
       thumbCell.setImageWith(canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row)
       
     }
@@ -311,7 +299,7 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-    let row = (indexPath as NSIndexPath).row
+    let row = indexPath.row
     
     if canOpenCamera && row == 0 {
       
@@ -319,17 +307,24 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
     } else {
       
-      if PhotosManager.sharedInstance.isCrop {
+      let indexInAblum = canOpenCamera == true ? row - 1 : row
+      
+      PhotosManager.sharedInstance.checkImageIsInICloud(with: indexInAblum) { isInICloud in
         
-        self.navigationController?.pushViewController(PhotoCropViewController(imageIndex: canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row), animated: true)
+        guard !isInICloud else { return }
         
-      } else {
-        
-        selectItemNum = canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row
-        goToPhotoBrowser()
+        if PhotosManager.sharedInstance.isCrop {
+          
+          self.navigationController?.pushViewController(PhotoCropViewController(imageIndex: indexInAblum), animated: true)
+          
+        } else {
+          
+          self.selectItemNum = indexInAblum
+          self.goToPhotoBrowser()
+          
+        }
         
       }
-      
     }
   }
 }
@@ -338,7 +333,7 @@ extension PhotoColletionViewController: PhotoAlbumViewDelegate {
   
   func photoAlbumView(_ photoAlbumView: PhotoAlbumView, didSelectAtIndex index: Int) {
     updateTitle()
-    popViewHelp.hidePopView()
+    popViewHelp.hidePoppingView()
     collectionView.reloadData()
     cellFadeAnimation = true
 
@@ -406,12 +401,12 @@ extension PhotoColletionViewController: UIImagePickerControllerDelegate, UINavig
 
 extension PhotoColletionViewController: PopViewHelperDelegate {
   
-  func popViewHelper(_ popViewHelper: PopViewHelper, shouldShowPopView targetView: UIView) {
+  func popViewHelper(_ popViewHelper: PopViewHelper, willShowPoppingView targetView: UIView) {
     
     animateIndicator(true)
   }
   
-  func popViewHelper(_ popViewHelper: PopViewHelper, shouldHidePopView targetView: UIView) {
+  func popViewHelper(_ popViewHelper: PopViewHelper, willHidePoppingView targetView: UIView) {
     
     animateIndicator(false)
   }

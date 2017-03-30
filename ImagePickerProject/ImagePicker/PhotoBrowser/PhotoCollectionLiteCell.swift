@@ -24,6 +24,25 @@ class PhotoCollectionLiteCell: UICollectionViewCell {
     zoomImageScrollView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     contentView.addSubview(zoomImageScrollView)
     
+    
+  }
+  
+  func setImageWithLocalPhoto(with index: Int) {
+    
+      let currentTag = tag + 1
+      tag = currentTag
+      
+      PhotosManager.sharedInstance.getImageInCurrentAlbumWith(index, withSizeType: .preview, handleCompletion: { (image: UIImage?, isInICloud) -> Void in
+        
+        guard currentTag == self.tag else {
+          
+          return
+        }
+        
+        self.zoomImageScrollView.setImage(image == nil ? UIImage(named: "default_pic") : image)
+        
+      }, handleImageRequestID: nil)
+      
   }
   
   required init?(coder aDecoder: NSCoder) {

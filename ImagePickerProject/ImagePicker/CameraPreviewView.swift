@@ -19,7 +19,7 @@ class CameraPreviewView: UIView {
     
     initRecording()
   }
-  
+
   required init?(coder aDecoder: NSCoder) {
 
     super.init(coder: aDecoder)
@@ -30,14 +30,13 @@ class CameraPreviewView: UIView {
   
   override func layoutSubviews() {
     
-    let sreenSize = UIScreen.main.bounds.size
     preLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
 
   }
   
   func startPreview() {
     
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low).async { 
+    DispatchQueue.global().async {
       
       self.session.startRunning()
       
@@ -47,7 +46,7 @@ class CameraPreviewView: UIView {
   
   func stopPreview() {
   
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.low).async {
+    DispatchQueue.global().async {
       
       self.session.stopRunning()
       

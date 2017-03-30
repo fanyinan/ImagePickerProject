@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CF04DDB31D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF04DDB01D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift */; };
+		CF2177561DFF92B8004E132F /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2177551DFF92B8004E132F /* UIImage+extension.swift */; };
 		CF25CE9E1DC88DE400CD57BC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CF25CE7C1DC88DE400CD57BC /* LICENSE */; };
 		CF25CE9F1DC88DE400CD57BC /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE7D1DC88DE400CD57BC /* README.md */; };
 		CF25CEA01DC88DE400CD57BC /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF25CE7F1DC88DE400CD57BC /* Constraint.swift */; };
@@ -86,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		CF04DDB01D0EAA3E008DDA50 /* PhotoCollectionLiteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionLiteCell.swift; sourceTree = "<group>"; };
+		CF2177551DFF92B8004E132F /* UIImage+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		CF25CE7C1DC88DE400CD57BC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		CF25CE7D1DC88DE400CD57BC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		CF25CE7F1DC88DE400CD57BC /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				CF5F18991DC86DFD005D1D04 /* Utility.swift */,
 				CF2C7C851C8961B500B72821 /* MuColor.swift */,
 				CF2C7C891C8961B500B72821 /* MuView.swift */,
+				CF2177551DFF92B8004E132F /* UIImage+extension.swift */,
 				CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */,
 			);
 			path = SupportFile;
@@ -476,6 +479,7 @@
 				CF25CEA41DC88DE400CD57BC /* ConstraintDescription.swift in Sources */,
 				CF25CEAC1DC88DE400CD57BC /* ConstraintLayoutSupportDSL.swift in Sources */,
 				CF25CEB51DC88DE400CD57BC /* ConstraintPriorityTarget.swift in Sources */,
+				CF2177561DFF92B8004E132F /* UIImage+extension.swift in Sources */,
 				CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */,
 				CF25CEAD1DC88DE400CD57BC /* ConstraintMaker.swift in Sources */,
 				CF25CEB61DC88DE400CD57BC /* ConstraintRelatableTarget.swift in Sources */,

@@ -46,22 +46,22 @@ class PhotoCropViewController: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = UIColor.black
-
+    
     guard originImage == nil else {
-      self.initView()
+      self.setupUI()
       return
     }
     
-    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(imageIndex!, withSizeType: .preview) { (image) -> Void in
+    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(imageIndex!, withSizeType: .preview, handleCompletion: { (image: UIImage?, _) -> Void in
       
       guard let _image = image else {
         return
       }
       
       self.originImage = _image
-      self.initView()
+      self.setupUI()
       
-    }
+    }, handleImageRequestID: nil)
     
   }
   
@@ -85,13 +85,11 @@ class PhotoCropViewController: UIViewController {
   /******************************************************************************
    *  Target-Action
    ******************************************************************************/
-   //MARK: - Target-Action
+  //MARK: - Target-Action
   
   func onComplete() {
     
     let (xScale, yScale, sizeScalse) = cropImageScrollView.getSelectedRectScale()
-    
-    PhotosManager.sharedInstance.clearData()
     
     PhotosManager.sharedInstance.rectScale = ImageRectScale(xScale: xScale, yScale: yScale, widthScale: sizeScalse, heighScale: sizeScalse)
     
@@ -119,9 +117,9 @@ class PhotoCropViewController: UIViewController {
   /******************************************************************************
    *  Private Method Implementation
    ******************************************************************************/
-   //MARK: - Private Method Implementation
-   
-   /**
+  //MARK: - Private Method Implementation
+  
+  /**
    收起navigationbar 暂不用
    */
   fileprivate func hideNavigationBar() {
@@ -136,7 +134,7 @@ class PhotoCropViewController: UIViewController {
     
   }
   
-  fileprivate func initView() {
+  fileprivate func setupUI() {
     
     automaticallyAdjustsScrollViewInsets = false
     
@@ -155,7 +153,7 @@ class PhotoCropViewController: UIViewController {
     //bottomBarTransparentView
     bottomBarTransparentView = UIView()
     view.addSubview(bottomBarTransparentView)
-    bottomBarTransparentView.snp_makeConstraints { (make) -> Void in
+    bottomBarTransparentView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
       make.height.equalTo(60)
     }
@@ -166,7 +164,7 @@ class PhotoCropViewController: UIViewController {
     //bottomBarContainer
     bottomBarContainerView = UIView()
     view.addSubview(bottomBarContainerView)
-    bottomBarContainerView.snp_makeConstraints { (make) -> Void in
+    bottomBarContainerView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
       make.height.equalTo(60)
     }
@@ -176,7 +174,7 @@ class PhotoCropViewController: UIViewController {
     //completeButton
     completeButton = UIButton()
     bottomBarContainerView.addSubview(completeButton)
-    completeButton.snp_makeConstraints { (make) -> Void in
+    completeButton.snp.makeConstraints { (make) -> Void in
       make.right.bottom.top.equalTo(bottomBarContainerView)
       make.width.equalTo(60)
     }
@@ -189,7 +187,7 @@ class PhotoCropViewController: UIViewController {
     //selectedCountLabel
     cancelButton = UIButton()
     bottomBarContainerView.addSubview(cancelButton)
-    cancelButton.snp_makeConstraints { (make) -> Void in
+    cancelButton.snp.makeConstraints { (make) -> Void in
       make.left.bottom.top.equalTo(bottomBarContainerView)
       make.width.equalTo(60)
     }
@@ -201,7 +199,7 @@ class PhotoCropViewController: UIViewController {
     
     imageView = UIImageView()
     view.addSubview(imageView)
-    imageView.snp_makeConstraints { (make) -> Void in
+    imageView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
       make.bottom.equalTo(view)
       make.width.height.equalTo(140)

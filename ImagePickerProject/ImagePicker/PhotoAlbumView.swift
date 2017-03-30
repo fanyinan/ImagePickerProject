@@ -15,7 +15,7 @@ protocol PhotoAlbumViewDelegate: NSObjectProtocol {
 }
 
 class PhotoAlbumView: UIView {
-
+  
   fileprivate var tableView: UITableView!
   fileprivate weak var delegate: PhotoAlbumViewDelegate?
   
@@ -27,22 +27,20 @@ class PhotoAlbumView: UIView {
     
     super.init(frame: frame)
     
-    initView()
-
+    setupUI()
+    
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-//    PhotosManager.sharedInstance.clearData()
-  
   /******************************************************************************
    *  private  Implements
    ******************************************************************************/
   //MARK: - private Implements
   
-  func initView(){
+  func setupUI(){
     
     backgroundColor = UIColor.green
     
@@ -74,11 +72,11 @@ extension PhotoAlbumView: UITableViewDataSource {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! PhotoAlbumCell
     
-    guard let collection = PhotosManager.sharedInstance.getAlbumWith((indexPath as NSIndexPath).row) else  { return cell }
+    guard let collection = PhotosManager.sharedInstance.getAlbumWith(indexPath.row) else  { return cell }
     
     cell.titleLabel.text = "\(collection.localizedTitle!) (\(PhotosManager.sharedInstance.getImageFetchResultWith(collection).count))"
     
-    PhotosManager.sharedInstance.getImageWith((indexPath as NSIndexPath).row, withIndex: 0, withSizeType: .thumbnail) { (image) -> Void in
+    PhotosManager.sharedInstance.getImageWith(indexPath.row, withIndex: 0, withSizeType: .thumbnail) { (image, _) -> Void in
       
       if image == nil {
         return
@@ -88,7 +86,7 @@ extension PhotoAlbumView: UITableViewDataSource {
     }
     
     cell.separatorInset = UIEdgeInsets.zero
-
+    
     return cell
   }
 }
@@ -100,10 +98,9 @@ extension PhotoAlbumView: UITableViewDelegate {
     if let indexPath = tableView.indexPathForSelectedRow {
       tableView.deselectRow(at: indexPath, animated: true)
     }
+    PhotosManager.sharedInstance.currentAlbumIndex = indexPath.row
     
-    PhotosManager.sharedInstance.currentAlbumIndex = (indexPath as NSIndexPath).row
-    
-    delegate?.photoAlbumView(self, didSelectAtIndex: (indexPath as NSIndexPath).row)
+    delegate?.photoAlbumView(self, didSelectAtIndex: indexPath.row)
   }
   
 }

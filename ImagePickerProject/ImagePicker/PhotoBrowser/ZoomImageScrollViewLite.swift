@@ -10,11 +10,11 @@ import UIKit
 
 class ZoomImageScrollViewLite: UIScrollView {
   
-  fileprivate var imageSize: CGSize!
   fileprivate var imageView: UIImageView!
-  fileprivate var singleTap: UITapGestureRecognizer!
-  fileprivate var doubleTap: UITapGestureRecognizer!
-  fileprivate var initialZoomScale: CGFloat! //保存初始比例，供双击放大后还原使用
+  private var imageSize: CGSize!
+  private var singleTap: UITapGestureRecognizer!
+  private var doubleTap: UITapGestureRecognizer!
+  private var initialZoomScale: CGFloat! //保存初始比例，供双击放大后还原使用
   
   let maxScale: CGFloat = 3
   
@@ -35,7 +35,8 @@ class ZoomImageScrollViewLite: UIScrollView {
     
   }
   
-  fileprivate func configUI() {
+  private func configUI() {
+    
     backgroundColor = UIColor.black
     showsHorizontalScrollIndicator = false
     showsVerticalScrollIndicator = false
@@ -47,7 +48,6 @@ class ZoomImageScrollViewLite: UIScrollView {
     
     //imageview
     imageView = UIImageView(frame: CGRect.zero)
-    imageView.backgroundColor = UIColor.yellow
     imageView.contentMode = .scaleAspectFill
     imageView.isUserInteractionEnabled = true
     
@@ -65,35 +65,15 @@ class ZoomImageScrollViewLite: UIScrollView {
   
   func setImage(_ image: UIImage?) {
     
-    if image == nil {
-      return
-    }
-    
     imageView.image = image
+    
+    guard let image = image else { return }
+    
+    imageSize = image.size
     //这里设置imageview的size为imagesize在当前缩放比例下的size
-    imageView.frame = CGRect(x: 0, y: 0, width: image!.size.width * zoomScale, height: image!.size.height * zoomScale)
+    imageView.frame = CGRect(x: 0, y: 0, width: image.size.width * zoomScale, height: image.size.height * zoomScale)
     
     calculateZoomScale()
-  }
-  
-  func setImageWithLocalPhotoWith(_ index: Int) {
-        
-    let currentTag = tag + 1
-    tag = currentTag
-    
-    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(index, withSizeType: .preview) { (image) -> Void in
-      
-      guard image != nil else {
-        return
-      }
-      
-      guard currentTag == self.tag else {
-
-        return
-      }
-      self.imageSize = image!.size
-      self.setImage(image)
-    }
   }
   
   /**
@@ -136,25 +116,29 @@ class ZoomImageScrollViewLite: UIScrollView {
     
   }
   
-  fileprivate func calculateZoomScale() {
+  private func calculateZoomScale() {
     
     let boundsSize = bounds.size
     
     let scaleX = boundsSize.width / imageSize.width
     let scaleY = boundsSize.height / imageSize.height
     
-    let minScale = min(scaleX, scaleY)
+    var minScale = min(scaleX, scaleY)
     let maxScale = CGFloat(3)
     
-    maximumZoomScale = minScale > 1 ? minScale : maxScale
+    if scaleX > 1.0 && scaleY > 1.0 {
+      minScale = 1.0
+    }
+    
+    maximumZoomScale = maxScale
     minimumZoomScale = minScale
     zoomScale = minimumZoomScale
     initialZoomScale = zoomScale
-
+    
     setNeedsLayout()
   }
   
-  fileprivate func moveFrameToCenter() {
+  private func moveFrameToCenter() {
     
     let boundsSize = bounds.size
     var frameToCenter = imageView.frame

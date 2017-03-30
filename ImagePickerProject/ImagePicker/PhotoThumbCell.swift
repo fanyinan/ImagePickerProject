@@ -14,15 +14,30 @@ class PhotoThumbCell: UICollectionViewCell {
   @IBOutlet weak var selectedImageView: UIImageView!
   @IBOutlet weak var unselectedImageView: UIImageView!
   @IBOutlet weak var selectedButton: UIControl!
-
-  var onRadio: ((PhotoThumbCell) -> Void)?
+  
+  private(set) var isInICloud = false
+  private var imageRequestID: Int32 = 0
+  weak var photoColletionViewController: PhotoColletionViewController?
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     
   }
   
   @IBAction func onClickRadio() {
-    onRadio?(self)
+
+    guard let vc = photoColletionViewController else { return }
+    
+    let indexPath = vc.collectionView.indexPath(for: self)!
+    
+    PhotosManager.sharedInstance.checkImageIsInICloud(with: indexPath.row - 1) { isInICloud in
+    
+      guard !isInICloud else { return }
+
+      self.setPhotoSelectedStatusWith(indexPath.row - 1)
+      vc.updateUI()
+      
+    }
   }
   
   func setImageWith(_ index: Int) {
@@ -33,7 +48,11 @@ class PhotoThumbCell: UICollectionViewCell {
     let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(index)
     self.setPhotoSelected(isSelected)
     
-    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(index, withSizeType: .thumbnail) { (image) -> Void in
+    imageView.image = nil
+    
+    PhotosManager.sharedInstance.cancelRequestImage(with: imageRequestID)
+    
+    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(index, withSizeType: .thumbnail, handleCompletion: { (image, isInICloud) -> Void in
       
       guard image != nil else {
         return
@@ -42,8 +61,13 @@ class PhotoThumbCell: UICollectionViewCell {
       if currentTag == self.tag {
         
         self.imageView.image = image
+        self.isInICloud = isInICloud
         
       }
+      
+    }) { imageRequestID in
+      
+      self.imageRequestID = imageRequestID
     }
   }
   
@@ -70,8 +94,8 @@ class PhotoThumbCell: UICollectionViewCell {
       
       self.setPhotoSelected(isSelected)
       
-      }) { _ in
-        
+    }) { _ in
+      
     }
     
   }
@@ -79,7 +103,7 @@ class PhotoThumbCell: UICollectionViewCell {
   func setPhotoSelected(_ isSelected: Bool) {
     
     if PhotosManager.sharedInstance.maxSelectedCount == 1 {
-
+      
       selectedButton.isHidden = true
       unselectedImageView.isHidden = true
       selectedImageView.isHidden = true
