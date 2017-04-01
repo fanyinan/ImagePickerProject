@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol WZPhotoBrowserLiteDelegate: NSObjectProtocol {
   
@@ -14,6 +15,7 @@ protocol WZPhotoBrowserLiteDelegate: NSObjectProtocol {
   
   func firstDisplayIndex(_ photoBrowser: WZPhotoBrowserLite) -> Int
   
+  func photoBrowser(photoBrowser: WZPhotoBrowserLite, assetForIndex index: Int) -> PHAsset
 }
 
 class WZPhotoBrowserLite: UIViewController {
@@ -24,9 +26,11 @@ class WZPhotoBrowserLite: UIViewController {
   var quitBlock: (() -> Void)?
   var currentIndex: Int = 0 {
     didSet{
+      currentAsset = PhotosManager.sharedInstance.currentImageAlbumFetchResult[currentIndex]
       photoDidChange()
     }
   }
+  var currentAsset: PHAsset!
   
   var isDidShow = false //用于标记次VC是否已经呈现
   
@@ -130,10 +134,8 @@ class WZPhotoBrowserLite: UIViewController {
     
   }
   
-  func photoDidChange() {
-
-    print(currentIndex)
-  }
+  func photoDidChange() { }
+  
 }
 
 extension WZPhotoBrowserLite: UICollectionViewDataSource {
@@ -150,7 +152,9 @@ extension WZPhotoBrowserLite: UICollectionViewDataSource {
     
     cell.padding = padding
     
-    cell.setImageWithLocalPhoto(with: indexPath.row)
+    if let asset = delegate?.photoBrowser(photoBrowser: self, assetForIndex: indexPath.row) {
+      cell.asset = asset
+    }
     
     return cell
     
@@ -166,7 +170,7 @@ extension WZPhotoBrowserLite: UICollectionViewDelegateFlowLayout {
     let showPhotoIndex = mainCollectionView.indexPathForItem(at: cellPoint)
     
     if let _showPhotoIndex = showPhotoIndex , currentIndex != _showPhotoIndex.row {
-      currentIndex = (showPhotoIndex! as NSIndexPath).row
+      currentIndex = showPhotoIndex!.row
     }
     
   }

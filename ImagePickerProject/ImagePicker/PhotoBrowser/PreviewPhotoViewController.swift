@@ -7,20 +7,21 @@
 //
 
 import UIKit
+import Photos
 
 class PreviewPhotoViewController: WZPhotoBrowserLite {
   
-  var topBarContainerView: UIView!
-  var topBarTransparentView: UIView!
-  var backButton: UIButton!
-  var selectButton: UIControl!
-  var unselectedImageView: UIImageView!
-  var selectedImageView: UIImageView!
+  private var topBarContainerView: UIView!
+  private var topBarTransparentView: UIView!
+  private var backButton: UIButton!
+  private var selectButton: UIControl!
+  private var unselectedImageView: UIImageView!
+  private var selectedImageView: UIImageView!
   
-  var bottomBarContainerView: UIView!
-  var bottomBarTransparentView: UIView!
-  var completeButton: UIButton!
-  var selectedCountLabel: UILabel!
+  private var bottomBarContainerView: UIView!
+  private var bottomBarTransparentView: UIView!
+  private var completeButton: UIButton!
+  private var selectedCountLabel: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,18 +52,13 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
 
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
   func onBack() {
-    navigationController?.popViewController(animated: true)
+    _ = navigationController?.popViewController(animated: true)
   }
   
   func onSelect() {
     
-    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentIndex) { isInICloud in
+    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentAsset) { isInICloud in
       
       guard !isInICloud else { return }
       
@@ -73,15 +69,13 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   func onComplete() {
     
-    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentIndex) { isInICloud in
+    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentAsset) { isInICloud in
       
       guard !isInICloud else { return }
       
-      let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
-      
       //如果当前没有被选择的照片，则选择当前照片
-      if selectedCount == 0 {
-        PhotosManager.sharedInstance.selectPhotoWith(self.currentIndex)
+      if PhotosManager.sharedInstance.selectedImages.isEmpty {
+        PhotosManager.sharedInstance.selectPhoto(with: self.currentAsset)
       }
       
       PhotosManager.sharedInstance.didFinish()
@@ -98,7 +92,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //topBarTransparentView
     topBarTransparentView = UIView()
     view.addSubview(topBarTransparentView)
-    topBarTransparentView.snp_makeConstraints { (make) -> Void in
+    topBarTransparentView.snp.makeConstraints { (make) -> Void in
       make.top.right.left.equalTo(view)
       make.height.equalTo(64)
     }
@@ -109,7 +103,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //topBarContainer
     topBarContainerView = UIView()
     view.addSubview(topBarContainerView)
-    topBarContainerView.snp_makeConstraints { (make) -> Void in
+    topBarContainerView.snp.makeConstraints { (make) -> Void in
       make.top.right.left.equalTo(view)
       make.height.equalTo(64)
     }
@@ -119,7 +113,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //backButton
     backButton = UIButton()
     topBarContainerView.addSubview(backButton)
-    backButton.snp_makeConstraints { (make) -> Void in
+    backButton.snp.makeConstraints { (make) -> Void in
       make.top.bottom.left.equalTo(topBarContainerView)
       make.width.equalTo(50)
     }
@@ -130,7 +124,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //selectButton
     selectButton = UIControl()
     topBarContainerView.addSubview(selectButton)
-    selectButton.snp_makeConstraints { (make) -> Void in
+    selectButton.snp.makeConstraints { (make) -> Void in
       make.right.equalTo(topBarContainerView).offset(-10)
       make.top.bottom.equalTo(topBarContainerView)
       make.width.equalTo(50)
@@ -141,7 +135,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //unselectedButton
     unselectedImageView = UIImageView()
     selectButton.addSubview(unselectedImageView)
-    unselectedImageView.snp_makeConstraints { (make) -> Void in
+    unselectedImageView.snp.makeConstraints { (make) -> Void in
       make.width.height.equalTo(26)
       make.center.equalTo(selectButton)
     }
@@ -151,7 +145,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //selectedButton
     selectedImageView = UIImageView()
     selectButton.addSubview(selectedImageView)
-    selectedImageView.snp_makeConstraints { (make) -> Void in
+    selectedImageView.snp.makeConstraints { (make) -> Void in
       make.width.height.equalTo(30)
       make.center.equalTo(selectButton)
     }
@@ -165,7 +159,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //bottomBarTransparentView
     bottomBarTransparentView = UIView()
     view.addSubview(bottomBarTransparentView)
-    bottomBarTransparentView.snp_makeConstraints { (make) -> Void in
+    bottomBarTransparentView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
       make.height.equalTo(44)
     }
@@ -176,7 +170,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //bottomBarContainer
     bottomBarContainerView = UIView()
     view.addSubview(bottomBarContainerView)
-    bottomBarContainerView.snp_makeConstraints { (make) -> Void in
+    bottomBarContainerView.snp.makeConstraints { (make) -> Void in
       make.right.bottom.left.equalTo(view)
       make.height.equalTo(44)
     }
@@ -186,7 +180,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //completeButton
     completeButton = UIButton()
     bottomBarContainerView.addSubview(completeButton)
-    completeButton.snp_makeConstraints { (make) -> Void in
+    completeButton.snp.makeConstraints { (make) -> Void in
       make.right.bottom.top.equalTo(bottomBarContainerView)
       make.width.equalTo(50)
     }
@@ -199,9 +193,9 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     //selectedCountLabel
     selectedCountLabel = UILabel()
     bottomBarContainerView.addSubview(selectedCountLabel)
-    selectedCountLabel.snp_makeConstraints { (make) -> Void in
+    selectedCountLabel.snp.makeConstraints { (make) -> Void in
       make.centerY.equalTo(bottomBarContainerView)
-      make.right.equalTo(completeButton.snp_left)
+      make.right.equalTo(completeButton.snp.left)
       make.width.height.equalTo(20)
     }
     
@@ -215,7 +209,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   override func photoDidChange() {
     super.photoDidChange()
     
-    let isSelected = PhotosManager.sharedInstance.selectedIndexList.contains(currentIndex)
+    let isSelected = PhotosManager.sharedInstance.selectedImages.contains(currentAsset)
     setPhotoSelected(isSelected)
     updateCount()
     
@@ -223,7 +217,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   func setPhotoSelectedStatusWith(_ index: Int) {
     
-    let isSuccess = PhotosManager.sharedInstance.selectPhotoWith(index)
+    let isSuccess = PhotosManager.sharedInstance.selectPhoto(with: currentAsset)
     
     if !isSuccess {
       
@@ -233,7 +227,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       return
     }
     
-    let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(index)
+    let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: currentAsset)
     setPhotoStatusWithAnimation(isSelected)
   }
   
@@ -258,9 +252,9 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     
   }
   
-  fileprivate func updateCount() {
+  private func updateCount() {
     
-    let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
+    let selectedCount = PhotosManager.sharedInstance.selectedImages.count
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
     selectedCountLabel.isHidden = selectedCount == 0

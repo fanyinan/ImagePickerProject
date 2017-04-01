@@ -12,12 +12,12 @@ import Photos
 protocol ImagePickerDelegate: NSObjectProtocol {
   
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage])
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceOption)
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceType)
 }
 
 extension ImagePickerDelegate {
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage]) {}
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceOption) {}
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceType) {}
 }
 
 enum ImagePickerType {
@@ -34,7 +34,7 @@ struct ResourceOption: OptionSet {
 
 enum ResourceType {
   case image(images: [UIImage])
-  case video(video: AVAsset)
+  case video(video: AVAsset?)
 }
 
 class ImagePickerHelper: NSObject {
@@ -57,7 +57,11 @@ class ImagePickerHelper: NSObject {
     }
   }
   var type: ImagePickerType = .albumAndCamera
-  var resourceOption: ResourceOption = .image
+  var resourceOption: ResourceOption = .image {
+    didSet{
+      PhotosManager.sharedInstance.resourceOption = resourceOption
+    }
+  }
   
   init(delegate: ImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
@@ -113,15 +117,27 @@ class ImagePickerHelper: NSObject {
       return
     }
     
-    PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
+    if let _ = PhotosManager.sharedInstance.selectedVideo {
       
-      self.handlerViewController?.dismiss(animated: true, completion: {
-        
-        PhotosManager.sharedInstance.clearData()
-
-        self.delegate?.pickedPhoto(self, images: images)        
-        
+      PhotosManager.sharedInstance.fetchVideo(handleCompletion: { avAsset in
+        self.handlerViewController?.dismiss(animated: true, completion: {
+          PhotosManager.sharedInstance.clearData()
+          self.delegate?.pickedPhoto(self, resource: .video(video: avAsset))
+        })
       })
+    } else {
+      
+      PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
+        
+        self.handlerViewController?.dismiss(animated: true, completion: {
+          
+          PhotosManager.sharedInstance.clearData()
+          
+          self.delegate?.pickedPhoto(self, images: images)
+          self.delegate?.pickedPhoto(self, resource: .image(images: images))
+          
+        })
+      }
     }
   }
   

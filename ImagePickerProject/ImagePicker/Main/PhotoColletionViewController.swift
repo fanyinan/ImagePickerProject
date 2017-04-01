@@ -40,7 +40,7 @@ class PhotoColletionViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    initView()
+    setupUI()
     
   }
   
@@ -100,7 +100,7 @@ class PhotoColletionViewController: UIViewController {
   
   func updateUI() {
     
-    let selectedCount = PhotosManager.sharedInstance.selectedIndexList.count
+    let selectedCount = PhotosManager.sharedInstance.selectedImages.count
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
     selectedCountLabel.isHidden = selectedCount == 0
@@ -109,6 +109,12 @@ class PhotoColletionViewController: UIViewController {
     completionLabel.isEnabled = selectedCount != 0
     completionButton.isEnabled = selectedCount != 0
     
+    for cell in collectionView.visibleCells {
+      
+      (cell as? PhotoThumbCell)?.updateSelectedStatus()
+      (cell as? PhotoThumbCell)?.updateIsSelectable()
+
+    }
   }
   
   /******************************************************************************
@@ -116,7 +122,7 @@ class PhotoColletionViewController: UIViewController {
    ******************************************************************************/
    //MARK: - private Implements
   
-  private func initView() {
+  private func setupUI() {
     
     initAblum()
     initNavigationBarButton()
@@ -272,8 +278,12 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
       let thumbCell = cell as! PhotoThumbCell
       
       thumbCell.photoColletionViewController = self
-      thumbCell.setImageWith(canOpenCamera == true ? (indexPath as NSIndexPath).row - 1 : (indexPath as NSIndexPath).row)
       
+      if let asset = PhotosManager.sharedInstance.getAssetInCurrentAlbum(with: canOpenCamera == true ? indexPath.row - 1 : indexPath.row) {
+        
+        thumbCell.setAsset(asset)
+
+      }
     }
     
     return cell
@@ -309,17 +319,22 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       let indexInAblum = canOpenCamera == true ? row - 1 : row
       
-      PhotosManager.sharedInstance.checkImageIsInICloud(with: indexInAblum) { isInICloud in
+      guard let asset = PhotosManager.sharedInstance.getAssetInCurrentAlbum(with: indexInAblum) else { return }
+      
+      guard asset.mediaType == .image && PhotosManager.sharedInstance.selectedVideo == nil else { return }
+      
+      PhotosManager.sharedInstance.checkImageIsInICloud(with: asset) { isInICloud in
         
         guard !isInICloud else { return }
-        
+
         if PhotosManager.sharedInstance.isCrop {
           
-          self.navigationController?.pushViewController(PhotoCropViewController(imageIndex: indexInAblum), animated: true)
+          self.navigationController?.pushViewController(PhotoCropViewController(asset: asset), animated: true)
           
         } else {
           
-          self.selectItemNum = indexInAblum
+          
+          self.selectItemNum = PhotosManager.sharedInstance.currentImageAlbumFetchResult.index(of: asset)
           self.goToPhotoBrowser()
           
         }
@@ -362,13 +377,17 @@ extension PhotoColletionViewController: WZPhotoBrowserLiteDelegate {
   
   func numberOfImage(_ photoBrowser: WZPhotoBrowserLite) -> Int {
     
-    return PhotosManager.sharedInstance.getImageCountInCurrentAlbum()
+    return PhotosManager.sharedInstance.currentImageAlbumFetchResult.count
     
   }
   
   func firstDisplayIndex(_ photoBrowser: WZPhotoBrowserLite) -> Int {
     
     return selectItemNum
+  }
+  
+  func photoBrowser(photoBrowser: WZPhotoBrowserLite, assetForIndex index: Int) -> PHAsset {
+    return PhotosManager.sharedInstance.currentImageAlbumFetchResult[index]
   }
 }
 

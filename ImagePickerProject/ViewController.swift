@@ -42,6 +42,7 @@ class ViewController: UIViewController {
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
+    imagePickerHelper.resourceOption = [.image]
     imagePickerHelper.startPhoto()
   }
   
@@ -127,6 +128,13 @@ extension ViewController: ImagePickerDelegate {
       imageViews[index].image = image
     }
     
+  }
+  
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceType) {
+    
+    if case .video(video: let tmpAVAsset) = resource, let avAsset = tmpAVAsset {
+      print(avAsset)
+    }
   }
 }
 

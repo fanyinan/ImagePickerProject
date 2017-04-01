@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import Photos
 
 class PhotoCropViewController: UIViewController {
   
-  var imageIndex: Int?
+  var asset: PHAsset?
   
   var originImage: UIImage!
   
@@ -23,9 +24,9 @@ class PhotoCropViewController: UIViewController {
   
   var imageView: UIImageView!
   
-  init(imageIndex: Int) {
+  init(asset: PHAsset) {
     
-    self.imageIndex = imageIndex
+    self.asset = asset
     
     super.init(nibName: nil, bundle: nil)
   }
@@ -47,12 +48,12 @@ class PhotoCropViewController: UIViewController {
     
     view.backgroundColor = UIColor.black
     
-    guard originImage == nil else {
+    guard let asset = asset, originImage == nil else {
       self.setupUI()
       return
     }
     
-    PhotosManager.sharedInstance.getImageInCurrentAlbumWith(imageIndex!, withSizeType: .preview, handleCompletion: { (image: UIImage?, _) -> Void in
+    PhotosManager.sharedInstance.fetchImage(with: asset, sizeType: .preview, handleCompletion: { (image: UIImage?, _) -> Void in
       
       guard let _image = image else {
         return
@@ -61,7 +62,7 @@ class PhotoCropViewController: UIViewController {
       self.originImage = _image
       self.setupUI()
       
-    }, handleImageRequestID: nil)
+    })
     
   }
   
@@ -93,14 +94,14 @@ class PhotoCropViewController: UIViewController {
     
     PhotosManager.sharedInstance.rectScale = ImageRectScale(xScale: xScale, yScale: yScale, widthScale: sizeScalse, heighScale: sizeScalse)
     
-    if imageIndex != nil {
-      PhotosManager.sharedInstance.selectPhotoWith(imageIndex!)
+    if let imageAsset = asset {
+      PhotosManager.sharedInstance.selectPhoto(with: imageAsset)
     } else {
       //如果用相机拍摄的照片需要直接裁剪
       originImage = PhotosManager.sharedInstance.cropImage(originImage)
     }
     
-    PhotosManager.sharedInstance.didFinish(imageIndex == nil ? originImage : nil)
+    PhotosManager.sharedInstance.didFinish(asset == nil ? originImage : nil)
     
   }
   

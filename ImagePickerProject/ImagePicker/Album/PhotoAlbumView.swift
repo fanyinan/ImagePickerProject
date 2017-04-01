@@ -74,9 +74,9 @@ extension PhotoAlbumView: UITableViewDataSource {
     
     guard let collection = PhotosManager.sharedInstance.getAlbumWith(indexPath.row) else  { return cell }
     
-    cell.titleLabel.text = "\(collection.localizedTitle!) (\(PhotosManager.sharedInstance.getImageFetchResultWith(collection).count))"
+    cell.titleLabel.text = "\(collection.localizedTitle!) (\(PhotosManager.sharedInstance.getFetchResult(with: collection, resourceOption: PhotosManager.sharedInstance.resourceOption).count))"
     
-    PhotosManager.sharedInstance.getImageWith(indexPath.row, withIndex: 0, withSizeType: .thumbnail) { (image, _) -> Void in
+    PhotosManager.sharedInstance.fetchImage(with: indexPath.row, imageIndex: 0, sizeType: .thumbnail) { (image, _) -> Void in
       
       if image == nil {
         return

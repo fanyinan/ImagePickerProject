@@ -11,7 +11,7 @@ import Photos
 enum PhotoSizeType {
   case thumbnail
   case preview
-  case origin
+  case export
 }
 
 struct ImageRectScale {
@@ -28,12 +28,14 @@ class PhotosManager: NSObject {
   static let sharedInstance = PhotosManager()
   static var assetGridThumbnailSize = CGSize(width: 50, height: 50)
   static var assetPreviewImageSize = UIScreen.main.bounds.size
-  
+  static var assetExportImageSize = UIScreen.main.bounds.size
+
   private var assetCollectionList: [PHAssetCollection] = []
   private var imageManager: PHCachingImageManager!
-  private var currentImageFetchResult: PHFetchResult<AnyObject>!
-  private(set) var selectedIndexList: [Int] = []
-  private var photoKeysInCache: Set<String> = []
+  private var currentAlbumFetchResult: PHFetchResult<PHAsset>!
+  private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
+  private(set) var selectedImages: Set<PHAsset> = []
+  private(set) var selectedVideo: PHAsset?
   
   var maxSelectedCount: Int = 1 {
     didSet {
@@ -54,7 +56,8 @@ class PhotosManager: NSObject {
       guard let _currentAlbumIndex = currentAlbumIndex else { return }
       
       guard let assetCollection = getAlbumWith(_currentAlbumIndex) else { return }
-      currentImageFetchResult = getImageFetchResultWith(assetCollection)
+      currentAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: resourceOption)
+      currentImageAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: [.image])
     }
   }
   
@@ -71,7 +74,7 @@ class PhotosManager: NSObject {
     }
   }
   
-  var resourceOption
+  var resourceOption: ResourceOption = .image
   /*之前使用notification来通知选择照片完成，但是如果notification没有被remove掉的话会被多次接收多次通知
    *所以改用这种方式
    */
@@ -167,14 +170,26 @@ class PhotosManager: NSObject {
   }
   
   //通过相册获取照片集合
-  func getImageFetchResultWith(_ album: PHAssetCollection) -> PHFetchResult<AnyObject> {
+  func getFetchResult(with album: PHAssetCollection, resourceOption: ResourceOption) -> PHFetchResult<PHAsset> {
     
     let fetchOptions = PHFetchOptions()
     fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-    fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-    let imageFetchResult = PHAsset.fetchAssets(in: album, options: fetchOptions)
     
-    return imageFetchResult as! PHFetchResult<AnyObject>
+    if resourceOption.contains(.image) && !resourceOption.contains(.video){
+      fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+    }
+    
+    if !resourceOption.contains(.image) && resourceOption.contains(.video) {
+      fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
+    }
+    
+    if resourceOption.contains(.image) && resourceOption.contains(.video) {
+      fetchOptions.predicate = NSPredicate(format: "mediaType = %d OR mediaType = %d", PHAssetMediaType.video.rawValue, PHAssetMediaType.image.rawValue)
+    }
+    
+    let fetchResult = PHAsset.fetchAssets(in: album, options: fetchOptions)
+    
+    return fetchResult
   }
   
   func getImageCountInCurrentAlbum() -> Int {
@@ -184,87 +199,19 @@ class PhotosManager: NSObject {
       return 0
     }
     
-    return currentImageFetchResult.count
+    return currentAlbumFetchResult.count
   }
   
-  func getImageInCurrentAlbumWith(_ index: Int, withSizeType sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void, handleImageRequestID: ((_ imageRquestID: Int32) -> Void)? = nil ){
+  func getAssetInCurrentAlbum(with index: Int) -> PHAsset? {
     
-    guard let _currentAlbumIndex = currentAlbumIndex else {
-      print("currentAlbumIndex is nil")
-      handleCompletion(nil, false)
-      return
+    guard currentAlbumFetchResult.count > index else {
+      return nil
     }
-    
-    
-    if sizeType == .thumbnail {
-      
-      if let image = SDImageCache.shared().imageFromMemoryCache(forKey: "localAssert_\(_currentAlbumIndex)_\(index)") {
-        
-        handleCompletion(image, false)
-        
-        return
-      }
-    }
-    
-    DispatchQueue.global().async {
-      
-      let imageRequestID = self.getImageWith(_currentAlbumIndex, withIndex: index, withSizeType: sizeType) { (image, isInICloud) -> Void in
-        
-        let image = sizeType == .origin ? self.cropImage(image) : image
-        
-        let key = "localAssert_\(_currentAlbumIndex)_\(index)"
-        self.photoKeysInCache.insert(key)
-        SDImageCache.shared().store(image, forKey: key, toDisk: false)
-        
-        DispatchQueue.main.async {
-          
-          handleCompletion(image, isInICloud)
-          
-        }
-      }
-      
-      DispatchQueue.main.async  {
-        handleImageRequestID?(imageRequestID)
-      }
-    }
+    let asset = currentAlbumFetchResult[index]
+    return asset
   }
   
-  func checkImageIsInICloud(with index: Int, completion: @escaping ((Bool) -> Void)) {
-  
-    guard let _currentAlbumIndex = currentAlbumIndex else {
-      print("currentAlbumIndex is nil")
-      completion(false)
-      return
-    }
-    
-    getImageWith(_currentAlbumIndex, withIndex: index, withSizeType: .origin) { (_, isInICloud) -> Void in
-    
-      if isInICloud {
-        print("该图片尚未从iCloud下载\n请使用本地图片")
-      }
-      
-      completion(isInICloud)
-    }
-  }
-  
-  @discardableResult
-  func getImageWith(_ albumIndex: Int, withIndex index: Int, withSizeType sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) -> PHImageRequestID {
-    
-    if currentAlbumIndex != albumIndex {
-      currentAlbumIndex = albumIndex
-    }
-    
-    if getAlbumCount() <= albumIndex {
-      handleCompletion(nil, false)
-      return 0
-    }
-    
-    if currentImageFetchResult.count <= index {
-      handleCompletion(nil, false)
-      return 0
-    }
-    
-    let asset = currentImageFetchResult[index] as! PHAsset
+  func fetchImage(with asset: PHAsset, sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) {
     
     var imageSize = CGSize.zero
     let imageRequestOptions = PHImageRequestOptions()
@@ -284,25 +231,54 @@ class PhotosManager: NSObject {
       imageRequestOptions.deliveryMode = .highQualityFormat
       imageRequestOptions.isNetworkAccessAllowed = false
       
-    case .origin:
+    case .export:
       imageSize = PHImageManagerMaximumSize
       imageRequestOptions.isSynchronous = true
       imageRequestOptions.resizeMode = .none
       imageRequestOptions.deliveryMode = .highQualityFormat
       imageRequestOptions.isNetworkAccessAllowed = false
-
+      
     }
     
-    let imageRequestID = imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: imageRequestOptions) { (image: UIImage?, info) -> Void in
+    imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: imageRequestOptions) { (image: UIImage?, info) -> Void in
       
       handleCompletion(image, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
     }
-    
-    return imageRequestID
   }
   
-  func cancelRequestImage(with imageRequestID: Int32) {
-    imageManager.cancelImageRequest(imageRequestID)
+  func fetchImage(with albumIndex: Int, imageIndex: Int, sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) {
+    
+    if currentAlbumIndex != albumIndex {
+      currentAlbumIndex = albumIndex
+    }
+    
+    if getAlbumCount() <= albumIndex {
+      handleCompletion(nil, false)
+    }
+    
+    if currentAlbumFetchResult.count <= imageIndex {
+      handleCompletion(nil, false)
+    }
+    
+    guard let asset = getAssetInCurrentAlbum(with: imageIndex) else {
+      handleCompletion(nil, false)
+      return
+    }
+    
+    fetchImage(with: asset, sizeType: sizeType, handleCompletion: handleCompletion)
+    
+  }
+  
+  func checkImageIsInICloud(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
+    
+    fetchImage(with: asset, sizeType: .export) { (_, isInICloud) -> Void in
+    
+      if isInICloud {
+        print("该图片尚未从iCloud下载\n请使用本地图片")
+      }
+      
+      completion(isInICloud)
+    }
   }
   
   /**
@@ -314,27 +290,40 @@ class PhotosManager: NSObject {
    */
   
   @discardableResult
-  func selectPhotoWith(_ index: Int) -> Bool {
+  func selectPhoto(with asset: PHAsset) -> Bool {
     
-    let isExist = getPhotoSelectedStatus(index)
+    let isExist = getPhotoSelectedStatus(with: asset)
     
     if isExist {
-      selectedIndexList = selectedIndexList.filter({$0 != index})
+      selectedImages.remove(asset)
     } else {
       
-      if maxSelectedCount == selectedIndexList.count {
+      if maxSelectedCount == selectedImages.count {
         
         return false
         
       } else {
         
-        selectedIndexList += [index]
+        selectedImages.insert(asset)
         return true
         
       }
     }
     
     return true
+  }
+  
+  @discardableResult
+  func selectVideo(with asset: PHAsset) -> Bool {
+    
+    guard let videoIndex = selectedVideo else {
+      selectedVideo = asset
+      return true
+    }
+    
+    selectedVideo = videoIndex == asset ? nil : asset
+    
+    return selectedVideo != nil
   }
   
   /**
@@ -344,8 +333,8 @@ class PhotosManager: NSObject {
    
    - returns: true为已被选中，false为未选中
    */
-  func getPhotoSelectedStatus(_ index: Int) -> Bool {
-    return selectedIndexList.contains(index)
+  func getPhotoSelectedStatus(with asset: PHAsset) -> Bool {
+    return selectedImages.contains(asset)
   }
   
   func clearData() {
@@ -355,43 +344,48 @@ class PhotosManager: NSObject {
     isCrop = false
     maxSelectedCount = 1
     rectScale = nil
-    selectedIndexList.removeAll()
-    
-    for photoKey in photoKeysInCache {
-      
-      SDImageCache.shared().removeImage(forKey: photoKey)
-      
-    }
-    
-    photoKeysInCache.removeAll()
+    selectedImages.removeAll()
+    resourceOption = .image
+ 
   }
   
   func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
-    selectedIndexList = selectedIndexList.sorted(by: {$0 < $1})
-    getAllSelectedImageInCurrentAlbumWith(selectedIndexList, imageList: [], handleCompletion: handleCompletion)
+    let imageAssets = Array(selectedImages).sorted(by: {$0.creationDate ?? Date() < $1.creationDate ?? Date()})
+    getAllSelectedImageInCurrentAlbum(with: imageAssets, imageList: [], handleCompletion: handleCompletion)
     
   }
   
-  func getAllSelectedImageInCurrentAlbumWith(_ imageIndexList: [Int], imageList: [UIImage],  handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
+  func getAllSelectedImageInCurrentAlbum(with imageAssets: [PHAsset], imageList: [UIImage],  handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
-    if imageIndexList.count == 0 {
+    if imageAssets.count == 0 {
       handleCompletion(imageList)
       return
     }
     
-    getImageInCurrentAlbumWith(imageIndexList[0], withSizeType: .origin, handleCompletion: { (image: UIImage?, _) -> Void in
-      
+    fetchImage(with: imageAssets[0], sizeType: .export) { (image: UIImage?, _) -> Void in
       if image == nil {
         
         handleCompletion([])
         return
       }
       
-      self.getAllSelectedImageInCurrentAlbumWith(Array(imageIndexList[1..<imageIndexList.count]), imageList: imageList + [image!], handleCompletion: handleCompletion)
+      self.getAllSelectedImageInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageList: imageList + [image!], handleCompletion: handleCompletion)
       
-    }, handleImageRequestID: nil)
+    }
+  }
+  
+  func fetchVideo(handleCompletion: @escaping (_ avAsset: AVAsset?) -> Void) {
     
+    guard let selectedVideo = selectedVideo else { return }
+    
+    let videoRequestOptions = PHVideoRequestOptions()
+    videoRequestOptions.isNetworkAccessAllowed = false
+    videoRequestOptions.deliveryMode = .fastFormat
+    
+    imageManager.requestAVAsset(forVideo: selectedVideo, options: videoRequestOptions) { (avAsset, _, _) in
+      handleCompletion(avAsset)
+    }
   }
   
   func cropImage(_ originImage: UIImage?) -> UIImage? {
