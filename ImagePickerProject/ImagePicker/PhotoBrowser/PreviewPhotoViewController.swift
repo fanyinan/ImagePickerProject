@@ -254,6 +254,11 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   private func updateCount() {
     
+    guard PhotosManager.sharedInstance.maxSelectedCount > 1 else {
+      selectedCountLabel.isHidden = true
+      return
+    }
+    
     let selectedCount = PhotosManager.sharedInstance.selectedImages.count
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     

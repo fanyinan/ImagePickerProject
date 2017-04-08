@@ -165,7 +165,7 @@ class PhotoThumbCell: UICollectionViewCell {
     
     let hour = second / (60 * 60)
     let minute = second % (60 * 60) / 60
-    let second = second % (60 * 60 * 60)
+    let second = second % 60
 
     let hourStr = String(format: "%02d", hour)
     let minuteStr = String(format: "%02d", minute)

@@ -100,7 +100,9 @@ class PhotoColletionViewController: UIViewController {
   
   func updateUI() {
     
-    let selectedCount = PhotosManager.sharedInstance.selectedImages.count
+    let selectedImageCount = PhotosManager.sharedInstance.selectedImages.count
+    let selectedVideoCount = PhotosManager.sharedInstance.selectedVideo == nil ? 0 : 1
+    let selectedCount = max(selectedImageCount, selectedVideoCount)
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
     selectedCountLabel.isHidden = selectedCount == 0

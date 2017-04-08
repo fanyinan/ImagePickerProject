@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +25,7 @@
                         <rect key="frame" x="117" y="8" width="23" height="23"/>
                         <subviews>
                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagepick_unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="abC-xZ-hjo">
-                                <rect key="frame" x="0.0" y="0.0" width="23" height="23"/>
+                                <rect key="frame" x="1" y="1" width="21" height="21"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagepick_checked" translatesAutoresizingMaskIntoConstraints="NO" id="oxf-g1-gHg">
@@ -35,15 +35,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="23" id="C1u-D7-Zc1"/>
-                            <constraint firstAttribute="trailing" secondItem="abC-xZ-hjo" secondAttribute="trailing" id="Kla-fZ-bZx"/>
+                            <constraint firstAttribute="trailing" secondItem="abC-xZ-hjo" secondAttribute="trailing" constant="1" id="Kla-fZ-bZx"/>
                             <constraint firstItem="oxf-g1-gHg" firstAttribute="leading" secondItem="eIg-iW-95C" secondAttribute="leading" id="NbK-S5-1rS"/>
                             <constraint firstItem="oxf-g1-gHg" firstAttribute="top" secondItem="eIg-iW-95C" secondAttribute="top" id="OZi-wU-gYe"/>
-                            <constraint firstItem="abC-xZ-hjo" firstAttribute="leading" secondItem="eIg-iW-95C" secondAttribute="leading" id="YBy-5O-cy0"/>
+                            <constraint firstItem="abC-xZ-hjo" firstAttribute="leading" secondItem="eIg-iW-95C" secondAttribute="leading" constant="1" id="YBy-5O-cy0"/>
                             <constraint firstAttribute="trailing" secondItem="oxf-g1-gHg" secondAttribute="trailing" id="cs0-It-9iA"/>
                             <constraint firstAttribute="height" constant="23" id="dRl-wA-Msj"/>
-                            <constraint firstAttribute="bottom" secondItem="abC-xZ-hjo" secondAttribute="bottom" id="ire-uv-pki"/>
+                            <constraint firstAttribute="bottom" secondItem="abC-xZ-hjo" secondAttribute="bottom" constant="1" id="ire-uv-pki"/>
                             <constraint firstAttribute="bottom" secondItem="oxf-g1-gHg" secondAttribute="bottom" id="ppY-02-wAH"/>
-                            <constraint firstItem="abC-xZ-hjo" firstAttribute="top" secondItem="eIg-iW-95C" secondAttribute="top" id="zKc-Mh-Ydb"/>
+                            <constraint firstItem="abC-xZ-hjo" firstAttribute="top" secondItem="eIg-iW-95C" secondAttribute="top" constant="1" id="zKc-Mh-Ydb"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbA-rJ-rg9">

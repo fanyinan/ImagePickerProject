@@ -12,12 +12,18 @@ import Photos
 protocol ImagePickerDelegate: NSObjectProtocol {
   
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage])
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceType)
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType)
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool
+
 }
 
 extension ImagePickerDelegate {
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage]) {}
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceType) {}
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType) {}
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool {
+    return true
+  }
+
 }
 
 enum ImagePickerType {
@@ -101,15 +107,19 @@ class ImagePickerHelper: NSObject {
     }
   }
   
-  
   func onComplete(_ image: UIImage?) {
     
     if let image = image {
       
+      guard self.delegate?.pickedPhoto(self, shouldPickResource: .image(images: [image])) ?? true else {
+        PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+        return
+      }
+      
       self.handlerViewController?.dismiss(animated: true, completion: {
         
         PhotosManager.sharedInstance.clearData()
-
+        
         self.delegate?.pickedPhoto(self, images: [image])
         
       })
@@ -120,21 +130,32 @@ class ImagePickerHelper: NSObject {
     if let _ = PhotosManager.sharedInstance.selectedVideo {
       
       PhotosManager.sharedInstance.fetchVideo(handleCompletion: { avAsset in
+        
+        guard self.delegate?.pickedPhoto(self, shouldPickResource: .video(video: avAsset)) ?? true else {
+          PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+          return
+        }
+        
         self.handlerViewController?.dismiss(animated: true, completion: {
           PhotosManager.sharedInstance.clearData()
-          self.delegate?.pickedPhoto(self, resource: .video(video: avAsset))
+          self.delegate?.pickedPhoto(self, didPickResource: .video(video: avAsset))
         })
       })
     } else {
       
       PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
         
+        guard self.delegate?.pickedPhoto(self, shouldPickResource: .image(images: images)) ?? true else {
+          PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+          return
+        }
+        
         self.handlerViewController?.dismiss(animated: true, completion: {
           
           PhotosManager.sharedInstance.clearData()
           
           self.delegate?.pickedPhoto(self, images: images)
-          self.delegate?.pickedPhoto(self, resource: .image(images: images))
+          self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
           
         })
       }

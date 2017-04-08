@@ -349,6 +349,13 @@ class PhotosManager: NSObject {
  
   }
   
+  func removeSelectionIfMaxCountIsOne() {
+    if maxSelectedCount == 1 {
+      selectedImages.removeAll()
+    }
+    selectedVideo = nil
+  }
+  
   func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
     let imageAssets = Array(selectedImages).sorted(by: {$0.creationDate ?? Date() < $1.creationDate ?? Date()})

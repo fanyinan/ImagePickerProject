@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
-    imagePickerHelper.resourceOption = [.image]
+    imagePickerHelper.resourceOption = [.image, .video]
     imagePickerHelper.startPhoto()
   }
   
