@@ -14,16 +14,12 @@ protocol ImagePickerDelegate: NSObjectProtocol {
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage])
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType)
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool
-
 }
 
 extension ImagePickerDelegate {
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage]) {}
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType) {}
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool {
-    return true
-  }
-
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool { return true }
 }
 
 enum ImagePickerType {
@@ -41,6 +37,7 @@ struct ResourceOption: OptionSet {
 enum ResourceType {
   case image(images: [UIImage])
   case video(video: AVAsset?)
+  case rawImageData(imageDatas: [Data])
 }
 
 class ImagePickerHelper: NSObject {
@@ -52,7 +49,7 @@ class ImagePickerHelper: NSObject {
   //最大图片数量，default ＝ 1
   var maxSelectedCount: Int {
     didSet {
-      PhotosManager.sharedInstance.maxSelectedCount = maxSelectedCount
+      PhotosManager.sharedInstance.maxSelectedCount = max(1, maxSelectedCount)
     }
   }
   
@@ -68,6 +65,7 @@ class ImagePickerHelper: NSObject {
       PhotosManager.sharedInstance.resourceOption = resourceOption
     }
   }
+  var isExportImageData = false
   
   init(delegate: ImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
@@ -141,23 +139,45 @@ class ImagePickerHelper: NSObject {
           self.delegate?.pickedPhoto(self, didPickResource: .video(video: avAsset))
         })
       })
+      
     } else {
       
-      PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
+      if isExportImageData {
         
-        guard self.delegate?.pickedPhoto(self, shouldPickResource: .image(images: images)) ?? true else {
-          PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
-          return
-        }
-        
-        self.handlerViewController?.dismiss(animated: true, completion: {
+        PhotosManager.sharedInstance.fetchSelectedImageDatas({ datas in
           
-          PhotosManager.sharedInstance.clearData()
+          guard self.delegate?.pickedPhoto(self, shouldPickResource: .rawImageData(imageDatas: datas)) ?? true else {
+            PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+            return
+          }
           
-          self.delegate?.pickedPhoto(self, images: images)
-          self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
-          
+          self.handlerViewController?.dismiss(animated: true, completion: {
+            
+            PhotosManager.sharedInstance.clearData()
+            
+            self.delegate?.pickedPhoto(self, didPickResource: .rawImageData(imageDatas: datas))
+            
+          })
         })
+        
+      } else {
+       
+        PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
+          
+          guard self.delegate?.pickedPhoto(self, shouldPickResource: .image(images: images)) ?? true else {
+            PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+            return
+          }
+          
+          self.handlerViewController?.dismiss(animated: true, completion: {
+            
+            PhotosManager.sharedInstance.clearData()
+            
+            self.delegate?.pickedPhoto(self, images: images)
+            self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
+            
+          })
+        }
       }
     }
   }

@@ -214,30 +214,15 @@ class PhotosManager: NSObject {
   func fetchImage(with asset: PHAsset, sizeType: PhotoSizeType, handleCompletion: @escaping (_ image: UIImage?, _ isInICloud: Bool) -> Void) {
     
     var imageSize = CGSize.zero
-    let imageRequestOptions = PHImageRequestOptions()
+    let imageRequestOptions = getImageRequestOptions(with: sizeType)
     
     switch sizeType {
     case .thumbnail:
       imageSize = PhotosManager.assetGridThumbnailSize
-      imageRequestOptions.isSynchronous = false
-      imageRequestOptions.resizeMode = .fast
-      imageRequestOptions.deliveryMode = .opportunistic
-      imageRequestOptions.isNetworkAccessAllowed = true
-      
     case .preview:
       imageSize = PhotosManager.assetPreviewImageSize
-      imageRequestOptions.isSynchronous = false
-      imageRequestOptions.resizeMode = .fast
-      imageRequestOptions.deliveryMode = .highQualityFormat
-      imageRequestOptions.isNetworkAccessAllowed = false
-      
     case .export:
       imageSize = PHImageManagerMaximumSize
-      imageRequestOptions.isSynchronous = true
-      imageRequestOptions.resizeMode = .none
-      imageRequestOptions.deliveryMode = .highQualityFormat
-      imageRequestOptions.isNetworkAccessAllowed = false
-      
     }
     
     imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: imageRequestOptions) { (image: UIImage?, info) -> Void in
@@ -358,7 +343,7 @@ class PhotosManager: NSObject {
   
   func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
     
-    let imageAssets = Array(selectedImages).sorted(by: {$0.creationDate ?? Date() < $1.creationDate ?? Date()})
+    let imageAssets = Array(selectedImages).sorted(by: {$0.creationDate ?? Date() > $1.creationDate ?? Date()})
     getAllSelectedImageInCurrentAlbum(with: imageAssets, imageList: [], handleCompletion: handleCompletion)
     
   }
@@ -395,6 +380,41 @@ class PhotosManager: NSObject {
     }
   }
   
+  func fetchSelectedImageDatas(_ handleCompletion: @escaping (_ datas: [Data]) -> Void) {
+    
+    let imageAssets = Array(selectedImages).sorted(by: {$0.creationDate ?? Date() > $1.creationDate ?? Date()})
+    getAllSelectedImageDatasInCurrentAlbum(with: imageAssets, imageDataList: [], handleCompletion: handleCompletion)
+    
+  }
+  
+  func getAllSelectedImageDatasInCurrentAlbum(with imageAssets: [PHAsset], imageDataList: [Data],  handleCompletion: @escaping (_ imageDatas: [Data]) -> Void) {
+    
+    if imageAssets.count == 0 {
+      handleCompletion(imageDataList)
+      return
+    }
+    
+    fetchRawImageData(with: imageAssets[0]) { imageData in
+      
+      guard let imageData = imageData else {
+        handleCompletion([])
+        return
+      }
+      
+      self.getAllSelectedImageDatasInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageDataList: imageDataList + [imageData], handleCompletion: handleCompletion)
+    }
+  }
+  
+  func fetchRawImageData(with asset: PHAsset, handleCompletion: @escaping (_ imageData: Data?) -> Void) {
+    
+    let imageRequestOptions = getImageRequestOptions(with: .export)
+    
+    imageManager.requestImageData(for: asset, options: imageRequestOptions) { (data, uti, _, info) in
+      
+      handleCompletion(data)
+    }
+  }
+  
   func cropImage(_ originImage: UIImage?) -> UIImage? {
     
     guard isCrop else { return originImage }
@@ -419,6 +439,34 @@ class PhotosManager: NSObject {
     
     return cropImage
     
+  }
+  
+  private func getImageRequestOptions(with sizeType: PhotoSizeType) -> PHImageRequestOptions {
+    
+    let imageRequestOptions = PHImageRequestOptions()
+
+    switch sizeType {
+    case .thumbnail:
+      imageRequestOptions.isSynchronous = false
+      imageRequestOptions.resizeMode = .fast
+      imageRequestOptions.deliveryMode = .opportunistic
+      imageRequestOptions.isNetworkAccessAllowed = true
+      
+    case .preview:
+      imageRequestOptions.isSynchronous = false
+      imageRequestOptions.resizeMode = .fast
+      imageRequestOptions.deliveryMode = .highQualityFormat
+      imageRequestOptions.isNetworkAccessAllowed = false
+      
+    case .export:
+      imageRequestOptions.isSynchronous = true
+      imageRequestOptions.resizeMode = .none
+      imageRequestOptions.deliveryMode = .highQualityFormat
+      imageRequestOptions.isNetworkAccessAllowed = false
+      
+    }
+    
+    return imageRequestOptions
   }
 }
 

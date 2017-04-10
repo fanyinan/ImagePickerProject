@@ -43,6 +43,7 @@ class ViewController: UIViewController {
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
     imagePickerHelper.resourceOption = [.image, .video]
+    imagePickerHelper.isExportImageData = true
     imagePickerHelper.startPhoto()
   }
   
@@ -130,10 +131,15 @@ extension ViewController: ImagePickerDelegate {
     
   }
   
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, resource: ResourceType) {
-    
+  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType) {
+    print(#function)
     if case .video(video: let tmpAVAsset) = resource, let avAsset = tmpAVAsset {
       print(avAsset)
+    }
+    
+    if case .rawImageData(imageDatas: let imageDatas) = resource {
+      
+      print(imageDatas.map({"\($0.count)"}))
     }
   }
 }
