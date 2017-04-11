@@ -32,12 +32,13 @@ struct ResourceOption: OptionSet {
   var rawValue: Int = 0
   static var image = ResourceOption(rawValue: 1 << 0)
   static var video = ResourceOption(rawValue: 1 << 1)
+  static var gif = ResourceOption(rawValue: 1 << 2)
 }
 
 enum ResourceType {
   case image(images: [UIImage])
   case video(video: AVAsset?)
-  case rawImageData(imageDatas: [Data])
+  case rawImageData(imageData: Data?)
 }
 
 class ImagePickerHelper: NSObject {
@@ -65,7 +66,6 @@ class ImagePickerHelper: NSObject {
       PhotosManager.sharedInstance.resourceOption = resourceOption
     }
   }
-  var isExportImageData = false
   
   init(delegate: ImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
@@ -142,11 +142,11 @@ class ImagePickerHelper: NSObject {
       
     } else {
       
-      if isExportImageData {
+      if PhotosManager.sharedInstance.selectedImages.count == 1 {
         
-        PhotosManager.sharedInstance.fetchSelectedImageDatas({ datas in
+        PhotosManager.sharedInstance.fetchSelectedImageData({ (data, isGIF) in
           
-          guard self.delegate?.pickedPhoto(self, shouldPickResource: .rawImageData(imageDatas: datas)) ?? true else {
+          guard self.delegate?.pickedPhoto(self, shouldPickResource: .rawImageData(imageData: data)) ?? true else {
             PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
             return
           }
@@ -155,8 +155,20 @@ class ImagePickerHelper: NSObject {
             
             PhotosManager.sharedInstance.clearData()
             
-            self.delegate?.pickedPhoto(self, didPickResource: .rawImageData(imageDatas: datas))
+            var images: [UIImage] = []
             
+            if let data = data, let image = UIImage(data: data) {
+              images.append(image)
+            }
+            
+            if isGIF {
+              self.delegate?.pickedPhoto(self, didPickResource: .rawImageData(imageData: data))
+            } else {
+              self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
+            }
+            
+            self.delegate?.pickedPhoto(self, images: images)
+
           })
         })
         
@@ -173,9 +185,9 @@ class ImagePickerHelper: NSObject {
             
             PhotosManager.sharedInstance.clearData()
             
-            self.delegate?.pickedPhoto(self, images: images)
             self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
-            
+            self.delegate?.pickedPhoto(self, images: images)
+
           })
         }
       }

@@ -7,6 +7,7 @@
 //
 
 import Photos
+import MobileCoreServices
 
 enum PhotoSizeType {
   case thumbnail
@@ -380,38 +381,24 @@ class PhotosManager: NSObject {
     }
   }
   
-  func fetchSelectedImageDatas(_ handleCompletion: @escaping (_ datas: [Data]) -> Void) {
+  func fetchSelectedImageData(_ handleCompletion: @escaping (_ data: Data?, _ isGIF: Bool) -> Void) {
     
-    let imageAssets = Array(selectedImages).sorted(by: {$0.creationDate ?? Date() > $1.creationDate ?? Date()})
-    getAllSelectedImageDatasInCurrentAlbum(with: imageAssets, imageDataList: [], handleCompletion: handleCompletion)
-    
-  }
-  
-  func getAllSelectedImageDatasInCurrentAlbum(with imageAssets: [PHAsset], imageDataList: [Data],  handleCompletion: @escaping (_ imageDatas: [Data]) -> Void) {
-    
-    if imageAssets.count == 0 {
-      handleCompletion(imageDataList)
+    guard let selectedAsset = selectedImages.first else {
+      handleCompletion(nil, false)
       return
     }
     
-    fetchRawImageData(with: imageAssets[0]) { imageData in
-      
-      guard let imageData = imageData else {
-        handleCompletion([])
-        return
-      }
-      
-      self.getAllSelectedImageDatasInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageDataList: imageDataList + [imageData], handleCompletion: handleCompletion)
-    }
+    fetchRawImageData(with: selectedAsset, handleCompletion: handleCompletion)
+    
   }
   
-  func fetchRawImageData(with asset: PHAsset, handleCompletion: @escaping (_ imageData: Data?) -> Void) {
+  func fetchRawImageData(with asset: PHAsset, handleCompletion: @escaping (_ imageData: Data?, _ isGIF: Bool) -> Void) {
     
     let imageRequestOptions = getImageRequestOptions(with: .export)
     
     imageManager.requestImageData(for: asset, options: imageRequestOptions) { (data, uti, _, info) in
       
-      handleCompletion(data)
+      handleCompletion(data, uti ?? "" == kUTTypeGIF as String)
     }
   }
   

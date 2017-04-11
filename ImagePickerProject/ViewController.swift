@@ -43,7 +43,6 @@ class ViewController: UIViewController {
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
     imagePickerHelper.resourceOption = [.image, .video]
-    imagePickerHelper.isExportImageData = true
     imagePickerHelper.startPhoto()
   }
   
@@ -137,9 +136,9 @@ extension ViewController: ImagePickerDelegate {
       print(avAsset)
     }
     
-    if case .rawImageData(imageDatas: let imageDatas) = resource {
+    if case .rawImageData(imageData: let imageData) = resource, let _imageData = imageData {
       
-      print(imageDatas.map({"\($0.count)"}))
+      print(_imageData.count)
     }
   }
 }
