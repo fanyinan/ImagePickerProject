@@ -142,7 +142,7 @@ class ImagePickerHelper: NSObject {
       
     } else {
       
-      if PhotosManager.sharedInstance.selectedImages.count == 1 {
+      if resourceOption.contains(.gif) && PhotosManager.sharedInstance.selectedImages.count == 1 {
         
         PhotosManager.sharedInstance.fetchSelectedImageData({ (data, isGIF) in
           
