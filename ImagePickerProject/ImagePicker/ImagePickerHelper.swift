@@ -32,7 +32,7 @@ struct ResourceOption: OptionSet {
   var rawValue: Int = 0
   static var image = ResourceOption(rawValue: 1 << 0)
   static var video = ResourceOption(rawValue: 1 << 1)
-  static var gif = ResourceOption(rawValue: 1 << 2)
+  static var data = ResourceOption(rawValue: 1 << 2)
 }
 
 enum ResourceType {
@@ -142,7 +142,7 @@ class ImagePickerHelper: NSObject {
       
     } else {
       
-      if resourceOption.contains(.gif) && PhotosManager.sharedInstance.selectedImages.count == 1 {
+      if resourceOption.contains(.data) && PhotosManager.sharedInstance.selectedImages.count == 1 {
         
         PhotosManager.sharedInstance.fetchSelectedImageData({ (data, isGIF) in
           
@@ -161,10 +161,17 @@ class ImagePickerHelper: NSObject {
               images.append(image)
             }
             
+            //在选了.data的情况下，是gif时，一定返回data
+            //如果不是gif，若选了.image则返回image, 否则返回data
             if isGIF {
               self.delegate?.pickedPhoto(self, didPickResource: .rawImageData(imageData: data))
             } else {
-              self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
+              
+              if self.resourceOption.contains(.image) {
+                self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
+              } else {
+                self.delegate?.pickedPhoto(self, didPickResource: .rawImageData(imageData: data))
+              }
             }
             
             self.delegate?.pickedPhoto(self, images: images)
@@ -194,7 +201,7 @@ class ImagePickerHelper: NSObject {
     }
   }
   
-  fileprivate func openAblum() {
+  private func openAblum() {
     
     guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
       
@@ -227,7 +234,7 @@ class ImagePickerHelper: NSObject {
     }
   }
   
-  fileprivate func showAblum() {
+  private func showAblum() {
     
     let viewController = PhotoColletionViewController()
     viewController.canOpenCamera = self.type != .album
