@@ -26,7 +26,7 @@ class PhotoMaskView: UIView {
     
     guard let ctx = UIGraphicsGetCurrentContext() else { return }
     
-    ctx.setFillColor(UIColor.hexStringToColor("000000", alpha: 0.5).cgColor)
+    ctx.setFillColor(UIColor(hex: 0x000000, alpha: 0.5).cgColor)
     ctx.fill(rect);
     ctx.strokePath();
     

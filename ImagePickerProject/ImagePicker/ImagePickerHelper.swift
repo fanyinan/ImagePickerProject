@@ -11,15 +11,16 @@ import Photos
 
 protocol ImagePickerDelegate: NSObjectProtocol {
   
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage])
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType)
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool
+  
 }
 
 extension ImagePickerDelegate {
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage]) {}
+  
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType) {}
   func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool { return true }
+  
 }
 
 enum ImagePickerType {
@@ -85,7 +86,7 @@ class ImagePickerHelper: NSObject {
    ******************************************************************************/
   //MARK: - public Method Implementation
   
-  func startPhoto(){
+  func start(){
     
     guard let _handlerViewController = handlerViewController else { return }
     
@@ -93,10 +94,14 @@ class ImagePickerHelper: NSObject {
     
     if type == .camera {
       
-      cameraHelper = CameraHelper(handlerViewController: _handlerViewController)
-      cameraHelper.isCrop = PhotosManager.sharedInstance.isCrop
-      cameraHelper.cropViewControllerTranlateType = CameraHelper.cropViewControllerTranlateType_Present
-      cameraHelper.openCamera()
+      if resourceOption.contains(.image) {
+        cameraHelper = CameraHelper(handlerViewController: _handlerViewController)
+        cameraHelper.isCrop = PhotosManager.sharedInstance.isCrop
+        cameraHelper.cropViewControllerTranlateType = CameraHelper.cropViewControllerTranlateType_Present
+        cameraHelper.openCamera()
+      } else if resourceOption.contains(.video) {
+        
+      }
       
     } else {
       
@@ -105,99 +110,95 @@ class ImagePickerHelper: NSObject {
     }
   }
   
-  func onComplete(_ image: UIImage?) {
+  func onComplete(_ resource: ResourceType?) {
     
-    if let image = image {
+    if let resource = resource {
       
-      guard self.delegate?.pickedPhoto(self, shouldPickResource: .image(images: [image])) ?? true else {
-        PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
-        return
-      }
+      guard shouldPick(resource: resource) else { return }
       
-      self.handlerViewController?.dismiss(animated: true, completion: {
-        
-        PhotosManager.sharedInstance.clearData()
-        
-        self.delegate?.pickedPhoto(self, images: [image])
-        
-      })
-      
+      finish(with: resource)
       return
     }
     
-    if let _ = PhotosManager.sharedInstance.selectedVideo {
-      
-      PhotosManager.sharedInstance.fetchVideo(handleCompletion: { avAsset in
-        
-        guard self.delegate?.pickedPhoto(self, shouldPickResource: .video(video: avAsset)) ?? true else {
-          PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
-          return
-        }
-        
-        self.handlerViewController?.dismiss(animated: true, completion: {
-          PhotosManager.sharedInstance.clearData()
-          self.delegate?.pickedPhoto(self, didPickResource: .video(video: avAsset))
-        })
-      })
-      
+    if let _ = PhotosManager.sharedInstance.selectedVideo  {
+      fetchVideo()
+      return
+    }
+    
+    if resourceOption.contains(.data) && PhotosManager.sharedInstance.selectedImages.count == 1 {
+      fetchImageDatas()
     } else {
+      fetchImages()
+    }
+  }
+  
+  private func shouldPick(resource: ResourceType) -> Bool {
+    
+    let should = delegate?.pickedPhoto(self, shouldPickResource: resource) ?? true
+    
+    if !should {
+      PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+    }
+    
+    return should
+  }
+  
+  private func finish(with resource: ResourceType) {
+    
+    handlerViewController?.dismiss(animated: true, completion: {
       
-      if resourceOption.contains(.data) && PhotosManager.sharedInstance.selectedImages.count == 1 {
-        
-        PhotosManager.sharedInstance.fetchSelectedImageData({ (data, isGIF) in
-          
-          guard self.delegate?.pickedPhoto(self, shouldPickResource: .rawImageData(imageData: data)) ?? true else {
-            PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
-            return
-          }
-          
-          self.handlerViewController?.dismiss(animated: true, completion: {
-            
-            PhotosManager.sharedInstance.clearData()
-            
-            var images: [UIImage] = []
-            
-            if let data = data, let image = UIImage(data: data) {
-              images.append(image)
-            }
-            
-            //在选了.data的情况下，是gif时，一定返回data
-            //如果不是gif，若选了.image则返回image, 否则返回data
-            if isGIF {
-              self.delegate?.pickedPhoto(self, didPickResource: .rawImageData(imageData: data))
-            } else {
-              
-              if self.resourceOption.contains(.image) {
-                self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
-              } else {
-                self.delegate?.pickedPhoto(self, didPickResource: .rawImageData(imageData: data))
-              }
-            }
-            
-            self.delegate?.pickedPhoto(self, images: images)
-
-          })
-        })
-        
+      PhotosManager.sharedInstance.clearData()
+      
+      self.delegate?.pickedPhoto(self, didPickResource: resource)
+      
+    })
+  }
+  
+  private func fetchVideo() {
+    
+    PhotosManager.sharedInstance.fetchVideo(handleCompletion: { avAsset in
+      
+      let resource: ResourceType = .video(video: avAsset)
+      
+      guard self.shouldPick(resource: resource) else { return }
+      
+      self.finish(with: resource)
+      
+    })
+  }
+  
+  private func fetchImageDatas() {
+    
+    PhotosManager.sharedInstance.fetchSelectedImageData({ (data, isGIF) in
+      
+      var resource: ResourceType!
+      
+      //在选了.data的情况下，是gif时，一定返回data
+      //如果不是gif，若选了.image则返回image, 否则返回data
+      
+      if !isGIF && self.resourceOption.contains(.image) {
+        guard let data = data, let image = UIImage(data: data) else { return }
+        resource = .image(images: [image])
       } else {
-       
-        PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
-          
-          guard self.delegate?.pickedPhoto(self, shouldPickResource: .image(images: images)) ?? true else {
-            PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
-            return
-          }
-          
-          self.handlerViewController?.dismiss(animated: true, completion: {
-            
-            PhotosManager.sharedInstance.clearData()
-            
-            self.delegate?.pickedPhoto(self, didPickResource: .image(images: images))
-            self.delegate?.pickedPhoto(self, images: images)
-
-          })
-        }
+        resource = .rawImageData(imageData: data)
       }
+      
+      guard self.shouldPick(resource: resource) else { return }
+      
+      self.finish(with: resource)
+      
+    })
+  }
+  
+  private func fetchImages() {
+    
+    PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
+      
+      let resource: ResourceType = .image(images: images)
+      
+      guard self.shouldPick(resource: resource) else { return }
+      
+      self.finish(with: resource)
     }
   }
   
@@ -241,7 +242,7 @@ class ImagePickerHelper: NSObject {
     
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.isTranslucent = false
-    navigationController.navigationBar.tintColor = mainTextColor
+    navigationController.navigationBar.tintColor = .jx_main
     self.handlerViewController?.present(navigationController, animated: true, completion: nil)
     
   }

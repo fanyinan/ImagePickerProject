@@ -8,7 +8,7 @@
 
 import UIKit
 
-let separatorColor = UIColor.hexStringToColor("e5e5e5")
+let separatorColor = UIColor(hex: 0xe5e5e5)
 
 class ViewController: UIViewController {
 
@@ -42,8 +42,8 @@ class ViewController: UIViewController {
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
-    imagePickerHelper.resourceOption = [.image, .video]
-    imagePickerHelper.startPhoto()
+    imagePickerHelper.resourceOption = [.image, .data]
+    imagePickerHelper.start()
   }
   
   @IBAction func onIsCrop(_ sender: UISwitch) {

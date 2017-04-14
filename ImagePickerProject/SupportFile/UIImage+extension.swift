@@ -33,11 +33,11 @@ extension UIImage {
     
     switch imageOrientation {
     case .left:
-      rectTransform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2)).translatedBy(x: 0, y: -size.height)
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2)).translatedBy(x: 0, y: -size.height)
     case .right:
-      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2)).translatedBy(x: -size.width, y: 0)
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2)).translatedBy(x: -size.width, y: 0)
     case .down:
-      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-M_PI)).translatedBy(x: -size.width, y: -size.height)
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2)).translatedBy(x: -size.width, y: -size.height)
     default:
       break
     }

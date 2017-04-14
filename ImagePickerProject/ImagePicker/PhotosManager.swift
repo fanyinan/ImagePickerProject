@@ -92,7 +92,7 @@ class PhotosManager: NSObject {
     
   }
   
-  //startphoto是调用，保存当前imagePicker
+  //start是调用，保存当前imagePicker
   func prepareWith(_ imagePicker: ImagePickerHelper) {
     
     self.imagePicker = imagePicker
@@ -100,10 +100,10 @@ class PhotosManager: NSObject {
   }
   
   //onCompletion是调用，重置数据
-  func didFinish(_ image: UIImage? = nil) {
+  func didFinish(_ resource: ResourceType? = nil) {
     
-    imagePicker?.onComplete(image)
-        
+    imagePicker?.onComplete(resource)
+    
   }
   
   //未选择图片但dismiss时调用，重置数据
@@ -176,15 +176,17 @@ class PhotosManager: NSObject {
     let fetchOptions = PHFetchOptions()
     fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
     
-    if resourceOption.contains(.image) && !resourceOption.contains(.video){
+    let isContainImage = resourceOption.contains(.image) || resourceOption.contains(.data)
+    
+    if isContainImage && !resourceOption.contains(.video){
       fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
     }
     
-    if !resourceOption.contains(.image) && resourceOption.contains(.video) {
+    if !isContainImage && resourceOption.contains(.video) {
       fetchOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.video.rawValue)
     }
     
-    if resourceOption.contains(.image) && resourceOption.contains(.video) {
+    if isContainImage && resourceOption.contains(.video) {
       fetchOptions.predicate = NSPredicate(format: "mediaType = %d OR mediaType = %d", PHAssetMediaType.video.rawValue, PHAssetMediaType.image.rawValue)
     }
     

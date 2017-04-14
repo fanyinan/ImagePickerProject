@@ -159,7 +159,7 @@ class PhotoColletionViewController: UIViewController {
       make.center.equalTo(ablumButton)
     }
     
-    titleLabel.textColor = mainTextColor
+    titleLabel.textColor = .jx_main
     titleLabel.font = UIFont.systemFont(ofSize: 18)
     titleLabel.textAlignment = .center
     
@@ -196,7 +196,7 @@ class PhotoColletionViewController: UIViewController {
     navigationController?.navigationBar.addSubview(completionButton)
     
     selectedCountLabel = UILabel(frame: CGRect(x: 0, y: (completionButton.frame.height - selectedCountLabelWidth) / 2, width: selectedCountLabelWidth, height: selectedCountLabelWidth))
-    selectedCountLabel.backgroundColor = UIColor.hexStringToColor("03AC00")
+    selectedCountLabel.backgroundColor = UIColor(hex: 0x03AC00)
     selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
     selectedCountLabel.textColor = UIColor.white
     selectedCountLabel.textAlignment = .center
@@ -204,7 +204,7 @@ class PhotoColletionViewController: UIViewController {
     completionButton.addSubview(selectedCountLabel)
     
     completionLabel = UILabel(frame: CGRect(x: selectedCountLabelWidth, y: 0, width: completionButton.frame.width - selectedCountLabelWidth, height: 44))
-    completionLabel.textColor = UIColor.hexStringToColor("03AC00")
+    completionLabel.textColor = UIColor(hex: 0x03AC00)
     completionLabel.text = "完成"
     completionLabel.font = UIFont.systemFont(ofSize: 14)
     completionLabel.textAlignment = .center
@@ -248,7 +248,7 @@ class PhotoColletionViewController: UIViewController {
     
     UIView.animate(withDuration: 0.3, animations: { 
       
-      let transform = CGAffineTransform(rotationAngle: isIndicatShowing ? CGFloat(M_PI) : 0)
+      let transform = CGAffineTransform(rotationAngle: isIndicatShowing ? CGFloat(Double.pi) : 0)
       self.indicatorImageView.transform = transform
       
     }) 
@@ -413,7 +413,7 @@ extension PhotoColletionViewController: UIImagePickerControllerDelegate, UINavig
         
         picker.dismiss(animated: true, completion: nil)
         
-        PhotosManager.sharedInstance.didFinish(image)
+        PhotosManager.sharedInstance.didFinish(.image(images: [image]))
         
       }
     }

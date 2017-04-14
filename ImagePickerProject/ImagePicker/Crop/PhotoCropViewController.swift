@@ -101,7 +101,7 @@ class PhotoCropViewController: UIViewController {
       originImage = PhotosManager.sharedInstance.cropImage(originImage)
     }
     
-    PhotosManager.sharedInstance.didFinish(asset == nil ? originImage : nil)
+    PhotosManager.sharedInstance.didFinish(asset == nil ? .image(images: [originImage]) : nil)
     
   }
   
@@ -160,7 +160,7 @@ class PhotoCropViewController: UIViewController {
     }
     
     bottomBarTransparentView.alpha = 0.7
-    bottomBarTransparentView.backgroundColor = UIColor.hexStringToColor("111111")
+    bottomBarTransparentView.backgroundColor = UIColor(hex: 0x111111)
     
     //bottomBarContainer
     bottomBarContainerView = UIView()

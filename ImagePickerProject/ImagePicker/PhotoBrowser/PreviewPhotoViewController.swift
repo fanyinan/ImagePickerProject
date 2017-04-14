@@ -98,7 +98,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     }
     
     topBarTransparentView.alpha = 0.7
-    topBarTransparentView.backgroundColor = UIColor.hexStringToColor("111111")
+    topBarTransparentView.backgroundColor = UIColor(hex: 0x111111)
     
     //topBarContainer
     topBarContainerView = UIView()
@@ -165,7 +165,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     }
     
     bottomBarTransparentView.alpha = 0.7
-    bottomBarTransparentView.backgroundColor = UIColor.hexStringToColor("111111")
+    bottomBarTransparentView.backgroundColor = UIColor(hex: 0x111111)
     
     //bottomBarContainer
     bottomBarContainerView = UIView()
@@ -200,7 +200,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     }
     
     selectedCountLabel.textColor = UIColor.white
-    selectedCountLabel.backgroundColor = UIColor.hexStringToColor("03AC00")
+    selectedCountLabel.backgroundColor = UIColor(hex: 0x03AC00)
     selectedCountLabel.textAlignment = .center
     selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
     
