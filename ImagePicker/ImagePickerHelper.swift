@@ -57,7 +57,7 @@ open class WZImagePickerHelper: NSObject {
   public var type: WZImagePickerType = .albumAndCamera
   public var resourceOption: WZResourceOption = .image
   
-  init(delegate: WZImagePickerDelegate, handlerViewController: UIViewController? = nil){
+  public init(delegate: WZImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
     self.handlerViewController = handlerViewController ?? (delegate as! UIViewController)
     self.maxSelectedCount = 1
