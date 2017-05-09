@@ -107,7 +107,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
 
-  s.resources = "ImagePicker/Resource"
+  s.resources = "ImagePicker/Resource/*"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
