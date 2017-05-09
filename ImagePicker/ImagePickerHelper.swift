@@ -49,15 +49,15 @@ public enum WZResourceType {
 open class WZImagePickerHelper: NSObject {
   
   private var cameraHelper: CameraHelper!
-  private weak var delegate: WZImagePickerDelegate?
   private weak var handlerViewController: UIViewController?
   
+  public weak var delegate: WZImagePickerDelegate?
   public var maxSelectedCount: Int = 1
   public var isCrop: Bool = false
   public var type: WZImagePickerType = .albumAndCamera
   public var resourceOption: WZResourceOption = .image
   
-  open init(delegate: WZImagePickerDelegate, handlerViewController: UIViewController? = nil){
+  public init(delegate: WZImagePickerDelegate?, handlerViewController: UIViewController? = nil) {
     self.delegate = delegate
     self.handlerViewController = handlerViewController ?? (delegate as! UIViewController)
     self.maxSelectedCount = 1
