@@ -200,7 +200,9 @@ class PhotoColletionViewController: UIViewController {
     selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
     selectedCountLabel.textColor = UIColor.white
     selectedCountLabel.textAlignment = .center
-    selectedCountLabel.setViewCornerRadius()
+    selectedCountLabel.layer.cornerRadius = selectedCountLabel.frame.size.height / 2
+    selectedCountLabel.layer.masksToBounds = true
+  
     completionButton.addSubview(selectedCountLabel)
     
     completionLabel = UILabel(frame: CGRect(x: selectedCountLabelWidth, y: 0, width: completionButton.frame.width - selectedCountLabelWidth, height: 44))

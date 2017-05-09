@@ -48,7 +48,8 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   override func viewWillLayoutSubviews() {
     super.viewWillLayoutSubviews()
     
-    selectedCountLabel.setViewCornerRadius()
+    selectedCountLabel.layer.cornerRadius = selectedCountLabel.frame.size.height / 2
+    selectedCountLabel.layer.masksToBounds = true
 
   }
   

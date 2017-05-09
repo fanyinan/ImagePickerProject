@@ -218,9 +218,10 @@ class ImagePickerHelper: NSObject {
         
         guard status == .authorized else { return }
         
-        exChangeMainQueue {
+        DispatchQueue.main.async {
           self.showAblum()
         }
+
       }
       
     case .authorized:

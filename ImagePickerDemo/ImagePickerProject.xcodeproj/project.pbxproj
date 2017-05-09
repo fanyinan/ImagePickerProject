@@ -1,0 +1,637 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F11C89613700B72821 /* AppDelegate.swift */; };
+		CF2C77F41C89613700B72821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2C77F31C89613700B72821 /* ViewController.swift */; };
+		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
+		CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F81C89613700B72821 /* Assets.xcassets */; };
+		CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */; };
+		CF467C6F1EC172F8003F85F5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CF467C4D1EC172F8003F85F5 /* LICENSE */; };
+		CF467C701EC172F8003F85F5 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CF467C4E1EC172F8003F85F5 /* README.md */; };
+		CF467C711EC172F8003F85F5 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C501EC172F8003F85F5 /* Constraint.swift */; };
+		CF467C721EC172F8003F85F5 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C511EC172F8003F85F5 /* ConstraintAttributes.swift */; };
+		CF467C731EC172F8003F85F5 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C521EC172F8003F85F5 /* ConstraintConfig.swift */; };
+		CF467C741EC172F8003F85F5 /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C531EC172F8003F85F5 /* ConstraintConstantTarget.swift */; };
+		CF467C751EC172F8003F85F5 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C541EC172F8003F85F5 /* ConstraintDescription.swift */; };
+		CF467C761EC172F8003F85F5 /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C551EC172F8003F85F5 /* ConstraintDSL.swift */; };
+		CF467C771EC172F8003F85F5 /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C561EC172F8003F85F5 /* ConstraintInsets.swift */; };
+		CF467C781EC172F8003F85F5 /* ConstraintInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C571EC172F8003F85F5 /* ConstraintInsetTarget.swift */; };
+		CF467C791EC172F8003F85F5 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C581EC172F8003F85F5 /* ConstraintItem.swift */; };
+		CF467C7A1EC172F8003F85F5 /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C591EC172F8003F85F5 /* ConstraintLayoutGuide.swift */; };
+		CF467C7B1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5A1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift */; };
+		CF467C7C1EC172F8003F85F5 /* ConstraintLayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5B1EC172F8003F85F5 /* ConstraintLayoutSupport.swift */; };
+		CF467C7D1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5C1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift */; };
+		CF467C7E1EC172F8003F85F5 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5D1EC172F8003F85F5 /* ConstraintMaker.swift */; };
+		CF467C7F1EC172F8003F85F5 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5E1EC172F8003F85F5 /* ConstraintMakerEditable.swift */; };
+		CF467C801EC172F8003F85F5 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5F1EC172F8003F85F5 /* ConstraintMakerExtendable.swift */; };
+		CF467C811EC172F8003F85F5 /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C601EC172F8003F85F5 /* ConstraintMakerFinalizable.swift */; };
+		CF467C821EC172F8003F85F5 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C611EC172F8003F85F5 /* ConstraintMakerPriortizable.swift */; };
+		CF467C831EC172F8003F85F5 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C621EC172F8003F85F5 /* ConstraintMakerRelatable.swift */; };
+		CF467C841EC172F8003F85F5 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C631EC172F8003F85F5 /* ConstraintMultiplierTarget.swift */; };
+		CF467C851EC172F8003F85F5 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C641EC172F8003F85F5 /* ConstraintOffsetTarget.swift */; };
+		CF467C861EC172F8003F85F5 /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C651EC172F8003F85F5 /* ConstraintPriorityTarget.swift */; };
+		CF467C871EC172F8003F85F5 /* ConstraintRelatableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C661EC172F8003F85F5 /* ConstraintRelatableTarget.swift */; };
+		CF467C881EC172F8003F85F5 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C671EC172F8003F85F5 /* ConstraintRelation.swift */; };
+		CF467C891EC172F8003F85F5 /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C681EC172F8003F85F5 /* ConstraintView+Extensions.swift */; };
+		CF467C8A1EC172F8003F85F5 /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C691EC172F8003F85F5 /* ConstraintView.swift */; };
+		CF467C8B1EC172F8003F85F5 /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6A1EC172F8003F85F5 /* ConstraintViewDSL.swift */; };
+		CF467C8C1EC172F8003F85F5 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6B1EC172F8003F85F5 /* Debugging.swift */; };
+		CF467C8D1EC172F8003F85F5 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6C1EC172F8003F85F5 /* LayoutConstraint.swift */; };
+		CF467C8E1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6D1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift */; };
+		CF467C8F1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6E1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift */; };
+		CF467CAB1EC17306003F85F5 /* PhotoAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C921EC17306003F85F5 /* PhotoAlbumCell.swift */; };
+		CF467CAC1EC17306003F85F5 /* PhotoAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF467C931EC17306003F85F5 /* PhotoAlbumCell.xib */; };
+		CF467CAD1EC17306003F85F5 /* PhotoAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C941EC17306003F85F5 /* PhotoAlbumView.swift */; };
+		CF467CAE1EC17306003F85F5 /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C961EC17306003F85F5 /* CameraHelper.swift */; };
+		CF467CAF1EC17306003F85F5 /* CameraPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C971EC17306003F85F5 /* CameraPreviewCell.swift */; };
+		CF467CB01EC17306003F85F5 /* CameraPreviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF467C981EC17306003F85F5 /* CameraPreviewCell.xib */; };
+		CF467CB11EC17306003F85F5 /* CameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C991EC17306003F85F5 /* CameraPreviewView.swift */; };
+		CF467CB21EC17306003F85F5 /* CropImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9B1EC17306003F85F5 /* CropImageScrollView.swift */; };
+		CF467CB31EC17306003F85F5 /* PhotoCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9C1EC17306003F85F5 /* PhotoCropViewController.swift */; };
+		CF467CB41EC17306003F85F5 /* PhotoMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9D1EC17306003F85F5 /* PhotoMaskView.swift */; };
+		CF467CB61EC17306003F85F5 /* ImagePickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C9F1EC17306003F85F5 /* ImagePickerHelper.swift */; };
+		CF467CB71EC17306003F85F5 /* PhotoColletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA11EC17306003F85F5 /* PhotoColletionViewController.swift */; };
+		CF467CB81EC17306003F85F5 /* PhotoThumbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA21EC17306003F85F5 /* PhotoThumbCell.swift */; };
+		CF467CB91EC17306003F85F5 /* PhotoThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF467CA31EC17306003F85F5 /* PhotoThumbCell.xib */; };
+		CF467CBA1EC17306003F85F5 /* PhotoCollectionLiteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA51EC17306003F85F5 /* PhotoCollectionLiteCell.swift */; };
+		CF467CBB1EC17306003F85F5 /* PreviewPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA61EC17306003F85F5 /* PreviewPhotoViewController.swift */; };
+		CF467CBC1EC17306003F85F5 /* WZPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA71EC17306003F85F5 /* WZPhotoBrowserLite.swift */; };
+		CF467CBD1EC17306003F85F5 /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */; };
+		CF467CBE1EC17306003F85F5 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA91EC17306003F85F5 /* PhotosManager.swift */; };
+		CF467CC71EC17454003F85F5 /* back_white_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC11EC17454003F85F5 /* back_white_arrow.png */; };
+		CF467CC81EC17454003F85F5 /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC21EC17454003F85F5 /* default_pic.png */; };
+		CF467CC91EC17454003F85F5 /* ic_down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC31EC17454003F85F5 /* ic_down_arrow.png */; };
+		CF467CCA1EC17454003F85F5 /* imagepick_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC41EC17454003F85F5 /* imagepick_camera.png */; };
+		CF467CCB1EC17454003F85F5 /* imagepick_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC51EC17454003F85F5 /* imagepick_checked.png */; };
+		CF467CCC1EC17454003F85F5 /* imagepick_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC61EC17454003F85F5 /* imagepick_unchecked.png */; };
+		CF467CD01EC17493003F85F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCE1EC17493003F85F5 /* Extension.swift */; };
+		CF467CD11EC17493003F85F5 /* PopViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CF2C77EE1C89613700B72821 /* ImagePickerProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePickerProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF2C77F11C89613700B72821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CF2C77F31C89613700B72821 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CF2C77F61C89613700B72821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CF2C77F81C89613700B72821 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CF2C77FB1C89613700B72821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CF2C77FD1C89613700B72821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagePickerProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		CF467C4D1EC172F8003F85F5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CF467C4E1EC172F8003F85F5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CF467C501EC172F8003F85F5 /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
+		CF467C511EC172F8003F85F5 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
+		CF467C521EC172F8003F85F5 /* ConstraintConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConfig.swift; sourceTree = "<group>"; };
+		CF467C531EC172F8003F85F5 /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConstantTarget.swift; sourceTree = "<group>"; };
+		CF467C541EC172F8003F85F5 /* ConstraintDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDescription.swift; sourceTree = "<group>"; };
+		CF467C551EC172F8003F85F5 /* ConstraintDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDSL.swift; sourceTree = "<group>"; };
+		CF467C561EC172F8003F85F5 /* ConstraintInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintInsets.swift; sourceTree = "<group>"; };
+		CF467C571EC172F8003F85F5 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintInsetTarget.swift; sourceTree = "<group>"; };
+		CF467C581EC172F8003F85F5 /* ConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintItem.swift; sourceTree = "<group>"; };
+		CF467C591EC172F8003F85F5 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
+		CF467C5A1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
+		CF467C5B1EC172F8003F85F5 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
+		CF467C5C1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
+		CF467C5D1EC172F8003F85F5 /* ConstraintMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMaker.swift; sourceTree = "<group>"; };
+		CF467C5E1EC172F8003F85F5 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerEditable.swift; sourceTree = "<group>"; };
+		CF467C5F1EC172F8003F85F5 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
+		CF467C601EC172F8003F85F5 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
+		CF467C611EC172F8003F85F5 /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
+		CF467C621EC172F8003F85F5 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
+		CF467C631EC172F8003F85F5 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
+		CF467C641EC172F8003F85F5 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
+		CF467C651EC172F8003F85F5 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
+		CF467C661EC172F8003F85F5 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
+		CF467C671EC172F8003F85F5 /* ConstraintRelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelation.swift; sourceTree = "<group>"; };
+		CF467C681EC172F8003F85F5 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
+		CF467C691EC172F8003F85F5 /* ConstraintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintView.swift; sourceTree = "<group>"; };
+		CF467C6A1EC172F8003F85F5 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintViewDSL.swift; sourceTree = "<group>"; };
+		CF467C6B1EC172F8003F85F5 /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
+		CF467C6C1EC172F8003F85F5 /* LayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
+		CF467C6D1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
+		CF467C6E1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
+		CF467C921EC17306003F85F5 /* PhotoAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCell.swift; sourceTree = "<group>"; };
+		CF467C931EC17306003F85F5 /* PhotoAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumCell.xib; sourceTree = "<group>"; };
+		CF467C941EC17306003F85F5 /* PhotoAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumView.swift; sourceTree = "<group>"; };
+		CF467C961EC17306003F85F5 /* CameraHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraHelper.swift; sourceTree = "<group>"; };
+		CF467C971EC17306003F85F5 /* CameraPreviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewCell.swift; sourceTree = "<group>"; };
+		CF467C981EC17306003F85F5 /* CameraPreviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraPreviewCell.xib; sourceTree = "<group>"; };
+		CF467C991EC17306003F85F5 /* CameraPreviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewView.swift; sourceTree = "<group>"; };
+		CF467C9B1EC17306003F85F5 /* CropImageScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropImageScrollView.swift; sourceTree = "<group>"; };
+		CF467C9C1EC17306003F85F5 /* PhotoCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCropViewController.swift; sourceTree = "<group>"; };
+		CF467C9D1EC17306003F85F5 /* PhotoMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoMaskView.swift; sourceTree = "<group>"; };
+		CF467C9F1EC17306003F85F5 /* ImagePickerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerHelper.swift; sourceTree = "<group>"; };
+		CF467CA11EC17306003F85F5 /* PhotoColletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoColletionViewController.swift; sourceTree = "<group>"; };
+		CF467CA21EC17306003F85F5 /* PhotoThumbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoThumbCell.swift; sourceTree = "<group>"; };
+		CF467CA31EC17306003F85F5 /* PhotoThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoThumbCell.xib; sourceTree = "<group>"; };
+		CF467CA51EC17306003F85F5 /* PhotoCollectionLiteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionLiteCell.swift; sourceTree = "<group>"; };
+		CF467CA61EC17306003F85F5 /* PreviewPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewPhotoViewController.swift; sourceTree = "<group>"; };
+		CF467CA71EC17306003F85F5 /* WZPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WZPhotoBrowserLite.swift; sourceTree = "<group>"; };
+		CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
+		CF467CA91EC17306003F85F5 /* PhotosManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
+		CF467CC11EC17454003F85F5 /* back_white_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_white_arrow.png; sourceTree = "<group>"; };
+		CF467CC21EC17454003F85F5 /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
+		CF467CC31EC17454003F85F5 /* ic_down_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_down_arrow.png; sourceTree = "<group>"; };
+		CF467CC41EC17454003F85F5 /* imagepick_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_camera.png; sourceTree = "<group>"; };
+		CF467CC51EC17454003F85F5 /* imagepick_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_checked.png; sourceTree = "<group>"; };
+		CF467CC61EC17454003F85F5 /* imagepick_unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_unchecked.png; sourceTree = "<group>"; };
+		CF467CCE1EC17493003F85F5 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopViewHelper.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF2C77EB1C89613700B72821 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CF2C77E51C89613700B72821 = {
+			isa = PBXGroup;
+			children = (
+				CF2C77F01C89613700B72821 /* ImagePickerProject */,
+				CF2C77EF1C89613700B72821 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CF2C77EF1C89613700B72821 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C77EE1C89613700B72821 /* ImagePickerProject.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF2C77F01C89613700B72821 /* ImagePickerProject */ = {
+			isa = PBXGroup;
+			children = (
+				CF467C901EC17306003F85F5 /* ImagePicker */,
+				CF467C4C1EC172F8003F85F5 /* SnapKit */,
+				CF2C7C841C8961B500B72821 /* SupportFile */,
+				CF2C77F11C89613700B72821 /* AppDelegate.swift */,
+				CF2C77F31C89613700B72821 /* ViewController.swift */,
+				CF2C77F51C89613700B72821 /* Main.storyboard */,
+				CF2C77F81C89613700B72821 /* Assets.xcassets */,
+				CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */,
+				CF2C77FD1C89613700B72821 /* Info.plist */,
+			);
+			path = ImagePickerProject;
+			sourceTree = "<group>";
+		};
+		CF2C7C841C8961B500B72821 /* SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+				CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */,
+			);
+			path = SupportFile;
+			sourceTree = "<group>";
+		};
+		CF467C4C1EC172F8003F85F5 /* SnapKit */ = {
+			isa = PBXGroup;
+			children = (
+				CF467C4D1EC172F8003F85F5 /* LICENSE */,
+				CF467C4E1EC172F8003F85F5 /* README.md */,
+				CF467C4F1EC172F8003F85F5 /* Source */,
+			);
+			path = SnapKit;
+			sourceTree = "<group>";
+		};
+		CF467C4F1EC172F8003F85F5 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				CF467C501EC172F8003F85F5 /* Constraint.swift */,
+				CF467C511EC172F8003F85F5 /* ConstraintAttributes.swift */,
+				CF467C521EC172F8003F85F5 /* ConstraintConfig.swift */,
+				CF467C531EC172F8003F85F5 /* ConstraintConstantTarget.swift */,
+				CF467C541EC172F8003F85F5 /* ConstraintDescription.swift */,
+				CF467C551EC172F8003F85F5 /* ConstraintDSL.swift */,
+				CF467C561EC172F8003F85F5 /* ConstraintInsets.swift */,
+				CF467C571EC172F8003F85F5 /* ConstraintInsetTarget.swift */,
+				CF467C581EC172F8003F85F5 /* ConstraintItem.swift */,
+				CF467C591EC172F8003F85F5 /* ConstraintLayoutGuide.swift */,
+				CF467C5A1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift */,
+				CF467C5B1EC172F8003F85F5 /* ConstraintLayoutSupport.swift */,
+				CF467C5C1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift */,
+				CF467C5D1EC172F8003F85F5 /* ConstraintMaker.swift */,
+				CF467C5E1EC172F8003F85F5 /* ConstraintMakerEditable.swift */,
+				CF467C5F1EC172F8003F85F5 /* ConstraintMakerExtendable.swift */,
+				CF467C601EC172F8003F85F5 /* ConstraintMakerFinalizable.swift */,
+				CF467C611EC172F8003F85F5 /* ConstraintMakerPriortizable.swift */,
+				CF467C621EC172F8003F85F5 /* ConstraintMakerRelatable.swift */,
+				CF467C631EC172F8003F85F5 /* ConstraintMultiplierTarget.swift */,
+				CF467C641EC172F8003F85F5 /* ConstraintOffsetTarget.swift */,
+				CF467C651EC172F8003F85F5 /* ConstraintPriorityTarget.swift */,
+				CF467C661EC172F8003F85F5 /* ConstraintRelatableTarget.swift */,
+				CF467C671EC172F8003F85F5 /* ConstraintRelation.swift */,
+				CF467C681EC172F8003F85F5 /* ConstraintView+Extensions.swift */,
+				CF467C691EC172F8003F85F5 /* ConstraintView.swift */,
+				CF467C6A1EC172F8003F85F5 /* ConstraintViewDSL.swift */,
+				CF467C6B1EC172F8003F85F5 /* Debugging.swift */,
+				CF467C6C1EC172F8003F85F5 /* LayoutConstraint.swift */,
+				CF467C6D1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift */,
+				CF467C6E1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		CF467C901EC17306003F85F5 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				CF467C9F1EC17306003F85F5 /* ImagePickerHelper.swift */,
+				CF467CA91EC17306003F85F5 /* PhotosManager.swift */,
+				CF467CCD1EC17493003F85F5 /* Tool */,
+				CF467C911EC17306003F85F5 /* Album */,
+				CF467C951EC17306003F85F5 /* Camera */,
+				CF467C9A1EC17306003F85F5 /* Crop */,
+				CF467CA01EC17306003F85F5 /* Main */,
+				CF467CA41EC17306003F85F5 /* PhotoBrowser */,
+				CF467CC01EC17454003F85F5 /* Resource */,
+			);
+			name = ImagePicker;
+			path = ../../ImagePicker;
+			sourceTree = "<group>";
+		};
+		CF467C911EC17306003F85F5 /* Album */ = {
+			isa = PBXGroup;
+			children = (
+				CF467C921EC17306003F85F5 /* PhotoAlbumCell.swift */,
+				CF467C931EC17306003F85F5 /* PhotoAlbumCell.xib */,
+				CF467C941EC17306003F85F5 /* PhotoAlbumView.swift */,
+			);
+			path = Album;
+			sourceTree = "<group>";
+		};
+		CF467C951EC17306003F85F5 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				CF467C961EC17306003F85F5 /* CameraHelper.swift */,
+				CF467C971EC17306003F85F5 /* CameraPreviewCell.swift */,
+				CF467C981EC17306003F85F5 /* CameraPreviewCell.xib */,
+				CF467C991EC17306003F85F5 /* CameraPreviewView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		CF467C9A1EC17306003F85F5 /* Crop */ = {
+			isa = PBXGroup;
+			children = (
+				CF467C9B1EC17306003F85F5 /* CropImageScrollView.swift */,
+				CF467C9C1EC17306003F85F5 /* PhotoCropViewController.swift */,
+				CF467C9D1EC17306003F85F5 /* PhotoMaskView.swift */,
+			);
+			path = Crop;
+			sourceTree = "<group>";
+		};
+		CF467CA01EC17306003F85F5 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CF467CA11EC17306003F85F5 /* PhotoColletionViewController.swift */,
+				CF467CA21EC17306003F85F5 /* PhotoThumbCell.swift */,
+				CF467CA31EC17306003F85F5 /* PhotoThumbCell.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CF467CA41EC17306003F85F5 /* PhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				CF467CA51EC17306003F85F5 /* PhotoCollectionLiteCell.swift */,
+				CF467CA61EC17306003F85F5 /* PreviewPhotoViewController.swift */,
+				CF467CA71EC17306003F85F5 /* WZPhotoBrowserLite.swift */,
+				CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */,
+			);
+			path = PhotoBrowser;
+			sourceTree = "<group>";
+		};
+		CF467CC01EC17454003F85F5 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				CF467CC11EC17454003F85F5 /* back_white_arrow.png */,
+				CF467CC21EC17454003F85F5 /* default_pic.png */,
+				CF467CC31EC17454003F85F5 /* ic_down_arrow.png */,
+				CF467CC41EC17454003F85F5 /* imagepick_camera.png */,
+				CF467CC51EC17454003F85F5 /* imagepick_checked.png */,
+				CF467CC61EC17454003F85F5 /* imagepick_unchecked.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		CF467CCD1EC17493003F85F5 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				CF467CCE1EC17493003F85F5 /* Extension.swift */,
+				CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CF2C77ED1C89613700B72821 /* ImagePickerProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF2C78001C89613700B72821 /* Build configuration list for PBXNativeTarget "ImagePickerProject" */;
+			buildPhases = (
+				CF2C77EA1C89613700B72821 /* Sources */,
+				CF2C77EB1C89613700B72821 /* Frameworks */,
+				CF2C77EC1C89613700B72821 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImagePickerProject;
+			productName = ImagePickerProject;
+			productReference = CF2C77EE1C89613700B72821 /* ImagePickerProject.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CF2C77E61C89613700B72821 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "范祎楠";
+				TargetAttributes = {
+					CF2C77ED1C89613700B72821 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4RQRV7P524;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = CF2C77E91C89613700B72821 /* Build configuration list for PBXProject "ImagePickerProject" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF2C77E51C89613700B72821;
+			productRefGroup = CF2C77EF1C89613700B72821 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CF2C77ED1C89613700B72821 /* ImagePickerProject */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CF2C77EC1C89613700B72821 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF467CCB1EC17454003F85F5 /* imagepick_checked.png in Resources */,
+				CF467CAC1EC17306003F85F5 /* PhotoAlbumCell.xib in Resources */,
+				CF467CB91EC17306003F85F5 /* PhotoThumbCell.xib in Resources */,
+				CF467CC71EC17454003F85F5 /* back_white_arrow.png in Resources */,
+				CF467CCA1EC17454003F85F5 /* imagepick_camera.png in Resources */,
+				CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */,
+				CF467CC81EC17454003F85F5 /* default_pic.png in Resources */,
+				CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */,
+				CF467CB01EC17306003F85F5 /* CameraPreviewCell.xib in Resources */,
+				CF2C77F71C89613700B72821 /* Main.storyboard in Resources */,
+				CF467C6F1EC172F8003F85F5 /* LICENSE in Resources */,
+				CF467CC91EC17454003F85F5 /* ic_down_arrow.png in Resources */,
+				CF467CCC1EC17454003F85F5 /* imagepick_unchecked.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CF2C77EA1C89613700B72821 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CF467C711EC172F8003F85F5 /* Constraint.swift in Sources */,
+				CF467CBA1EC17306003F85F5 /* PhotoCollectionLiteCell.swift in Sources */,
+				CF467C8C1EC172F8003F85F5 /* Debugging.swift in Sources */,
+				CF467C861EC172F8003F85F5 /* ConstraintPriorityTarget.swift in Sources */,
+				CF467C721EC172F8003F85F5 /* ConstraintAttributes.swift in Sources */,
+				CF467C8F1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift in Sources */,
+				CF467C891EC172F8003F85F5 /* ConstraintView+Extensions.swift in Sources */,
+				CF467C881EC172F8003F85F5 /* ConstraintRelation.swift in Sources */,
+				CF467CB41EC17306003F85F5 /* PhotoMaskView.swift in Sources */,
+				CF467C7A1EC172F8003F85F5 /* ConstraintLayoutGuide.swift in Sources */,
+				CF467C771EC172F8003F85F5 /* ConstraintInsets.swift in Sources */,
+				CF467C781EC172F8003F85F5 /* ConstraintInsetTarget.swift in Sources */,
+				CF467CD11EC17493003F85F5 /* PopViewHelper.swift in Sources */,
+				CF467C8D1EC172F8003F85F5 /* LayoutConstraint.swift in Sources */,
+				CF467C791EC172F8003F85F5 /* ConstraintItem.swift in Sources */,
+				CF467C7C1EC172F8003F85F5 /* ConstraintLayoutSupport.swift in Sources */,
+				CF467CB21EC17306003F85F5 /* CropImageScrollView.swift in Sources */,
+				CF2C77F41C89613700B72821 /* ViewController.swift in Sources */,
+				CF467C761EC172F8003F85F5 /* ConstraintDSL.swift in Sources */,
+				CF467C731EC172F8003F85F5 /* ConstraintConfig.swift in Sources */,
+				CF467C7E1EC172F8003F85F5 /* ConstraintMaker.swift in Sources */,
+				CF467CB61EC17306003F85F5 /* ImagePickerHelper.swift in Sources */,
+				CF467CAD1EC17306003F85F5 /* PhotoAlbumView.swift in Sources */,
+				CF467CB71EC17306003F85F5 /* PhotoColletionViewController.swift in Sources */,
+				CF467C701EC172F8003F85F5 /* README.md in Sources */,
+				CF467C7F1EC172F8003F85F5 /* ConstraintMakerEditable.swift in Sources */,
+				CF467C8B1EC172F8003F85F5 /* ConstraintViewDSL.swift in Sources */,
+				CF467CB81EC17306003F85F5 /* PhotoThumbCell.swift in Sources */,
+				CF467CD01EC17493003F85F5 /* Extension.swift in Sources */,
+				CF467CAF1EC17306003F85F5 /* CameraPreviewCell.swift in Sources */,
+				CF467C801EC172F8003F85F5 /* ConstraintMakerExtendable.swift in Sources */,
+				CF467CB11EC17306003F85F5 /* CameraPreviewView.swift in Sources */,
+				CF467C7B1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift in Sources */,
+				CF467C831EC172F8003F85F5 /* ConstraintMakerRelatable.swift in Sources */,
+				CF467C811EC172F8003F85F5 /* ConstraintMakerFinalizable.swift in Sources */,
+				CF467C821EC172F8003F85F5 /* ConstraintMakerPriortizable.swift in Sources */,
+				CF467C8E1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift in Sources */,
+				CF467C871EC172F8003F85F5 /* ConstraintRelatableTarget.swift in Sources */,
+				CF467CBE1EC17306003F85F5 /* PhotosManager.swift in Sources */,
+				CF467CAB1EC17306003F85F5 /* PhotoAlbumCell.swift in Sources */,
+				CF467C841EC172F8003F85F5 /* ConstraintMultiplierTarget.swift in Sources */,
+				CF467CBC1EC17306003F85F5 /* WZPhotoBrowserLite.swift in Sources */,
+				CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */,
+				CF467CB31EC17306003F85F5 /* PhotoCropViewController.swift in Sources */,
+				CF467C8A1EC172F8003F85F5 /* ConstraintView.swift in Sources */,
+				CF467CAE1EC17306003F85F5 /* CameraHelper.swift in Sources */,
+				CF467C851EC172F8003F85F5 /* ConstraintOffsetTarget.swift in Sources */,
+				CF467CBB1EC17306003F85F5 /* PreviewPhotoViewController.swift in Sources */,
+				CF467C741EC172F8003F85F5 /* ConstraintConstantTarget.swift in Sources */,
+				CF467C7D1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift in Sources */,
+				CF467CBD1EC17306003F85F5 /* ZoomImageScrollViewLite.swift in Sources */,
+				CF467C751EC172F8003F85F5 /* ConstraintDescription.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CF2C77F51C89613700B72821 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2C77F61C89613700B72821 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF2C77FB1C89613700B72821 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CF2C77FE1C89613700B72821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CF2C77FF1C89613700B72821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CF2C78011C89613700B72821 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ImagePickerProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fyn.ImagePickerProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ImagePickerProject/SupportFile/ImagePickerProject-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		CF2C78021C89613700B72821 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = ImagePickerProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = fyn.ImagePickerProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ImagePickerProject/SupportFile/ImagePickerProject-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CF2C77E91C89613700B72821 /* Build configuration list for PBXProject "ImagePickerProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2C77FE1C89613700B72821 /* Debug */,
+				CF2C77FF1C89613700B72821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF2C78001C89613700B72821 /* Build configuration list for PBXNativeTarget "ImagePickerProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF2C78011C89613700B72821 /* Debug */,
+				CF2C78021C89613700B72821 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CF2C77E61C89613700B72821 /* Project object */;
+}

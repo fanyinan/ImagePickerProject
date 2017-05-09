@@ -65,37 +65,6 @@ class ViewController: UIViewController {
     }
   }
   
-  func testCompression(image: UIImage) {
-    
-    printImageInfo(prefix: "raw", image: image)
-
-    let imageDefaultSize = CGSize(width: 100, height: 100)
-
-    let image1 = image.imageScaledWithoutCliped(to: imageDefaultSize)!
-    
-    printImageInfo(prefix: "size", image: image1)
-    
-    image1.compressForUpload { (data, image) in
-      
-      self.printImageInfo(prefix: "size-DataSize", image: image)
-    }
-    
-    image.compressForUpload { (data, image) in
-      
-      self.printImageInfo(prefix: "DataSize", image: image)
-
-      let image2 = image.imageScaledWithoutCliped(to: imageDefaultSize)!
-
-      self.printImageInfo(prefix: "DataSize-size", image: image2)
-
-    }
-    
-  }
-  
-  func printImageInfo(prefix: String, image: UIImage) {
-    
-    print("\(prefix),size: \(image.size), dataSize \(UIImageJPEGRepresentation(image, 1)!.count)")
-  }
 }
 
 extension ViewController: ImagePickerDelegate {

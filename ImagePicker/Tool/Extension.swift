@@ -35,3 +35,29 @@ extension UIColor {
     return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
   }
 }
+
+extension UIImage {
+  
+  //旋转rect
+  func transformOrientationRect(_ rect: CGRect) -> CGRect {
+    
+    var rectTransform: CGAffineTransform = CGAffineTransform.identity
+    
+    switch imageOrientation {
+    case .left:
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2)).translatedBy(x: 0, y: -size.height)
+    case .right:
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2)).translatedBy(x: -size.width, y: 0)
+    case .down:
+      rectTransform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2)).translatedBy(x: -size.width, y: -size.height)
+    default:
+      break
+    }
+    
+    let orientationRect = rect.applying(rectTransform.scaledBy(x: scale, y: scale))
+    
+    return orientationRect
+    
+  }
+  
+}
