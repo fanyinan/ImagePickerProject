@@ -134,8 +134,8 @@ class PhotoColletionViewController: UIViewController {
     collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: collectionViewFlowLayout)
     collectionView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     collectionView.backgroundColor = UIColor.white
-    collectionView.register(UINib(nibName: thumbIdentifier, bundle: Bundle(for: PhotoThumbCell.self)), forCellWithReuseIdentifier: thumbIdentifier)
-    collectionView.register(UINib(nibName: previewIdentifier, bundle: Bundle(for: CameraPreviewCell.self)), forCellWithReuseIdentifier: previewIdentifier)
+    collectionView.register(UINib(nibName: thumbIdentifier, bundle: nil), forCellWithReuseIdentifier: thumbIdentifier)
+    collectionView.register(UINib(nibName: previewIdentifier, bundle: nil), forCellWithReuseIdentifier: previewIdentifier)
 
     collectionView.dataSource = self
     collectionView.delegate = self

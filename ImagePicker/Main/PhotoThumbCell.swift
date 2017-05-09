@@ -83,7 +83,7 @@ class PhotoThumbCell: UICollectionViewCell {
     
     if !isSuccess {
       
-      let alert = UIAlertView(title: "", message: "你最多只能选择\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "我知道了")
+      let alert = UIAlertView(title: "", message: "最多只能选择\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "知道了")
       alert.show()
       
       return
@@ -96,7 +96,7 @@ class PhotoThumbCell: UICollectionViewCell {
     
     self.setResourceSelected(!isSelected)
     
-    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: { () -> Void in
+    UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: { () -> Void in
       
       self.setResourceSelected(isSelected)
       
