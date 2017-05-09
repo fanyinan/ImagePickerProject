@@ -12,39 +12,6 @@
 		CF2C77F71C89613700B72821 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F51C89613700B72821 /* Main.storyboard */; };
 		CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77F81C89613700B72821 /* Assets.xcassets */; };
 		CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF2C77FA1C89613700B72821 /* LaunchScreen.storyboard */; };
-		CF467C6F1EC172F8003F85F5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = CF467C4D1EC172F8003F85F5 /* LICENSE */; };
-		CF467C701EC172F8003F85F5 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = CF467C4E1EC172F8003F85F5 /* README.md */; };
-		CF467C711EC172F8003F85F5 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C501EC172F8003F85F5 /* Constraint.swift */; };
-		CF467C721EC172F8003F85F5 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C511EC172F8003F85F5 /* ConstraintAttributes.swift */; };
-		CF467C731EC172F8003F85F5 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C521EC172F8003F85F5 /* ConstraintConfig.swift */; };
-		CF467C741EC172F8003F85F5 /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C531EC172F8003F85F5 /* ConstraintConstantTarget.swift */; };
-		CF467C751EC172F8003F85F5 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C541EC172F8003F85F5 /* ConstraintDescription.swift */; };
-		CF467C761EC172F8003F85F5 /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C551EC172F8003F85F5 /* ConstraintDSL.swift */; };
-		CF467C771EC172F8003F85F5 /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C561EC172F8003F85F5 /* ConstraintInsets.swift */; };
-		CF467C781EC172F8003F85F5 /* ConstraintInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C571EC172F8003F85F5 /* ConstraintInsetTarget.swift */; };
-		CF467C791EC172F8003F85F5 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C581EC172F8003F85F5 /* ConstraintItem.swift */; };
-		CF467C7A1EC172F8003F85F5 /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C591EC172F8003F85F5 /* ConstraintLayoutGuide.swift */; };
-		CF467C7B1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5A1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift */; };
-		CF467C7C1EC172F8003F85F5 /* ConstraintLayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5B1EC172F8003F85F5 /* ConstraintLayoutSupport.swift */; };
-		CF467C7D1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5C1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift */; };
-		CF467C7E1EC172F8003F85F5 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5D1EC172F8003F85F5 /* ConstraintMaker.swift */; };
-		CF467C7F1EC172F8003F85F5 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5E1EC172F8003F85F5 /* ConstraintMakerEditable.swift */; };
-		CF467C801EC172F8003F85F5 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C5F1EC172F8003F85F5 /* ConstraintMakerExtendable.swift */; };
-		CF467C811EC172F8003F85F5 /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C601EC172F8003F85F5 /* ConstraintMakerFinalizable.swift */; };
-		CF467C821EC172F8003F85F5 /* ConstraintMakerPriortizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C611EC172F8003F85F5 /* ConstraintMakerPriortizable.swift */; };
-		CF467C831EC172F8003F85F5 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C621EC172F8003F85F5 /* ConstraintMakerRelatable.swift */; };
-		CF467C841EC172F8003F85F5 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C631EC172F8003F85F5 /* ConstraintMultiplierTarget.swift */; };
-		CF467C851EC172F8003F85F5 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C641EC172F8003F85F5 /* ConstraintOffsetTarget.swift */; };
-		CF467C861EC172F8003F85F5 /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C651EC172F8003F85F5 /* ConstraintPriorityTarget.swift */; };
-		CF467C871EC172F8003F85F5 /* ConstraintRelatableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C661EC172F8003F85F5 /* ConstraintRelatableTarget.swift */; };
-		CF467C881EC172F8003F85F5 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C671EC172F8003F85F5 /* ConstraintRelation.swift */; };
-		CF467C891EC172F8003F85F5 /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C681EC172F8003F85F5 /* ConstraintView+Extensions.swift */; };
-		CF467C8A1EC172F8003F85F5 /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C691EC172F8003F85F5 /* ConstraintView.swift */; };
-		CF467C8B1EC172F8003F85F5 /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6A1EC172F8003F85F5 /* ConstraintViewDSL.swift */; };
-		CF467C8C1EC172F8003F85F5 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6B1EC172F8003F85F5 /* Debugging.swift */; };
-		CF467C8D1EC172F8003F85F5 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6C1EC172F8003F85F5 /* LayoutConstraint.swift */; };
-		CF467C8E1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6D1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift */; };
-		CF467C8F1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C6E1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift */; };
 		CF467CAB1EC17306003F85F5 /* PhotoAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C921EC17306003F85F5 /* PhotoAlbumCell.swift */; };
 		CF467CAC1EC17306003F85F5 /* PhotoAlbumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF467C931EC17306003F85F5 /* PhotoAlbumCell.xib */; };
 		CF467CAD1EC17306003F85F5 /* PhotoAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467C941EC17306003F85F5 /* PhotoAlbumView.swift */; };
@@ -72,9 +39,13 @@
 		CF467CCC1EC17454003F85F5 /* imagepick_unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC61EC17454003F85F5 /* imagepick_unchecked.png */; };
 		CF467CD01EC17493003F85F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCE1EC17493003F85F5 /* Extension.swift */; };
 		CF467CD11EC17493003F85F5 /* PopViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */; };
+		DB07072D855558974CCCA5B9 /* Pods_ImagePickerProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30193EB4488311F7EE4A4CBB /* Pods-ImagePickerProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.debug.xcconfig"; sourceTree = "<group>"; };
+		95A5E52D98A73A4239134B4F /* Pods-ImagePickerProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImagePickerProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject.release.xcconfig"; sourceTree = "<group>"; };
+		9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ImagePickerProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2C77EE1C89613700B72821 /* ImagePickerProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePickerProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2C77F11C89613700B72821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF2C77F31C89613700B72821 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,39 +54,6 @@
 		CF2C77FB1C89613700B72821 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF2C77FD1C89613700B72821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ImagePickerProject-Bridging-Header.h"; sourceTree = "<group>"; };
-		CF467C4D1EC172F8003F85F5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		CF467C4E1EC172F8003F85F5 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		CF467C501EC172F8003F85F5 /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
-		CF467C511EC172F8003F85F5 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintAttributes.swift; sourceTree = "<group>"; };
-		CF467C521EC172F8003F85F5 /* ConstraintConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConfig.swift; sourceTree = "<group>"; };
-		CF467C531EC172F8003F85F5 /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintConstantTarget.swift; sourceTree = "<group>"; };
-		CF467C541EC172F8003F85F5 /* ConstraintDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDescription.swift; sourceTree = "<group>"; };
-		CF467C551EC172F8003F85F5 /* ConstraintDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintDSL.swift; sourceTree = "<group>"; };
-		CF467C561EC172F8003F85F5 /* ConstraintInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintInsets.swift; sourceTree = "<group>"; };
-		CF467C571EC172F8003F85F5 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintInsetTarget.swift; sourceTree = "<group>"; };
-		CF467C581EC172F8003F85F5 /* ConstraintItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintItem.swift; sourceTree = "<group>"; };
-		CF467C591EC172F8003F85F5 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
-		CF467C5A1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
-		CF467C5B1EC172F8003F85F5 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
-		CF467C5C1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
-		CF467C5D1EC172F8003F85F5 /* ConstraintMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMaker.swift; sourceTree = "<group>"; };
-		CF467C5E1EC172F8003F85F5 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerEditable.swift; sourceTree = "<group>"; };
-		CF467C5F1EC172F8003F85F5 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
-		CF467C601EC172F8003F85F5 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
-		CF467C611EC172F8003F85F5 /* ConstraintMakerPriortizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerPriortizable.swift; sourceTree = "<group>"; };
-		CF467C621EC172F8003F85F5 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
-		CF467C631EC172F8003F85F5 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
-		CF467C641EC172F8003F85F5 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
-		CF467C651EC172F8003F85F5 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
-		CF467C661EC172F8003F85F5 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
-		CF467C671EC172F8003F85F5 /* ConstraintRelation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintRelation.swift; sourceTree = "<group>"; };
-		CF467C681EC172F8003F85F5 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
-		CF467C691EC172F8003F85F5 /* ConstraintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintView.swift; sourceTree = "<group>"; };
-		CF467C6A1EC172F8003F85F5 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintViewDSL.swift; sourceTree = "<group>"; };
-		CF467C6B1EC172F8003F85F5 /* Debugging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugging.swift; sourceTree = "<group>"; };
-		CF467C6C1EC172F8003F85F5 /* LayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
-		CF467C6D1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
-		CF467C6E1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
 		CF467C921EC17306003F85F5 /* PhotoAlbumCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCell.swift; sourceTree = "<group>"; };
 		CF467C931EC17306003F85F5 /* PhotoAlbumCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumCell.xib; sourceTree = "<group>"; };
 		CF467C941EC17306003F85F5 /* PhotoAlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumView.swift; sourceTree = "<group>"; };
@@ -150,17 +88,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB07072D855558974CCCA5B9 /* Pods_ImagePickerProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E6755B29B526CAFA2AEFB02 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F83594CA809A6E91D048020 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				30193EB4488311F7EE4A4CBB /* Pods-ImagePickerProject.debug.xcconfig */,
+				95A5E52D98A73A4239134B4F /* Pods-ImagePickerProject.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CF2C77E51C89613700B72821 = {
 			isa = PBXGroup;
 			children = (
 				CF2C77F01C89613700B72821 /* ImagePickerProject */,
 				CF2C77EF1C89613700B72821 /* Products */,
+				9F83594CA809A6E91D048020 /* Pods */,
+				9E6755B29B526CAFA2AEFB02 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,7 +134,6 @@
 			isa = PBXGroup;
 			children = (
 				CF467C901EC17306003F85F5 /* ImagePicker */,
-				CF467C4C1EC172F8003F85F5 /* SnapKit */,
 				CF2C7C841C8961B500B72821 /* SupportFile */,
 				CF2C77F11C89613700B72821 /* AppDelegate.swift */,
 				CF2C77F31C89613700B72821 /* ViewController.swift */,
@@ -194,54 +151,6 @@
 				CF2C7C8B1C8961B500B72821 /* ImagePickerProject-Bridging-Header.h */,
 			);
 			path = SupportFile;
-			sourceTree = "<group>";
-		};
-		CF467C4C1EC172F8003F85F5 /* SnapKit */ = {
-			isa = PBXGroup;
-			children = (
-				CF467C4D1EC172F8003F85F5 /* LICENSE */,
-				CF467C4E1EC172F8003F85F5 /* README.md */,
-				CF467C4F1EC172F8003F85F5 /* Source */,
-			);
-			path = SnapKit;
-			sourceTree = "<group>";
-		};
-		CF467C4F1EC172F8003F85F5 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				CF467C501EC172F8003F85F5 /* Constraint.swift */,
-				CF467C511EC172F8003F85F5 /* ConstraintAttributes.swift */,
-				CF467C521EC172F8003F85F5 /* ConstraintConfig.swift */,
-				CF467C531EC172F8003F85F5 /* ConstraintConstantTarget.swift */,
-				CF467C541EC172F8003F85F5 /* ConstraintDescription.swift */,
-				CF467C551EC172F8003F85F5 /* ConstraintDSL.swift */,
-				CF467C561EC172F8003F85F5 /* ConstraintInsets.swift */,
-				CF467C571EC172F8003F85F5 /* ConstraintInsetTarget.swift */,
-				CF467C581EC172F8003F85F5 /* ConstraintItem.swift */,
-				CF467C591EC172F8003F85F5 /* ConstraintLayoutGuide.swift */,
-				CF467C5A1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift */,
-				CF467C5B1EC172F8003F85F5 /* ConstraintLayoutSupport.swift */,
-				CF467C5C1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift */,
-				CF467C5D1EC172F8003F85F5 /* ConstraintMaker.swift */,
-				CF467C5E1EC172F8003F85F5 /* ConstraintMakerEditable.swift */,
-				CF467C5F1EC172F8003F85F5 /* ConstraintMakerExtendable.swift */,
-				CF467C601EC172F8003F85F5 /* ConstraintMakerFinalizable.swift */,
-				CF467C611EC172F8003F85F5 /* ConstraintMakerPriortizable.swift */,
-				CF467C621EC172F8003F85F5 /* ConstraintMakerRelatable.swift */,
-				CF467C631EC172F8003F85F5 /* ConstraintMultiplierTarget.swift */,
-				CF467C641EC172F8003F85F5 /* ConstraintOffsetTarget.swift */,
-				CF467C651EC172F8003F85F5 /* ConstraintPriorityTarget.swift */,
-				CF467C661EC172F8003F85F5 /* ConstraintRelatableTarget.swift */,
-				CF467C671EC172F8003F85F5 /* ConstraintRelation.swift */,
-				CF467C681EC172F8003F85F5 /* ConstraintView+Extensions.swift */,
-				CF467C691EC172F8003F85F5 /* ConstraintView.swift */,
-				CF467C6A1EC172F8003F85F5 /* ConstraintViewDSL.swift */,
-				CF467C6B1EC172F8003F85F5 /* Debugging.swift */,
-				CF467C6C1EC172F8003F85F5 /* LayoutConstraint.swift */,
-				CF467C6D1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift */,
-				CF467C6E1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift */,
-			);
-			path = Source;
 			sourceTree = "<group>";
 		};
 		CF467C901EC17306003F85F5 /* ImagePicker */ = {
@@ -342,9 +251,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CF2C78001C89613700B72821 /* Build configuration list for PBXNativeTarget "ImagePickerProject" */;
 			buildPhases = (
+				226264370DA4127C849AD525 /* [CP] Check Pods Manifest.lock */,
 				CF2C77EA1C89613700B72821 /* Sources */,
 				CF2C77EB1C89613700B72821 /* Frameworks */,
 				CF2C77EC1C89613700B72821 /* Resources */,
+				A996329BAC19C25F18D41370 /* [CP] Embed Pods Frameworks */,
+				AF2F118616715325DDF2F2D2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -405,7 +317,6 @@
 				CF2C77F91C89613700B72821 /* Assets.xcassets in Resources */,
 				CF467CB01EC17306003F85F5 /* CameraPreviewCell.xib in Resources */,
 				CF2C77F71C89613700B72821 /* Main.storyboard in Resources */,
-				CF467C6F1EC172F8003F85F5 /* LICENSE in Resources */,
 				CF467CC91EC17454003F85F5 /* ic_down_arrow.png in Resources */,
 				CF467CCC1EC17454003F85F5 /* imagepick_unchecked.png in Resources */,
 			);
@@ -413,63 +324,79 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		226264370DA4127C849AD525 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A996329BAC19C25F18D41370 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AF2F118616715325DDF2F2D2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ImagePickerProject/Pods-ImagePickerProject-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CF2C77EA1C89613700B72821 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF467C711EC172F8003F85F5 /* Constraint.swift in Sources */,
 				CF467CBA1EC17306003F85F5 /* PhotoCollectionLiteCell.swift in Sources */,
-				CF467C8C1EC172F8003F85F5 /* Debugging.swift in Sources */,
-				CF467C861EC172F8003F85F5 /* ConstraintPriorityTarget.swift in Sources */,
-				CF467C721EC172F8003F85F5 /* ConstraintAttributes.swift in Sources */,
-				CF467C8F1EC172F8003F85F5 /* UILayoutSupport+Extensions.swift in Sources */,
-				CF467C891EC172F8003F85F5 /* ConstraintView+Extensions.swift in Sources */,
-				CF467C881EC172F8003F85F5 /* ConstraintRelation.swift in Sources */,
 				CF467CB41EC17306003F85F5 /* PhotoMaskView.swift in Sources */,
-				CF467C7A1EC172F8003F85F5 /* ConstraintLayoutGuide.swift in Sources */,
-				CF467C771EC172F8003F85F5 /* ConstraintInsets.swift in Sources */,
-				CF467C781EC172F8003F85F5 /* ConstraintInsetTarget.swift in Sources */,
 				CF467CD11EC17493003F85F5 /* PopViewHelper.swift in Sources */,
-				CF467C8D1EC172F8003F85F5 /* LayoutConstraint.swift in Sources */,
-				CF467C791EC172F8003F85F5 /* ConstraintItem.swift in Sources */,
-				CF467C7C1EC172F8003F85F5 /* ConstraintLayoutSupport.swift in Sources */,
 				CF467CB21EC17306003F85F5 /* CropImageScrollView.swift in Sources */,
 				CF2C77F41C89613700B72821 /* ViewController.swift in Sources */,
-				CF467C761EC172F8003F85F5 /* ConstraintDSL.swift in Sources */,
-				CF467C731EC172F8003F85F5 /* ConstraintConfig.swift in Sources */,
-				CF467C7E1EC172F8003F85F5 /* ConstraintMaker.swift in Sources */,
 				CF467CB61EC17306003F85F5 /* ImagePickerHelper.swift in Sources */,
 				CF467CAD1EC17306003F85F5 /* PhotoAlbumView.swift in Sources */,
 				CF467CB71EC17306003F85F5 /* PhotoColletionViewController.swift in Sources */,
-				CF467C701EC172F8003F85F5 /* README.md in Sources */,
-				CF467C7F1EC172F8003F85F5 /* ConstraintMakerEditable.swift in Sources */,
-				CF467C8B1EC172F8003F85F5 /* ConstraintViewDSL.swift in Sources */,
 				CF467CB81EC17306003F85F5 /* PhotoThumbCell.swift in Sources */,
 				CF467CD01EC17493003F85F5 /* Extension.swift in Sources */,
 				CF467CAF1EC17306003F85F5 /* CameraPreviewCell.swift in Sources */,
-				CF467C801EC172F8003F85F5 /* ConstraintMakerExtendable.swift in Sources */,
 				CF467CB11EC17306003F85F5 /* CameraPreviewView.swift in Sources */,
-				CF467C7B1EC172F8003F85F5 /* ConstraintLayoutGuideDSL.swift in Sources */,
-				CF467C831EC172F8003F85F5 /* ConstraintMakerRelatable.swift in Sources */,
-				CF467C811EC172F8003F85F5 /* ConstraintMakerFinalizable.swift in Sources */,
-				CF467C821EC172F8003F85F5 /* ConstraintMakerPriortizable.swift in Sources */,
-				CF467C8E1EC172F8003F85F5 /* UILayoutGuide+Extensions.swift in Sources */,
-				CF467C871EC172F8003F85F5 /* ConstraintRelatableTarget.swift in Sources */,
 				CF467CBE1EC17306003F85F5 /* PhotosManager.swift in Sources */,
 				CF467CAB1EC17306003F85F5 /* PhotoAlbumCell.swift in Sources */,
-				CF467C841EC172F8003F85F5 /* ConstraintMultiplierTarget.swift in Sources */,
 				CF467CBC1EC17306003F85F5 /* WZPhotoBrowserLite.swift in Sources */,
 				CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */,
 				CF467CB31EC17306003F85F5 /* PhotoCropViewController.swift in Sources */,
-				CF467C8A1EC172F8003F85F5 /* ConstraintView.swift in Sources */,
 				CF467CAE1EC17306003F85F5 /* CameraHelper.swift in Sources */,
-				CF467C851EC172F8003F85F5 /* ConstraintOffsetTarget.swift in Sources */,
 				CF467CBB1EC17306003F85F5 /* PreviewPhotoViewController.swift in Sources */,
-				CF467C741EC172F8003F85F5 /* ConstraintConstantTarget.swift in Sources */,
-				CF467C7D1EC172F8003F85F5 /* ConstraintLayoutSupportDSL.swift in Sources */,
 				CF467CBD1EC17306003F85F5 /* ZoomImageScrollViewLite.swift in Sources */,
-				CF467C751EC172F8003F85F5 /* ConstraintDescription.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +505,7 @@
 		};
 		CF2C78011C89613700B72821 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30193EB4488311F7EE4A4CBB /* Pods-ImagePickerProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -595,6 +523,7 @@
 		};
 		CF2C78021C89613700B72821 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95A5E52D98A73A4239134B4F /* Pods-ImagePickerProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
