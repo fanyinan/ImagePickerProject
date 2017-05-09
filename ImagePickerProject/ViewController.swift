@@ -16,29 +16,13 @@ class ViewController: UIViewController {
   @IBOutlet var maxCountTextField: UITextField!
   @IBOutlet var imageViews: [UIImageView]!
   
-  var imagePickerHelper: ImagePickerHelper!
   var isCrop: Bool = true
   var type: ImagePickerType = .albumAndCamera
   var maxCount = 3
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    imagePickerHelper = ImagePickerHelper(delegate: self)
-    
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
   @IBAction func onStart() {
     
+    let imagePickerHelper = ImagePickerHelper(delegate: self)
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type

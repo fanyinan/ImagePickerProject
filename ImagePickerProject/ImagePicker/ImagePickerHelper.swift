@@ -48,25 +48,11 @@ class ImagePickerHelper: NSObject {
   
   weak var delegate: ImagePickerDelegate?
   weak var handlerViewController: UIViewController?
-  //最大图片数量，default ＝ 1
-  var maxSelectedCount: Int {
-    didSet {
-      PhotosManager.sharedInstance.maxSelectedCount = max(1, maxSelectedCount)
-    }
-  }
   
-  //是否裁剪
-  var isCrop: Bool = false {
-    didSet{
-      PhotosManager.sharedInstance.isCrop = isCrop
-    }
-  }
+  var maxSelectedCount: Int = 1
+  var isCrop: Bool = false
   var type: ImagePickerType = .albumAndCamera
-  var resourceOption: ResourceOption = .image {
-    didSet{
-      PhotosManager.sharedInstance.resourceOption = resourceOption
-    }
-  }
+  var resourceOption: ResourceOption = .image
   
   init(delegate: ImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
@@ -90,13 +76,25 @@ class ImagePickerHelper: NSObject {
     
     guard let _handlerViewController = handlerViewController else { return }
     
+    if resourceOption == .video {
+      maxSelectedCount = 1
+    }
+    
+    if maxSelectedCount <= 0 {
+      maxSelectedCount = 1
+    }
+    
+    if maxSelectedCount > 1 {
+      isCrop = false
+    }
+    
     PhotosManager.sharedInstance.prepareWith(self)
     
     if type == .camera {
       
       if resourceOption.contains(.image) {
         cameraHelper = CameraHelper(handlerViewController: _handlerViewController)
-        cameraHelper.isCrop = PhotosManager.sharedInstance.isCrop
+        cameraHelper.isCrop = isCrop
         cameraHelper.cropViewControllerTranlateType = CameraHelper.cropViewControllerTranlateType_Present
         cameraHelper.openCamera()
       } else if resourceOption.contains(.video) {

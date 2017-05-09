@@ -38,49 +38,34 @@ class PhotosManager: NSObject {
   private(set) var selectedImages: Set<PHAsset> = []
   private(set) var selectedVideo: PHAsset?
   
-  var maxSelectedCount: Int = 1 {
-    didSet {
-      
-      if maxSelectedCount <= 0 {
-        maxSelectedCount = 1
-      }
-      
-      if maxSelectedCount > 1 {
-        isCrop = false
-      }
-    }
-  }
-  
   var currentAlbumIndex: Int? {
     didSet{
       
       guard let _currentAlbumIndex = currentAlbumIndex else { return }
       
       guard let assetCollection = getAlbumWith(_currentAlbumIndex) else { return }
-      currentAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: resourceOption)
+      currentAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: imagePicker.resourceOption)
       currentImageAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: [.image])
     }
   }
   
   //裁剪图片用的比例
   var rectScale: ImageRectScale?
-  //是否裁剪
-  var isCrop: Bool = false {
-    didSet{
-      
-      //只有当最大图片数量为1时才可以裁剪
-      if maxSelectedCount != 1 && isCrop {
-        isCrop = false
-      }
-    }
+  
+  var imagePicker: ImagePickerHelper!
+  
+  var maxSelectedCount: Int {
+    return imagePicker.maxSelectedCount
+  }
+
+  var isCrop: Bool {
+    return imagePicker.isCrop
   }
   
-  var resourceOption: ResourceOption = .image
-  /*之前使用notification来通知选择照片完成，但是如果notification没有被remove掉的话会被多次接收多次通知
-   *所以改用这种方式
-   */
-  weak var imagePicker: ImagePickerHelper?
-  
+  var resourceOption: ResourceOption {
+    return imagePicker.resourceOption
+  }
+
   override init() {
     
     super.init()
@@ -97,10 +82,6 @@ class PhotosManager: NSObject {
     
     self.imagePicker = imagePicker
     
-    if PhotosManager.sharedInstance.resourceOption == .video {
-
-      PhotosManager.sharedInstance.maxSelectedCount = 1
-    }
   }
   
   //onCompletion是调用，重置数据
@@ -290,7 +271,7 @@ class PhotosManager: NSObject {
       selectedImages.remove(asset)
     } else {
       
-      if maxSelectedCount == selectedImages.count {
+      if imagePicker.maxSelectedCount == selectedImages.count {
         
         return false
         
@@ -333,17 +314,14 @@ class PhotosManager: NSObject {
     
     imagePicker = nil
 
-    isCrop = false
-    maxSelectedCount = 1
     rectScale = nil
     selectedImages.removeAll()
     selectedVideo = nil
-    resourceOption = .image
  
   }
   
   func removeSelectionIfMaxCountIsOne() {
-    if maxSelectedCount == 1 {
+    if imagePicker.maxSelectedCount == 1 {
       selectedImages.removeAll()
     }
     selectedVideo = nil
@@ -411,7 +389,7 @@ class PhotosManager: NSObject {
   
   func cropImage(_ originImage: UIImage?) -> UIImage? {
     
-    guard isCrop else { return originImage }
+    guard imagePicker.isCrop else { return originImage }
     
     guard let _rectScale = rectScale else {
       return originImage
