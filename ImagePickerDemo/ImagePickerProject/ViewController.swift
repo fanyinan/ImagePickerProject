@@ -15,12 +15,12 @@ class ViewController: UIViewController {
   @IBOutlet var imageViews: [UIImageView]!
   
   var isCrop: Bool = true
-  var type: ImagePickerType = .albumAndCamera
+  var type: WZImagePickerType = .albumAndCamera
   var maxCount = 3
   
   @IBAction func onStart() {
     
-    let imagePickerHelper = ImagePickerHelper(delegate: self)
+    let imagePickerHelper = WZImagePickerHelper(delegate: self)
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
@@ -65,8 +65,8 @@ class ViewController: UIViewController {
   
 }
 
-extension ViewController: ImagePickerDelegate {
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, images: [UIImage]) {
+extension ViewController: WZImagePickerDelegate {
+  func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, images: [UIImage]) {
     
     print("count \(images.count)")
 
@@ -81,7 +81,7 @@ extension ViewController: ImagePickerDelegate {
     
   }
   
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType) {
+  func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, didPickResource resource: WZResourceType) {
     print(#function)
     if case .video(video: let tmpAVAsset) = resource, let avAsset = tmpAVAsset {
       print(avAsset)

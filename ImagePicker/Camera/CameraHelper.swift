@@ -18,7 +18,7 @@ class CameraHelper: NSObject {
   
   var isCrop = false
   
-  //当为false时由ImagePickerHelper来负责dismiss
+  //当为false时由WZImagePickerHelper来负责dismiss
   var cropViewControllerTranlateType: Int = CameraHelper.cropViewControllerTranlateType_Push
   
   var imagePicker:UIImagePickerController!

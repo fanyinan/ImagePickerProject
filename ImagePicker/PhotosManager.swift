@@ -52,7 +52,7 @@ class PhotosManager: NSObject {
   //裁剪图片用的比例
   var rectScale: ImageRectScale?
   
-  var imagePicker: ImagePickerHelper!
+  var imagePicker: WZImagePickerHelper!
   
   var maxSelectedCount: Int {
     return imagePicker.maxSelectedCount
@@ -62,7 +62,7 @@ class PhotosManager: NSObject {
     return imagePicker.isCrop
   }
   
-  var resourceOption: ResourceOption {
+  var resourceOption: WZResourceOption {
     return imagePicker.resourceOption
   }
 
@@ -78,14 +78,14 @@ class PhotosManager: NSObject {
   }
   
   //start是调用，保存当前imagePicker
-  func prepareWith(_ imagePicker: ImagePickerHelper) {
+  func prepare(_ imagePicker: WZImagePickerHelper) {
     
     self.imagePicker = imagePicker
     
   }
   
   //onCompletion是调用，重置数据
-  func didFinish(_ resource: ResourceType? = nil) {
+  func didFinish(_ resource: WZResourceType? = nil) {
     
     imagePicker?.onComplete(resource)
     
@@ -156,7 +156,7 @@ class PhotosManager: NSObject {
   }
   
   //通过相册获取照片集合
-  func getFetchResult(with album: PHAssetCollection, resourceOption: ResourceOption) -> PHFetchResult<PHAsset> {
+  func getFetchResult(with album: PHAssetCollection, resourceOption: WZResourceOption) -> PHFetchResult<PHAsset> {
     
     let fetchOptions = PHFetchOptions()
     fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]

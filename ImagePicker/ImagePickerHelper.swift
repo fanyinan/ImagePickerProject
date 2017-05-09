@@ -9,52 +9,55 @@
 import UIKit
 import Photos
 
-protocol ImagePickerDelegate: NSObjectProtocol {
+public protocol WZImagePickerDelegate: NSObjectProtocol {
   
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType)
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool
-  
-}
-
-extension ImagePickerDelegate {
-  
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, didPickResource resource: ResourceType) {}
-  func pickedPhoto(_ imagePickerHelper: ImagePickerHelper, shouldPickResource resource: ResourceType) -> Bool { return true }
+  func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, didPickResource resource: WZResourceType)
+  func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, shouldPickResource resource: WZResourceType) -> Bool
   
 }
 
-enum ImagePickerType {
+extension WZImagePickerDelegate {
+  
+  func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, didPickResource resource: WZResourceType) {}
+  func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, shouldPickResource resource: WZResourceType) -> Bool { return true }
+  
+}
+
+public enum WZImagePickerType {
   case album
   case camera
   case albumAndCamera
 }
 
-struct ResourceOption: OptionSet {
-  var rawValue: Int = 0
-  static var image = ResourceOption(rawValue: 1 << 0)
-  static var video = ResourceOption(rawValue: 1 << 1)
-  static var data = ResourceOption(rawValue: 1 << 2)
+ public struct WZResourceOption: OptionSet {
+  public var rawValue: Int = 0
+  public init(rawValue: Int) {
+    self.rawValue = rawValue
+  }
+  
+  public static var image = WZResourceOption(rawValue: 1 << 0)
+  public static var video = WZResourceOption(rawValue: 1 << 1)
+  public static var data = WZResourceOption(rawValue: 1 << 2)
 }
 
-enum ResourceType {
+public enum WZResourceType {
   case image(images: [UIImage])
   case video(video: AVAsset?)
   case rawImageData(imageData: Data?)
 }
 
-class ImagePickerHelper: NSObject {
+open class WZImagePickerHelper: NSObject {
   
-  fileprivate var cameraHelper: CameraHelper!
+  private var cameraHelper: CameraHelper!
+  private weak var delegate: WZImagePickerDelegate?
+  private weak var handlerViewController: UIViewController?
   
-  weak var delegate: ImagePickerDelegate?
-  weak var handlerViewController: UIViewController?
+  public var maxSelectedCount: Int = 1
+  public var isCrop: Bool = false
+  public var type: WZImagePickerType = .albumAndCamera
+  public var resourceOption: WZResourceOption = .image
   
-  var maxSelectedCount: Int = 1
-  var isCrop: Bool = false
-  var type: ImagePickerType = .albumAndCamera
-  var resourceOption: ResourceOption = .image
-  
-  init(delegate: ImagePickerDelegate, handlerViewController: UIViewController? = nil){
+  init(delegate: WZImagePickerDelegate, handlerViewController: UIViewController? = nil){
     self.delegate = delegate
     self.handlerViewController = handlerViewController ?? (delegate as! UIViewController)
     self.maxSelectedCount = 1
@@ -62,17 +65,13 @@ class ImagePickerHelper: NSObject {
     
     PhotosManager.sharedInstance.clearData()
   }
-  
-  deinit{
-    print("ImagePickerHelper deinit")
-  }
-  
+
   /******************************************************************************
    *  public Method Implementation
    ******************************************************************************/
   //MARK: - public Method Implementation
   
-  func start(){
+  public func start(){
     
     guard let _handlerViewController = handlerViewController else { return }
     
@@ -88,7 +87,7 @@ class ImagePickerHelper: NSObject {
       isCrop = false
     }
     
-    PhotosManager.sharedInstance.prepareWith(self)
+    PhotosManager.sharedInstance.prepare(self)
     
     if type == .camera {
       
@@ -108,7 +107,7 @@ class ImagePickerHelper: NSObject {
     }
   }
   
-  func onComplete(_ resource: ResourceType?) {
+  func onComplete(_ resource: WZResourceType?) {
     
     if let resource = resource {
       
@@ -130,7 +129,7 @@ class ImagePickerHelper: NSObject {
     }
   }
   
-  private func shouldPick(resource: ResourceType) -> Bool {
+  private func shouldPick(resource: WZResourceType) -> Bool {
     
     let should = delegate?.pickedPhoto(self, shouldPickResource: resource) ?? true
     
@@ -141,7 +140,7 @@ class ImagePickerHelper: NSObject {
     return should
   }
   
-  private func finish(with resource: ResourceType) {
+  private func finish(with resource: WZResourceType) {
     
     handlerViewController?.dismiss(animated: true, completion: {
       
@@ -156,7 +155,7 @@ class ImagePickerHelper: NSObject {
     
     PhotosManager.sharedInstance.fetchVideo(handleCompletion: { avAsset in
       
-      let resource: ResourceType = .video(video: avAsset)
+      let resource: WZResourceType = .video(video: avAsset)
       
       guard self.shouldPick(resource: resource) else { return }
       
@@ -169,7 +168,7 @@ class ImagePickerHelper: NSObject {
     
     PhotosManager.sharedInstance.fetchSelectedImageData({ (data, isGIF) in
       
-      var resource: ResourceType!
+      var resource: WZResourceType!
       
       //在选了.data的情况下，是gif时，一定返回data
       //如果不是gif，若选了.image则返回image, 否则返回data
@@ -192,7 +191,7 @@ class ImagePickerHelper: NSObject {
     
     PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
       
-      let resource: ResourceType = .image(images: images)
+      let resource: WZResourceType = .image(images: images)
       
       guard self.shouldPick(resource: resource) else { return }
       
