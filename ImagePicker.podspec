@@ -92,7 +92,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "ImagePicker/**/*.{swift,xib}"
+  s.source_files  = "ImagePicker/**/*.swift"
   # s.public_header_files = "Classes/**/*.h"
 
 
@@ -107,7 +107,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   # s.resource  = "imagepick_unchecked.png"
   # s.resources = "Resources/*.png"
 
-  s.resources = "ImagePicker/Resource/*.png"
+  s.resources = "ImagePicker/Resource/*.png, ImagePicker/Resource/*.xib"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
