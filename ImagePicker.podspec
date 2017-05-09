@@ -93,7 +93,6 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #
 
   s.source_files  = "ImagePicker/**/*"
-
   # s.public_header_files = "Classes/**/*.h"
 
 
@@ -108,7 +107,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
 
-  # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
+  s.preserve_paths = "Resource"
 
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
