@@ -140,6 +140,10 @@ extension ViewController: ImagePickerDelegate {
       
       print(_imageData.count)
     }
+    
+    if case .image(images: let images) = resource {
+      print(images.count)
+    }
   }
 }
 

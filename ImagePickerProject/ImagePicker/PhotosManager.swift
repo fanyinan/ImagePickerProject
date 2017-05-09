@@ -97,6 +97,10 @@ class PhotosManager: NSObject {
     
     self.imagePicker = imagePicker
     
+    if PhotosManager.sharedInstance.resourceOption == .video {
+
+      PhotosManager.sharedInstance.maxSelectedCount = 1
+    }
   }
   
   //onCompletion是调用，重置数据
@@ -333,6 +337,7 @@ class PhotosManager: NSObject {
     maxSelectedCount = 1
     rectScale = nil
     selectedImages.removeAll()
+    selectedVideo = nil
     resourceOption = .image
  
   }

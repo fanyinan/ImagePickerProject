@@ -128,6 +128,15 @@ class PhotoThumbCell: UICollectionViewCell {
   
   func updateIsSelectable() {
     
+    if PhotosManager.sharedInstance.maxSelectedCount == 1 {
+      
+      selectedButton.isHidden = true
+      unselectedImageView.isHidden = true
+      selectedImageView.isHidden = true
+      
+      return
+    }
+    
     if asset.mediaType == .video {
       
       let isHide = !PhotosManager.sharedInstance.selectedImages.isEmpty
@@ -135,15 +144,6 @@ class PhotoThumbCell: UICollectionViewCell {
       selectedButton.isHidden = isHide
       
     } else if asset.mediaType == .image {
-      
-      if PhotosManager.sharedInstance.maxSelectedCount == 1 {
-        
-        selectedButton.isHidden = true
-        unselectedImageView.isHidden = true
-        selectedImageView.isHidden = true
-        
-        return
-      }
       
       let isHide = !(PhotosManager.sharedInstance.selectedVideo == nil)
       selectedStatusContainerView.isHidden = isHide

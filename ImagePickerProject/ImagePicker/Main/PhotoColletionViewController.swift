@@ -323,24 +323,37 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       guard let asset = PhotosManager.sharedInstance.getAssetInCurrentAlbum(with: indexInAblum) else { return }
       
-      guard asset.mediaType == .image && PhotosManager.sharedInstance.selectedVideo == nil else { return }
-      
-      PhotosManager.sharedInstance.checkImageIsInICloud(with: asset) { isInICloud in
-        
-        guard !isInICloud else { return }
-
-        if PhotosManager.sharedInstance.isCrop {
+      if asset.mediaType == .image && PhotosManager.sharedInstance.selectedVideo == nil {
+       
+        PhotosManager.sharedInstance.checkImageIsInICloud(with: asset) { isInICloud in
           
-          self.navigationController?.pushViewController(PhotoCropViewController(asset: asset), animated: true)
+          guard !isInICloud else { return }
           
-        } else {
-          
-          
-          self.selectItemNum = PhotosManager.sharedInstance.currentImageAlbumFetchResult.index(of: asset)
-          self.goToPhotoBrowser()
+          if PhotosManager.sharedInstance.isCrop {
+            
+            self.navigationController?.pushViewController(PhotoCropViewController(asset: asset), animated: true)
+            
+          } else {
+            
+            
+            self.selectItemNum = PhotosManager.sharedInstance.currentImageAlbumFetchResult.index(of: asset)
+            self.goToPhotoBrowser()
+            
+          }
           
         }
+      }
+      
+      if PhotosManager.sharedInstance.resourceOption == .video {
         
+        PhotosManager.sharedInstance.checkImageIsInICloud(with: asset) { isInICloud in
+          
+          guard !isInICloud else { return }
+          
+          PhotosManager.sharedInstance.selectVideo(with: asset)
+          PhotosManager.sharedInstance.didFinish()
+          
+        }
       }
     }
   }
