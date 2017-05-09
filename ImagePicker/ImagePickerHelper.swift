@@ -16,7 +16,7 @@ public protocol WZImagePickerDelegate: NSObjectProtocol {
   
 }
 
-extension WZImagePickerDelegate {
+public extension WZImagePickerDelegate {
   
   func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, didPickResource resource: WZResourceType) {}
   func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, shouldPickResource resource: WZResourceType) -> Bool { return true }
