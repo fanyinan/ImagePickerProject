@@ -8,8 +8,6 @@
 
 import UIKit
 
-let separatorColor = UIColor(hex: 0xe5e5e5)
-
 class ViewController: UIViewController {
 
   @IBOutlet var isCropSwitch: UISwitch!

@@ -12,6 +12,7 @@ import UIKit
 extension UIColor {
   
   class var jx_main: UIColor { return UIColor(hex: 0x333333) }
+  class var separatorColor: UIColor { return  UIColor(hex: 0xe5e5e5) }
 
   convenience init(hex: Int, alpha: CGFloat = 1) {
     
