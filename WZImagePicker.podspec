@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "WZImagePicker"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A complete functions ImagePicker."
 
   # This description is used to generate tags and improve search results.
@@ -81,7 +81,7 @@ A complete functions ImagePicker. It can picks image, gif, video.
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/fanyinan/ImagePickerProject.git" }
+  s.source       = { :git => "https://github.com/fanyinan/ImagePickerProject.git", :tag => "#{s.version}"}
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

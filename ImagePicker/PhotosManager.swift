@@ -182,7 +182,7 @@ class PhotosManager: NSObject {
   
   func getImageCountInCurrentAlbum() -> Int {
     
-    guard currentAlbumIndex != nil else {
+    guard currentAlbumIndex != nil &&  currentAlbumFetchResult != nil else {
       print("currentAlbumIndex is nil")
       return 0
     }
