@@ -89,8 +89,7 @@ extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerD
         
       } else {
         
-        //这里不需要dismiss，统一让外部来dismiss
-//        picker.dismissViewControllerAnimated(true, completion: nil)
+        picker.dismiss(animated: false, completion: nil)
         
         PhotosManager.sharedInstance.didFinish(.image(images: [image]))
         

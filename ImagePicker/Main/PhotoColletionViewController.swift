@@ -409,33 +409,6 @@ extension PhotoColletionViewController: WZPhotoBrowserLiteDelegate {
   }
 }
 
-extension PhotoColletionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    
-    let type : String = info[UIImagePickerControllerMediaType] as! String
-    
-    if type == "public.image" {
-      
-      let image : UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-      
-      if PhotosManager.sharedInstance.isCrop {
-        
-        picker.dismiss(animated: false, completion: nil)
-        
-        navigationController?.pushViewController(PhotoCropViewController(image: image), animated: true)
-        
-      } else {
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-        PhotosManager.sharedInstance.didFinish(.image(images: [image]))
-        
-      }
-    }
-  }
-}
-
 extension PhotoColletionViewController: PopViewHelperDelegate {
   
   func popViewHelper(_ popViewHelper: PopViewHelper, willShowPoppingView targetView: UIView) {
