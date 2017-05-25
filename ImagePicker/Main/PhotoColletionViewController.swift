@@ -85,8 +85,9 @@ class PhotoColletionViewController: UIViewController {
   
   func onCancel() {
     
-    PhotosManager.sharedInstance.cancel()
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true) {
+      PhotosManager.sharedInstance.cancel()
+    }
   }
   
   func goToPhotoBrowser() {
