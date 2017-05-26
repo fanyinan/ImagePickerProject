@@ -50,7 +50,7 @@ class PhotoAlbumView: UIView {
     tableView.tableFooterView = UIView()
     tableView.dataSource = self
     tableView.delegate = self
-    let nibCell = UINib(nibName: identifier, bundle: nil)
+    let nibCell = UINib(nibName: identifier, bundle: Bundle(for: PhotoAlbumView.self))
     tableView.register(nibCell, forCellReuseIdentifier: identifier)
     tableView.separatorColor = UIColor.separatorColor
     tableView.rowHeight = 60.0

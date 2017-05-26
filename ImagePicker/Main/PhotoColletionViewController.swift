@@ -176,7 +176,8 @@ class PhotoColletionViewController: UIViewController {
     }
     
     indicatorImageView.contentMode = .scaleAspectFit
-    indicatorImageView.image = UIImage(named: "ic_down_arrow")
+    let image = UIImage(named: "ic_down_arrow", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
+    indicatorImageView.image = image
     
   }
   
