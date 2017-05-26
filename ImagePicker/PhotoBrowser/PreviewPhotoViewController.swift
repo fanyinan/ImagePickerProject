@@ -119,7 +119,8 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.width.equalTo(50)
     }
     
-    backButton.setImage(UIImage(named: "back_white_arrow"), for: UIControlState())
+    let image = UIImage(named: "back_white_arrow", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
+    backButton.setImage(image, for: .normal)
     backButton.addTarget(self, action: #selector(PreviewPhotoViewController.onBack), for: .touchUpInside)
     
     //selectButton
