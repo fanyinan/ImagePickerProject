@@ -42,8 +42,6 @@ class PhotoAlbumView: UIView {
   
   func setupUI(){
     
-    backgroundColor = UIColor.green
-    
     tableView = UITableView(frame: bounds, style: .plain)
     tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     tableView.backgroundColor = UIColor.white

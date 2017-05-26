@@ -119,6 +119,8 @@ class PhotosManager: NSObject {
     
     let albumFetchResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
     
+    assetCollectionList.removeAll()
+    
     albumFetchResult.enumerateObjects({ (object, index, point) -> Void in
       
       let assetCollection = object
