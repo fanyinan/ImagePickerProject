@@ -31,7 +31,7 @@
 		CF467CBC1EC17306003F85F5 /* WZPhotoBrowserLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA71EC17306003F85F5 /* WZPhotoBrowserLite.swift */; };
 		CF467CBD1EC17306003F85F5 /* ZoomImageScrollViewLite.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */; };
 		CF467CBE1EC17306003F85F5 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CA91EC17306003F85F5 /* PhotosManager.swift */; };
-		CF467CC71EC17454003F85F5 /* back_white_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC11EC17454003F85F5 /* back_white_arrow.png */; };
+		CF467CC71EC17454003F85F5 /* back_white_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC11EC17454003F85F5 /* back_white_arrow@3x.png */; };
 		CF467CC81EC17454003F85F5 /* default_pic.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC21EC17454003F85F5 /* default_pic.png */; };
 		CF467CC91EC17454003F85F5 /* ic_down_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC31EC17454003F85F5 /* ic_down_arrow.png */; };
 		CF467CCA1EC17454003F85F5 /* imagepick_camera.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC41EC17454003F85F5 /* imagepick_camera.png */; };
@@ -73,7 +73,7 @@
 		CF467CA71EC17306003F85F5 /* WZPhotoBrowserLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WZPhotoBrowserLite.swift; sourceTree = "<group>"; };
 		CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomImageScrollViewLite.swift; sourceTree = "<group>"; };
 		CF467CA91EC17306003F85F5 /* PhotosManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosManager.swift; sourceTree = "<group>"; };
-		CF467CC11EC17454003F85F5 /* back_white_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_white_arrow.png; sourceTree = "<group>"; };
+		CF467CC11EC17454003F85F5 /* back_white_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_white_arrow@3x.png"; sourceTree = "<group>"; };
 		CF467CC21EC17454003F85F5 /* default_pic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_pic.png; sourceTree = "<group>"; };
 		CF467CC31EC17454003F85F5 /* ic_down_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_down_arrow.png; sourceTree = "<group>"; };
 		CF467CC41EC17454003F85F5 /* imagepick_camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_camera.png; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 		CF467CC01EC17454003F85F5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				CF467CC11EC17454003F85F5 /* back_white_arrow.png */,
+				CF467CC11EC17454003F85F5 /* back_white_arrow@3x.png */,
 				CF467CC21EC17454003F85F5 /* default_pic.png */,
 				CF467CC31EC17454003F85F5 /* ic_down_arrow.png */,
 				CF467CC41EC17454003F85F5 /* imagepick_camera.png */,
@@ -310,7 +310,7 @@
 				CF467CCB1EC17454003F85F5 /* imagepick_unchecked.png in Resources */,
 				CF467CAC1EC17306003F85F5 /* PhotoAlbumCell.xib in Resources */,
 				CF467CB91EC17306003F85F5 /* PhotoThumbCell.xib in Resources */,
-				CF467CC71EC17454003F85F5 /* back_white_arrow.png in Resources */,
+				CF467CC71EC17454003F85F5 /* back_white_arrow@3x.png in Resources */,
 				CF467CCA1EC17454003F85F5 /* imagepick_camera.png in Resources */,
 				CF2C77FC1C89613700B72821 /* LaunchScreen.storyboard in Resources */,
 				CF467CC81EC17454003F85F5 /* default_pic.png in Resources */,

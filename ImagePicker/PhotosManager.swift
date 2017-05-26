@@ -387,27 +387,21 @@ class PhotosManager: NSObject {
     }
   }
   
-  func cropImage(_ originImage: UIImage?) -> UIImage? {
-    
-    guard imagePicker.isCrop else { return originImage }
-    
+  func cropImage(_ originImage: UIImage) -> UIImage {
+        
     guard let _rectScale = rectScale else {
       return originImage
     }
     
-    guard let _originImage = originImage else {
-      return originImage
-    }
+    let cropRect = CGRect(x: originImage.size.width * _rectScale.xScale, y: originImage.size.height * _rectScale.yScale, width: originImage.size.width * _rectScale.widthScale, height: originImage.size.width * _rectScale.heighScale)
     
-    let cropRect = CGRect(x: _originImage.size.width * _rectScale.xScale, y: _originImage.size.height * _rectScale.yScale, width: _originImage.size.width * _rectScale.widthScale, height: _originImage.size.width * _rectScale.heighScale)
+    let orientationRect = originImage.transformOrientationRect(cropRect)
     
-    let orientationRect = _originImage.transformOrientationRect(cropRect)
+    let cropImageRef = originImage.cgImage?.cropping(to: orientationRect)
+  
+    guard let _cropImageRef = cropImageRef else { return originImage }
     
-    let cropImageRef = _originImage.cgImage?.cropping(to: orientationRect)
-    
-    guard let _cropImageRef = cropImageRef else { return nil }
-    
-    let cropImage = UIImage(cgImage: _cropImageRef, scale: 1, orientation: _originImage.imageOrientation)
+    let cropImage = UIImage(cgImage: _cropImageRef, scale: 1, orientation: originImage.imageOrientation)
     
     return cropImage
     

@@ -191,6 +191,12 @@ open class WZImagePickerHelper: NSObject {
     
     PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
       
+      var images: [UIImage] = images
+
+      if self.isCrop && images.count == 1 {
+        images = [PhotosManager.sharedInstance.cropImage(images[0])]
+      }
+      
       let resource: WZResourceType = .image(images: images)
       
       guard self.shouldPick(resource: resource) else { return }

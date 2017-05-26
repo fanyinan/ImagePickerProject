@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
-    imagePickerHelper.resourceOption = [.image, .data]
+    imagePickerHelper.resourceOption = [.image]
     imagePickerHelper.start()
   }
   
@@ -66,20 +66,6 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: WZImagePickerDelegate {
-  func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, images: [UIImage]) {
-    
-    print("count \(images.count)")
-
-    for (index, image) in images.enumerated() {
-      
-      if index >= imageViews.count {
-        return
-      }
-      
-      imageViews[index].image = image
-    }
-    
-  }
   
   func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, didPickResource resource: WZResourceType) {
     print(#function)
@@ -94,6 +80,15 @@ extension ViewController: WZImagePickerDelegate {
     
     if case .image(images: let images) = resource {
       print(images.count)
+      
+      for (index, image) in images.enumerated() {
+        
+        if index >= imageViews.count {
+          return
+        }
+        
+        imageViews[index].image = image
+      }
     }
   }
 }
