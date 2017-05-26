@@ -17,14 +17,16 @@ class ViewController: UIViewController {
   var isCrop: Bool = true
   var type: WZImagePickerType = .albumAndCamera
   var maxCount = 3
+  var reourceOption: WZResourceOption = [.image, .data]
+  var imagePickerHelper: WZImagePickerHelper!
   
   @IBAction func onStart() {
     
-    let imagePickerHelper = WZImagePickerHelper(delegate: self)
+    imagePickerHelper = WZImagePickerHelper(delegate: self)
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type
-    imagePickerHelper.resourceOption = [.image]
+    imagePickerHelper.resourceOption = reourceOption
     imagePickerHelper.start()
   }
   
@@ -47,6 +49,17 @@ class ViewController: UIViewController {
       type = .album
     case 2:
       type = .camera
+    default:
+      break
+    }
+  }
+  
+  @IBAction func onResourceType(_ sender: UISegmentedControl) {
+    switch sender.selectedSegmentIndex {
+    case 0:
+      reourceOption = [.image, .data]
+    case 1:
+      reourceOption = .video
     default:
       break
     }

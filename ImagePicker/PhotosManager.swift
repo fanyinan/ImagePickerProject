@@ -37,6 +37,7 @@ class PhotosManager: NSObject {
   private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var selectedImages: Set<PHAsset> = []
   private(set) var selectedVideo: PHAsset?
+  private var isForceUpdate = true
   
   var currentAlbumIndex: Int? {
     didSet{
@@ -98,9 +99,9 @@ class PhotosManager: NSObject {
     
   }
   
-  fileprivate func getPhotoAlbum() -> [PHAssetCollection] {
+  fileprivate func getPhotoAlbum(isForceUpdate: Bool = false) -> [PHAssetCollection] {
     
-    guard assetCollectionList.isEmpty else {
+    guard assetCollectionList.isEmpty || isForceUpdate else {
       
       return assetCollectionList
     }
@@ -152,7 +153,10 @@ class PhotosManager: NSObject {
   }
   
   func getAlbumCount() -> Int {
-    return getPhotoAlbum().count
+    
+    let isForceUpdate = self.isForceUpdate
+    self.isForceUpdate = false
+    return getPhotoAlbum(isForceUpdate: isForceUpdate).count
   }
   
   //通过相册获取照片集合
@@ -317,6 +321,7 @@ class PhotosManager: NSObject {
     rectScale = nil
     selectedImages.removeAll()
     selectedVideo = nil
+    isForceUpdate = true
  
   }
   
@@ -440,7 +445,7 @@ extension PhotosManager: PHPhotoLibraryChangeObserver {
   
   func photoLibraryDidChange(_ changeInstance: PHChange) {
     
-    _ = getPhotoAlbum()
+    _ = getPhotoAlbum(isForceUpdate: true)
     
   }
 }

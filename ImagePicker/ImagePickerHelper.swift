@@ -175,9 +175,19 @@ open class WZImagePickerHelper: NSObject {
       
       if !isGIF && self.resourceOption.contains(.image) {
         guard let data = data, let image = UIImage(data: data) else { return }
-        resource = .image(images: [image])
+        
+        var images: [UIImage] = [image]
+        
+        if self.isCrop {
+          images = [PhotosManager.sharedInstance.cropImage(image)]
+        }
+        
+        resource = .image(images: images)
+        
       } else {
+        
         resource = .rawImageData(imageData: data)
+        
       }
       
       guard self.shouldPick(resource: resource) else { return }
