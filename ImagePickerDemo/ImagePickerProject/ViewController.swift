@@ -18,11 +18,10 @@ class ViewController: UIViewController {
   var type: WZImagePickerType = .albumAndCamera
   var maxCount = 3
   var reourceOption: WZResourceOption = [.image, .data]
-  var imagePickerHelper: WZImagePickerHelper!
   
   @IBAction func onStart() {
     
-    imagePickerHelper = WZImagePickerHelper(delegate: self)
+    let imagePickerHelper = WZImagePickerHelper(delegate: self)
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type

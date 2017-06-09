@@ -45,6 +45,8 @@ class PhotosManager: NSObject {
       guard let _currentAlbumIndex = currentAlbumIndex else { return }
       
       guard let assetCollection = getAlbumWith(_currentAlbumIndex) else { return }
+      guard let imagePicker = imagePicker else { return }
+      
       currentAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: imagePicker.resourceOption)
       currentImageAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: [.image])
     }
@@ -110,8 +112,6 @@ class PhotosManager: NSObject {
     
     if #available(iOS 9.0, *) {
       albumType += [.smartAlbumSelfPortraits, .smartAlbumScreenshots]
-    } else {
-      // Fallback on earlier versions
     }
     
     //      ["相机胶卷", "自拍" , "最近添加", "屏幕快照"]
