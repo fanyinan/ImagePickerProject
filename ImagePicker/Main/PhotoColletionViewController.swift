@@ -351,7 +351,7 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       if PhotosManager.sharedInstance.resourceOption == .video {
         
-        PhotosManager.sharedInstance.checkImageIsInICloud(with: asset) { isInICloud in
+        PhotosManager.sharedInstance.checkVideoIsInICloud(with: asset) { isInICloud in
           
           guard !isInICloud else { return }
           

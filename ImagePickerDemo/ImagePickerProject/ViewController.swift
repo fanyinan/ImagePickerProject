@@ -14,6 +14,10 @@ class ViewController: UIViewController {
   @IBOutlet var maxCountTextField: UITextField!
   @IBOutlet var imageViews: [UIImageView]!
   
+  fileprivate lazy var imagePickerHelper: WZImagePickerHelper = {
+    return WZImagePickerHelper(delegate: self)
+  }()
+  
   var isCrop: Bool = true
   var type: WZImagePickerType = .albumAndCamera
   var maxCount = 3
@@ -21,7 +25,6 @@ class ViewController: UIViewController {
   
   @IBAction func onStart() {
     
-    let imagePickerHelper = WZImagePickerHelper(delegate: self)
     imagePickerHelper.isCrop = isCrop
     imagePickerHelper.maxSelectedCount = maxCount
     imagePickerHelper.type = type

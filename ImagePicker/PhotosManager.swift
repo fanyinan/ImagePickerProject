@@ -37,7 +37,6 @@ class PhotosManager: NSObject {
   private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var selectedImages: Set<PHAsset> = []
   private(set) var selectedVideo: PHAsset?
-  private var isForceUpdate = true
   
   var currentAlbumIndex: Int? {
     didSet{
@@ -76,8 +75,6 @@ class PhotosManager: NSObject {
     imageManager = PHCachingImageManager()
     imageManager.allowsCachingHighQualityImages = false
     
-    PHPhotoLibrary.shared().register(self)
-    
   }
   
   //start是调用，保存当前imagePicker
@@ -101,9 +98,9 @@ class PhotosManager: NSObject {
     
   }
   
-  fileprivate func getPhotoAlbum(isForceUpdate: Bool = false) -> [PHAssetCollection] {
+  fileprivate func getPhotoAlbum() -> [PHAssetCollection] {
     
-    guard assetCollectionList.isEmpty || isForceUpdate else {
+    guard assetCollectionList.isEmpty else {
       
       return assetCollectionList
     }
@@ -156,9 +153,7 @@ class PhotosManager: NSObject {
   
   func getAlbumCount() -> Int {
     
-    let isForceUpdate = self.isForceUpdate
-    self.isForceUpdate = false
-    return getPhotoAlbum(isForceUpdate: isForceUpdate).count
+    return getPhotoAlbum().count
   }
   
   //通过相册获取照片集合
@@ -260,6 +255,18 @@ class PhotosManager: NSObject {
     }
   }
   
+  func checkVideoIsInICloud(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
+    
+    fetchVideo { (_, isInICloud) in
+      
+      if isInICloud {
+        print("该图片尚未从iCloud下载\n请使用本地图片")
+      }
+      
+      completion(isInICloud)
+    }
+  }
+  
   /**
    选择图片或取消选择图片
    
@@ -323,8 +330,8 @@ class PhotosManager: NSObject {
     rectScale = nil
     selectedImages.removeAll()
     selectedVideo = nil
-    isForceUpdate = true
- 
+    assetCollectionList.removeAll()
+
   }
   
   func removeSelectionIfMaxCountIsOne() {
@@ -360,7 +367,7 @@ class PhotosManager: NSObject {
     }
   }
   
-  func fetchVideo(handleCompletion: @escaping (_ avAsset: AVAsset?) -> Void) {
+  func fetchVideo(handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
     
     guard let selectedVideo = selectedVideo else { return }
     
@@ -368,8 +375,8 @@ class PhotosManager: NSObject {
     videoRequestOptions.isNetworkAccessAllowed = false
     videoRequestOptions.deliveryMode = .fastFormat
     
-    imageManager.requestAVAsset(forVideo: selectedVideo, options: videoRequestOptions) { (avAsset, _, _) in
-      handleCompletion(avAsset)
+    imageManager.requestAVAsset(forVideo: selectedVideo, options: videoRequestOptions) { (avAsset, _, info) in
+      handleCompletion(avAsset, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
     }
   }
   
@@ -440,14 +447,5 @@ class PhotosManager: NSObject {
     }
     
     return imageRequestOptions
-  }
-}
-
-extension PhotosManager: PHPhotoLibraryChangeObserver {
-  
-  func photoLibraryDidChange(_ changeInstance: PHChange) {
-    
-    _ = getPhotoAlbum(isForceUpdate: true)
-    
   }
 }

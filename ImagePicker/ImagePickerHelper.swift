@@ -153,7 +153,7 @@ open class WZImagePickerHelper: NSObject {
   
   private func fetchVideo() {
     
-    PhotosManager.sharedInstance.fetchVideo(handleCompletion: { avAsset in
+    PhotosManager.sharedInstance.fetchVideo(handleCompletion: { (avAsset, _) in
       
       let resource: WZResourceType = .video(video: avAsset)
       
