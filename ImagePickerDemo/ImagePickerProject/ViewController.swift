@@ -21,7 +21,7 @@ class ViewController: UIViewController {
   var isCrop: Bool = true
   var type: WZImagePickerType = .albumAndCamera
   var maxCount = 3
-  var reourceOption: WZResourceOption = [.image, .data]
+  var reourceOption: WZResourceOption = [.video]
   
   @IBAction func onStart() {
     

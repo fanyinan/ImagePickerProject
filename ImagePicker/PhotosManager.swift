@@ -248,7 +248,8 @@ class PhotosManager: NSObject {
     fetchImage(with: asset, sizeType: .export) { (_, isInICloud) -> Void in
     
       if isInICloud {
-        print("该图片尚未从iCloud下载\n请使用本地图片")
+        let alertView = UIAlertView(title: "无法选取图片", message: "该图片尚未从iCloud下载\n请使用本地图片", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+        alertView.show()
       }
       
       completion(isInICloud)
@@ -257,10 +258,11 @@ class PhotosManager: NSObject {
   
   func checkVideoIsInICloud(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
     
-    fetchVideo { (_, isInICloud) in
+    fetchVideo(videoAsset: asset) { (_, isInICloud) in
       
       if isInICloud {
-        print("该图片尚未从iCloud下载\n请使用本地图片")
+        let alertView = UIAlertView(title: "无法选取视频", message: "该视频尚未从iCloud下载\n请使用本地视频", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+        alertView.show()
       }
       
       completion(isInICloud)
@@ -367,17 +369,25 @@ class PhotosManager: NSObject {
     }
   }
   
-  func fetchVideo(handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
-    
-    guard let selectedVideo = selectedVideo else { return }
+  func fetchVideo(videoAsset: PHAsset, handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
     
     let videoRequestOptions = PHVideoRequestOptions()
     videoRequestOptions.isNetworkAccessAllowed = false
     videoRequestOptions.deliveryMode = .fastFormat
     
-    imageManager.requestAVAsset(forVideo: selectedVideo, options: videoRequestOptions) { (avAsset, _, info) in
-      handleCompletion(avAsset, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
+    imageManager.requestAVAsset(forVideo: videoAsset, options: videoRequestOptions) { (avAsset, _, info) in
+      
+      DispatchQueue.main.async {
+        handleCompletion(avAsset, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
+      }
     }
+  }
+  
+  func fetchSelectedVideo(handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
+    
+    guard let selectedVideo = selectedVideo else { return }
+    
+    fetchVideo(videoAsset: selectedVideo, handleCompletion: handleCompletion)
   }
   
   func fetchSelectedImageData(_ handleCompletion: @escaping (_ data: Data?, _ isGIF: Bool) -> Void) {
