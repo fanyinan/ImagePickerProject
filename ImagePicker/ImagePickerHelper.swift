@@ -29,7 +29,7 @@ public enum WZImagePickerType {
   case albumAndCamera
 }
 
- public struct WZResourceOption: OptionSet {
+public struct WZResourceOption: OptionSet {
   public var rawValue: Int = 0
   public init(rawValue: Int) {
     self.rawValue = rawValue
@@ -63,9 +63,8 @@ open class WZImagePickerHelper: NSObject {
     self.maxSelectedCount = 1
     super.init()
     
-    PhotosManager.sharedInstance.clearData()
   }
-
+  
   /******************************************************************************
    *  public Method Implementation
    ******************************************************************************/

@@ -30,9 +30,9 @@ class PhotosManager: NSObject {
   static var assetGridThumbnailSize = CGSize(width: 50, height: 50)
   static var assetPreviewImageSize = UIScreen.main.bounds.size
   static var assetExportImageSize = UIScreen.main.bounds.size
-
+  
   private var assetCollectionList: [PHAssetCollection] = []
-  private var imageManager: PHCachingImageManager!
+  private lazy var imageManager: PHCachingImageManager = self.initImageManager()
   private var currentAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var selectedImages: Set<PHAsset> = []
@@ -59,7 +59,7 @@ class PhotosManager: NSObject {
   var maxSelectedCount: Int {
     return imagePicker.maxSelectedCount
   }
-
+  
   var isCrop: Bool {
     return imagePicker.isCrop
   }
@@ -67,14 +67,19 @@ class PhotosManager: NSObject {
   var resourceOption: WZResourceOption {
     return imagePicker.resourceOption
   }
-
+  
   override init() {
     
     super.init()
     
-    imageManager = PHCachingImageManager()
+  }
+  
+  func initImageManager() -> PHCachingImageManager {
+    
+    let imageManager = PHCachingImageManager()
     imageManager.allowsCachingHighQualityImages = false
     
+    return imageManager
   }
   
   //start是调用，保存当前imagePicker
@@ -246,7 +251,7 @@ class PhotosManager: NSObject {
   func checkImageIsInICloud(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
     
     fetchImage(with: asset, sizeType: .export) { (_, isInICloud) -> Void in
-    
+      
       if isInICloud {
         let alertView = UIAlertView(title: "无法选取图片", message: "该图片尚未从iCloud下载\n请使用本地图片", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
         alertView.show()
@@ -328,12 +333,12 @@ class PhotosManager: NSObject {
   func clearData() {
     
     imagePicker = nil
-
+    
     rectScale = nil
     selectedImages.removeAll()
     selectedVideo = nil
     assetCollectionList.removeAll()
-
+    
   }
   
   func removeSelectionIfMaxCountIsOne() {
@@ -412,7 +417,7 @@ class PhotosManager: NSObject {
   }
   
   func cropImage(_ originImage: UIImage) -> UIImage {
-        
+    
     guard let _rectScale = rectScale else {
       return originImage
     }
@@ -422,7 +427,7 @@ class PhotosManager: NSObject {
     let orientationRect = originImage.transformOrientationRect(cropRect)
     
     let cropImageRef = originImage.cgImage?.cropping(to: orientationRect)
-  
+    
     guard let _cropImageRef = cropImageRef else { return originImage }
     
     let cropImage = UIImage(cgImage: _cropImageRef, scale: 1, orientation: originImage.imageOrientation)
@@ -434,7 +439,7 @@ class PhotosManager: NSObject {
   private func getImageRequestOptions(with sizeType: PhotoSizeType) -> PHImageRequestOptions {
     
     let imageRequestOptions = PHImageRequestOptions()
-
+    
     switch sizeType {
     case .thumbnail:
       imageRequestOptions.isSynchronous = false
