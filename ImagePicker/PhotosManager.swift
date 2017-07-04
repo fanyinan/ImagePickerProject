@@ -248,29 +248,53 @@ class PhotosManager: NSObject {
     
   }
   
-  func checkImageIsInICloud(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
+  func checkImageIsInLocal(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
     
-    fetchImage(with: asset, sizeType: .export) { (_, isInICloud) -> Void in
+    fetchImage(with: asset, sizeType: .export) { (image, isInICloud) -> Void in
       
-      if isInICloud {
-        let alertView = UIAlertView(title: "无法选取图片", message: "该图片尚未从iCloud下载\n请使用本地图片", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
-        alertView.show()
+      if  image == nil {
+        
+        if isInICloud {
+          
+          let alertView = UIAlertView(title: "无法选取图片", message: "该图片尚未从iCloud下载\n请使用本地图片", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          alertView.show()
+          
+        } else {
+          
+          let alertView = UIAlertView(title: "", message: "选取图片失败", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          alertView.show()
+
+        }
+        
+        return
       }
       
-      completion(isInICloud)
+      completion(true)
     }
   }
   
-  func checkVideoIsInICloud(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
+  func checkVideoIsInLocal(with asset: PHAsset, completion: @escaping ((Bool) -> Void)) {
     
-    fetchVideo(videoAsset: asset) { (_, isInICloud) in
+    fetchVideo(videoAsset: asset) { (avAsset, isInICloud) in
       
-      if isInICloud {
-        let alertView = UIAlertView(title: "无法选取视频", message: "该视频尚未从iCloud下载\n请使用本地视频", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
-        alertView.show()
+      if  avAsset == nil {
+        
+        if isInICloud {
+          
+          let alertView = UIAlertView(title: "无法选取图片", message: "该图片尚未从iCloud下载\n请使用本地图片", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          alertView.show()
+          
+        } else {
+          
+          let alertView = UIAlertView(title: "", message: "选取图片失败", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "确定")
+          alertView.show()
+          
+        }
+        
+        return
       }
       
-      completion(isInICloud)
+      completion(true)
     }
   }
   

@@ -33,9 +33,9 @@ class PhotoThumbCell: UICollectionViewCell {
 
     guard let vc = photoColletionViewController else { return }
     
-    PhotosManager.sharedInstance.checkImageIsInICloud(with: asset) { isInICloud in
+    PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
     
-      guard !isInICloud else { return }
+      guard isExistInLocal else { return }
 
       self.setResourceSelectedStatus()
       vc.updateUI()

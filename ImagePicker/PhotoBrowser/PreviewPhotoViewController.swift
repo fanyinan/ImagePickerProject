@@ -59,9 +59,9 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   func onSelect() {
     
-    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentAsset) { isInICloud in
+    PhotosManager.sharedInstance.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
       
-      guard !isInICloud else { return }
+      guard isExistInLocal else { return }
       
       self.setPhotoSelectedStatusWith(self.currentIndex)
       self.updateCount()
@@ -70,9 +70,9 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   func onComplete() {
     
-    PhotosManager.sharedInstance.checkImageIsInICloud(with: currentAsset) { isInICloud in
+    PhotosManager.sharedInstance.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
       
-      guard !isInICloud else { return }
+      guard isExistInLocal else { return }
       
       //如果当前没有被选择的照片，则选择当前照片
       if PhotosManager.sharedInstance.selectedImages.isEmpty {

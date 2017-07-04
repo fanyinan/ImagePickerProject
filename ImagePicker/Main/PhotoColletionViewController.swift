@@ -332,9 +332,9 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       if asset.mediaType == .image && PhotosManager.sharedInstance.selectedVideo == nil {
        
-        PhotosManager.sharedInstance.checkImageIsInICloud(with: asset) { isInICloud in
+        PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
           
-          guard !isInICloud else { return }
+          guard isExistInLocal else { return }
           
           if PhotosManager.sharedInstance.isCrop {
             
@@ -353,9 +353,9 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       if PhotosManager.sharedInstance.resourceOption == .video {
         
-        PhotosManager.sharedInstance.checkVideoIsInICloud(with: asset) { isInICloud in
+        PhotosManager.sharedInstance.checkVideoIsInLocal(with: asset) { isExistInLocal in
           
-          guard !isInICloud else { return }
+          guard isExistInLocal else { return }
           
           PhotosManager.sharedInstance.selectVideo(with: asset)
           PhotosManager.sharedInstance.didFinish()
