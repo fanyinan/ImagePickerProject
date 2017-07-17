@@ -62,15 +62,10 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
+  func completeButtonClick() {
     
     completionButton.removeFromSuperview()
 
-  }
-  
-  func completeButtonClick() {
-    
     PhotosManager.sharedInstance.didFinish()
     
   }
@@ -87,6 +82,8 @@ class PhotoColletionViewController: UIViewController {
   
   func onCancel() {
     
+    completionButton.removeFromSuperview()
+
     dismiss(animated: true) {
       PhotosManager.sharedInstance.cancel()
     }
