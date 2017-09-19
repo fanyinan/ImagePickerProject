@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "WZImagePicker"
-  s.version      = "0.1.5"
+  s.version      = "0.1.6"
   s.summary      = "A complete functions ImagePicker."
 
   # This description is used to generate tags and improve search results.
