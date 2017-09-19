@@ -49,7 +49,7 @@ class CameraHelper: NSObject {
   
   fileprivate func checkCamera(){
     
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
     if (AVAuthorizationStatus.denied == authStatus || AVAuthorizationStatus.restricted == authStatus){
       
       let _ = UIAlertView(title: "相机被禁用", message: "请在设置－隐私－相机中开启", delegate: nil, cancelButtonTitle: "确定").show()

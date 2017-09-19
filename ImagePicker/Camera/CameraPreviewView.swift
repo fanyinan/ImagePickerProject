@@ -57,7 +57,11 @@ class CameraPreviewView: UIView {
   
   fileprivate func initRecording() {
     
-    let device = getCamera(with: .back)
+    guard let device = getCamera(with: .back) else {
+      print("初始化录制设备失败")
+
+      return
+    }
     
     do {
       
@@ -76,16 +80,14 @@ class CameraPreviewView: UIView {
     }
     
     preLayer = AVCaptureVideoPreviewLayer(session: session)
-    preLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+    preLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
     layer.addSublayer(preLayer)
     
   }
 
-  fileprivate func getCamera(with position: AVCaptureDevicePosition) -> AVCaptureDevice? {
+  fileprivate func getCamera(with position: AVCaptureDevice.Position) -> AVCaptureDevice? {
     
-    for device in AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) {
-      
-      let device = device as! AVCaptureDevice
+    for device in AVCaptureDevice.devices(for: AVMediaType.video) {
       
       if device.position == position {
         return device

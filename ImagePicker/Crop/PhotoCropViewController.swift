@@ -88,7 +88,7 @@ class PhotoCropViewController: UIViewController {
    ******************************************************************************/
   //MARK: - Target-Action
   
-  func onComplete() {
+  @objc func onComplete() {
     
     let (xScale, yScale, sizeScalse) = cropImageScrollView.getSelectedRectScale()
     
@@ -105,7 +105,7 @@ class PhotoCropViewController: UIViewController {
     
   }
   
-  func onCancel() {
+  @objc func onCancel() {
     
     if navigationController == nil {
       self.dismiss(animated: true, completion: nil)

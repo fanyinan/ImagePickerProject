@@ -62,7 +62,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  func completeButtonClick() {
+  @objc func completeButtonClick() {
     
     completionButton.removeFromSuperview()
 
@@ -70,7 +70,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  func albumButtonClick() {
+  @objc func albumButtonClick() {
     
     if popViewHelp.isShow {
       popViewHelp.hidePoppingView()
@@ -80,7 +80,7 @@ class PhotoColletionViewController: UIViewController {
     
   }
   
-  func onCancel() {
+  @objc func onCancel() {
     
     completionButton.removeFromSuperview()
 
@@ -218,7 +218,7 @@ class PhotoColletionViewController: UIViewController {
   
   private func checkCamera(){
     
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
     if (AVAuthorizationStatus.denied == authStatus || AVAuthorizationStatus.restricted == authStatus){
       
       let alertController = UIAlertController(title: "相机被禁用", message: "请在设置－隐私－相机中开启", preferredStyle: .alert)

@@ -244,7 +244,7 @@ class PopViewHelper: NSObject {
     isDelayHide = false
   }
   
-  func onClickMask() {
+  @objc func onClickMask() {
     
     if let _mask = mask {
       delegate?.popViewHelper?(self, didClickMask: _mask)
@@ -338,7 +338,7 @@ class PopViewHelper: NSObject {
     
   }
   
-  func hidePoppingViewWithAnimated() {
+  @objc func hidePoppingViewWithAnimated() {
     hidePoppingView()
   }
   

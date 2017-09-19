@@ -128,7 +128,7 @@ class WZPhotoBrowserLite: UIViewController {
     
   }
   
-  func onClickPhoto() {
+  @objc func onClickPhoto() {
     
     quitBlock?()
     

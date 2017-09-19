@@ -53,11 +53,11 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
 
   }
   
-  func onBack() {
+  @objc func onBack() {
     _ = navigationController?.popViewController(animated: true)
   }
   
-  func onSelect() {
+  @objc func onSelect() {
     
     PhotosManager.sharedInstance.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
       
@@ -68,7 +68,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     }
   }
   
-  func onComplete() {
+  @objc func onComplete() {
     
     PhotosManager.sharedInstance.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
       
