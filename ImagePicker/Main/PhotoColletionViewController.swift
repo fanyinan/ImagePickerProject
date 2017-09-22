@@ -156,23 +156,18 @@ class PhotoColletionViewController: UIViewController {
     
     titleLabel = UILabel()
     ablumButton.addSubview(titleLabel)
-    titleLabel.snp.makeConstraints { (make) in
-      make.center.equalTo(ablumButton)
-    }
     
     titleLabel.textColor = .jx_main
     titleLabel.font = UIFont.systemFont(ofSize: 18)
     titleLabel.textAlignment = .center
-    
     updateTitle()
-
-    indicatorImageView = UIImageView()
+    titleLabel.sizeToFit()
+    titleLabel.center = CGPoint(x: ablumButton.frame.midX, y: ablumButton.frame.midY)
+    
+    indicatorImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: indicatorWidth, height: indicatorWidth))
     ablumButton.addSubview(indicatorImageView)
-    indicatorImageView.snp.makeConstraints { (make) in
-      make.left.equalTo(titleLabel.snp.right).offset(5)
-      make.centerY.equalTo(ablumButton)
-      make.width.height.equalTo(indicatorWidth)
-    }
+    indicatorImageView.center.y = titleLabel.center.y
+    indicatorImageView.frame.origin.x = titleLabel.frame.maxX
     
     indicatorImageView.contentMode = .scaleAspectFit
     let image = UIImage(named: "ic_down_arrow", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
