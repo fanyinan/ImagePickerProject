@@ -14,7 +14,7 @@ class CameraPreviewView: UIView {
   fileprivate var inputVideo: AVCaptureDeviceInput!
   fileprivate var preLayer: AVCaptureVideoPreviewLayer!
   fileprivate var session: AVCaptureSession!
-  
+  public var isCameraAvailable: Bool = true
   override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -31,8 +31,9 @@ class CameraPreviewView: UIView {
   
   override func layoutSubviews() {
     
-    preLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-
+    if preLayer != nil {
+      preLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+    }
   }
   
   func startPreview() {
@@ -59,7 +60,7 @@ class CameraPreviewView: UIView {
     
     guard let device = getCamera(with: .back) else {
       print("初始化录制设备失败")
-
+      isCameraAvailable = false
       return
     }
     
@@ -70,7 +71,7 @@ class CameraPreviewView: UIView {
     } catch {
       
       print("初始化录制设备失败")
-      
+      isCameraAvailable = false
     }
     
     session = AVCaptureSession()
