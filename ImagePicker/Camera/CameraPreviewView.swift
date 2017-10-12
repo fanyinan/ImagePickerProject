@@ -15,6 +15,7 @@ class CameraPreviewView: UIView {
   fileprivate var preLayer: AVCaptureVideoPreviewLayer!
   fileprivate var session: AVCaptureSession!
   public var isCameraAvailable: Bool = true
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -30,13 +31,12 @@ class CameraPreviewView: UIView {
   }
   
   override func layoutSubviews() {
-    
-    if preLayer != nil {
-      preLayer.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-    }
+    preLayer?.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
   }
   
   func startPreview() {
+    
+    guard isCameraAvailable else { return }
     
     DispatchQueue.global().async {
       

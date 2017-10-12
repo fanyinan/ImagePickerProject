@@ -15,10 +15,7 @@ class CameraPreviewCell: UICollectionViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
 
-    if cameraPreviewView.isCameraAvailable {
-      cameraPreviewView.startPreview()      
-    }
+    cameraPreviewView.startPreview()
     
   }
-  
 }

@@ -31,29 +31,16 @@ class CameraHelper: NSObject {
   
   func openCamera() {
 
-    if UIImagePickerController.isSourceTypeAvailable(.camera){
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
       imagePicker = UIImagePickerController()
       imagePicker.sourceType = .camera
       imagePicker.cameraDevice = .front
       imagePicker.isEditing = false
       imagePicker.delegate = self
       handlerViewController?.modalPresentationStyle = .overCurrentContext
-      handlerViewController?.present(imagePicker, animated: true, completion: {
-        
-        self.checkCamera() })
+      handlerViewController?.present(imagePicker, animated: true, completion: nil)
     } else {
-      print("相机不可用")
-    }
-    
-  }
-  
-  fileprivate func checkCamera(){
-    
-    let authStatus : AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-    if (AVAuthorizationStatus.denied == authStatus || AVAuthorizationStatus.restricted == authStatus){
-      
-      let _ = UIAlertView(title: "相机被禁用", message: "请在设置－隐私－相机中开启", delegate: nil, cancelButtonTitle: "确定").show()
-      
+      let _ = UIAlertView(title: "相机不可用", message: nil, delegate: nil, cancelButtonTitle: "确定").show()
     }
   }
 }

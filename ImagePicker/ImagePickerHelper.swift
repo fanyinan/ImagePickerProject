@@ -70,7 +70,7 @@ open class WZImagePickerHelper: NSObject {
    ******************************************************************************/
   //MARK: - public Method Implementation
   
-  public func start(){
+  open func start() {
     
     guard let _handlerViewController = handlerViewController else { return }
     
@@ -101,7 +101,7 @@ open class WZImagePickerHelper: NSObject {
       
     } else {
       
-      openAblum()
+      showAblum()
       
     }
   }
@@ -201,7 +201,7 @@ open class WZImagePickerHelper: NSObject {
     PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
       
       var images: [UIImage] = images
-
+      
       if self.isCrop && images.count == 1 {
         images = [PhotosManager.sharedInstance.cropImage(images[0])]
       }
@@ -211,40 +211,6 @@ open class WZImagePickerHelper: NSObject {
       guard self.shouldPick(resource: resource) else { return }
       
       self.finish(with: resource)
-    }
-  }
-  
-  private func openAblum() {
-    
-    guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
-      
-      let _ = UIAlertView(title: "相册不可用", message: nil, delegate: nil, cancelButtonTitle: "确定").show()
-      
-      return
-    }
-    
-    let status = PHPhotoLibrary.authorizationStatus()
-    
-    switch status {
-    case .notDetermined:
-      
-      PHPhotoLibrary.requestAuthorization { (status) in
-        
-        guard status == .authorized else { return }
-        
-        DispatchQueue.main.async {
-          self.showAblum()
-        }
-
-      }
-      
-    case .authorized:
-      showAblum()
-      
-    case .restricted, .denied:
-      
-      let _ = UIAlertView(title: "相册被禁用", message: "请在设置－隐私－照片中开启", delegate: nil, cancelButtonTitle: "确定").show()
-      
     }
   }
   
@@ -260,3 +226,4 @@ open class WZImagePickerHelper: NSObject {
     
   }
 }
+
