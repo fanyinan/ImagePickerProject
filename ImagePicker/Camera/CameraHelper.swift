@@ -1,9 +1,9 @@
 //
 //  CameraHelper.swift
-//  Yuanfenba
+//  ImagePickerProject
 //
 //  Created by 范祎楠 on 16/3/3.
-//  Copyright © 2016年 Juxin. All rights reserved.
+//  Copyright © 2016年 fyn. All rights reserved.
 //
 
 import UIKit

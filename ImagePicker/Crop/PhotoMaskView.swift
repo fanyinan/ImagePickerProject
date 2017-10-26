@@ -1,9 +1,9 @@
 //
 //  PhotoMaskView.swift
-//  Yuanfenba
+//  ImagePickerProject
 //
 //  Created by 范祎楠 on 15/12/21.
-//  Copyright © 2015年 Juxin. All rights reserved.
+//  Copyright © 2015年 fyn. All rights reserved.
 //
 
 import UIKit

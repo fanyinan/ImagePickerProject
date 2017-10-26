@@ -1,6 +1,6 @@
 //
 //  PopViewManager.swift
-//  MuMu
+//  ImagePickerProject
 //
 //  Created by 范祎楠 on 15/4/16.
 //  Copyright (c) 2015年 范祎楠. All rights reserved.
