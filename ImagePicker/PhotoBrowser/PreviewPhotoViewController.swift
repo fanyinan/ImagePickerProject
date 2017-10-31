@@ -12,14 +12,12 @@ import Photos
 class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   private var topBarContainerView: UIView!
-  private var topBarTransparentView: UIView!
   private var backButton: UIButton!
   private var selectButton: UIControl!
   private var unselectedImageView: UIImageView!
   private var selectedImageView: UIImageView!
   
   private var bottomBarContainerView: UIView!
-  private var bottomBarTransparentView: UIView!
   private var completeButton: UIButton!
   private var selectedCountLabel: UILabel!
   
@@ -89,24 +87,18 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   func initTopbar() {
     
-    
-    //topBarTransparentView
-    topBarTransparentView = UIView()
-    view.addSubview(topBarTransparentView)
-    topBarTransparentView.snp.makeConstraints { (make) -> Void in
-      make.top.right.left.equalTo(view)
-      make.height.equalTo(64)
-    }
-    
-    topBarTransparentView.alpha = 0.7
-    topBarTransparentView.backgroundColor = UIColor(hex: 0x111111)
-    
     //topBarContainer
     topBarContainerView = UIView()
+    topBarContainerView.backgroundColor = UIColor(hex: 0x111111).withAlphaComponent(0.7)
     view.addSubview(topBarContainerView)
     topBarContainerView.snp.makeConstraints { (make) -> Void in
-      make.top.right.left.equalTo(view)
+      make.right.left.equalTo(view)
       make.height.equalTo(64)
+      if #available(iOS 11.0, *) {
+        make.top.equalTo(navigationController!.view.layoutMargins.top)
+      } else {
+        make.top.equalTo(view)
+      }
     }
     
     topBarContainerView.backgroundColor = UIColor.clear
@@ -158,26 +150,20 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   func initBottomBar() {
     
-    //bottomBarTransparentView
-    bottomBarTransparentView = UIView()
-    view.addSubview(bottomBarTransparentView)
-    bottomBarTransparentView.snp.makeConstraints { (make) -> Void in
-      make.right.bottom.left.equalTo(view)
-      make.height.equalTo(44)
-    }
-    
-    bottomBarTransparentView.alpha = 0.7
-    bottomBarTransparentView.backgroundColor = UIColor(hex: 0x111111)
-    
     //bottomBarContainer
     bottomBarContainerView = UIView()
+    bottomBarContainerView.backgroundColor = UIColor(hex: 0x111111).withAlphaComponent(0.7)
+
     view.addSubview(bottomBarContainerView)
     bottomBarContainerView.snp.makeConstraints { (make) -> Void in
-      make.right.bottom.left.equalTo(view)
+      make.right.left.equalTo(view)
       make.height.equalTo(44)
+      if #available(iOS 11.0, *) {
+        make.bottom.equalTo(-navigationController!.view.layoutMargins.bottom)
+      } else {
+        make.bottom.equalTo(view)
+      }
     }
-    
-    bottomBarContainerView.backgroundColor = UIColor.clear
     
     //completeButton
     completeButton = UIButton()
