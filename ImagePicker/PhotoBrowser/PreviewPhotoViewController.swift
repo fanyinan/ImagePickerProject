@@ -32,7 +32,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    if PhotosManager.sharedInstance.maxSelectedCount == 1 {
+    if PhotosManager.shared.maxSelectedCount == 1 {
       
       selectButton.isHidden = true
       unselectedImageView.isHidden = true
@@ -57,27 +57,40 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   @objc func onSelect() {
     
-    PhotosManager.sharedInstance.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
+    if currentAsset.mediaType == .image {
+      PhotosManager.shared.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
+        
+        guard isExistInLocal else { return }
+        
+        self.setPhotoSelectedStatusWith(self.currentIndex)
+        self.updateCount()
+
+      }
+    } else if currentAsset.mediaType == .video {
       
-      guard isExistInLocal else { return }
-      
-      self.setPhotoSelectedStatusWith(self.currentIndex)
-      self.updateCount()
+      PhotosManager.shared.checkVideoIsInLocal(with: currentAsset) { isExistInLocal in
+        
+        guard isExistInLocal else { return }
+        
+        self.setPhotoSelectedStatusWith(self.currentIndex)
+        self.updateCount()
+
+      }
     }
   }
   
   @objc func onComplete() {
     
-    PhotosManager.sharedInstance.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
+    PhotosManager.shared.checkImageIsInLocal(with: currentAsset) { isExistInLocal in
       
       guard isExistInLocal else { return }
       
       //如果当前没有被选择的照片，则选择当前照片
-      if PhotosManager.sharedInstance.selectedImages.isEmpty {
-        PhotosManager.sharedInstance.selectPhoto(with: self.currentAsset)
+      if PhotosManager.shared.selectedImages.isEmpty {
+        PhotosManager.shared.select(with: self.currentAsset)
       }
       
-      PhotosManager.sharedInstance.didFinish()
+      PhotosManager.shared.didFinish()
     }
   }
   
@@ -92,23 +105,21 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     topBarContainerView.backgroundColor = UIColor(hex: 0x111111).withAlphaComponent(0.7)
     view.addSubview(topBarContainerView)
     topBarContainerView.snp.makeConstraints { (make) -> Void in
-      make.right.left.equalTo(view)
-      make.height.equalTo(64)
+      make.right.left.equalToSuperview()
+      make.top.equalToSuperview()
       if #available(iOS 11.0, *) {
-        make.top.equalTo(navigationController!.view.layoutMargins.top)
+        make.height.equalTo(40 + navigationController!.view.safeAreaInsets.top)
       } else {
-        make.top.equalTo(view)
+        make.height.equalTo(64)
       }
     }
-    
-    topBarContainerView.backgroundColor = UIColor.clear
     
     //backButton
     backButton = UIButton()
     topBarContainerView.addSubview(backButton)
     backButton.snp.makeConstraints { (make) -> Void in
-      make.top.bottom.left.equalTo(topBarContainerView)
-      make.width.equalTo(50)
+      make.bottom.left.equalTo(topBarContainerView)
+      make.width.height.equalTo(50)
     }
     
     let image = UIImage(named: "back_white_arrow", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
@@ -120,8 +131,8 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     topBarContainerView.addSubview(selectButton)
     selectButton.snp.makeConstraints { (make) -> Void in
       make.right.equalTo(topBarContainerView).offset(-10)
-      make.top.bottom.equalTo(topBarContainerView)
-      make.width.equalTo(50)
+      make.bottom.equalTo(topBarContainerView)
+      make.width.height.equalTo(50)
     }
     
     selectButton.addTarget(self, action: #selector(PreviewPhotoViewController.onSelect), for: .touchUpInside)
@@ -134,7 +145,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.center.equalTo(selectButton)
     }
     
-    unselectedImageView.image = UIImage(named: "imagepick_unchecked")
+    unselectedImageView.image = UIImage(named: "imagepick_unchecked", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
     
     //selectedButton
     selectedImageView = UIImageView()
@@ -144,7 +155,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
       make.center.equalTo(selectButton)
     }
     
-    selectedImageView.image = UIImage(named: "imagepick_checked")
+    selectedImageView.image = UIImage(named: "imagepick_checked", in: Bundle(for: PreviewPhotoViewController.self), compatibleWith: nil)
     
   }
   
@@ -157,11 +168,11 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     view.addSubview(bottomBarContainerView)
     bottomBarContainerView.snp.makeConstraints { (make) -> Void in
       make.right.left.equalTo(view)
-      make.height.equalTo(44)
+      make.bottom.equalTo(view)
       if #available(iOS 11.0, *) {
-        make.bottom.equalTo(-navigationController!.view.layoutMargins.bottom)
+        make.height.equalTo(20 + navigationController!.view.layoutMargins.bottom)
       } else {
-        make.bottom.equalTo(view)
+        make.height.equalTo(44)
       }
     }
     
@@ -169,26 +180,27 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
     completeButton = UIButton()
     bottomBarContainerView.addSubview(completeButton)
     completeButton.snp.makeConstraints { (make) -> Void in
-      make.right.bottom.top.equalTo(bottomBarContainerView)
-      make.width.equalTo(50)
+      make.top.equalTo(bottomBarContainerView)
+      make.right.equalToSuperview().offset(-navigationController!.view.layoutMargins.right)
+      make.width.height.equalTo(50)
     }
     
-    completeButton.setTitle("完成", for: UIControlState())
+    completeButton.setTitle("完成", for: .normal)
     completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-    completeButton.setTitleColor(UIColor.green, for: UIControlState())
+    completeButton.setTitleColor(.white, for: .normal)
     completeButton.addTarget(self, action: #selector(PreviewPhotoViewController.onComplete), for: .touchUpInside)
     
     //selectedCountLabel
     selectedCountLabel = UILabel()
     bottomBarContainerView.addSubview(selectedCountLabel)
     selectedCountLabel.snp.makeConstraints { (make) -> Void in
-      make.centerY.equalTo(bottomBarContainerView)
+      make.centerY.equalTo(completeButton)
       make.right.equalTo(completeButton.snp.left)
       make.width.height.equalTo(20)
     }
     
     selectedCountLabel.textColor = UIColor.white
-    selectedCountLabel.backgroundColor = UIColor(hex: 0x03AC00)
+    selectedCountLabel.backgroundColor = UIColor(hex: 0xFFE972)
     selectedCountLabel.textAlignment = .center
     selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
     
@@ -197,7 +209,7 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   override func photoDidChange() {
     super.photoDidChange()
     
-    let isSelected = PhotosManager.sharedInstance.selectedImages.contains(currentAsset)
+    let isSelected = PhotosManager.shared.getAssetSelectedStatus(with: currentAsset)
     setPhotoSelected(isSelected)
     updateCount()
     
@@ -205,17 +217,17 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   func setPhotoSelectedStatusWith(_ index: Int) {
     
-    let isSuccess = PhotosManager.sharedInstance.selectPhoto(with: currentAsset)
+    let isSuccess = PhotosManager.shared.select(with: currentAsset)
     
     if !isSuccess {
       
-      let alert = UIAlertView(title: "", message: "你最多只能选择\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "我知道了")
+      let alert = UIAlertView(title: "", message: "你最多只能选择\(PhotosManager.shared.maxSelectedCount)张文件", delegate: nil, cancelButtonTitle: "我知道了")
       alert.show()
       
       return
     }
     
-    let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: currentAsset)
+    let isSelected = PhotosManager.shared.getAssetSelectedStatus(with: currentAsset)
     setPhotoStatusWithAnimation(isSelected)
   }
   
@@ -242,12 +254,12 @@ class PreviewPhotoViewController: WZPhotoBrowserLite {
   
   private func updateCount() {
     
-    guard PhotosManager.sharedInstance.maxSelectedCount > 1 else {
+    guard PhotosManager.shared.maxSelectedCount > 1 else {
       selectedCountLabel.isHidden = true
       return
     }
     
-    let selectedCount = PhotosManager.sharedInstance.selectedImages.count
+    let selectedCount = PhotosManager.shared.selectedImages.count
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
     selectedCountLabel.isHidden = selectedCount == 0

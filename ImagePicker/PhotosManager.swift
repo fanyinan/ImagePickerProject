@@ -26,17 +26,17 @@ struct ImageRectScale {
 
 class PhotosManager: NSObject {
   
-  static let sharedInstance = PhotosManager()
+  static let shared = PhotosManager()
   static var assetGridThumbnailSize = CGSize(width: 50, height: 50)
   static var assetPreviewImageSize = UIScreen.main.bounds.size
   static var assetExportImageSize = UIScreen.main.bounds.size
   
   private var assetCollectionList: [PHAssetCollection] = []
   private lazy var imageManager: PHCachingImageManager = self.initImageManager()
-  private var currentAlbumFetchResult: PHFetchResult<PHAsset>!
-  private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
+  private(set) var currentAlbumFetchResult: PHFetchResult<PHAsset>!
+//  private(set) var currentImageAlbumFetchResult: PHFetchResult<PHAsset>!
   private(set) var selectedImages: Set<PHAsset> = []
-  private(set) var selectedVideo: PHAsset?
+  private(set) var selectedVideos: Set<PHAsset> = []
   
   var currentAlbumIndex: Int? {
     didSet{
@@ -47,7 +47,7 @@ class PhotosManager: NSObject {
       guard let imagePicker = imagePicker else { return }
       
       currentAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: imagePicker.resourceOption)
-      currentImageAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: [.image])
+//      currentImageAlbumFetchResult = getFetchResult(with: assetCollection, resourceOption: [.image])
     }
   }
   
@@ -307,21 +307,36 @@ class PhotosManager: NSObject {
    */
   
   @discardableResult
-  func selectPhoto(with asset: PHAsset) -> Bool {
+  func select(with asset: PHAsset) -> Bool {
     
-    let isExist = getPhotoSelectedStatus(with: asset)
+    var isExist = false
+    
+    if asset.mediaType == .image {
+      isExist = getPhotoSelectedStatus(with: asset)
+    } else if asset.mediaType == .video {
+      isExist = getVideoSelectedStatus(with: asset)
+    }
     
     if isExist {
-      selectedImages.remove(asset)
+      if asset.mediaType == .image {
+        selectedImages.remove(asset)
+      } else if asset.mediaType == .video {
+        selectedVideos.remove(asset)
+      }
+      
     } else {
       
-      if imagePicker.maxSelectedCount == selectedImages.count {
+      if imagePicker.maxSelectedCount == selectedImages.count + selectedVideos.count {
         
         return false
         
       } else {
         
-        selectedImages.insert(asset)
+        if asset.mediaType == .image {
+          selectedImages.insert(asset)
+        } else if asset.mediaType == .video {
+          selectedVideos.insert(asset)
+        }
         return true
         
       }
@@ -330,28 +345,15 @@ class PhotosManager: NSObject {
     return true
   }
   
-  @discardableResult
-  func selectVideo(with asset: PHAsset) -> Bool {
+  func getAssetSelectedStatus(with asset: PHAsset) -> Bool {
     
-    guard let videoIndex = selectedVideo else {
-      selectedVideo = asset
-      return true
+    if asset.mediaType == .image {
+      return getPhotoSelectedStatus(with: asset)
+    } else if asset.mediaType == .video {
+      return getVideoSelectedStatus(with: asset)
     }
     
-    selectedVideo = videoIndex == asset ? nil : asset
-    
-    return selectedVideo != nil
-  }
-  
-  /**
-   获取该照片的选中状态
-   
-   - parameter index: 照片index
-   
-   - returns: true为已被选中，false为未选中
-   */
-  func getPhotoSelectedStatus(with asset: PHAsset) -> Bool {
-    return selectedImages.contains(asset)
+    return false
   }
   
   func clearData() {
@@ -360,7 +362,7 @@ class PhotosManager: NSObject {
     
     rectScale = nil
     selectedImages.removeAll()
-    selectedVideo = nil
+    selectedVideos.removeAll()
     assetCollectionList.removeAll()
     
   }
@@ -368,8 +370,8 @@ class PhotosManager: NSObject {
   func removeSelectionIfMaxCountIsOne() {
     if imagePicker.maxSelectedCount == 1 {
       selectedImages.removeAll()
+      selectedVideos.removeAll()
     }
-    selectedVideo = nil
   }
   
   func fetchSelectedImages(_ handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
@@ -379,44 +381,11 @@ class PhotosManager: NSObject {
     
   }
   
-  func getAllSelectedImageInCurrentAlbum(with imageAssets: [PHAsset], imageList: [UIImage],  handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
+  func fetchSelectedVideos(handleCompletion: @escaping (_ avAssets: [AVAsset]) -> Void) {
     
-    if imageAssets.count == 0 {
-      handleCompletion(imageList)
-      return
-    }
+    let videoAssets = Array(selectedVideos).sorted(by: {$0.creationDate ?? Date() > $1.creationDate ?? Date()})
     
-    fetchImage(with: imageAssets[0], sizeType: .export) { (image: UIImage?, _) -> Void in
-      if image == nil {
-        
-        handleCompletion([])
-        return
-      }
-      
-      self.getAllSelectedImageInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageList: imageList + [image!], handleCompletion: handleCompletion)
-      
-    }
-  }
-  
-  func fetchVideo(videoAsset: PHAsset, handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
-    
-    let videoRequestOptions = PHVideoRequestOptions()
-    videoRequestOptions.isNetworkAccessAllowed = false
-    videoRequestOptions.deliveryMode = .fastFormat
-    
-    imageManager.requestAVAsset(forVideo: videoAsset, options: videoRequestOptions) { (avAsset, _, info) in
-      
-      DispatchQueue.main.async {
-        handleCompletion(avAsset, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
-      }
-    }
-  }
-  
-  func fetchSelectedVideo(handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
-    
-    guard let selectedVideo = selectedVideo else { return }
-    
-    fetchVideo(videoAsset: selectedVideo, handleCompletion: handleCompletion)
+    getAllSelectedVideoInCurrentAlbum(with: videoAssets, videoList: [], handleCompletion: handleCompletion)
   }
   
   func fetchSelectedImageData(_ handleCompletion: @escaping (_ data: Data?, _ isGIF: Bool) -> Void) {
@@ -428,16 +397,6 @@ class PhotosManager: NSObject {
     
     fetchRawImageData(with: selectedAsset, handleCompletion: handleCompletion)
     
-  }
-  
-  func fetchRawImageData(with asset: PHAsset, handleCompletion: @escaping (_ imageData: Data?, _ isGIF: Bool) -> Void) {
-    
-    let imageRequestOptions = getImageRequestOptions(with: .export)
-    
-    imageManager.requestImageData(for: asset, options: imageRequestOptions) { (data, uti, _, info) in
-      
-      handleCompletion(data, uti ?? "" == kUTTypeGIF as String)
-    }
   }
   
   func cropImage(_ originImage: UIImage) -> UIImage {
@@ -458,6 +417,67 @@ class PhotosManager: NSObject {
     
     return cropImage
     
+  }
+  
+  func fetchVideo(videoAsset: PHAsset, handleCompletion: @escaping (_ avAsset: AVAsset?, _ isInICloud: Bool) -> Void) {
+    
+    let videoRequestOptions = PHVideoRequestOptions()
+    videoRequestOptions.isNetworkAccessAllowed = false
+    videoRequestOptions.deliveryMode = .fastFormat
+    
+    imageManager.requestAVAsset(forVideo: videoAsset, options: videoRequestOptions) { (avAsset, _, info) in
+      
+      DispatchQueue.main.async {
+        handleCompletion(avAsset, info?[PHImageResultIsInCloudKey] as? Bool ?? false)
+      }
+    }
+  }
+  
+  private func getAllSelectedImageInCurrentAlbum(with imageAssets: [PHAsset], imageList: [UIImage],  handleCompletion: @escaping (_ images: [UIImage]) -> Void) {
+    
+    if imageAssets.count == 0 {
+      handleCompletion(imageList)
+      return
+    }
+    
+    fetchImage(with: imageAssets[0], sizeType: .export) { (image: UIImage?, _) -> Void in
+      if image == nil {
+        
+        handleCompletion([])
+        return
+      }
+      
+      self.getAllSelectedImageInCurrentAlbum(with: Array(imageAssets[1..<imageAssets.count]), imageList: imageList + [image!], handleCompletion: handleCompletion)
+      
+    }
+  }
+  
+  private func getAllSelectedVideoInCurrentAlbum(with videoAssets: [PHAsset], videoList: [AVAsset],  handleCompletion: @escaping (_ videos: [AVAsset]) -> Void) {
+    
+    if videoAssets.count == 0 {
+      handleCompletion(videoList)
+      return
+    }
+    
+    fetchVideo(videoAsset: videoAssets[0]) { (avAsset: AVAsset?, _) in
+      
+      guard let avAsset = avAsset else {
+        handleCompletion([])
+        return
+      }
+      
+      self.getAllSelectedVideoInCurrentAlbum(with: Array(videoAssets[1..<videoAssets.count]), videoList: videoList + [avAsset], handleCompletion: handleCompletion)
+    }
+  }
+  
+  private func fetchRawImageData(with asset: PHAsset, handleCompletion: @escaping (_ imageData: Data?, _ isGIF: Bool) -> Void) {
+    
+    let imageRequestOptions = getImageRequestOptions(with: .export)
+    
+    imageManager.requestImageData(for: asset, options: imageRequestOptions) { (data, uti, _, info) in
+      
+      handleCompletion(data, uti ?? "" == kUTTypeGIF as String)
+    }
   }
   
   private func getImageRequestOptions(with sizeType: PhotoSizeType) -> PHImageRequestOptions {
@@ -486,5 +506,13 @@ class PhotosManager: NSObject {
     }
     
     return imageRequestOptions
+  }
+  
+  private func getPhotoSelectedStatus(with asset: PHAsset) -> Bool {
+    return selectedImages.contains(asset)
+  }
+  
+  private func getVideoSelectedStatus(with asset: PHAsset) -> Bool {
+    return selectedVideos.contains(asset)
   }
 }

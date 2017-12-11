@@ -42,7 +42,7 @@ public struct WZResourceOption: OptionSet {
 
 public enum WZResourceType {
   case image(images: [UIImage])
-  case video(video: AVAsset?)
+  case video(videos: [AVAsset])
   case rawImageData(imageData: Data?)
 }
 
@@ -74,10 +74,6 @@ open class WZImagePickerHelper: NSObject {
     
     guard let _handlerViewController = handlerViewController else { return }
     
-    if resourceOption == .video {
-      maxSelectedCount = 1
-    }
-    
     if maxSelectedCount <= 0 {
       maxSelectedCount = 1
     }
@@ -86,7 +82,7 @@ open class WZImagePickerHelper: NSObject {
       isCrop = false
     }
     
-    PhotosManager.sharedInstance.prepare(self)
+    PhotosManager.shared.prepare(self)
     
     if type == .camera {
       
@@ -116,12 +112,12 @@ open class WZImagePickerHelper: NSObject {
       return
     }
     
-    if let _ = PhotosManager.sharedInstance.selectedVideo  {
+    if !PhotosManager.shared.selectedVideos.isEmpty  {
       fetchVideo()
       return
     }
     
-    if resourceOption.contains(.data) && PhotosManager.sharedInstance.selectedImages.count == 1 {
+    if resourceOption.contains(.data) && PhotosManager.shared.selectedImages.count == 1 {
       fetchImageDatas()
     } else {
       fetchImages()
@@ -133,7 +129,7 @@ open class WZImagePickerHelper: NSObject {
     let should = delegate?.pickedPhoto(self, shouldPickResource: resource) ?? true
     
     if !should {
-      PhotosManager.sharedInstance.removeSelectionIfMaxCountIsOne()
+      PhotosManager.shared.removeSelectionIfMaxCountIsOne()
     }
     
     return should
@@ -143,7 +139,7 @@ open class WZImagePickerHelper: NSObject {
     
     handlerViewController?.dismiss(animated: true, completion: {
       
-      PhotosManager.sharedInstance.clearData()
+      PhotosManager.shared.clearData()
       
       self.delegate?.pickedPhoto(self, didPickResource: resource)
       
@@ -152,9 +148,9 @@ open class WZImagePickerHelper: NSObject {
   
   private func fetchVideo() {
     
-    PhotosManager.sharedInstance.fetchSelectedVideo(handleCompletion: { (avAsset, _) in
+    PhotosManager.shared.fetchSelectedVideos(handleCompletion: { avAsset in
       
-      let resource: WZResourceType = .video(video: avAsset)
+      let resource: WZResourceType = .video(videos: avAsset)
       
       guard self.shouldPick(resource: resource) else { return }
       
@@ -165,7 +161,7 @@ open class WZImagePickerHelper: NSObject {
   
   private func fetchImageDatas() {
     
-    PhotosManager.sharedInstance.fetchSelectedImageData({ (data, isGIF) in
+    PhotosManager.shared.fetchSelectedImageData({ (data, isGIF) in
       
       var resource: WZResourceType!
       
@@ -178,7 +174,7 @@ open class WZImagePickerHelper: NSObject {
         var images: [UIImage] = [image]
         
         if self.isCrop {
-          images = [PhotosManager.sharedInstance.cropImage(image)]
+          images = [PhotosManager.shared.cropImage(image)]
         }
         
         resource = .image(images: images)
@@ -198,12 +194,12 @@ open class WZImagePickerHelper: NSObject {
   
   private func fetchImages() {
     
-    PhotosManager.sharedInstance.fetchSelectedImages { (images) -> Void in
+    PhotosManager.shared.fetchSelectedImages { (images) -> Void in
       
       var images: [UIImage] = images
       
       if self.isCrop && images.count == 1 {
-        images = [PhotosManager.sharedInstance.cropImage(images[0])]
+        images = [PhotosManager.shared.cropImage(images[0])]
       }
       
       let resource: WZResourceType = .image(images: images)

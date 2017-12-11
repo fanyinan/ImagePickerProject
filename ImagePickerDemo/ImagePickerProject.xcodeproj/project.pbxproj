@@ -39,6 +39,10 @@
 		CF467CCC1EC17454003F85F5 /* imagepick_checked.png in Resources */ = {isa = PBXBuildFile; fileRef = CF467CC61EC17454003F85F5 /* imagepick_checked.png */; };
 		CF467CD01EC17493003F85F5 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCE1EC17493003F85F5 /* Extension.swift */; };
 		CF467CD11EC17493003F85F5 /* PopViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */; };
+		CFBB56721FDE2A3700A80DBF /* PreviewVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBB56701FDE2A3700A80DBF /* PreviewVideoViewController.swift */; };
+		CFBB56771FDE308500A80DBF /* PreviewVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFBB56761FDE308500A80DBF /* PreviewVideoViewController.xib */; };
+		CFBC6BF51FDBC2FE000EB059 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = CFBC6BF41FDBC2FE000EB059 /* play.png */; };
+		CFBC6BF71FDBC3A1000EB059 /* VideoPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC6BF61FDBC3A1000EB059 /* VideoPlayView.swift */; };
 		DB07072D855558974CCCA5B9 /* Pods_ImagePickerProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E81F196D59D9C20DB1AA34A /* Pods_ImagePickerProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +85,10 @@
 		CF467CC61EC17454003F85F5 /* imagepick_checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagepick_checked.png; sourceTree = "<group>"; };
 		CF467CCE1EC17493003F85F5 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		CF467CCF1EC17493003F85F5 /* PopViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopViewHelper.swift; sourceTree = "<group>"; };
+		CFBB56701FDE2A3700A80DBF /* PreviewVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewVideoViewController.swift; sourceTree = "<group>"; };
+		CFBB56761FDE308500A80DBF /* PreviewVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviewVideoViewController.xib; sourceTree = "<group>"; };
+		CFBC6BF41FDBC2FE000EB059 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		CFBC6BF61FDBC3A1000EB059 /* VideoPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +226,9 @@
 				CF467CA61EC17306003F85F5 /* PreviewPhotoViewController.swift */,
 				CF467CA71EC17306003F85F5 /* WZPhotoBrowserLite.swift */,
 				CF467CA81EC17306003F85F5 /* ZoomImageScrollViewLite.swift */,
+				CFBC6BF61FDBC3A1000EB059 /* VideoPlayView.swift */,
+				CFBB56701FDE2A3700A80DBF /* PreviewVideoViewController.swift */,
+				CFBB56761FDE308500A80DBF /* PreviewVideoViewController.xib */,
 			);
 			path = PhotoBrowser;
 			sourceTree = "<group>";
@@ -225,6 +236,7 @@
 		CF467CC01EC17454003F85F5 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				CFBC6BF41FDBC2FE000EB059 /* play.png */,
 				CF467CC11EC17454003F85F5 /* back_white_arrow@3x.png */,
 				CF467CC21EC17454003F85F5 /* default_pic.png */,
 				CF467CC31EC17454003F85F5 /* ic_down_arrow.png */,
@@ -318,7 +330,9 @@
 				CF467CB01EC17306003F85F5 /* CameraPreviewCell.xib in Resources */,
 				CF2C77F71C89613700B72821 /* Main.storyboard in Resources */,
 				CF467CC91EC17454003F85F5 /* ic_down_arrow.png in Resources */,
+				CFBC6BF51FDBC2FE000EB059 /* play.png in Resources */,
 				CF467CCC1EC17454003F85F5 /* imagepick_checked.png in Resources */,
+				CFBB56771FDE308500A80DBF /* PreviewVideoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,11 +405,13 @@
 				CF467CB61EC17306003F85F5 /* ImagePickerHelper.swift in Sources */,
 				CF467CAD1EC17306003F85F5 /* PhotoAlbumView.swift in Sources */,
 				CF467CB71EC17306003F85F5 /* PhotoColletionViewController.swift in Sources */,
+				CFBB56721FDE2A3700A80DBF /* PreviewVideoViewController.swift in Sources */,
 				CF467CB81EC17306003F85F5 /* PhotoThumbCell.swift in Sources */,
 				CF467CD01EC17493003F85F5 /* Extension.swift in Sources */,
 				CF467CAF1EC17306003F85F5 /* CameraPreviewCell.swift in Sources */,
 				CF467CB11EC17306003F85F5 /* CameraPreviewView.swift in Sources */,
 				CF467CBE1EC17306003F85F5 /* PhotosManager.swift in Sources */,
+				CFBC6BF71FDBC3A1000EB059 /* VideoPlayView.swift in Sources */,
 				CF467CAB1EC17306003F85F5 /* PhotoAlbumCell.swift in Sources */,
 				CF467CBC1EC17306003F85F5 /* WZPhotoBrowserLite.swift in Sources */,
 				CF2C77F21C89613700B72821 /* AppDelegate.swift in Sources */,

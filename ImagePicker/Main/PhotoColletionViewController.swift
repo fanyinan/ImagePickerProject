@@ -66,7 +66,7 @@ class PhotoColletionViewController: UIViewController {
     
     completionButton.removeFromSuperview()
 
-    PhotosManager.sharedInstance.didFinish()
+    PhotosManager.shared.didFinish()
     
   }
   
@@ -85,7 +85,7 @@ class PhotoColletionViewController: UIViewController {
     completionButton.removeFromSuperview()
 
     dismiss(animated: true) {
-      PhotosManager.sharedInstance.cancel()
+      PhotosManager.shared.cancel()
     }
   }
   
@@ -101,8 +101,8 @@ class PhotoColletionViewController: UIViewController {
   
   func updateUI() {
     
-    let selectedImageCount = PhotosManager.sharedInstance.selectedImages.count
-    let selectedVideoCount = PhotosManager.sharedInstance.selectedVideo == nil ? 0 : 1
+    let selectedImageCount = PhotosManager.shared.selectedImages.count
+    let selectedVideoCount = PhotosManager.shared.selectedVideos.count
     let selectedCount = max(selectedImageCount, selectedVideoCount)
     let countString = selectedCount == 0 ? "" : "\(selectedCount)"
     
@@ -193,7 +193,7 @@ class PhotoColletionViewController: UIViewController {
     navigationController?.navigationBar.addSubview(completionButton)
     
     selectedCountLabel = UILabel(frame: CGRect(x: 0, y: (completionButton.frame.height - selectedCountLabelWidth) / 2, width: selectedCountLabelWidth, height: selectedCountLabelWidth))
-    selectedCountLabel.backgroundColor = UIColor(hex: 0x03AC00)
+    selectedCountLabel.backgroundColor = UIColor(hex: 0xFFE972)
     selectedCountLabel.font = UIFont.systemFont(ofSize: 14)
     selectedCountLabel.textColor = UIColor.white
     selectedCountLabel.textAlignment = .center
@@ -203,7 +203,7 @@ class PhotoColletionViewController: UIViewController {
     completionButton.addSubview(selectedCountLabel)
     
     completionLabel = UILabel(frame: CGRect(x: selectedCountLabelWidth, y: 0, width: completionButton.frame.width - selectedCountLabelWidth, height: 44))
-    completionLabel.textColor = UIColor(hex: 0x03AC00)
+    completionLabel.textColor = UIColor(hex: 0x333333)
     completionLabel.text = "完成"
     completionLabel.font = UIFont.systemFont(ofSize: 14)
     completionLabel.textAlignment = .center
@@ -230,14 +230,14 @@ class PhotoColletionViewController: UIViewController {
     }
     
     cameraHelper.cropViewControllerTranlateType = CameraHelper.cropViewControllerTranlateType_Push
-    cameraHelper.isCrop = PhotosManager.sharedInstance.isCrop
+    cameraHelper.isCrop = PhotosManager.shared.isCrop
     cameraHelper.openCamera()
   }
 
   fileprivate func updateTitle() {
     
-    if let currentAlbumIndex = PhotosManager.sharedInstance.currentAlbumIndex {
-      let title = PhotosManager.sharedInstance.getAlbumWith(currentAlbumIndex)?.localizedTitle ?? "相册"
+    if let currentAlbumIndex = PhotosManager.shared.currentAlbumIndex {
+      let title = PhotosManager.shared.getAlbumWith(currentAlbumIndex)?.localizedTitle ?? "相册"
       titleLabel.text = title
       
     }
@@ -258,7 +258,7 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     
-    var photoNum = PhotosManager.sharedInstance.getImageCountInCurrentAlbum()
+    var photoNum = PhotosManager.shared.getImageCountInCurrentAlbum()
     
     if canOpenCamera {
       photoNum += 1
@@ -280,7 +280,7 @@ extension PhotoColletionViewController: UICollectionViewDataSource {
       
       thumbCell.photoColletionViewController = self
       
-      if let asset = PhotosManager.sharedInstance.getAssetInCurrentAlbum(with: canOpenCamera == true ? indexPath.row - 1 : indexPath.row) {
+      if let asset = PhotosManager.shared.getAssetInCurrentAlbum(with: canOpenCamera == true ? indexPath.row - 1 : indexPath.row) {
         
         thumbCell.setAsset(asset)
 
@@ -320,38 +320,43 @@ extension PhotoColletionViewController: UICollectionViewDelegate {
       
       let indexInAblum = canOpenCamera == true ? row - 1 : row
       
-      guard let asset = PhotosManager.sharedInstance.getAssetInCurrentAlbum(with: indexInAblum) else { return }
+      guard let asset = PhotosManager.shared.getAssetInCurrentAlbum(with: indexInAblum) else { return }
       
-      if asset.mediaType == .image && PhotosManager.sharedInstance.selectedVideo == nil {
+      if asset.mediaType == .image && PhotosManager.shared.selectedVideos.isEmpty {
        
-        PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
+        PhotosManager.shared.checkImageIsInLocal(with: asset) { isExistInLocal in
           
           guard isExistInLocal else { return }
           
-          if PhotosManager.sharedInstance.isCrop {
+          if PhotosManager.shared.isCrop {
             
             self.navigationController?.pushViewController(PhotoCropViewController(asset: asset), animated: true)
             
           } else {
             
-            
-            self.selectItemNum = PhotosManager.sharedInstance.currentImageAlbumFetchResult.index(of: asset)
+            self.selectItemNum = PhotosManager.shared.currentAlbumFetchResult.index(of: asset)
             self.goToPhotoBrowser()
             
           }
-          
         }
       }
       
-      if PhotosManager.sharedInstance.resourceOption == .video {
+      if asset.mediaType == .video {
         
-        PhotosManager.sharedInstance.checkVideoIsInLocal(with: asset) { isExistInLocal in
-          
+        PhotosManager.shared.checkVideoIsInLocal(with: asset) { isExistInLocal in
+
           guard isExistInLocal else { return }
+
+          self.selectItemNum = PhotosManager.shared.currentAlbumFetchResult.index(of: asset)
           
-          PhotosManager.sharedInstance.selectVideo(with: asset)
-          PhotosManager.sharedInstance.didFinish()
+          if PhotosManager.shared.maxSelectedCount == 1 {
           
+            let vc = PreviewVideoViewController()
+            vc.asset = asset
+            self.navigationController?.pushViewController(vc, animated: true)
+          } else {
+            self.goToPhotoBrowser()
+          }
         }
       }
     }
@@ -391,7 +396,7 @@ extension PhotoColletionViewController: WZPhotoBrowserLiteDelegate {
   
   func numberOfImage(_ photoBrowser: WZPhotoBrowserLite) -> Int {
     
-    return PhotosManager.sharedInstance.currentImageAlbumFetchResult.count
+    return PhotosManager.shared.currentAlbumFetchResult.count
     
   }
   
@@ -401,7 +406,7 @@ extension PhotoColletionViewController: WZPhotoBrowserLiteDelegate {
   }
   
   func photoBrowser(photoBrowser: WZPhotoBrowserLite, assetForIndex index: Int) -> PHAsset {
-    return PhotosManager.sharedInstance.currentImageAlbumFetchResult[index]
+    return PhotosManager.shared.currentAlbumFetchResult[index]
   }
 }
 

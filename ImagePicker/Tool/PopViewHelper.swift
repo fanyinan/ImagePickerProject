@@ -54,7 +54,7 @@ enum AnimationTarget {
 
 class PopViewManager {
   
-  static let sharedInstance = PopViewManager()
+  static let shared = PopViewManager()
   private init() {}
   
   private var popViewHelperDic = [Int: PopViewHelper]()

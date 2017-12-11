@@ -14,11 +14,9 @@ class ViewController: UIViewController {
   @IBOutlet var maxCountTextField: UITextField!
   @IBOutlet var imageViews: [UIImageView]!
   
-  fileprivate lazy var imagePickerHelper: WZImagePickerHelper = {
-    return WZImagePickerHelper(delegate: self)
-  }()
+  private lazy var imagePickerHelper = WZImagePickerHelper(delegate: self)
   
-  var isCrop: Bool = true
+  var isCrop: Bool = false
   var type: WZImagePickerType = .albumAndCamera
   var maxCount = 3
   var reourceOption: WZResourceOption = [.image]
@@ -84,8 +82,9 @@ extension ViewController: WZImagePickerDelegate {
   
   func pickedPhoto(_ imagePickerHelper: WZImagePickerHelper, didPickResource resource: WZResourceType) {
     print(#function)
-    if case .video(video: let tmpAVAsset) = resource, let avAsset = tmpAVAsset {
-      print(avAsset)
+    
+    if case .video(videos: let tmpAVAssets) = resource {
+      tmpAVAssets.forEach{print($0)}
     }
     
     if case .rawImageData(imageData: let imageData) = resource, let _imageData = imageData {

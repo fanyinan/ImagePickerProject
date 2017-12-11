@@ -78,7 +78,7 @@ extension CameraHelper: UIImagePickerControllerDelegate, UINavigationControllerD
         
         picker.dismiss(animated: false, completion: nil)
         
-        PhotosManager.sharedInstance.didFinish(.image(images: [image]))
+        PhotosManager.shared.didFinish(.image(images: [image]))
         
       }
       

@@ -53,7 +53,7 @@ class PhotoCropViewController: UIViewController {
       return
     }
     
-    PhotosManager.sharedInstance.fetchImage(with: asset, sizeType: .preview, handleCompletion: { (image: UIImage?, _) -> Void in
+    PhotosManager.shared.fetchImage(with: asset, sizeType: .preview, handleCompletion: { (image: UIImage?, _) -> Void in
       
       guard let _image = image else {
         return
@@ -92,16 +92,16 @@ class PhotoCropViewController: UIViewController {
     
     let (xScale, yScale, sizeScalse) = cropImageScrollView.getSelectedRectScale()
     
-    PhotosManager.sharedInstance.rectScale = ImageRectScale(xScale: xScale, yScale: yScale, widthScale: sizeScalse, heighScale: sizeScalse)
+    PhotosManager.shared.rectScale = ImageRectScale(xScale: xScale, yScale: yScale, widthScale: sizeScalse, heighScale: sizeScalse)
     
     if let imageAsset = asset {
-      PhotosManager.sharedInstance.selectPhoto(with: imageAsset)
+      PhotosManager.shared.select(with: imageAsset)
     } else {
       //如果用相机拍摄的照片需要直接裁剪
-      originImage = PhotosManager.sharedInstance.cropImage(originImage)
+      originImage = PhotosManager.shared.cropImage(originImage)
     }
     
-    PhotosManager.sharedInstance.didFinish(asset == nil ? .image(images: [originImage]) : nil)
+    PhotosManager.shared.didFinish(asset == nil ? .image(images: [originImage]) : nil)
     
   }
   
@@ -180,9 +180,9 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(60)
     }
     
-    completeButton.setTitle("选取", for: UIControlState())
+    completeButton.setTitle("选取", for: .normal)
     completeButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-    completeButton.setTitleColor(UIColor.white, for: UIControlState())
+    completeButton.setTitleColor(UIColor.white, for: .normal)
     completeButton.addTarget(self, action: #selector(PhotoCropViewController.onComplete), for: .touchUpInside)
     
     //selectedCountLabel
@@ -193,9 +193,9 @@ class PhotoCropViewController: UIViewController {
       make.width.equalTo(60)
     }
     
-    cancelButton.setTitle("取消", for: UIControlState())
+    cancelButton.setTitle("取消", for: .normal)
     cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-    cancelButton.setTitleColor(UIColor.white, for: UIControlState())
+    cancelButton.setTitleColor(UIColor.white, for: .normal)
     cancelButton.addTarget(self, action: #selector(PhotoCropViewController.onCancel), for: .touchUpInside)
     
     imageView = UIImageView()

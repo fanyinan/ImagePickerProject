@@ -24,22 +24,29 @@ class PhotoThumbCell: UICollectionViewCell {
   
   weak var photoColletionViewController: PhotoColletionViewController?
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    
-  }
-  
   @IBAction func onClickRadio() {
 
     guard let vc = photoColletionViewController else { return }
     
-    PhotosManager.sharedInstance.checkImageIsInLocal(with: asset) { isExistInLocal in
-    
-      guard isExistInLocal else { return }
-
-      self.setResourceSelectedStatus()
-      vc.updateUI()
+    if asset.mediaType == .image {
+      PhotosManager.shared.checkImageIsInLocal(with: asset) { isExistInLocal in
+        
+        guard isExistInLocal else { return }
+        
+        self.setResourceSelectedStatus()
+        vc.updateUI()
+        
+      }
+    } else if asset.mediaType == .video {
       
+      PhotosManager.shared.checkVideoIsInLocal(with: asset) { isExistInLocal in
+        
+        guard isExistInLocal else { return }
+        
+        self.setResourceSelectedStatus()
+        vc.updateUI()
+        
+      }
     }
   }
   
@@ -56,7 +63,7 @@ class PhotoThumbCell: UICollectionViewCell {
     
     imageView.image = nil
     
-    PhotosManager.sharedInstance.fetchImage(with: asset, sizeType: .thumbnail) { (image, isInICloud) in
+    PhotosManager.shared.fetchImage(with: asset, sizeType: .thumbnail) { (image, isInICloud) in
       
       guard image != nil else {
         return
@@ -71,27 +78,6 @@ class PhotoThumbCell: UICollectionViewCell {
     }
   }
   
-  func setResourceSelectedStatus() {
-    
-    guard asset.mediaType == .image else {
-      let isSelected = PhotosManager.sharedInstance.selectVideo(with: asset)
-      setPhotoStatusWithAnimation(isSelected)
-      return
-    }
-    
-    let isSuccess = PhotosManager.sharedInstance.selectPhoto(with: asset)
-    
-    if !isSuccess {
-      
-      let alert = UIAlertView(title: "", message: "最多只能选择\(PhotosManager.sharedInstance.maxSelectedCount)张照片", delegate: nil, cancelButtonTitle: "知道了")
-      alert.show()
-      
-      return
-    }
-    let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: asset)
-    setPhotoStatusWithAnimation(isSelected)
-  }
-  
   func setPhotoStatusWithAnimation(_ isSelected: Bool) {
     
     self.setResourceSelected(!isSelected)
@@ -100,27 +86,21 @@ class PhotoThumbCell: UICollectionViewCell {
       
       self.setResourceSelected(isSelected)
       
-    }) { _ in
-      
-    }
+    }, completion: nil)
     
   }
   
   func updateSelectedStatus() {
     
+    let isSelected = PhotosManager.shared.getAssetSelectedStatus(with: asset)
+    setResourceSelected(isSelected)
+    
     if asset.mediaType == .video {
       
       durationLabel.text = formatSecond(second: Int(round(asset.duration)))
-      if let selectedVideo = PhotosManager.sharedInstance.selectedVideo, selectedVideo == asset {
-        setResourceSelected(true)
-      } else {
-        setResourceSelected(false)
-      }
       
     } else {
       
-      let isSelected = PhotosManager.sharedInstance.getPhotoSelectedStatus(with: asset)
-      setResourceSelected(isSelected)
       durationLabel.text = ""
       
     }
@@ -128,7 +108,7 @@ class PhotoThumbCell: UICollectionViewCell {
   
   func updateIsSelectable() {
     
-    if PhotosManager.sharedInstance.maxSelectedCount == 1 {
+    if PhotosManager.shared.maxSelectedCount == 1 && !PhotosManager.shared.resourceOption.contains(.video) {
       
       selectedButton.isHidden = true
       unselectedImageView.isHidden = true
@@ -136,32 +116,30 @@ class PhotoThumbCell: UICollectionViewCell {
       
       return
     }
+    
+    var isHide = true
     
     if asset.mediaType == .video {
-      
-      let isHide = !PhotosManager.sharedInstance.selectedImages.isEmpty
-      selectedStatusContainerView.isHidden = isHide
-      selectedButton.isHidden = isHide
-      
+      isHide = !PhotosManager.shared.selectedImages.isEmpty
     } else if asset.mediaType == .image {
-      
-      let isHide = !(PhotosManager.sharedInstance.selectedVideo == nil)
-      selectedStatusContainerView.isHidden = isHide
-      selectedButton.isHidden = isHide
-
+      isHide = !PhotosManager.shared.selectedVideos.isEmpty
     }
+    
+    selectedStatusContainerView.isHidden = isHide
+    selectedButton.isHidden = isHide
   }
   
-  func setResourceSelected(_ isSelected: Bool) {
+  private func setResourceSelected(_ isSelected: Bool) {
     
-    if PhotosManager.sharedInstance.maxSelectedCount == 1 {
-      
-      selectedButton.isHidden = true
-      unselectedImageView.isHidden = true
-      selectedImageView.isHidden = true
-      
-      return
-    }
+//    if PhotosManager.shared.maxSelectedCount == 1, PhotosManager.shared.op {
+//
+//      selectedButton.isHidden = true
+//      unselectedImageView.isHidden = true
+//      selectedImageView.isHidden = true
+//
+//      return
+//    }
+    
     selectedImageView.isHidden = false
     unselectedImageView.isHidden = false
     
@@ -170,7 +148,7 @@ class PhotoThumbCell: UICollectionViewCell {
     
   }
   
-  func formatSecond(second: Int) -> String {
+  private func formatSecond(second: Int) -> String {
     
     let hour = second / (60 * 60)
     let minute = second % (60 * 60) / 60
@@ -185,5 +163,32 @@ class PhotoThumbCell: UICollectionViewCell {
     } else {
       return hourStr + ":" + minuteStr + ":" + secondStr
     }
+  }
+  
+  private func setResourceSelectedStatus() {
+    
+    
+    let isSuccess = PhotosManager.shared.select(with: asset)
+    
+    if !isSuccess {
+      
+      if PhotosManager.shared.maxSelectedCount == 1 {
+        
+        if let selectedAsset = PhotosManager.shared.selectedVideos.first ?? PhotosManager.shared.selectedImages.first {
+          PhotosManager.shared.select(with: selectedAsset)
+          PhotosManager.shared.select(with: asset)
+        }
+        
+      } else {
+        
+        let alert = UIAlertView(title: "", message: "最多只能选择\(PhotosManager.shared.maxSelectedCount)个文件", delegate: nil, cancelButtonTitle: "知道了")
+        alert.show()
+        
+        return
+      }
+    }
+    
+    let isSelected = PhotosManager.shared.getAssetSelectedStatus(with: asset)
+    setPhotoStatusWithAnimation(isSelected)
   }
 }

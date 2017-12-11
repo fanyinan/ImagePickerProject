@@ -26,7 +26,7 @@ class WZPhotoBrowserLite: UIViewController {
   var quitBlock: (() -> Void)?
   var currentIndex: Int = 0 {
     didSet{
-      currentAsset = PhotosManager.sharedInstance.currentImageAlbumFetchResult[currentIndex]
+      currentAsset = PhotosManager.shared.currentAlbumFetchResult[currentIndex]
       photoDidChange()
     }
   }
@@ -153,11 +153,17 @@ extension WZPhotoBrowserLite: UICollectionViewDataSource {
     cell.padding = padding
     
     if let asset = delegate?.photoBrowser(photoBrowser: self, assetForIndex: indexPath.row) {
-      cell.asset = asset
+      cell.setData(asset)
     }
     
     return cell
     
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    
+    guard let cell = cell as? PhotoCollectionLiteCell else { return }
+    cell.pause()
   }
 }
 

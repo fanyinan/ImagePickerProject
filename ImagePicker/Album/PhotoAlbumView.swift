@@ -63,18 +63,18 @@ class PhotoAlbumView: UIView {
 extension PhotoAlbumView: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return PhotosManager.sharedInstance.getAlbumCount()
+    return PhotosManager.shared.getAlbumCount()
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! PhotoAlbumCell
     
-    guard let collection = PhotosManager.sharedInstance.getAlbumWith(indexPath.row) else  { return cell }
+    guard let collection = PhotosManager.shared.getAlbumWith(indexPath.row) else  { return cell }
     
-    cell.titleLabel.text = "\(collection.localizedTitle!) (\(PhotosManager.sharedInstance.getFetchResult(with: collection, resourceOption: PhotosManager.sharedInstance.resourceOption).count))"
+    cell.titleLabel.text = "\(collection.localizedTitle!) (\(PhotosManager.shared.getFetchResult(with: collection, resourceOption: PhotosManager.shared.resourceOption).count))"
     
-    PhotosManager.sharedInstance.fetchImage(with: indexPath.row, imageIndex: 0, sizeType: .thumbnail) { (image, _) -> Void in
+    PhotosManager.shared.fetchImage(with: indexPath.row, imageIndex: 0, sizeType: .thumbnail) { (image, _) -> Void in
       
       if image == nil {
         return
@@ -96,7 +96,7 @@ extension PhotoAlbumView: UITableViewDelegate {
     if let indexPath = tableView.indexPathForSelectedRow {
       tableView.deselectRow(at: indexPath, animated: true)
     }
-    PhotosManager.sharedInstance.currentAlbumIndex = indexPath.row
+    PhotosManager.shared.currentAlbumIndex = indexPath.row
     
     delegate?.photoAlbumView(self, didSelectAtIndex: indexPath.row)
   }
